@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #901b16, #e0303d);
+  color: white;
+  transition: background 0.7s;
+}
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #e0303d;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(179, 37, 31);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(165, 37, 31);
+}
+#canvas {
+  transition: opacity 0.35s;
+  position: fixed;
+  display: flex;
+  width: 0;
+  height: 100%;
+  background: white;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  overflow-x: hidden;
+}
+#canvas nav {
+  align-self: center;
+  width: 100%;
+  text-align: center;
+}
+#canvas a {
+  text-decoration: none;
+  display: block;
+  color: black;
+  padding: 20px;
+  transition: 0.2s;
+}
+#canvas a:hover {
+  color: #901b16;
+}
+#canvas nav a {
+    font-size: 40px;
+}
+.closecanvas {
+  position: absolute;
+  right: 45px;
+  top: 20px;
+  font-size: 60px;
+}
+#header {
+  background: linear-gradient(to right, #901b16, #e0303d);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  padding: 30px 0 20px 50px;
+  height: 100px;
+  width: 100%;
+}
+#header-img {
+  width: 200px;
+}
+#nav-bar {
+  position: absolute;
+  right: 50px;
+}
+#header a {
+  text-decoration: none;
+  color: white;
+  padding: 20px 10px;
+  font-size: 22px;
+}
+.navmenu {
+  font-size: 25px;
+  display: none;
+}
+#home {
+  padding-top: 100px;
+  overflow: auto;
+}
+#video {
+  display: block;
+  margin: 80px auto 50px auto;
+  width: 80%;
+}
+#hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 600px;
+  width: 100%;
+  margin-top: 40px;
+}
+#hero h2 {
+  font-size: 50px;
+  font-weight: 600;
+}
+#form input[type='email'] {
+  margin: 15px 0;
+  font-size: 18px;
+  color: black;
+  width: 100%;
+  height: 30px;
+  outline: none;
+  border: none;
+}
+#form input[type='submit'] {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+  font-size: 18px;
+  width: 140px;
+  height: 30px;
+}
+#products {
+  padding-top: 90px;
+}
+#products h2 {
+  text-align: center; 
+  font-size: 50px;
+}
+.productsection {
+  overflow: auto;
+  margin: 150px auto;
+}
+.productsection img {
+  float: left;
+  margin: 0 25px 0 50px;
+}
+.productimg { width: 160px; }
+.productimgex { 
+  width: 135px; 
+}
+.productsection div h3 {
+  font-size: 35px;
+  text-align: center;
+}
+.productsection div p {
+  font-size: 20px;
+  margin: 15px;
+  text-align: center;
+}
+#form input[type='submit']:hover, 
+#form input[type='submit']:active {
+  background-color: #e9e9e9;
+}
+#form input[type='email']:focus {
+  background-color: #f0f0f0;
+  color: #010101;
+}
+#contact h2 {
+  text-align: center; 
+  font-size: 40px;
+}
+#contact p {
+  text-align: center;
+  margin: 15px;
+  font-size: 25px;
+}
+@media screen and (min-width: 720px) {
+ .productsection div h3 { font-size: 40px; }
+  #video { height: 415px; }  
+  .productsection { width: 95%; }
+}
+@media screen and (min-width: 1030px) {
+  #video { height: 515px; }
+  .productsection { width: 85%; }
+  .productsection div p { font-size: 22px; }
+}
+@media screen and (min-width: 1200px) {
+  #video { 
+    height: 615px; 
+    margin: 100px auto 50px auto;
+  }
+}
+@media screen and (min-width: 1450px) {
+  #video { 
+    height: 715px; 
+    margin: 150px auto 100px auto;
+  }  
+  .productsection { width:  75%; }
+
+}
+@media screen and (max-width: 800px) {
+  #hero h2 { font-size: 40px; }
+  #form input[type='email'],
+  #form input[type='submit'] { 
+    height: 25px; 
+  }
+  #video {
+    margin: 80px auto;
+    height: 320px;
+  }
+}
+@media screen and (max-width: 660px) {
+  #header { padding-left: 30px; }
+  .nav-link { display: none; }
+  .navmenu { display: block; }
+  .closecanvas { display: block; }
+  #video { display: none; }
+  #products { padding-top: 140px; }
+  .productsection {
+    margin: 100px auto;
+    display: grid;
+    grid-template-column: auto;
+    grid-template-row: auto;
+  }
+  .productsection div p {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .productsection img {
+    grid-row: 2 / 3;
+    float: none;
+    margin: 60px auto;
+  }
+}

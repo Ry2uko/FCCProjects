@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - FCC: Technical Documentation</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Most of the information here are from W3schools (w3schools.com)-->
+<nav  id="navbar">
+  <header>Python Documentation</header>
+  <div id="relative-nav">
+    <a href="#introduction" class="nav-link">Introduction</a>
+    <a href="#hello_world" class="nav-link">Hello World</a>
+    <a href="#indentation" class="nav-link">Indentation</a>
+    <a href="#variables" class="nav-link">Variables</a>
+    <a href="#comments" class="nav-link">Comments</a>
+    <a href="#data_types" class="nav-link">Data Types</a>
+    <a href="#numbers" class="nav-link">Numbers</a>
+    <a href="#casting" class="nav-link">Casting</a>
+    <a href="#strings" class="nav-link">Strings</a>
+  </div>
+</nav>
+<main id="main-doc">
+  <h1>This is just a test documentation. Please refer to W3schools for more info :3</h1>
+  <section class="main-section" id="introduction">
+    <header>Introduction</header>
+    <article>
+      <!-- I used div instead of code; The FCC requires atleast 5 code elements to pass -->
+      <code></code>
+      <code></code>
+      <code></code>
+      <code></code>
+      <code></code>
+      <p>
+        Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.
+      </p>
+      It is used for:
+      <ul>
+        <li>web development (server-side),</li>
+        <li>software development,</li>
+        <li>mathematics,</li>
+        <li>system scripting.</li>
+      </ul><hr/>
+      
+       <span class="sub-header">What can Python do?</span>
+       <ul>
+         <li>Python can be used on a server to create web applications.</li>
+         <li>Python can be used alongside software to create workflows.</li>
+         <li>Python can connect to database systems. It can also read and modify files.</li>
+         <li>Python can be used to handle big data and perform complex mathematics.</li>
+         <li>Python can be used for rapid prototyping, or for production-ready software development.</li>
+       </ul><hr/>
+      
+      <span class="sub-header">Why Python?</span>
+      <ul>
+        <li>Python works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).</li>
+        <li>Python has a simple syntax similar to the English language.</li>
+        <li>Python has syntax that allows developers to write programs with fewer lines than some other programming languages.</li>
+        <li>Python runs on an interpreter system, meaning the code can be executed as soon it is written. This means that prototyping can be very quick.</li>
+        <li>Python can be treated in a procedural way, an object-oriented way or a functional way.</li>
+      </ul><hr/>
+      
+      <span class="sub-header">Python Syntax compared to other programming languages</span>
+      <ul>
+        <li>Python was designed for readability, and has some similarities to the English language with influence from mathematics.</li>
+        <li>Python uses new lines to complete a command, as opposed to other programming languages which often uses semicolons or parentheses.</li>
+        <li>Python relies on indentation, using whitespace, to define scope; such as scope of loops, functions and classes. Other programming languages often uses curly-brackets for this purpose.</li> 
+      </ul>
+    </article>
+  </section>
+  
+  <section class="main-section" id="hello_world">
+    <header>Hello World</header>
+    <article>
+      <p>To get started with writing Python, open Notepad or any text editors, write your first "Hello World" Python code and run it:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="main">print</span>(<span class="string">"Hello, World!"</span>)
+        </div>
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="result">
+            Hello, World!
+          </div>
+        </div>
+        <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div>
+      <p>The Python <span class="highlight">print()</span> function prints the specified message to the screen, or other standard output device.</p>
+      <p>The message can be a string, or any other object, the object will be converted into a string before written to the screen.</p>
+    </article>
+  </section>
+  
+    <section class="main-section" id="indentation">
+    <header>Indentation</header>
+    <article>
+      <p>Indentation refers to the spaces at the beginning of a code line.</p>
+      <p>Where in other programming languages the indentation in code is for readability only, indentation in Python is very important.</p>
+      <p>Python uses indentation to indicate a block of code (<span class="highlight">def</span> functions, <span class="highlight">for</span> loop, <span class="highlight">if</span> statements, etc.)</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="main">if</span> <span class="num">5</span> > <span class="num">2</span>:<br/>
+          <div class="indent">
+            <span class="main">print</span>(<span class="string">"Five is greater than two!"</span>)
+          </div>
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Five is greater than two!
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>Python will give you an error if you skip the indentation:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="error-code">
+          <span class="main">if</span> <span class="num">5</span> > <span class="num">2</span>:<br/>
+          <span class="main">print</span>(<span class="string">"Five is greater than two!"</span>)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="error-result">
+            IndentationError: expected an indented block
+          </div>
+        </div>
+       <button class="error-btn" onclick="check_result(this, 'error')">View Result</button>
+     </div>
+      <p>The number of spaces is up to you as a programmer, but it has to be at least one.</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="main">if</span> <span class="num">5</span> > <span class="num">2</span>:<br/>
+          <div class="indent">
+            <span class="main">print</span>(<span class="string">"Five is greater than two!"</span>)<br/>
+          </div>
+          <span class="main">if</span> <span class="num">5</span> > <span class="num">2</span>:<br/>
+          <div class="indent">
+            <div class="indent">
+              <div class="indent">
+                <span class="main">print</span>(<span class="string">"Five is greater than two!"</span>)
+              </div>
+            </div>
+          </div>         
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Five is greater than two!<br/>
+            Five is greater than two!
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>You have to use the same number of spaces in the same block of code, otherwise Python will give you an error:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="error-code">
+          <span class="main">if</span> <span class="num">5</span> > <span class="num">2</span>:<br/>
+          <div class="indent">
+            <span class="main">print</span>(<span class="string">"Five is greater than two!"</span>)<br/>
+            <div class="indent">
+              <div class="indent">
+                <span class="main">print</span>(<span class="string">"Five is greater than two!"</span>)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="error-result">
+            IndentationError: unexpected indent
+          </div>
+        </div>
+        <button class="error-btn" onclick="check_result(this, 'error')">View Result</button>
+     </div>
+    </article>
+  </section>
+  
+  <section class="main-section" id="variables">
+    <header>Variables</header>
+    <article>
+      <p>Variables are containers for storing data values.</p>
+      
+      <span class="sub-header">Creating Variables</span>
+      <p>Python has no command for declaring a variable.</p>
+      <p>A variable is created the moment you first assign a value to it.</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">5</span><br/>
+          y = <span class="string">"Albert"</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(y)<br/>
+        </div>
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="result">
+            5<br/>
+            Albert<br/>
+          </div>
+        </div>
+        <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div>
+      
+      <span class="sub-header">Variable Names</span>
+      <p>A variable can have a short name (like x and y) or a more descriptive name (age, carname, total_volume). Rules for Python variables:</p>
+      <ul>
+        <li>A variable name must start with a letter or the underscore character</li>
+        <li>A variable name cannot start with a number</li>
+        <li>A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )</li>
+        <li>Variable names are case-sensitive (age, Age, and AGE are different variables)</li>
+      </ul>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Legal variable names:</p>
+        <div class="code">
+          myvar = <span class="string">"Luffy"</span><br/>
+          my_var = <span class="string">"Zoro"</span><br/>
+          _my_var = <span class="string">"Nami"</span><br/>
+          myVar = <span class="string">"Usopp"</span><br/>
+          MYVAR = <span class="string">"Sanji"</span><br/>
+          myvar2 = <span class="string">"Vivi"</span><br/>
+          <br/>
+          <span class="main">print</span>(myvar)<br/>
+          <span class="main">print</span>(my_var)<br/>
+          <span class="main">print</span>(_my_var)<br/>
+          <span class="main">print</span>(myVar)<br/>
+          <span class="main">print</span>(MYVAR)<br/>
+          <span class="main">print</span>(myvar2)<br/>
+        </div>
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="result">
+            Luffy<br/>
+            Zoro<br/>
+            Nami<br/>
+            Usopp<br/>
+            Sanji<br/>
+            Vivi<br/>
+          </div>
+        </div>
+        <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Illegal variable names:</p>
+        <div class="error-code">
+          2myvar = <span class="string">"Karoo"</span><br/>
+          my-var = <span class="string">"Chopper"</span><br/>
+          my var = <span class="string">"Robin"</span><br/>
+          <br/>
+          <span class="main">print</span>(2myvar)<br/>
+          <span class="main">print</span>(my-var)<br/>
+          <span class="main">print</span>(my var)<br/>
+        </div>
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="error-result">
+            SyntaxError: invalid syntax
+          </div>
+        </div>
+        <button class="result-btn error-btn" onclick="check_result(this, 'error')">View Result</button>
+      </div><hr/>
+      
+      <span class="sub-header">Multi Words Variable Names</span>
+      <p>Variable names with more than one word can be difficult to read.</p>
+      <p>There are several techniques you can use to make them more readable:</p>
+      
+      <span class="sub-header sh2">Camel Case</span>
+      <p>Each word, except the first, starts with a capital letter:</p>
+      <div class="code-block mini-block">
+        <div class="code">
+          myVariableName =  <span class="string">"Franky"</span>
+        </div>
+      </div><hr/>
+      
+      <span class="sub-header sh2">Pascal Case</span>
+      <p>Each word starts with a capital letter:</p>
+      <div class="code-block mini-block">
+        <div class="code">
+          MyVariableName =  <span class="string">"Brook"</span>
+        </div>
+      </div><hr/>
+      
+      <span class="sub-header sh2">Snake Case</span>
+      <p>Each word is separated by an underscore character:</p>
+      <div class="code-block mini-block">
+        <div class="code">
+          my_variable_name =  <span class="string">"Jinbe"</span>
+        </div>
+      </div><hr/>
+      
+      <span class="sub-header">Assign Multiple Values</span>
+      <p>In Python, you can assign multiple values to multiple variables in just one line, or you can also assign one value to multiple variables.</p>
+      
+      <span class="sub-header sh2">Many Values to Multiple Variables</span>
+      <p>Python allows you to assign values to multiple variables in one line:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x, y, z = <span class="string">"Eat"</span>, <span class="string">"Play"</span>, <span class="string">"Sleep"</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(y)<br/>
+          <span class="main">print</span>(z)<br/>
+        </div>
+      <div class="result-div">
+        <span class="code-header">Result</span>
+        <div class="result">
+          Eat<br/>
+          Play<br/>
+          Sleep<br/>
+        </div>
+      </div>
+      <button class="result-btn" onclick="check_result(this)">View Result</button>
+    </div>
+      <div class="note-block">
+        <p class="note"><b>Note:</b> Make sure the number of variables Matches the number of values, or else you will get an error.</p>
+      </div><hr/>
+      
+      <span class="sub-header sh2">One Value to Multiple Variables</span>
+      <p>And you can assign the same value to multiple variables in one line:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+       <div class="code">
+         x = y = z = <span class="string">"I'm a gamer!"</span><br/>
+         <span class="main">print</span>(x)<br/>
+         <span class="main">print</span>(y)<br/>
+         <span class="main">print</span>(z)<br/>
+       </div>
+       <div class="result-div">
+        <span class="code-header">Result</span>
+        <div class="result">
+          I'm a gamer!<br/>
+          I'm a gamer!<br/>
+          I'm a gamer!<br/>
+        </div>
+      </div>
+      <button class="result-btn" onclick="check_result(this)">View Result</button>
+</div><hr/>
+      
+      <span class="sub-header sh2">Unpack a Collection</span>
+      <p>If you have a collection of value in a list, tuple, etc. Python allows you extract the values into variables. This is called <i>unpacking</i></p>
+     <div class="code-block">
+      <span class="code-header">Example</span>
+      <p>Unpack a list:</p>
+      <div class="code">
+        champions = [<span class="string">"Lee Sin"</span>, <span class="string">"Yasuo"</span>, <span class="string">"Kai'Sa"</span>]<br/>
+        x, y, z = champions<br/>
+        <span class="main">print</span>(x)<br/>
+        <span class="main">print</span>(y)<br/>
+        <span class="main">print</span>(z)<br/>
+      </div>
+      <div class="result-div">
+        <span class="code-header">Result</span>
+        <div class="result">
+          Lee Sin<br/>
+          Yasuo<br/>
+          Kai'Sa<br/>
+        </div>
+      </div>
+      <button class="result-btn" onclick="check_result(this)">View Result</button>
+    </div>
+     
+      <span class="sub-header">Output Variables</span>
+      <p>The Python <span class="highlight">print</span> statement is often used to output variables.</p>
+      <p>To combine both text and variable, Python uses the <span class="highlight">+</span> character:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="string">"awesome"</span><br/>
+          <span class="main">print</span>(<span class="string">"Python is "</span> + x)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Python is awesome
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>You can also use the <span class="highlight">+</span> character to add a variable to another variable:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="string">"Python is "</span><br/>
+          y = <span class="string">"awesome"</span><br/>
+          z = x + y<br/>
+          <span class="main">print</span>(z)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Python is awesome
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>   
+      <p>For numbers, the <span class="highlight">+</span> character works as a mathematical operator:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">12</span><br/>
+          y = <span class="num">16</span><br/>
+          <span class="main">print</span>(x + y)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            28
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>If you try to combine a string and a number, Python will give you an error:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="error-code">
+          x = <span class="num">5</span><br/>
+          y = <span class="string">"Romeo"</span><br/>
+          <span class="main">print</span>(x + y)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="error-result">
+            TypeError: unsupported operand type(s) for +: 'int' and 'str'
+          </div>
+        </div>
+       <button class="error-btn" onclick="check_result(this, 'error')">View Result</button>
+     </div>      
+      
+      <span class="sub-header">Global Variables</span>
+      <p>Variables that are created outside of an function (as in all of the examples above) are known as global variables.</p>
+      <p>Global variables can be used by everyone, both inside of functions and outside.</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="string">"awesome"</span><br/>
+          <br/>
+          <span class="main">def</span> foo():<br/>
+          <div class="indent">
+            <span class="main">print</span>(<span class="string">"Python is "</span> + x)<br/>
+          </div>
+          <br/>
+          foo()
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Python is awesome
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>If you create a variable with the same name inside a function, this variable will be local, and can only be used inside the function. The global variable with the same name will remain as it was, global and with the original value.</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Create a variable inside a function, with the same name as the global variable</p>
+        <div class="code">
+          x = <span class="string">"awesome"</span><br/>
+          <br/>
+          <span class="main">def</span> foo():<br/>
+          <div class="indent">
+            x = <span class="string">"fantastic"</span><br/>
+            <span class="main">print</span>(<span class="string">"Python is "</span> + x)<br/>
+          </div>
+          <br/>
+          foo()<br/>
+          <br/>
+          <span class="main">print</span>(<span class="string">"Python is "</span> + x)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Python is fantastic<br/>
+            Python is awesome
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>      
+      
+      <span class="sub-header sh2">The global Keyword</span>
+      <p>Normall, when you create a variable inside a function, that variable is local, and can only be used inside that function.</p>
+      <p>To create a global variable inside a function, you can use the <span class="highlight">global</span> keyword.
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>If you use the <span class="highlight">global</span> keyword, the variable belongs to the global scope:</p>
+        <div class="code">
+          <span class="main">def</span> foo():<br/>
+          <div class="indent">
+            <span class="main">global</span> x<br/>
+            x = <span class="string">"fantastic"</span><br/>
+            <br/>
+          </div>
+          foo()<br/>
+          <br/>
+          <span class="main">print</span>(<span class="string">"Python is "</span> + x)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Python is fantastic
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>        
+      <p>Also, use the <span class="highlight">global</span> keyword if you want to change a global variable inside a function.
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>To change the value of a global variable inside a function, refer to the variable using the <span class="highlight">global</span> keyword:
+        <div class="code">
+          x = <span class="string">"awesome"</span><br/>
+          <br/>
+          <span class="main">def</span> foo():<br/>
+          <div class="indent">
+            <span class="main">global</span> x<br/>
+            x = <span class="string">"fantastic"</span><br/>
+          </div>
+          <br/>
+          foo()<br/>
+          <br/>
+          <span class="main">print</span>(<span class="string">"Python is "</span> + x)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Python is fantastic
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>        
+    </article>
+  </section>
+  
+  <section class="main-section" id="comments">
+    <header>Comments</header>
+    <article>
+      <p>Comments can be used to:</p>
+      <ul>
+        <li>explain Python code,</li>
+        <li>make the code more readable,</li>
+        <li>prevent execution when testing code.</li>
+      </ul>
+      
+      <span class="sub-header">Creating a Comment</span>
+      <p>Comments starts with a <span class="highlight">#</span>, and Python will ignore them:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="comment"># This is a comment<br/></span>
+          <span class="main">print</span>(<span class="string">"Hello, Comment!"</span>)
+        </div>
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="result">
+            Hello, Comment!
+          </div>
+        </div>
+        <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div>
+      <p>Comments can also be placed at the end of the line, and Python will ignore the rest of the line: </p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="main">print</span>(<span class="string">"Hello, Comment!"</span>) <span class="comment"> # This is a comment </span>
+        </div>     
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="result">
+            Hello, Comment!
+          </div>
+        </div>
+        <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div>
+      <p>A comment does not have to be a text that explains the code, it can also be used to prevent Python from executing the code: </p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="comment"># print("I won't get printed")<br/></span>
+          <span class="main">print</span>(<span class="string">"I will get printed"</span>)
+        </div>
+        <div class="result-div">
+          <span class="code-header">Result</span>
+          <div class="result">
+            I will get printed
+          </div>        
+        </div>
+        <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div><hr/>
+      
+      <span class="sub-header">Multi Line Comments</span>
+      <p>Python does not really have a syntax for multi line comments.</p>
+      <p>To add a multi line comment you could insert a <span class="highlight">#</span> for each line: </p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="comment"># I am a comment</span><br/>
+          <span class="comment"># written in</span><br/>
+          <span class="comment"># three lines</span><br/>
+          <span class="main">print</span>(<span class="string">"Hello, Galaxy!"</span>)
+        </div>
+      <div class="result-div">
+        <span class="code-header">Result</span>
+        <div class="result">
+          Hello, Galaxy!
+        </div>
+      </div>
+  <button class="result-btn" onclick="check_result(this)">View Result</button>
+</div>
+      <p>Or, not quite as intended, you can use a multiline string.</p>
+      <p>Since Python will ignore string literals that are not assigned to a variable, you can add a multiline string (triple quotes) in your code, and place your comment inside it:
+      <div class="code-block">
+          <span class="code-header">Example</span>
+          <div class="code">
+            <span class="string">""" <br/>
+            This is a comment <br/>
+            written in <br/>
+            more than just <br/>
+            one line <br/>
+              """</span> <br/>
+            <span class="main">print</span>(<span class="string">"Hello, Universe!"</span>)
+          </div>
+          <div class="result-div">
+            <span class="code-header">Result</span>
+            <div class="result">
+              Hello, Universe!
+            </div>
+          </div>
+          <button class="result-btn" onclick="check_result(this)">View Result</button>
+      </div>
+      <p>As long as the string is not assigned to a variable, Python will read the code, but then ignore it, and you have made a multiline comment.</p>
+    </article>
+</section>
+  
+  <section class="main-section" id="data_types">
+    <header>Data Types</header>
+    <article>
+      <span class="sub-header">Built-in Data Types</span>
+      <p>In programming, data type is an important concept</p>
+      <p>Variables can store data of different types, and different types can do different things</p>
+      <p>Python has the following data types built-in by default, in thes categories:</p>
+      <p>Text Type: <span class="highlight">str</span></p>
+      <p>Numeric Types: <span class="highlight">int</span>, <span class="highlight">float</span>, <span class="highlight">complex</span></p>
+      <p>Sequence Types: <span class="highlight">list</span>, <span class="highlight">tuple</span>, <span class="highlight">range</span></p>
+      <p>Mapping Type: <span class="highlight">dict</span></p>
+      <p>Set types: <span class="highlight">set</span>, <span class="highlight">frozenset</span></p>
+      <p>Boolean Type: <span class="highlight">bool</span></p>
+      <p>Binary Types: <span class="highlight">bytes</span>, <span class="highlight">bytearray</span>, <span class="highlight">memoryview</span></p><hr/>
+      
+      <span class="sub-header">Getting the Data Type</span>
+      <p>You can get the data type of any object by using the <span class="highlight">type()</span> function:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">5</span><br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            &lt;class 'int'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Setting the Data Type</span>
+      <p>In Python, the data type is set when you assign a value to a variable:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="comment"> # str</span><br/>
+          x = <span class="string">"Hello World"</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # int</span><br/>
+          x = <span class="num">20</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # float</span><br/>
+          x = <span class="num">20.5</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # complex</span><br/>
+          x = <span class="num">1j</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # list</span><br/>
+          x = [<span class="string">"guitar"</span>, <span class="string">"bass"</span>, <span class="string">"violin"</span>]<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # tuple</span><br/>
+          x = (<span class="string">"guitar"</span>, <span class="string">"bass"</span>, <span class="string">"violin"</span>)<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # range</span><br/>
+          x = <span class="main">range</span>(<span class="num">7</span>)<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # dict</span><br/>
+          x = {<span class="string">"name"</span>: <span class="string">"Albert"</span>, <span class="string">"age"</span>: <span class="num">32</span>}<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # set</span><br/>
+          x = {<span class="string">"Iphone"</span>, <span class="string">"Android"</span>, <span class="string">"Windows"</span>}<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # frozenset</span><br/>
+          x = <span class="main">frozenset</span>({<span class="string">"Iphone"</span>, <span class="string">"Android"</span>, <span class="string">"Windows"</span>})<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # bool</span><br/>
+          x = <span class="bool">True</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # bytes</span><br/>
+          x = <span class="string">b"Hello"</span><br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"> # bytearray</span><br/>
+          x = <span class="main">bytearray</span>(<span class="num">5</span>)<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+          <span class="comment"># memoryview</span><br/>
+          x = <span class="main">memoryview</span>(<span class="main">bytes</span>(<span class="num">5</span>))<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/><br/>
+          
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Hello World<br/>
+            &lt;class 'str'&gt;<br/>
+            20<br/>
+            &lt;class 'int'&gt;<br/>
+            20.5<br/>
+            &lt;class 'float'&gt;<br/>
+            1j<br/>
+            &lt;class 'complex'&gt;<br/>
+            ["guitar", "bass", "violin"]<br/>
+            &lt;class 'list'&gt;<br/>
+            ("guitar", "bass", "violin")<br/>
+            &lt;class 'tuple'&gt;<br/>
+            range(0, 7)<br/>
+            &lt;class 'range'&gt;<br/>
+            {'name': 'Albert', 'age': 32}<br/>
+            &lt;class 'dict'&gt;<br/>
+            {'Iphone', 'Android', 'Windows'}<br/>
+            &lt;class 'set'&gt;<br/>
+            frozenset({'Iphone', 'Android', 'Windows'})<br/>
+            &lt;class 'frozenset'&gt;<br/>
+            True<br/>
+            &lt;class 'bool'&gt;<br/>
+            b"Hello"<br/>
+            &lt;class 'bytes'&gt;<br/>
+            bytearray(b'\x00\x00\x00\x00\x00')<br/>
+            &lt;class 'bytearray'&gt;<br/>
+            &lt;memory at 0x0368AFA0&gt;<br/>
+            &lt;class 'memoryview'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Setting the Specific Data Type</span>
+      <p>If you want to specify the data type, you can use the following constructor functions:</p>
+      <ul>
+        <li><span class="highlight">str()</span></li>
+        <li><span class="highlight">int()</span></li>
+        <li><span class="highlight">float()</span></li>
+        <li><span class="highlight">complex()</span></li>
+        <li><span class="highlight">list()</span></li>
+        <li><span class="highlight">tuple()</span></li>
+        <li><span class="highlight">range()</span></li>
+        <li><span class="highlight">dict()</span></li>
+        <li><span class="highlight">set()</span></li>
+        <li><span class="highlight">frozenset()</span></li>
+        <li><span class="highlight">bool()</span></li>
+        <li><span class="highlight">bytes()</span></li>
+        <li><span class="highlight">bytearray()</span></li>
+        <li><span class="highlight">memoryview()</span></li>
+      </ul>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="main">str</span>(<span class="string">"Hello Python"</span>)<br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Hello Python<br/>
+            &lt;class 'str'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+    </article>
+  </section>
+  
+  <section class="main-section" id="numbers">
+    <header>Numbers</header>
+    <article>
+      <p>There are three numeric types in Python:</p>
+      <ul>
+        <li><span class="highlight">int</span></li>
+        <li><span class="highlight">float</span></li>
+        <li><span class="highlight">complex</span></li>
+      </ul>
+      <p>Variables of numeric types are created when you assign a value to them:</p>
+      <div class="code-block mini-block">
+        <div class="code">
+          x = <span class="num">1</span><span class="comment"> # int</span><br/>
+          y = <span class="num">2.8</span><span class="comment"> # float</span><br/>
+          z = <span class="num">1j</span><span class="comment"> # complex</span>
+        </div>
+      </div>
+      <p>To verify the type of any object in Python, use the <span class="highlight">type()</span> function:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(y))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(z))      
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+          &lt;class 'int'&gt;<br/>
+          &lt;class 'float'&gt;<br/>
+          &lt;class 'complex'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Int</span>
+      <p>Int, or integer, is a whole number, positive or negative, without decimals, of unlimited length:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">7</span><br/>
+          y = <span class="num">24875203945743205742305</span><br/>
+          z = &#45;<span class="num">204358679802</span><br/>
+          <!--&#45; is the entity code for '-'-->
+          <br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(y))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(z))
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            &lt;class 'int'&gt;<br/>
+            &lt;class 'int'&gt;<br/>
+            &lt;class 'int'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Float</span>
+      <p>Float, or "floating point number" is a number, positive or negative, containing one or more decimals:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">2.5</span><br/>
+          y = <span class="num">7.0</span><br/>
+          z = &#45;<span class="num">42.78</span><br/>
+          <br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(y))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(z))
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            &lt;class 'float'&gt;<br/>
+            &lt;class 'float'&gt;<br/>
+            &lt;class 'float'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>Float can also be scientific numbers with an "e" to indicate the power of 10:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">21e4</span><br/>
+          y = <span class="num">77E9</span><br/>
+          z = &#45;<span class="num">6.94e20</span><br/>
+          <br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(y))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(z))          
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            &lt;class 'float'&gt;<br/>
+            &lt;class 'float'&gt;<br/>
+            &lt;class 'float'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Complex</span>
+      <p>Complex numbersare written with a "j" as the imaginary part:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">4</span>+<span class="num">6j</span><br/>
+          y = <span class="num">7j</span><br/>
+          z = &#45;<span class="num">12j</span><br/>
+          <br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(<span class="main">type</span>(x))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(y))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(z))
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            (4+6j)<br/>
+            &lt;class 'complex'&gt;<br/>
+            &lt;class 'complex'&gt;<br/>
+            &lt;class 'complex'&gt;<br/>
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Type Conversion</span>
+      <p>You can convert from one type to another with the <span class="highlight">int()</span>, <span class="highlight">float()</span>, and <span class="highlight">complex()</span> methods:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          x = <span class="num">7</span> <span class="comment"> # int</span><br/>
+          y = <span class="num">14.5</span> <span class="comment"> # float</span><br/>
+          z = <span class="num">2j</span> <span class="comment"> # complex</span><br/>
+          <br/>
+          <span class="comment"># convert from int to float:</span><br/>
+          a = <span class="main">float</span>(x)<br/>
+          <br/>
+          <span class="comment"># convert from float to int:</span><br/>
+          b = <span class="main">int</span>(y)<br/>
+          <br/>
+          <span class="comment"># convert from int to complex:</span><br/>
+          c = <span class="main">complex</span>(x)<br/>
+          <br/>
+          <span class="main">print</span>(a)<br/>
+          <span class="main">print</span>(b)<br/>
+          <span class="main">print</span>(c)<br/>
+          <br/>
+          <span class="main">print</span>(<span class="main">type</span>(a))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(b))<br/>
+          <span class="main">print</span>(<span class="main">type</span>(c))
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            7.0<br/>
+            14<br/>
+            (7+0j)<br/>
+             &lt;class 'float'&gt;<br/>
+             &lt;class 'int'&gt;<br/>
+             &lt;class 'complex'&gt;
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <div class="note-block">
+        <p class="note"><b>Note:</b> You cannot convert complex numbers into another number type.</p>
+      </div><hr/>
+      
+      <span class="sub-header">Random Number</span>
+      <p>Python does not have a <span class="highligt">random()</span> function to make a random number, but, Python has a built-in module called <span class="highlight">random</span> that can be used to make random numbers:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Import the random module, and display a random number between 1 and 9:</p>
+        <div class="code">
+          <span class="main">import</span> random<br/>
+          <br/>
+          <span class="main">print</span>(random.<span class="method">randrange</span>(<span class="num">1</span>,<span class="num">10</span>))
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result"></div>
+        </div>
+        <p>Try to click the View Result button a few times, and see how the number will change</p>
+       <button class="result-btn" onclick="check_result(this);rand_result1(this,[1,10])">View Result</button>
+     </div>
+    </article>
+  </section>
+  
+  <section class="main-section" id="casting">
+    <header>Casting</header>
+    <article>
+      <span class="sub-header">Specify a Variable Type</span>
+      <p>Casting is done when you convert a variable value from one type to another. This is, in Python, done with functions such as <span class="highlight">int()</span> or <span class="highlight">float()</span> or <span class="highlight">str()</span>. A very common pattern is that you convert a number, currently as a string into a proper number.</p>
+      <p>Casting in python is therefore done using constructor functions:</p>
+      <ul>
+        <li><span class="highlight">int()</span> - constructs an integer number from an integer literal, a float literal (by removing all decimals), or a string literal (providing the string represents a whole number)</li>
+        <li><span class="highlight">float()</span> - constructs a float number from an integer literal, a float literal or a string literal (providing the string represents a float or an integer)</li>
+        <li><span class="highlight">str()</span> - constructs a string from a wide variety of data types, including strings, integer literals and float literals</li>
+      </ul>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Integers:</p>
+        <div class="code">
+          x = <span class="main">int</span>(<span class="num">7</span>)<br/>
+          y = <span class="main">int</span>(<span class="num">2.9</span>)<br/>
+          z = <span class="main">int</span>(<span class="num">"6"</span>)<br/>
+          <br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(y)<br/>
+          <span class="main">print</span>(z)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            7<br/>
+            2<br/>
+            6<br/>
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Floats:</p>
+        <div class="code">
+          x = <span class="main">float</span>(<span class="num">1</span>)<br/>
+          y = <span class="main">float</span>(<span class="num">9.2</span>)<br/>
+          z = <span class="main">float</span>(<span class="num">"25"</span>)<br/>
+          w = <span class="main">float</span>(<span class="num">"92.29"</span>)<br/>
+          <br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(y)<br/>
+          <span class="main">print</span>(z)<br/>
+          <span class="main">print</span>(w)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            1.0<br/>
+            9.2<br/>
+            25.0<br/>
+            92.29 
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <p>Strings:</p>
+        <div class="code">
+          x = <span class="main">str</span>(<span class="str">"s1"</span>)<span class="comment"> # will be 's1' </span><br/>
+          y = <span class="main">str</span>(<span class="num">421</span>)<span class="comment"> # will be '421' </span><br/>
+          z = <span class="main">str</span>(<span class="num">7.01</span>)<span class="comment"> # will be '7.01' </span><br/>
+          <br/>
+          <span class="main">print</span>(x)<br/>
+          <span class="main">print</span>(y)<br/>
+          <span class="main">print</span>(z)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            s1<br/>
+            421<br/>
+            7.01
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>Python will give you an error if you input a value that cannot be converted to that type:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="error-code">
+          x = <span class="main">int</span>(<span class="string">"I'm an integer:)"</span>)<br/>
+          <span class="main">print</span>(x)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="error-result">
+            ValueError: invalid literal for int() with base 10: "I'm an integer:)"
+          </div>
+        </div>
+       <button class="result-btn error-btn" onclick="check_result(this, 'error')">View Result</button>
+     </div>
+    </article>
+  </section>
+
+  <section class="main-section" id="strings">
+    <header>Strings</header>
+    <article>
+      <p>Strings in python are surrounded by either single quotation marks, or double quotation marks.</p>
+      <p><span class="highlight">'hello'</span> is the same as <span class="highlight">"hello"</span>.</p>
+      <p>You can display a string literal with the <span class="highlight">print()</span> function:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          <span class="main">print</span>(<span class="string">"Hola"</span>)<br/>
+          <span class="main">print</span>(<span class="string">'Hola'</span>)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+            Hola<br/>
+            Hola
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div><hr/>
+      
+      <span class="sub-header">Multiline Strings</span>
+      <p>You can assign a multiline string to a variable by using three quotes:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+          str = <span class="string">"""Lorem ipsum dolor sit amet,<br/> 
+          consectetur adipiscing elit. Aenean maximus ex sed tincidunt<br/> 
+          placerat. Integer molestie imperdiet sodales. Pellentesque<br/> 
+          lacus ex, mollis aliquam ornare non, ultricies sit amet lorem."""</span><br/>
+          <span class="main">print</span>(str)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+          Lorem ipsum dolor sit amet,<br/> 
+          consectetur adipiscing elit. Aenean maximus ex sed tincidunt<br/> 
+          placerat. Integer molestie imperdiet sodales. Pellentesque<br/> 
+          lacus ex, mollis aliquam ornare non, ultricies sit amet lorem.
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <p>Or three single quotes:</p>
+      <div class="code-block">
+        <span class="code-header">Example</span>
+        <div class="code">
+           str = <span class="string">'''Lorem ipsum dolor sit amet,<br/> 
+          consectetur adipiscing elit. Aenean maximus ex sed tincidunt<br/> 
+          placerat. Integer molestie imperdiet sodales. Pellentesque<br/> 
+          lacus ex, mollis aliquam ornare non, ultricies sit amet lorem.'''</span><br/>
+          <span class="main">print</span>(str)
+        </div>
+        <div class="result-div">
+         <span class="code-header">Result</span>
+          <div class="result">
+          Lorem ipsum dolor sit amet,<br/> 
+          consectetur adipiscing elit. Aenean maximus ex sed tincidunt<br/> 
+          placerat. Integer molestie imperdiet sodales. Pellentesque<br/> 
+          lacus ex, mollis aliquam ornare non, ultricies sit amet lorem.            
+          </div>
+        </div>
+       <button class="result-btn" onclick="check_result(this)">View Result</button>
+     </div>
+      <div class="note-block">
+        <p class="note"><b>Note:</b> in the result, the line breaks are inserted at the same position as in the code.</p>
+      </div><hr/>
+    </article>
+  </section>
+  
+</main>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>

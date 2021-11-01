@@ -1,0 +1,291 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: white
+}
+:root {
+  --blue:  #09F;
+  --lightblue: #36F;
+  --green: #4CAF50;
+  --green2: #3C3;
+  --orange: #F93;
+  --red: #F33;
+  --grey: #b3b3b3;
+  --light-yellow: #FFC;
+}
+h1 {
+  background-color: black;
+  padding: 30px;
+  text-align: center;
+  font-size: 32px;
+  animation: rainbow 4s linear 0s infinite;
+}
+@keyframes rainbow {
+  from {
+    color: #6666ff;
+  }
+  10% {
+    color: #0099ff;
+  }
+  50% {
+    color: #00ff00;
+  }
+  75% {
+    color: #ff3399;
+  }
+  100% {
+    color: #6666ff;
+  }
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+hr {
+  margin: 20px 0!important;
+  border: 0!important;
+  border-top: 1px solid #eee!important;
+}
+#navbar {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  border-right: 4px solid #ccc;
+  width: 340px;
+  height: 100%;
+}
+#navbar header {
+  font-size: 26px;
+  text-align: center;
+  margin: 25px 0;
+}
+#navbar .nav-link {
+  display: block;
+  text-decoration: none;
+  border-top: 1px solid #eee;
+  transition: 0.2s;
+  border-bottom: 1px solid #eee;
+  color: black;
+  font-size: 20px;
+  padding: 7px 0 7px 10px;
+}
+#navbar .nav-link:hover {
+  background-color: #eee;
+}
+#main-doc {
+  margin-left: 370px;
+}
+.main-section {
+  margin-top: 50px;
+  padding-top: 20px;
+}
+.main-section:first-child {
+  margin-top: 10px;
+}
+.main-section header {
+  border-left: 5px solid var(--blue);
+  padding: 0 10px;
+  font-weight: bold;
+  font-size: 35px;
+}
+#introduction article code {
+  display: none; /* Hides the code element */
+}
+.main-section article .sub-header {
+  display: block;
+  font-size: 27px;
+}
+.main-section article .sh2 {
+  font-size: 24px;
+  padding: 5px 0;
+}
+.main-section article {
+  font-size: 18px;
+}
+.main-section article .code-block {
+  border-radius: 0.25rem;
+  margin: 30px 0;
+  background-color: #F1F1F1;
+  padding: 13px 10px;
+}
+.main-section article .code-block .code-header  {
+  display: block;
+  font-size: 25px;
+}
+.code-block span.string { color: #A31515; }
+.code-block span.comment { color: #008052; }
+.code-block span.num { color: #ff4d4d; }
+.code-block span.main { color: #005cb3; }
+.code-block span.bool { color: #3e8e41; }
+.code-block span.method { color: #33f; }
+.code-block div.indent { margin-left: 18px; }
+.main-section article .code-block .result-div {
+  display: none;
+}
+.main-section article .code-block .code,
+.main-section article .code-block .result,
+.main-section article .code-block .error-code,
+.main-section article .code-block .error-result {
+  font-family: monospace, sans-serif;
+  border-left: 5px solid var(--lightblue);
+  line-height: 1.45;
+  color: #000;
+  font-size: 18px;
+  margin: 18px 0;
+  padding: 20px 10px;
+  background-color: #FFF;
+  display: block;
+}
+.main-section article .code-block .result {
+  border-color: var(--orange)
+}
+.main-section article .code-block .error-code {
+  border-color: var(--red);
+}
+.main-section article .code-block .error-result {
+  border-color: var(--grey);
+}
+.main-section article .code-block .result-btn,
+.main-section article .code-block .error-btn {
+  background-color: var(--lightblue);
+  color: #FFF;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 10px 0;
+  padding: 10px 15px;
+}
+.main-section article .code-block .error-btn {
+  background-color: var(--red)
+}
+.main-section article .highlight {
+  background-color: #F5F5F5;
+  padding: 0 5px; 
+  color: #E11472;
+}
+.main-section article .note-block {
+  background-color: var(--light-yellow);
+  border-radius: 0.25rem;
+  padding: 15px 0;
+  margin: 30px 0;
+}
+.main-section article .note-block .note {
+  margin-left: 10px;
+}
+@media screen and (max-width: 1080px) {
+  #navbar {
+    width: 280px;
+  }
+  #navbar header {
+    font-size: 22px;
+  }
+  #navbar .nav-link {
+    font-size: 18px;
+  }
+  #main-doc {
+    margin-left: 300px;
+  }
+  .code div.indent { margin-left: 16px; }
+  .main-section header {
+    font-size: 31px;
+  }
+  .main-section article {
+    font-size: 17px;
+  }
+  .main-section article .sub-header {
+    font-size: 23px;
+  }
+  .main-section article .sh2 {
+    font-size: 20px;
+  }
+  .main-section article .code-block .code-header {
+    font-size: 22px;
+  }  
+  .main-section article .code-block {
+    margin: 25px 0;
+  }
+.main-section article .code-block .code,
+.main-section article .code-block .result,
+.main-section article .code-block .error-code,
+.main-section article .code-block .error-result {
+    font-size: 17px;    
+  }
+  .main-section article .code-block .result-btn {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 850px) {
+  #navbar {
+    width: 240px;
+  }
+  #navbar header {
+    font-size: 20px;
+  }
+  #navbar .nav-link {
+    font-size: 17px;
+    padding: 5px 10px;
+  }
+  #main-doc {
+    margin-left: 260px;
+  }
+  .code div.indent { margin-left: 14px; }
+}
+@media screen and (max-width: 720px) {
+  #main-doc {
+    margin-left: 0px;
+  }
+  #navbar {
+    position: relative;
+    width: 100%;
+   top: 20px;
+    border: none;
+    margin-bottom: 40px;
+  }
+  #navbar header {
+    font-size: 25px;
+  }
+  #navbar .nav-link {
+    font-size: 19px;
+    padding: 5px 8px;
+    border-bottom: none;
+  }
+  .code div.indent { margin-left: 12px; }
+  #navbar #relative-nav {
+    overflow-y: auto;
+    border: 2px solid #ccc;
+    height: 300px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .code div.indent { margin-left: 10px; }
+  .main-section header {
+    font-size: 28px;
+  }
+  .main-section article {
+    font-size: 16px;
+  }
+  .main-section article .sub-header {
+    font-size: 20px;
+  }
+  .main-section article .sh2 {
+    font-size: 17px;
+  }
+  .main-section article .code-block .code-header {
+    font-size: 20px;
+  }  
+  .main-section article .code-block {
+    margin: 20px 0;
+    padding: 8px 5px;
+  }
+.main-section article .code-block .code,
+.main-section article .code-block .result,
+.main-section article .code-block .error-code,
+.main-section article .code-block .error-result {
+    font-size: 16px;    
+  }
+  .main-section article .code-block .result-btn {
+    font-size: 15px;
+  }  
+}

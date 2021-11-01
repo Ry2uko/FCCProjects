@@ -1,0 +1,89 @@
+<div class="container">
+  
+  <header>
+    <h1 id="title">FCC Survey Form</h1>
+    <p id="description">Thank you for taking the time to answer our survey!</p>
+  </header>
+  
+  <form id="survey-form" autocomplete="off">
+    
+    <div class="group">
+      <label for="name" id="name-label">Name</label>
+      <input id="name" type="text" placeholder="Enter your name" name="name"required>
+    </div>
+    
+    <div class="group">
+      <label for="email" id="email-label">Email</label>
+      <input id="email" type="email" placeholder="Enter your email" name="email" required>
+    </div>
+    
+    <div class="group">
+      <label for="number" id="number-label">Age<span>(optional)</span></label>
+      <input id="number" type="number" placeholder="Enter your Age" min="12" max="99" name="age">
+    </div>
+    
+    <div class="group">
+      <p class="label-p">What is your current status?</p>
+      <select id="dropdown" name="status" required>
+        <option disabled selected value>Select your status</option>
+        <option value="part-time">Part Time Worker</option>
+        <option value="full-time">Full Time Worker</option>
+        <option value="student">Student</option>
+        <option value="prefer-not">Prefer not to say</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    
+    <div class="group">
+      <p class="label-p">Which continent do you belong?</p>
+      <select id="dropdown2" name="continent" required>
+        <option disabled selected value>Select your continent</option>
+        <option value="asia">Asia</option>
+        <option value="europe">Europe</option>
+        <option value="south-america">South America</option>
+         <option value="north-america">North America</option>
+         <option value="africa">Africa</option>
+        <option value="prefer-not">Prefer not to say</option>
+         <option value="others">Others</option>
+      </select>
+    </div>
+    
+    <div class="group">
+        <p class="label-p">Are you interested in coding?</p>
+      <label><input type="radio" name="interested-in-coding" value="yes" checked>Yes</label>
+      <label><input type="radio" name="interested-in-coding" value="no">No</label>
+      <label><input type="radio" name="interested-in-coding" value="not-sure">Not Sure</label>
+    </div>
+    
+    <div class="group">
+      <p class="label-p">How many programming language do you know? <span>(Python, C, etc.)</span></p>
+      <label><input type="radio" name="known-language" value="1" checked>1</label>
+      <label><input type="radio" name="known-language" value="2">2</label>
+      <label><input type="radio" name="known-language" value="3-or-more">3+</label>
+      <label><input type="radio" name="known-language" value="not-sure">Not Sure</label>
+    </div>
+    
+    <div class="group">
+      <p class="label-p">What programming language do you currently know?<span>(Check all that apply)</span></p>
+      <label><input type="checkbox" name="known-language-checkbox" value="python">Python</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="javascript">Javascript</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="ruby">Swift</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="java">Java</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="c++">C++</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="c#">C#</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="c">C</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="php">PHP</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="r">R</label>
+      <label><input type="checkbox" name="known-language-checkbox" value="go">Go</label>
+    </div>
+    
+    <div class="group">
+      <p class="label-p">So what do you think of our survey?<span>(optional)</span></p>
+      <textarea placeholder="Enter you comment here..." name="comment"></textarea>
+    </div>
+    
+    <div class="group">
+      <button id="submit" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

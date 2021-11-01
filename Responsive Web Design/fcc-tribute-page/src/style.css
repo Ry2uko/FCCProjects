@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo&display=swap');
+body {
+  background-color: white
+}
+h1 {
+  text-align: center;
+  font-family: Cardo, cursive;
+  margin: 10px;
+  font-size: 2.6em;
+}
+.h2sub {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 5px;
+}
+figure {
+  text-align: center;
+  display: block;
+  margin: 15px;
+}
+figcaption {
+  font-size: 1.1em;
+}
+#image {
+  max-width: 100%;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+}
+p {
+ font-family: Verdana, sans-serif;
+}
+#context p {
+  font-size: 1.09em;
+  text-align: justify;
+  margin: 0 40px;
+}
+#par {
+  margin: 20px 0 0 40px;
+  font-size: 1.1em;
+}
+

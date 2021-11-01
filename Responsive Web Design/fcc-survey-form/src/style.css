@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background: #FBFBFB;
+}
+header {
+  margin-bottom: 1rem;
+}
+.container {
+  width: 100%;
+  margin: 3rem auto 0 auto;
+}
+h1 {
+  font-size: 30px;
+  text-align: center;
+}
+#description {
+  font-size: 20px;
+  text-align: center;
+}
+form {
+  display: block;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background: white; 
+  padding: 0.7rem;
+}
+.group {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+#name, #email {
+  width: 100%;
+}
+.group input, select {
+  display: block;
+  height: 30px;
+  font-size: 1.1em;
+  outline: none;
+}
+#number {
+  min-width: 180px;
+}
+select {
+  min-width: 180px;
+  font-size: 1em;
+}
+label {
+  display: flex;
+  font-size: 1.3em;
+  align-items: center;
+}
+.label-p {
+  font-size: 1.3em;
+}
+label span, p span {
+  font-size: 0.75em;
+  margin-left: 2px;
+}
+input[type="radio"], input[type="checkbox"] {
+  display: inline-block;
+  margin: 0 5px;
+}
+textarea {
+  width: 100%;
+  font-size: 1.45em;
+  min-height: 130px;
+  padding: 0.25rem;
+  outline: none;
+  resize: none;
+}
+#submit {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  font-size: 1.3em;
+  border: 2px solid #333;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#submit:hover {
+  background-color: #ddd;
+}
+#submit:active {
+  background-color: #ccc;
+}
+@media (min-width: 650px) {
+  .container {
+    width: 650px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  form {
+    padding: 0.9rem;
+  }
+}
+@media (min-width: 800px) {
+  .container {
+    width: 750px;
+  }
+  form {
+    padding: 1.1rem;
+  }
+ 
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 900px;
+  }
+  #description {
+    font-size: 25px;
+  }
+ form {
+    padding: 1.3rem;
+  }
+}

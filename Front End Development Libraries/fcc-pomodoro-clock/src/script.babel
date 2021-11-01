@@ -1,0 +1,368 @@
+// Project by @Ry2uko
+
+import * as React from "https://cdn.skypack.dev/react@17.0.1";
+import * as ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
+
+let isRunning = false;
+let intervalInProgress = false;
+let currMode = "session";
+
+let colorSet = {}; // tbu
+
+class Pomodoro extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // Default Values
+      sessionMin: 25, 
+      breakMin: 5, 
+      // Timer
+      minutes: 25,
+      seconds: 0,
+      disMin: "25",
+      disSec: "00",
+      time: "25:00",
+      
+      // Misc
+      startStop: "Start",
+      timerInterval: 0,
+    }
+  }
+  
+  componentDidMount() {
+    let sidebar = document.getElementById("sidebar");
+    document.getElementById("settings").addEventListener("click", function() {
+      sidebar.style.width = "320px";
+    });
+    document.getElementById("closebtn").addEventListener("click", function() {
+      sidebar.style.width = "0";
+    });
+    
+    this.sessionLabel = document.getElementById("timer-label");
+    this.breakLabel = document.getElementById("timer-label2");
+    this.startStop = document.getElementById("start_stop");
+    
+    this.sessionInc = document.getElementById("session-increment");
+    this.sessionDec = document.getElementById("session-decrement");
+    this.breakInc = document.getElementById("break-increment");
+    this.breakDec = document.getElementById("break-decrement");
+    
+    // color variables 
+    
+    // Default
+    this.bgsessiondefault = "rgb(255,85,85)"; 
+    this.bgbreakdefault = "#736CED";
+    // this.bgbreakdefault = "rgb(98, 188, 252)";
+    
+  }
+  
+  
+  // Handles hover for btn
+  handleHover = (type) => {
+    let bgcolor = this.bgsessiondefault;
+    if(currMode === "break") bgcolor = this.bgbreakdefault;
+    if(type === "enter") {
+      this.startStop.style.backgroundColor = bgcolor;
+      this.startStop.style.color =  "rgb(253, 254, 251)";
+    } else {
+      this.startStop.style.backgroundColor = "rgb(253,254,251)";
+      this.startStop.style.color =  bgcolor;
+    }
+  }
+  
+  // Timer Functions
+  startTimer = () => {
+    if(isRunning) {
+      this.setState({
+        startStop: "Start",
+      });
+      isRunning = false;
+      return;
+    }
+    this.setState({
+        startStop: "Stop",
+      });
+    
+    isRunning = true;
+    if(!intervalInProgress) {
+      this.setTimer();
+      this.setState({
+        timerInterval: setInterval(() => this.timerFoo(), 1000),
+      });
+      intervalInProgress = true;
+    }
+    
+  }
+  
+  resetTimer = () => {
+    this.setState({
+        startStop: "Start",
+      });
+    isRunning = false;
+    intervalInProgress = false;
+    this.setTimer();
+    clearInterval(this.state.timerInterval)
+  }
+  
+  lessThanTen = (int) => {
+    if(isRunning && intervalInProgress) return;
+    this.setState({
+      minutes: int,
+      seconds: 0,
+      disSec: "00",
+    });
+    if(int < 10) {
+      this.setState(prev => ({
+        disMin: "0" + int,
+      }));
+    } else {
+      this.setState(prev => ({
+        disMin: int.toString(),
+      }))
+    }
+    this.setState(prev => ({
+        time: `${prev.disMin}:${prev.disSec}`,
+    }));
+  }
+  
+  setTimer = () => {
+    let currMin = this.state.sessionMin;
+    if(currMode === "break") {
+      currMin = this.state.breakMin;
+    };
+    this.lessThanTen(currMin);
+  }
+  
+  setColor = (bgcolor) => {
+    document.body.style.background = bgcolor;
+    this.startStop.style.color = bgcolor;
+    this.sessionInc.style.background = bgcolor;
+    this.sessionDec.style.background = bgcolor;
+    this.breakInc.style.background = bgcolor;
+    this.breakDec.style.background = bgcolor;
+  }
+  
+  changeMode = (mode, color) => {
+    if(currMode === mode || isRunning) return;
+    if(mode === "session") {
+      currMode = "session";
+      let bgcolor = this.bgsessiondefault;
+      this.sessionLabel.style.color = "rgba(253, 254, 251, 1)";
+      this.breakLabel.style.color = "rgba(253, 254, 251, 0.6)";
+      this.setColor(bgcolor)
+
+    } else {
+      currMode = "break";
+      let bgcolor = this.bgbreakdefault;
+      this.sessionLabel.style.color = "rgba(253, 254, 251, 0.6)";
+      this.breakLabel.style.color = "rgba(253, 254, 251, 1)";
+      this.setColor(bgcolor)
+    }
+    this.resetTimer();
+} 
+  
+  minFoo = () => {
+    if(this.state.minutes <= 10) {
+      this.setState(prev => ({
+        minutes: prev.minutes - 1,
+        disMin: "0" + (prev.minutes - 1),
+      }));
+      return;
+    }
+    this.setState(prev => ({
+      minutes: prev.minutes - 1,
+      disMin: (prev.minutes - 1).toString(),
+    }));
+  }
+  
+  secFoo = () => {
+    if(this.state.seconds === 0) {
+      this.setState(prev => ({
+        seconds: 59,
+        disSec: "59",
+      }));
+      this.minFoo();
+      return;
+    } else if(this.state.seconds <= 10) {
+      this.setState(prev => ({
+        seconds: prev.seconds - 1,
+        disSec: "0" + (prev.seconds - 1),
+      }));
+      return;
+    }
+    this.setState(prev => ({
+      seconds: prev.seconds - 1,  
+      disSec: (prev.seconds - 1).toString(),
+    }));
+  }
+  
+  // Function for interval
+  timerFoo = () => {
+    // Returns if isRunning is false
+    if(!isRunning) return;
+    if(this.state.seconds === 0 && this.state.minutes === 0) {
+      isRunning = false; // changeMode bypass
+			if(currMode === "session") {
+        this.changeMode("break");
+      } else {
+        this.changeMode("session");
+      }
+			return;
+    }
+    this.secFoo();
+    this.setState(prev => ({
+      time: `${prev.disMin}:${prev.disSec}`,
+    }));
+  }
+  
+  skip = () => {
+    let customTxt = "";
+    if(isRunning) {
+      customTxt = " early"; // just a bit of detail :)
+    }
+    if(confirm(`Are you sure you want to finish the ${currMode}${customTxt}?`)) {
+      this.setState({
+        startStop: "Start",
+      });
+      isRunning = false
+      if(currMode === "session") {
+        this.changeMode("break"); 
+        return;
+      } else {
+        this.changeMode("session")
+      }
+    }
+  }
+  
+  // Settings Function
+  countFunc = (mode, type) => {
+    if(type === "increment") {
+      if(mode === "session") {
+        this.setState(prev => ({
+          sessionMin: prev.sessionMin + 1,
+        }));
+        if(currMode === mode) this.lessThanTen(this.state.sessionMin + 1);
+      } else {
+        this.setState(prev => ({
+          breakMin: prev.breakMin + 1,
+        }));
+        if(currMode === mode) this.lessThanTen(this.state.breakMin + 1);
+      }
+    } else {
+      if(mode === "session") {
+        if(this.state.sessionMin === 1) return;
+        this.setState(prev => ({
+          sessionMin: prev.sessionMin - 1,
+        }));
+        if(currMode === mode) this.lessThanTen(this.state.sessionMin - 1);
+      } else {
+        if(this.state.breakMin === 1) return;
+        this.setState(prev => ({
+          breakMin: prev.breakMin - 1,
+        }));
+        if(currMode === mode) this.lessThanTen(this.state.breakMin - 1);
+      }
+    }
+  }
+  
+  render() {
+    return (
+      <div>
+        
+        <button type="button" id="settings" className="btn">
+          <i className="fas fa-cog"></i>
+        </button>
+        <div id="sidebar">
+          <a href="javascript:void(0)" id="closebtn">&times;</a>
+          <div className="settings-bar">
+            <span className="settings-label">Session Length</span>
+            <div className="settings-container">
+              <button type="button"
+                className="settings-btn"
+                id="session-decrement"
+                onClick={this.countFunc.bind(this, "session", "decrement")}>-</button>
+              <input type="text"
+                id="session-length"
+                className="settings-input"
+                value={this.state.sessionMin}/>
+              <button type="button"
+                className="settings-btn"
+                id="session-increment"
+                onClick={this.countFunc.bind(this, "session", "increment")}>+</button>
+            </div>
+            <span className="settings-label">Break Length</span>
+            <div className="settings-container">
+              
+              <button type="button"
+                className="settings-btn"
+                id="break-decrement"
+                onClick={this.countFunc.bind(this, "break", "decrement")}>-</button>
+              <input type="text"
+                id="break-length"
+                className="settings-input"
+                value={this.state.breakMin}/>
+              <button type="button"
+                className="settings-btn"
+                id="break-increment"
+                onClick={this.countFunc.bind(this, "break", "increment")}>+</button>
+            </div>
+          </div>
+        </div>
+        
+        <h1>Pomodoro Clock</h1>
+        
+        <div id="timer-container">
+          
+          <div className="timer">
+            
+            <div className="timer-label">
+              <span id="timer-label" 
+                onClick={this.changeMode.bind(this, "session")}>
+                Session
+              </span>
+              <span id="timer-label2" 
+                onClick={this.changeMode.bind(this, "break")}>
+                Break
+              </span>
+            </div>
+            <div className="time-container">
+              <span id="time-left">{this.state.time}</span>
+            </div>
+            
+          </div>
+          
+          <div className="controls">
+            <button type="button" 
+              className="btn" 
+              id="reset" 
+              onClick={this.resetTimer}>
+              <i className="fas fa-redo"></i>
+              </button>
+            <button  type="button" 
+              className="btn" 
+              id="start_stop" 
+              onClick={this.startTimer} 
+              onMouseEnter={this.handleHover.bind(this, "enter")}
+              onMouseLeave={this.handleHover.bind(this, "leave")}>
+              {this.state.startStop}
+            </button>
+            <button type="button" 
+              className="btn" 
+              id="skip" 
+              onClick={this.skip}>
+              <i className="fas fa-forward"></i>
+              </button>
+          </div>
+          
+        </div>
+      </div>
+    );
+  }
+}
+
+
+
+ReactDOM.render(<Pomodoro />, document.getElementById("root"));
+
+ 
+// Seperate class: to do list

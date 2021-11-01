@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Cabin&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  background: #0086FA;
+  color: white;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div#calculator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 34px;
+  width: 620px;
+  height: 720px;
+  box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.2), -1px -1px 13px rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  background-color: #F0F0F0;
+  font-family: "Cabin", Helvetica, Arial, sans-serif;
+  color: #3C8AFF;
+}
+@media screen and (max-height: 800px) {
+  div#calculator {
+    height: 580px;
+  }
+}
+@media screen and (max-height: 600px) {
+  div#calculator {
+    height: 480px;
+  }
+}
+@media screen and (max-width: 750px) {
+  div#calculator {
+    width: 530px;
+  }
+}
+@media screen and (max-width: 580px) {
+  div#calculator {
+    width: 450px;
+    padding: 7px 27px;
+  }
+}
+@media screen and (max-width: 480px) {
+  div#calculator {
+    width: 360px;
+    padding: 7px 9px;
+  }
+}
+@media screen and (max-width: 380px) {
+  div#calculator {
+    width: 300px;
+    padding: 7px 3px;
+  }
+}
+div#calculator div#display-container {
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid rgba(10, 10, 10, 0.2);
+  border-radius: 0.3rem;
+  width: 100%;
+  height: 180px;
+}
+div#calculator div#display-container div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+div#calculator div#display-container div.text-display {
+  flex-grow: 6;
+}
+div#calculator div#display-container div.text-display span {
+  margin-top: 35px;
+  font-size: 4em;
+}
+@media screen and (max-height: 800px) {
+  div#calculator div#display-container div.text-display span {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 750px) {
+  div#calculator div#display-container div.text-display span {
+    font-size: 3.6em;
+  }
+}
+@media screen and (max-width: 580px) {
+  div#calculator div#display-container div.text-display span {
+    margin-top: 33px;
+    font-size: 3.1em;
+  }
+}
+@media screen and (max-width: 480px) {
+  div#calculator div#display-container div.text-display span {
+    margin-top: 37px;
+    font-size: 2.6em;
+  }
+}
+@media screen and (max-width: 380px) {
+  div#calculator div#display-container div.text-display span {
+    font-size: 2em;
+  }
+}
+div#calculator div#display-container div.textop {
+  color: rgba(10, 10, 10, 0.5);
+  flex-grow: 2;
+}
+div#calculator div#display-container div a#zerodivide {
+  padding-top: 20px;
+  color: #59a5d8;
+  display: none;
+  font-size: 1.2em;
+}
+div#calculator div#display-container div a#zerodivide:hover {
+  color: rgba(89, 165, 216, 0.8);
+}
+div#calculator div#display-container div span {
+  font-size: 1.5em;
+  line-height: 1;
+  position: absolute;
+}
+@media screen and (max-height: 800px) {
+  div#calculator div#display-container div span {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 580px) {
+  div#calculator div#display-container div span {
+    font-size: 1.2em;
+  }
+}
+@media screen and (max-width: 480px) {
+  div#calculator div#display-container div span {
+    font-size: 1.3em;
+  }
+}
+@media screen and (max-width: 380px) {
+  div#calculator div#display-container div span {
+    font-size: 1.2em;
+  }
+}
+div#calculator div#keypad {
+  display: grid;
+  width: 100%;
+  height: 540px;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(5, auto);
+  grid-gap: 10px;
+  padding: 40px 12px 10px 12px;
+}
+@media screen and (max-width: 480px) {
+  div#calculator div#keypad {
+    grid-gap: 6px;
+    padding: 20px 0 10px 0;
+  }
+}
+@media screen and (max-width: 380px) {
+  div#calculator div#keypad {
+    grid-gap: 2px;
+    padding: 20px 5px 10px 5px;
+  }
+}
+div#calculator div#keypad button {
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(10, 10, 10, 0.1);
+  background-color: rgba(118, 202, 255, 0.1);
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 1.3em;
+  transition: 0.2s;
+  border-radius: 0.4rem;
+}
+div#calculator div#keypad button.op {
+  background-color: rgba(77, 187, 255, 0.2);
+}
+div#calculator div#keypad button#cleareverything {
+  transition: background-color 1s;
+}
+div#calculator div#keypad button#equals {
+  background-color: rgba(51, 163, 232, 0.4);
+}
+div#calculator div#keypad button#decimal, div#calculator div#keypad button#plus-minus {
+  background-color: rgba(118, 202, 255, 0.1);
+}
+div#calculator div#keypad button:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap')
+
+$bg-white: #F0F0F0
+$bg-color: #0086FA
+$color-blue: #3C8AFF
+
+body
+  margin: 0
+  padding: 0
+  background: $bg-color
+  color: white
+  height: 100vh
+* 
+  box-sizing: border-box
+
+div#calculator
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translateY(-50%) translateX(-50%)
+  display: flex
+  flex-direction: column
+  padding: 12px 34px
+  width: 620px
+  height: 720px
+  box-shadow: 1px 1px 16px rgba(0,0,0,0.2), -1px -1px 13px rgba(0,0,0,0.2)
+  border-radius: 0.3rem
+  background-color: $bg-white
+  font-family: "Cabin", Helvetica, Arial, sans-serif
+  color: $color-blue
+  
+  @media screen and (max-height: 800px)
+    height: 580px
+  @media screen and (max-height: 600px)
+    height: 480px
+  @media screen and (max-width: 750px)
+    width: 530px
+  @media screen and (max-width: 580px)
+    width: 450px
+    padding: 7px 27px
+  @media screen and (max-width: 480px)
+    width: 360px
+    padding: 7px 9px
+  @media screen and (max-width: 380px)
+    width: 300px
+    padding: 7px 3px
+  
+  div
+    &#display-container
+      overflow: auto
+      box-sizing: border-box
+      display: flex
+      flex-direction: column
+      border-bottom: 2px solid rgba(10,10,10,0.2)
+      border-radius: .3rem
+      width: 100%
+      height: 180px
+      div
+        position: relative
+        display: flex
+        align-items: center
+        padding: 8px
+        
+        &.text-display
+          flex-grow: 6
+          
+          span
+            margin-top: 35px
+            font-size: 4em
+            @media screen and (max-height: 800px)
+              font-size: 3em
+            @media screen and (max-width: 750px)
+              font-size: 3.6em
+            @media screen and (max-width: 580px)
+              margin-top: 33px
+              font-size: 3.1em
+            @media screen and (max-width: 480px)
+              margin-top: 37px
+              font-size: 2.6em
+            @media screen and (max-width: 380px)
+              font-size: 2em
+        &.textop
+          color: rgba(10, 10, 10, 0.5)
+          flex-grow: 2
+          
+        a#zerodivide
+          padding-top: 20px
+          color: rgba(89, 165, 216, 1)
+          display: none
+          font-size: 1.2em
+          
+          &:hover
+            color: rgba(89, 165, 216, 0.8)
+          
+        span
+          font-size: 1.5em
+          line-height: 1
+          position: absolute
+          @media screen and (max-height: 800px)
+              font-size: 1em
+          @media screen and (max-width: 580px)
+            font-size: 1.2em
+          @media screen and (max-width: 480px)
+            font-size: 1.3em
+          @media screen and (max-width: 380px)
+            font-size: 1.2em
+            
+          
+    &#keypad
+      display: grid
+      width: 100%
+      height: 540px
+      grid-template-columns: repeat(4, auto)
+      grid-template-rows: repeat(5, auto)
+      grid-gap: 10px
+      padding: 40px 12px 10px 12px
+      
+      @media screen and (max-width: 480px)
+        grid-gap: 6px
+        padding: 20px 0 10px 0 
+      @media screen and (max-width: 380px)
+        grid-gap: 2px
+        padding: 20px 5px 10px 5px
+      
+      button
+        width: 100%
+        height: 100%
+        border: 2px solid rgba(10, 10, 10, 0.1)
+        background-color: rgba(118, 202, 255, 0.1)
+        color: rgba(0,0,0,0.7)
+        font-size: 1.3em
+        transition: 0.2s
+        border-radius: 0.4rem
+        
+        &.op
+          background-color: rgba(77, 187, 255, 0.2)
+        &#cleareverything
+          transition: background-color 1s
+        &#equals
+          background-color: rgba(51, 163, 232, 0.4)
+        &#decimal, &#plus-minus
+          background-color: rgba(118, 202, 255, 0.1)
+        &:hover
+          transform: scale(1.05)
+        
+  

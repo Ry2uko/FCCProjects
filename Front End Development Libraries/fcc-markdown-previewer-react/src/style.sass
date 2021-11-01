@@ -1,0 +1,98 @@
+$bg1: #FAE1DD
+$bg2: #F7F9F9
+
+
+*
+  ::-webkit-scrollbar
+    width: 12px
+  ::-webkit-scrollbar-track
+    background: #FAE1DD
+  ::-webkit-scrollbar-thumb
+    background: #f5c4bc
+  ::-webkit-scrollbar-thumb:hover
+    background: #f2b0a6
+
+body
+  background-color: $bg1
+  
+  div
+    &#body-container, &.preview-container
+      ::-webkit-scrollbar 
+        width:  2px
+      ::-webkit-scrollbar-track 
+        background: #FFF
+      ::-webkit-scrollbar-thumb 
+        background: #495057
+      ::-webkit-scrollbar-thumb:hover 
+        background: #343a40
+  
+  //Media
+  @media(max-width: 800px)
+    div
+      &#body-container
+        flex-direction: column
+      &.editor-div
+        width: 80vw
+        display: block
+        margin: auto
+      &.preview-container
+        width: 90vw
+        display: block
+        margin: 15px auto
+  
+div
+  &#body-container
+    display: flex
+    flex-direction: row
+    padding: 16px
+    
+  &.preview-container
+    background-color: $bg2
+    width: 60vw
+    height: 95vh
+    margin-left: 3vw
+    border: 2px solid black
+    border-radius: 6px
+    
+    div#preview
+      padding: 8px
+      height: 94vh
+      overflow: auto
+      h1
+        font-size: 2.1em
+      h2
+        font-size: 1.9em
+      h3
+        font-size: 1.7em
+      h4
+       font-size: 1.6em
+      h5
+        font-size: 1.5em
+      h6
+        font-size: 1.4em
+      p
+        font-size: 1.1em
+      span
+        &.chibi
+          img
+            display: inline
+            width: 200px
+            height: 240px
+      blockquote
+        border-left: 4px solid #444
+        padding-left: 10px
+   
+  &.editor-div
+    width: 36vw
+    height: 95vh
+    
+    textarea#editor
+      background-color: $bg2
+      border: 2px solid black
+      padding: 4px
+      border-radius: 6px
+      font-size: 1em
+      outline: none
+      resize: none
+      width: 100%
+      height: 100%

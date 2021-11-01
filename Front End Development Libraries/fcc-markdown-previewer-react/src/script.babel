@@ -1,0 +1,101 @@
+// Project by @Ry2uko
+
+let placeholder = `# Markdown Previewer
+You can type **anything** you want like links, headers, subheaders, list, and more. 
+
+## I'm a H2 Element
+This is an *inline code*: \`console.log('Hello React')\`  
+And this is a *code block*:  
+\`\`\`
+function returnFname(fullName) {
+  return fullName.split(' ')[0];
+}
+\`\`\`
+
+### I'm a H3 Element
+There are also different types of *lists*:
+1. **Unordered**  
+  Things I like:
+    - Coffee
+    - Reading
+    - Games
+2. **Ordered**  
+  This is an ordered list! :O
+    
+#### I'm a H4 Element
+Learn more about markdown and [syntaxes](https://en.wikipedia.org/wiki/Syntax_(programming_languages)):  
+**<a href="https://www.markdownguide.org/basic-syntax/" target="_blank">Click me!</a>**
+<!--
+I'm using html here instead of []() because
+I you can't add target="_blank" in markdown:) 
+-->
+
+##### I'm a H5 Element
+Here is a quote from my favorite author: *William Shakespeare*  
+> Though she be but little, she is fierce.  
+
+###### I'm a H6 Element
+You can also add images here:  
+<span class='chibi'>
+![monikachibi](https://www.nicepng.com/png/detail/938-9382210_ddlc-doki-doki-literature-club-monika-chibi.png)
+![sayorichibi](https://www.seekpng.com/png/detail/144-1449329_delighted-cinnamon-bun-chibi-doki-doki-literature-club.png)
+</span>  
+Just like that!
+
+You can start creating your own markdown too!  
+Just remove everything and *let your mind go wild!*    
+**ENJOY!**
+`
+
+class Previewer extends React.Component {
+  render() {
+    return (
+      <div class="preview-container">
+        <div
+          id="preview"
+          dangerouslySetInnerHTML={{
+            __html: marked(this.props.input)
+          }}
+          />
+        </div>
+      );
+  }
+}
+
+class Editor extends React.Component {
+  render() {
+    return (
+      <div class="editor-div">
+        <textarea id="editor" 
+          onChange={this.props.handleChange} 
+          value={this.props.input}
+          spellcheck="false"></textarea>
+      </div>
+      )
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: placeholder,
+    }
+  }
+  handleChange = (e) => {
+    this.setState({
+      input: e.target.value
+    })
+  }
+  render() {
+    return (
+      <div id="body-container">
+          <Editor handleChange={this.handleChange} 
+        input={this.state.input}/>
+          <Previewer input={this.state.input} />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

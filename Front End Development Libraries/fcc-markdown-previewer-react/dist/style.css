@@ -1,0 +1,107 @@
+* ::-webkit-scrollbar {
+  width: 12px;
+}
+* ::-webkit-scrollbar-track {
+  background: #FAE1DD;
+}
+* ::-webkit-scrollbar-thumb {
+  background: #f5c4bc;
+}
+* ::-webkit-scrollbar-thumb:hover {
+  background: #f2b0a6;
+}
+
+body {
+  background-color: #FAE1DD;
+}
+body div#body-container ::-webkit-scrollbar, body div.preview-container ::-webkit-scrollbar {
+  width: 2px;
+}
+body div#body-container ::-webkit-scrollbar-track, body div.preview-container ::-webkit-scrollbar-track {
+  background: #FFF;
+}
+body div#body-container ::-webkit-scrollbar-thumb, body div.preview-container ::-webkit-scrollbar-thumb {
+  background: #495057;
+}
+body div#body-container ::-webkit-scrollbar-thumb:hover, body div.preview-container ::-webkit-scrollbar-thumb:hover {
+  background: #343a40;
+}
+@media (max-width: 800px) {
+  body div#body-container {
+    flex-direction: column;
+  }
+  body div.editor-div {
+    width: 80vw;
+    display: block;
+    margin: auto;
+  }
+  body div.preview-container {
+    width: 90vw;
+    display: block;
+    margin: 15px auto;
+  }
+}
+
+div#body-container {
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+}
+div.preview-container {
+  background-color: #F7F9F9;
+  width: 60vw;
+  height: 95vh;
+  margin-left: 3vw;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+div.preview-container div#preview {
+  padding: 8px;
+  height: 94vh;
+  overflow: auto;
+}
+div.preview-container div#preview h1 {
+  font-size: 2.1em;
+}
+div.preview-container div#preview h2 {
+  font-size: 1.9em;
+}
+div.preview-container div#preview h3 {
+  font-size: 1.7em;
+}
+div.preview-container div#preview h4 {
+  font-size: 1.6em;
+}
+div.preview-container div#preview h5 {
+  font-size: 1.5em;
+}
+div.preview-container div#preview h6 {
+  font-size: 1.4em;
+}
+div.preview-container div#preview p {
+  font-size: 1.1em;
+}
+div.preview-container div#preview span.chibi img {
+  display: inline;
+  width: 200px;
+  height: 240px;
+}
+div.preview-container div#preview blockquote {
+  border-left: 4px solid #444;
+  padding-left: 10px;
+}
+div.editor-div {
+  width: 36vw;
+  height: 95vh;
+}
+div.editor-div textarea#editor {
+  background-color: #F7F9F9;
+  border: 2px solid black;
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 1em;
+  outline: none;
+  resize: none;
+  width: 100%;
+  height: 100%;
+}

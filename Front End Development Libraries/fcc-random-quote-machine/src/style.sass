@@ -1,0 +1,171 @@
+// Import
+@import url('https://fonts.googleapis.com/css2?family=Georama:wght@300&display=swap')
+
+//Variables
+$quoteboxbg: #121113
+$text-color: #e6e6e6
+
+//Mixins
+@mixin vendor-box-shadow($box-shadows...) 
+  box-shadow: $box-shadows
+  -webkit-box-shadow: $box-shadows
+  -moz-box-shadow: $box-shadows
+  
+
+body
+  background: linear-gradient(to right, #171617, #151415)
+  height: 100vh
+div
+  &#quote-box
+    @include vendor-box-shadow(1px 1px 3px 1px #020102, -1px -1px 3px 1px #020102)
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 87vw
+    height: 78vh
+    overflow: hidden
+    transform: translate(-50%, -50%)
+    background-color: $quoteboxbg
+    color: $text-color
+    font-family: 'Georama', Helvetica, Arial, sans-serif
+    
+    //Media
+    @media(max-width: 1300px)
+      width: 82vw
+      height: 76vh
+    @media(max-width: 1000px)
+      width: 86vw
+      height: 70vh
+    @media(max-width: 800px)
+      width: 80vw
+      height: 60vh
+    @media(max-width: 600px)
+      width: 85vw
+      height: 57vh
+    @media(max-width: 350px)  
+      width: 85vw
+      height: 90vh
+      
+  &.text-box
+    width: 95%
+    height: 68% 
+    position: relative
+    align-items: center
+    
+    @media(max-width: 350px)
+      padding-top: 15px
+      align-items: start
+    p#textPar
+      font-size: 2.2vw 
+      position: relative
+      
+      //Media
+      @media (max-width: 930px)
+        font-size: 24px
+      @media (max-width: 710px)
+        font-size: 20px
+      @media (max-width: 530px)
+        font-size: 17px
+      @media(max-width: 350px)
+        font-size: 19px
+      @media (min-width: 1250px)
+        font-size: 1.9vw
+      
+      i             
+        font-size: 1.4em 
+        @media(max-width: 350px)
+          font-size: 1.1em
+        &[class*="fa-quote-left"]
+            margin-right: 18px
+    p#author
+      
+      font-size: 2.3vw
+      position: absolute
+      bottom: 0
+      right: 0
+    
+      //Media
+      @media (max-width: 930px)
+        font-size: 23px
+      @media (max-width: 710px)
+        font-size: 20px
+      @media (max-width: 530px)
+        font-size: 16px
+      @media(max-width: 350px)
+        font-size: 18px
+      @media (min-width: 1250px)
+        font-size: 2vw
+
+  &.btn-box
+    width: 95%
+    height: 32%
+    align-items: center
+    position: relative
+    
+    @media(max-width: 520px)
+      display: flex
+      flex-direction: column
+    button
+      &#new-quote
+        color: #b3b3b3
+        padding: 12px 62px
+        margin-left: 24px
+        transition: 0.4s
+        border-radius: 15px
+        box-shadow: none
+        font:
+          size: 18px
+          family: Helvetica, sans-serif
+          
+        &:hover
+           border: 2px solid $text-color
+        
+        //Media
+        @media(max-width: 520px)
+          display: block
+          width: 100%
+        @media (min-width: 710px)
+          font-size: 22px
+        @media (min-width: 1300px)
+          font-size: 24px
+      
+    div
+      &.social-links
+        position: absolute
+        right: 0
+        margin-right: 10%
+        
+        @media(max-width: 520px)
+          margin: 0
+          position: relative
+        
+        a
+          &.social
+            opacity: 0.8
+            color: $text-color
+            font-size: 58px
+            margin: 5px
+            transition: 0.4s
+            
+            &:hover
+              font-size: 66px
+            
+            @media(max-width: 710px)
+              font-size: 48px
+              &:hover
+                font-size: 56px
+                
+              
+          
+        
+        
+      
+      
+       
+        
+    
+      
+     
+    
+    
+    

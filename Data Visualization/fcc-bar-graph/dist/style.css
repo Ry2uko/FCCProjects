@@ -1,0 +1,45 @@
+html, body {
+  height: 100%;
+  background: #1098F7;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #fff;
+}
+
+div.tooltip {
+  pointer-events: none;
+  position: absolute;
+  background: #fff;
+  padding: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 0.4rem;
+  color: #000;
+}
+
+div#barGraph {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px -1px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 500px;
+  width: 970px;
+}
+div#barGraph svg#barChart rect {
+  cursor: pointer;
+  fill: #1098F7;
+}
+div#barGraph svg#barChart g.axis path, div#barGraph svg#barChart g.axis line {
+  fill: none;
+  stroke: #000;
+}

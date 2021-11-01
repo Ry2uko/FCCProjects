@@ -1,0 +1,33 @@
+html, body
+  height: 100%
+  overflow: hidden
+*
+  box-sizing: border-box
+
+h1
+  margin: 10px 0 10px 0
+  font-size: 50px
+h2
+  margin: 0 0 5px 0
+  font-size: 18px
+  
+div#map
+  display: flex
+  position: absolute
+  justify-content: center
+  align-items: center
+  background-color: #fff
+  top: 65%
+  left: 50%
+  transform: translate(-50%, -65%)
+  
+div#tooltip
+  opacity: 0
+  
+path
+  &.counties
+    fill: none
+  &.states
+    fill: none
+    stroke: #fff
+    stroke-linejoin: round

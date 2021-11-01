@@ -1,0 +1,55 @@
+$green: #669D31
+
+html, body
+  height: 100%
+  background: $green
+  overflow: hidden
+  
+*
+  box-sizing: border-box
+
+h1
+  color: #fff
+  
+div#tooltip
+  pointer-events: none
+  position: absolute
+  background: #fff
+  padding: 6px
+  border: 1px solid rgba(0,0,0,0.6)
+  border-radius: 0.4rem
+  color: #000
+  opacity: 0
+  
+  p
+    margin-bottom: 0
+  
+div#barGraph
+  display: flex
+  position: absolute
+  justify-content: center
+  align-items: center
+  background-color: #fff
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2), -1px -1px -1px rgba(0,0,0,0.2)
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  height: 500px
+  width: 970px
+  
+  svg#scatterplotGraph
+    g
+      &.axis
+        font: 13px Helvetica, sans-serif
+        path, line
+          fill: none
+          stroke: #000
+          
+      &#legend
+        opacity: 0.9
+          
+      circle.dot
+        transition: opacity 0.1s
+        cursor: pointer
+        stroke: #000
+        opacity: 0.9

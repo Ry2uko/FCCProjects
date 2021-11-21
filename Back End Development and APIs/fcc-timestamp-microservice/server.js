@@ -11,8 +11,15 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/api", function(req, res) {
+  res.json({
+    "unix": Date.now(),
+    "utc": new Date().toUTCString()
+  });
+});
 
 app.get("/api/:date", function (req, res) {
+  console.log(req.params.date);
   let parsedUnix = parseInt(req.params.date);
   let utcDate = new Date(req.params.date).toUTCString();
 

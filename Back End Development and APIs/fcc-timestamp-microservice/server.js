@@ -19,7 +19,6 @@ app.get("/api", function(req, res) {
 });
 
 app.get("/api/:date", function (req, res) {
-  console.log(req.params.date);
   let parsedUnix = parseInt(req.params.date);
   let utcDate = new Date(req.params.date).toUTCString();
 

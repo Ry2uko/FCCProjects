@@ -1,0 +1,19 @@
+{
+	"name": "fcc-learn-npm-package-json",
+	"author": "Ry2uko",
+	"description": "just some descriptive text:-)",
+  "keywords": ["freecodecamp","json","solution","package"],
+  "license": "MIT",
+  "version": "1.0.0",
+	"dependencies": {
+		"express": "^4.14.0"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://idontknow/todo.git"
+	}
+}

@@ -1,14 +1,15 @@
 # FCCProjects
-These are my projects from [freeCodeCamp](https://www.freecodecamp.org/ry2uko). 
+[freeCodeCamp](https://www.freecodecamp.org/ry2uko) projects by Ry2uko. 
 
-Projects from:
+**Front End**:
+
+[Codepen](https://codepen.io/collection/kNNkPK)
+
 - Responsive Web Design
 - Front End Development Libraries
 - Data Visualization
 
-are exported from Codepen. You can view the codepen collection [here](https://codepen.io/collection/kNNkPK).
-
-And the rest are created locally or on any online IDE:
+[Replit](https://replit.com/@Ry2uko)
 - Back End Development and APIs
 - Quality Assurance
 - Information Security

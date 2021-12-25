@@ -12,52 +12,6 @@ let colorSet = {}; // tbu
 class Pomodoro extends React.Component {
   constructor(props) {
     super(props);_defineProperty(this, "handleHover",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     type => {
       let bgcolor = this.bgsessiondefault;
       if (currMode === "break") bgcolor = this.bgbreakdefault;
@@ -202,6 +156,10 @@ class Pomodoro extends React.Component {
       if (!isRunning) return;
       if (this.state.seconds === 0 && this.state.minutes === 0) {
         isRunning = false; // changeMode bypass
+
+        const audio = new Audio('../alarm.mp3');
+        audio.play();
+
         if (currMode === "session") {
           this.changeMode("break");
         } else {

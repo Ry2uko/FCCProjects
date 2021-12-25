@@ -202,6 +202,10 @@ class Pomodoro extends React.Component {
     if(!isRunning) return;
     if(this.state.seconds === 0 && this.state.minutes === 0) {
       isRunning = false; // changeMode bypass
+
+      const audio = new Audio('../alarm.mp3');
+      audio.play();
+
 			if(currMode === "session") {
         this.changeMode("break");
       } else {

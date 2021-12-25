@@ -1,3 +1,4 @@
+require('dotenv').config();
 const chai = require('chai');
 const assert = chai.assert;
 
@@ -67,7 +68,7 @@ suite('Functional Tests', function () {
 });
 
 const Browser = require('zombie');
-Browser.site = 'https://almondine-bottlenose-tea.glitch.me';
+Browser.site = process.env.BROWSER_SITE;
 suite('Functional Tests with Zombie.js', function () {
   this.timeout(5000);
   const browser = new Browser();

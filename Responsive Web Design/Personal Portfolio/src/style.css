@@ -10,6 +10,9 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   background: linear-gradient(to right, #90e0ef, #48cae4);
 }
+html {
+  scroll-behavior: smooth;
+}
 #navbar {
   z-index: 1;
   display: block;

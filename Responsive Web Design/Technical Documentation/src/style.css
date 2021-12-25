@@ -4,6 +4,9 @@
 body {
   background-color: white
 }
+html {
+  scroll-behavior: smooth;
+}
 :root {
   --blue:  #09F;
   --lightblue: #36F;

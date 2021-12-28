@@ -3,13 +3,14 @@ function ConvertHandler() {
   this.getNum = function(input) {
     let result = "invalid number"; 
     // Correct format 
-    if (/^(\/|\d|\.)*[A-Za-z]+$/.test(input)) {
+    if (/^(\/|\d|\.)*[A-Za-z]*$/.test(input)) {
       if (/^[A-za-z]+$/.test(input)) { // No number
         result = 1;
       } else if (!(/(\/).*\1/.test(input))) { // Double fraction
         if(input.includes('/')) {
-          const matchedInput = input.match(/(\d|\.)+\/\d+/)[0].split('/');
+          const matchedInput = input.match(/(\d|\.)+\/(\d|\.)+/)[0].split('/');
           result = parseFloat(matchedInput[0]) / parseFloat(matchedInput[1]);
+          result = parseFloat(result.toFixed(5));
         } else {
           result = parseFloat(input.match(/^(\/|\d|\.)*/));
         }
@@ -57,8 +58,6 @@ function ConvertHandler() {
     };
 
     let result = unitSpells[unit];
-
-    if(num === 1) result = result.slice(0, -1); // Spelling
     
     return result;
   };
@@ -75,28 +74,26 @@ function ConvertHandler() {
         result *= galToL;
         break;
       case "L":
-        result = galToL / result;
+        result /= galToL;
         break;
       case "lbs":
         result *= lbsToKg;
         break;
       case "kg":
-        result = lbsToKg / result;
+        result /= lbsToKg;
         break;
       case "mi":
         result *= miToKm;
         break;
       case "km":
-        result = miToKm / result;
+        result /= miToKm;
     }
-    
-    return result;
+    return parseFloat(result.toFixed(5));  // 5 decimal digits
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let convertStr = "convert";
-    if(initNum === 1)  convertStr += "s"; // Spelling
-    let result = `${initNum} ${initUnit} ${convertStr} to ${returnNum} ${returnUnit}`;
+
+    let result = `${initNum} ${initUnit} converts to ${returnNum} ${returnUnit}`;
     
     return result;
   };

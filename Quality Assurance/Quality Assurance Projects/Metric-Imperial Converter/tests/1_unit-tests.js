@@ -76,10 +76,10 @@ suite('Unit Tests', function(){
     });
     test('convertHandler should correctly convert lbs to kg', () => {
       const result = convertHandler.convert(1, 'lbs');
-      assert.equal(result, 0.453592);
+      assert.equal(result, 0.45359);
     });
     test('convertHandler should correctly convert kg to lbs', () => {
-      const result = convertHandler.convert(0.453592, 'kg');
+      const result = convertHandler.convert(0.45359, 'kg');
       assert.equal(result, 1);
     });
   });

@@ -11,7 +11,7 @@ const project = '/api/issues/testProject';
 function postIssue(sendData) {
   return new Promise((resolve, reject) => {
     chai.request(server)
-    post(project)
+    .post(project)
     .set('content-type', 'application/json')
     .send(sendData)
     .end((err, res) => {

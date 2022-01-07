@@ -29,33 +29,4 @@ console.log(result);
 
 //END_SYNC
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.listen(process.env.PORT || 3000, () => {});

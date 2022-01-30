@@ -1,0 +1,36 @@
+POST http://localhost:1010/api/replies/general
+Content-Type: application/json
+
+{
+  "text": "Thread #2",
+  "delete_password": "1010",
+  "thread_id": "61f3d81603ba0f40e535c010"
+}
+
+###
+
+DELETE http://localhost:1010/api/threads/general
+Content-Type: application/json
+
+{
+  "thread_id": "61f61600c89c395923e5ab2c",
+  "delete_password": "1010"
+}
+
+###
+
+PUT http://localhost:1010/api/threads/general 
+Content-Type: application/json
+
+{
+  "thread_id": "61f4c8012e86dffc92d0d5bb"
+}
+
+###
+POST https://anonymous-message-board.freecodecamp.rocks/api/threads/general
+Content-Type: application/json
+
+{
+  "text": "Hello Thread",
+  "delete_password": "1010"
+}

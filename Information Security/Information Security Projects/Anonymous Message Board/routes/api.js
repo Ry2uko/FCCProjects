@@ -107,7 +107,7 @@ module.exports = function (app) {
 
     try {
       await thread.save();
-      res.redirect('back');
+      res.status(204).send();
     } catch (err) {
       return res.json({ error: err.message });
     }
@@ -186,7 +186,7 @@ module.exports = function (app) {
       thread.replies.push(reply);
       thread.replycount += 1;
 
-      await thread.save();
+      res.status(204).send();
 
       res.redirect('back');
 

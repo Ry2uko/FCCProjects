@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #040622;
+  color: rgba(217, 218, 238, 0.9);
+}
+
+h1 {
+  margin-top: 4rem;
+  font-family: 'Martel', serif;
+  font-size: 5rem;
+}
+
+div#parent-container {
+  margin: 2rem auto;
+  width: 1200px;
+}
+
+div#streamers-container {
+  margin: 4rem auto;
+  width: 700px;
+}
+
+div#streamers-container div.streamer-tab {
+  height: 100px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 9px;
+  padding: 30px;
+  border-radius: 0.3rem;
+  background-color: rgba(35, 36, 77, 0.4);
+}
+
+div#streamers-container div.streamer-tab.online span.streamer-game {
+  color: #00A676 !important;
+}
+
+div#streamers-container div.streamer-tab div.streamer-img img {
+  height: 70px;
+  width: 70px;
+  border: 2px solid rgba(217, 218, 238, 0.397);
+  border-radius: 0.5rem;
+}
+
+div#streamers-container div.streamer-tab div.streamer-info {
+  margin-left: 40px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 1.4rem;
+  font-family: 'Gudea', sans-serif;
+}
+
+div#streamers-container div.streamer-tab div.streamer-info span.streamer-name {
+  text-align: center;
+  min-width: 200px;
+}
+
+div#streamers-container div.streamer-tab div.streamer-info span.streamer-name a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+div#streamers-container div.streamer-tab div.streamer-info span.streamer-name a:hover {
+  color: #767acc;
+}
+
+div#streamers-container div.streamer-tab div.streamer-info span.streamer-game {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-wrap: break-word;
+  text-align: center;
+  color: rgba(217, 218, 238, 0.397);
+}
+
+nav#navbar {
+  margin: 4rem auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 700px;
+}
+
+nav#navbar a {
+  position: relative;
+  text-decoration: none;
+  color: rgba(217, 218, 238, 0.397);
+  letter-spacing: 0.5px;
+  font-family: 'Gudea', sans-serif;
+  font-size: 1.6rem;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+nav#navbar a::after {
+  content: '';
+  position: absolute;
+  background-color: #434685;
+  height: 3px;
+  width: 0;
+  left: 0;
+  bottom: -10px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+nav#navbar a.active {
+  color: #d9daee;
+}
+
+nav#navbar a.active::after {
+  width: 100%;
+}
+
+nav#navbar a:hover {
+  color: #d9daee;
+}
+/*# sourceMappingURL=styles.css.map */

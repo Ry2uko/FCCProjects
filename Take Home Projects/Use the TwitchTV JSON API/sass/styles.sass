@@ -1,0 +1,123 @@
+$midnight-blue: #040622
+$default-color: rgba(217, 218, 238, 0.9)
+$bgcolor2: #434685
+$bgcolor3: #767acc
+$active-color: rgb(217, 218, 238)
+$inactive-color: rgba(217, 218, 238, 0.397)
+$online: #00A676
+$offline: #4d4d4d
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html, body
+  height: 100%
+  width: 100%
+
+body
+  background-color: $midnight-blue
+  color: $default-color
+
+h1
+  margin-top: 4rem
+  font:
+    family: 'Martel', serif
+    size: 5rem
+
+div
+  &#parent-container
+    margin: 2rem auto
+    width: 1200px
+
+  &#streamers-container
+    margin: 4rem auto
+    width: 700px
+    
+    div.streamer-tab
+      height: 100px
+      width: 100%
+      display: flex
+      align-items: center
+      margin: 9px
+      padding: 30px
+      border-radius: 0.3rem
+      background-color: rgba(35, 36, 77, 0.4)
+
+      &.online
+        span.streamer-game
+          color: $online !important
+
+      div
+        &.streamer-img 
+          img
+            height: 70px
+            width: 70px
+            border: 2px solid $inactive-color
+            border-radius: 0.5rem
+
+        &.streamer-info
+          margin-left: 40px
+          flex-grow: 1
+          display: flex
+          align-items: center
+          justify-content: space-between
+          font:
+            size: 1.4rem
+            family: 'Gudea', sans-serif
+          
+          span
+            &.streamer-name
+              text-align: center
+              min-width: 200px
+              
+              a
+                text-decoration: none
+                color: inherit
+                transition: 0.2s
+
+                &:hover
+                  color: $bgcolor3
+
+            &.streamer-game
+              flex-grow: 1
+              overflow-wrap: break-word
+              text-align: center
+              color: $inactive-color
+
+nav#navbar
+    margin: 4rem auto
+    display: flex
+    justify-content: space-around
+    width: 700px
+
+    a
+      position: relative
+      text-decoration: none
+      color: $inactive-color
+      letter-spacing: 0.5px
+      font:
+        family: 'Gudea', sans-serif 
+        size: 1.6rem
+      transition: color 0.2s
+      
+      &::after
+        content: ''
+        position: absolute
+        background-color: $bgcolor2
+        height: 3px
+        width: 0
+        left: 0
+        bottom: -10px
+        transition: 0.2s
+
+      &.active
+        color: $active-color
+
+        &::after
+          width: 100%
+
+      &:hover
+        color: $active-color
+      

@@ -8,6 +8,7 @@
 - Responsive Web Design
 - Front End Development Libraries
 - Data Visualization
+- Take Home Projects (Coding Interview Prep)
 
 [Replit](https://replit.com/@Ry2uko)
 - Back End Development and APIs

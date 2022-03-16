@@ -17,3 +17,4 @@
 - Scientific Computing with Python
 - Data Analysis with Python
 - Machine Learning with Python
+- Take Home Projects (Coding Interview Prep)

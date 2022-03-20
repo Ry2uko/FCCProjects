@@ -1,0 +1,106 @@
+ // Hacked by Ry2uko ;}
+function Random() {
+  return (
+      <div className="container otop-container">
+        <p>or</p>
+        <p className="link">
+          <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Click here for a random article</a>
+        </p>
+      </div>
+    );
+}
+
+function NoResult() {
+  return (
+    <div className="container nores-container">
+      <p>No result.</p>
+    </div>
+  );
+}
+
+class Article extends React.Component {
+  componentDidMount() {
+    $('.article').on('click', e => {
+      const articleId = $(e.currentTarget).attr('articleId');
+      window.open(`https://en.wikipedia.org/?curid=${articleId}`, '_blank');
+    });
+  }
+  render() {
+    return (
+      <div className="article-container container">
+        {this.props.keys.map(i => {
+          const article = this.props.articles[i];
+          return (
+            <div className="article" key={i} articleId={i}>
+              <h4>{article.title}</h4>
+              <p>{article.extract}</p>
+            </div>
+          );
+         })}
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      renderComponent: <Random />,
+    }
+  }
+  
+  handleClick() {
+    const inputVal = document.getElementById('search').value;
+    if (inputVal.length < 1) {
+      return this.setState({
+        renderComponent: <Random />,
+      });
+    };
+    
+    $.ajax({
+      type: 'GET',
+      url: `https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=${inputVal}`,
+      dataType: 'jsonp',
+      success: data => {
+        if (!data.query) {
+          return this.setState({
+            renderComponent: <NoResult />,
+          });
+        }
+        this.setState({
+          renderComponent: <Article articles={data.query.pages} keys={Object.keys(data.query.pages)} />,
+        });
+      }
+    })
+   
+  }
+  
+  componentDidMount() {
+    $('#search').on('keypress', e => {
+     if (e.key === "Enter") $('#searchBtn').click();
+    });
+  }
+  
+  render() {
+    return (
+      <div className="container-fluid">
+        <h1><a target="_blank" href="https://en.wikipedia.org/"><img alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/2244px-Wikipedia-logo-v2.svg.png" />Wikipedia Viewer</a></h1>
+        <div className="container search-container">
+          <div className="input-group">
+            <input type="text" placeholder="Search for an article" className="form-control shadow-none" id="search" autocomplete="off"/>
+            <button className="btn btn-secondary shadow-none" type="button" id="searchBtn" onClick={this.handleClick.bind(this)}>
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+        { this.state.renderComponent }
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);

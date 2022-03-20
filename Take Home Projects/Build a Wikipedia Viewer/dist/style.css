@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #F9F9F9;
+}
+
+h1 {
+  margin-top: 15px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+}
+h1 a {
+  text-decoration: none;
+  color: initial;
+}
+h1 a:hover, h1 a:active {
+  color: initial;
+}
+h1 img {
+  width: 40px;
+  height: 40px;
+  margin-right: 7px;
+}
+@media (max-width: 720px) {
+  h1 {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 2rem;
+  }
+  h1 img {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+  }
+}
+
+div.search-container {
+  margin: 3.5rem auto 2rem auto;
+}
+div.search-container input[type=text] {
+  height: 50px;
+  font-size: 1.2rem;
+}
+div.search-container button {
+  width: 50px;
+}
+div.search-container button i {
+  font-size: 1.1rem;
+}
+div.otop-container {
+  display: flex;
+  flex-direction: column;
+}
+div.otop-container p {
+  text-align: center;
+}
+div.otop-container p:not(.link) {
+  font-size: 1.4rem;
+  margin-bottom: 1.6rem;
+}
+div.otop-container p a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: #275DB7;
+}
+@media (max-width: 720px) {
+  div.otop-container p:not(.link) {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+div.otop-container p a {
+  font-size: 1.4rem;
+}
+div.nores-container {
+  margin-top: 40px;
+}
+div.nores-container p {
+  font-size: 1.4rem;
+  font-family: monospace;
+  text-align: center;
+}
+div.article-container {
+  margin: 40px auto;
+}
+div.article-container div.article {
+  padding: 1rem;
+  margin: 15px 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+div.article-container div.article:hover {
+  transform: scale(1.01);
+}
+div.article-container div.article h4 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-family: "Merriweather", serif;
+}
+div.article-container div.article p {
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-family: "Nunito", sans-serif;
+}

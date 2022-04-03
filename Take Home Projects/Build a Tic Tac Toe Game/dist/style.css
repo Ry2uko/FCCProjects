@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  position: relative;
+  background-color: #fff;
+}
+
+div#title-screen h1 {
+  text-align: center;
+  margin: 40px 0 70px 0;
+  font-family: "Merriweather", serif;
+  font-size: 3.8rem;
+}
+div#title-screen h4 {
+  margin-bottom: 1.3rem;
+  font-family: "Merriweather", serif;
+  font-size: 1.5rem;
+}
+div#title-screen div.game-form {
+  margin-top: 4rem;
+}
+div#title-screen div.game-form div {
+  text-align: center;
+  margin-bottom: 4.65rem;
+}
+div#title-screen button {
+  padding: 7px 25px;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 0.3rem;
+  margin: 0 10px;
+  transition: 0.2s;
+  font-size: 1.33rem;
+  font-family: "M Plus 1", sans-serif;
+}
+div#title-screen button span {
+  pointer-events: none;
+}
+div#title-screen button#startgame {
+  font-size: 1.6rem;
+  padding: 7px 65px;
+  display: block;
+  margin: 100px auto;
+  border: 2px solid #fff;
+}
+div#title-screen button#startgame:hover {
+  border-color: rgba(0, 0, 0, 0.7);
+}
+div#title-screen button#startgame:active {
+  transform: scale(0.97);
+}
+div#game-screen {
+  display: none;
+  margin: 1.2rem auto;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+div#game-screen button#gototitlescreen {
+  position: absolute;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.8);
+  border: none;
+  font-size: 2.15rem;
+  margin: 2px 13px;
+  top: 0;
+  right: 0;
+  transition: 0.2s;
+}
+div#game-screen button#gototitlescreen:hover {
+  transform: scale(1.08);
+}
+div.canvas-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+div.canvas-container canvas {
+  width: 531px;
+  height: 531px;
+}
+div.canvas-container p {
+  text-align: center;
+  margin-bottom: 20px;
+  min-height: 34px;
+  font-size: 1.4rem;
+  font-color: initial;
+}
+div.canvas-container p span.winner-x {
+  color: #FF686B;
+}
+div.canvas-container p span.winner-o {
+  color: #668cff;
+}
+div.canvas-container p span.winner-tie {
+  color: #B37AB5;
+}
+div.canvas-container span#reset-timer {
+  margin-top: 20px;
+  font-size: 1.3rem;
+}
+div.player-option {
+  width: 340px;
+  margin-bottom: 30px;
+}
+div.player-option ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+}
+div.player-option ul li {
+  list-style-type: none;
+}
+div.player-option ul li a {
+  position: relative;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
+  transition: color 0.25s;
+}
+div.player-option ul li a::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 0;
+  left: 0;
+  bottom: -10px;
+  transition: 0.25s;
+}
+div.player-option ul li a.active {
+  color: #000001;
+}
+div.player-option ul li a.active::after {
+  width: 100%;
+}
+div.player-option ul li a span {
+  font-size: 1.4rem;
+}
+div.player-option ul li a span.option-x {
+  color: #FF686B;
+}
+div.player-option ul li a span.option-o {
+  color: #668cff;
+}
+div.player-option ul li.x-color a::after {
+  background-color: #FF686B;
+}
+div.player-option ul li.o-color a::after {
+  background-color: #668cff;
+}
+div.score-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px 19px;
+}
+div.score-container p {
+  margin: 0;
+  line-height: 33px;
+  font-size: 1.8rem;
+}
+div.score-container p.score-x span:not(.score) {
+  margin-left: 1px;
+  color: #FF686B;
+}
+div.score-container p.score-o span:not(.score) {
+  color: #668cff;
+}

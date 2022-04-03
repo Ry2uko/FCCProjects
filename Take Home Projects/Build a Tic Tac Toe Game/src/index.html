@@ -1,0 +1,35 @@
+<div class="container" id="title-screen">
+  <h1 class="display-4">Tic Tac Toe</h1>
+  <div class="game-form">
+    <div class="gamemode-div">
+      <h4>Choose Gamemode:</h4>
+      <button class="vs-radio" value="vsbot">1 Player</button>
+      <button class="vs-radio" value="vsplayer">2 Players</button>
+    </div>
+    <div class="playas-div">
+      <h4>Play as / First Play:</h4>
+      <button class="playas-radio" value="playas-x">Play as <span>X</span></button>
+      <button class="playas-radio" value="playas-random">Play as <span>Random</span></button>
+      <button class="playas-radio" value="playas-o">Play as <span>O</span></button>
+    </div>
+    <button id="startgame">Start</button>
+  </div>
+</div>
+<div class="container" id="game-screen">
+  <div class="score-container">
+    <p class="score-x"><span>X</span> - <span class="score">0</span></p>
+    <p class="score-o"><span>O</span> - <span class="score">0</span></p>
+  </div>
+  <div class="player-option">
+    <ul>
+      <li id="1player" class="x-color"><a href="javascript:void(0)" >Player 1 (<span class="option-x">X</span>)</a></li>
+      <li id="2player" class="o-color"><a href="javascript:void(0)" >Player 2 (<span class="option-o">O</span>)</a></li>
+    </ul>
+  </div>
+  <div class="canvas-container">
+    <p id="result"></p>
+    <canvas id="board"></canvas>
+    <span id="reset-timer"></span>
+  </div>
+  <button id="gototitlescreen" title="Go to title screen"><i class="fa-solid fa-house"></i></button>
+</div>

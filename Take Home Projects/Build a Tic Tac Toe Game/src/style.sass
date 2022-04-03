@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1&display=swap')
+
+$x-color: #FF686B
+$o-color: #668cff
+$tie-color: #B37AB5
+$canvas-size: 531px
+$inactive: rgba(0, 0, 0, 0.3)
+$active: rgb(0,0,0.8)
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+body, html
+  width: 100%
+  height: 100%
+  overflow-x: hidden
+  position: relative
+  background-color: #fff
+  
+div 
+  &#title-screen
+    
+    h1
+      text-align: center
+      margin: 40px 0 70px 0
+      font:
+        family: 'Merriweather', serif
+        size: 3.8rem
+    
+    h4
+      margin-bottom: 1.3rem
+      font:
+        family: 'Merriweather', serif
+        size: 1.5rem
+        
+    div.game-form 
+      margin-top: 4rem
+      
+      div
+        text-align: center
+        margin-bottom: 4.65rem
+        
+        
+    button
+      padding: 7px 25px
+      background-color: #fff
+      border: 2px solid #fff
+      border-radius: 0.3rem
+      margin: 0 10px
+      transition: 0.2s
+      
+      font:
+        size: 1.33rem
+        family: 'M Plus 1', sans-serif
+      
+      span
+        pointer-events: none
+        
+      &#startgame   
+        font-size: 1.6rem
+        padding: 7px 65px
+        display: block
+        margin: 100px auto
+        border: 2px solid #fff
+        
+        &:hover
+          border-color: rgba(0,0,0,0.7)
+        
+        &:active
+          transform: scale(0.97)
+        
+            
+  &#game-screen
+    display: none
+    margin: 1.2rem auto
+    flex-direction: column
+    align-items: center
+    width: 100%
+    
+    button#gototitlescreen
+      position: absolute
+      background-color: #fff
+      color: rgba(0,0,0,0.8)
+      border: none
+      font-size: 2.15rem
+      margin: 2px 13px
+      top: 0
+      right: 0
+      transition: 0.2s
+      
+      &:hover
+        transform: scale(1.08)
+      
+  &.canvas-container
+    display: flex
+    flex-direction: column
+    width: 100%
+    align-items: center
+    
+    canvas
+      width: $canvas-size
+      height: $canvas-size
+    
+    p
+      text-align: center
+      margin-bottom: 20px
+      min-height: 34px
+      font:
+        size: 1.4rem
+        color: initial
+        
+      span
+        &.winner-x
+          color: $x-color
+          
+        &.winner-o
+          color: $o-color
+        
+        &.winner-tie
+          color: $tie-color
+    
+    span#reset-timer
+      margin-top: 20px
+      font-size: 1.3rem
+          
+  &.player-option
+    width: 340px
+    margin-bottom: 30px
+    
+    ul
+      padding: 0
+      display: flex
+      justify-content: space-around
+      margin: 0
+      
+      li
+        list-style-type: none
+        
+        a
+          position: relative
+          text-decoration: none
+          color: $inactive
+          font-size: 1.5rem
+          transition: color 0.25s
+          
+          &::after
+            content: ''
+            position: absolute
+            height: 3px
+            width: 0
+            left: 0
+            bottom: -10px
+            transition: 0.25s
+              
+          &.active
+            color: $active
+            &::after
+              width: 100%
+            
+          span
+            font-size: 1.4rem
+            
+            &.option-x
+              color: $x-color
+              
+            &.option-o
+              color: $o-color
+            
+        &.x-color a
+          &::after
+            background-color: $x-color
+          
+        &.o-color a
+          &::after
+            background-color: $o-color
+  
+  &.score-container
+    position: absolute
+    top: 0
+    left: 0
+    margin: 10px 19px
+    
+    p
+      margin: 0
+      line-height: 33px
+      font:
+        size:  1.8rem
+       
+      &.score-x span:not(.score)
+        margin-left: 1px
+        color: $x-color
+
+      &.score-o span:not(.score)
+        color: $o-color
+          

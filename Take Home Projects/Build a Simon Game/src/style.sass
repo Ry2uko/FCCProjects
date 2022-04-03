@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Anybody:wght@300&display=swap')
+
+$bg-color: #F0F7F4
+$bg-color2: #1B1B1E
+$controls-inactive: #c6ceeb
+$green-inactive: #00A74A
+$red-inactive: #9F0F17
+$yellow-inactive: #CCA707
+$blue-inactive: #094A8F
+$count-bg: #32050C
+$count-color: #DC0D29
+$count-color-inactive: #430710
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body, html
+  width: 100%
+  height: 100%
+  
+body
+  background-color: $bg-color
+  
+div
+  &.game-container
+    display: flex
+    justify-content: center
+    padding-top: 80px
+    margin: 0 80px
+    
+  &#simon-game
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 20px
+    position: relative
+    width: 580px
+    height: 580px
+    background-color: $bg-color2
+    border-radius: 100%
+    display: grid
+    padding: 30px
+    grid-template-columns: auto auto
+    grid-template-rows: auto auto
+    grid-gap: 28px
+    
+  &.color-tile
+    cursor: default
+    
+    &#green
+      background-color: $green-inactive
+      border-top-left-radius: 100%
+      
+    &#red
+      background-color: $red-inactive
+      border-top-right-radius: 100%
+      
+    &#yellow
+      background-color: $yellow-inactive
+      border-bottom-left-radius: 100%
+      
+    &#blue
+      background-color: $blue-inactive
+      border-bottom-right-radius: 100%
+  
+  &#controls
+    display: flex
+    justify-content: center
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 325px
+    height: 325px
+    background-color: $controls-inactive
+    border-radius: 100%
+    border: 18px solid $bg-color2
+    z-index: 999999
+    align-items: center 
+    
+    &.flex-stretch
+      align-items: stretch
+    
+    div
+      &#cStrict
+        display: none
+        flex-direction: column
+        
+        div.strict-options
+          display: flex
+          justify-content: center
+          
+          button
+            border: none
+            margin: 0 15px
+            padding: 5px 15px
+            background-color: inherit
+            cursor: pointer
+            transition: color 0.3s
+            font:
+              size: 1.7rem
+              family: 'Anybody', cursive
+            
+            &#yes:hover
+              color: $green-inactive
+              
+            &#no:hover
+              color: $red-inactive
+      &#cGame
+        margin-top: 60px
+        display: none
+        flex-direction: column
+        
+        div.count-container
+          width: 120px
+          height: 60px
+          background-color: $count-bg
+          border: 5px solid $bg-color2
+          border-radius: 0.6rem
+          margin: 12px 0 0 37px
+          display: flex
+          justify-content: center
+          align-items: center
+          color: $count-color-inactive
+          
+          span
+            user-select: none
+            line-height: 45px
+            font:
+              size: 2.5rem
+              family: monospace
+              
+    h4
+      user-select: none
+      font-family: 'Anybody', cursive
+      transition: transform 0.3s, color 0.3s
+      display: block
+      text-overflow: break-word
+      
+      &#start-header
+        color: rgba(0,0,0,0.7)
+        cursor: pointer
+        font-size: 1.7rem
+        &:hover
+          color: #000000
+          transform: scale(1.01)
+        
+      &#strict-header
+        margin: -30px 0 0 10px
+        color: #000000
+        padding: 20px
+        font-size: 1.4rem
+        
+      &#game-header
+        margin-left: 12px
+        font-size: 3.6rem
+        color: rgba(0,0,0,0.7)
+        

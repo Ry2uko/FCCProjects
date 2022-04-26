@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #FBAB7E;
+  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
+
+div.content-wrapper {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+          box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  margin-top: 3rem;
+  background-color: #fff;
+  font-family: 'Maven Pro', sans-serif;
+  border-radius: 0.3rem;
+  padding: 0;
+  max-width: 1200px;
+}
+
+div.heading-wrapper {
+  border-bottom: 2px solid #bfbfbf;
+  padding: 20px;
+}
+
+div.heading-wrapper h1.title {
+  font-size: 2.2rem;
+  text-align: center;
+  margin: 0;
+  color: #ff9500;
+}
+
+div.heading-wrapper h1.title small {
+  color: #ff9500aa;
+  font-size: 1.4rem;
+  letter-spacing: -1px;
+}
+
+div.heading-wrapper h1.title small a {
+  color: #25cf83aa;
+  text-decoration: none;
+}
+
+div.form-wrapper {
+  padding: 0 2rem;
+}
+
+div.form-wrapper h2 {
+  text-align: center;
+  margin: 3.5rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 2.4rem;
+}
+
+div.form-wrapper div.form {
+  display: block;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+div.form-wrapper div.form-floating {
+  margin-bottom: 15px;
+}
+
+div.form-wrapper div.form-floating label {
+  margin-bottom: 5px;
+}
+
+div.form-wrapper div.form-floating input:focus, div.form-wrapper div.form-floating select:focus {
+  -webkit-box-shadow: 0 0 0 0.05rem #F7CE68 !important;
+          box-shadow: 0 0 0 0.05rem #F7CE68 !important;
+  border-color: #FBAB7E !important;
+}
+
+div.form-wrapper div.form-floating label, div.form-wrapper div.form-floating input {
+  font-size: 1.1rem !important;
+}
+
+div.form-wrapper div.group-submit {
+  padding: 1.1rem 0 3.5rem 0;
+}
+
+div.form-wrapper div.group-submit p.error-msg {
+  color: #fff;
+  text-align: center;
+  font-size: 1.35rem;
+  margin-bottom: 1.4rem;
+}
+
+div.form-wrapper div.group-submit div.searchOrRecent button#btnSearch {
+  display: block;
+  margin: 0 auto 0.6rem auto;
+  padding: 6px 95px;
+  background-color: #ff9500;
+  border: 2px solid #ff9500;
+  border-radius: 0.3rem;
+  font-size: 1.4rem;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+}
+
+div.form-wrapper div.group-submit div.searchOrRecent button#btnSearch:hover {
+  background-color: #fff;
+  color: #ff9500;
+  border-color: #ff9500;
+}
+
+div.form-wrapper div.group-submit div.searchOrRecent p {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+div.form-wrapper div.group-submit div.searchOrRecent p a {
+  color: #ff9500;
+}
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,107 @@
+$honey: #FBAB7E
+$honey-trans: #ff9500aa
+$honey-text: #ff9500
+$honey2: #F7CE68
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body, html
+  width: 100%
+  height: 100%
+  overflow-x: hidden
+  background-color: $honey
+  background-image: linear-gradient(62deg, $honey 0%, $honey2 100%);
+
+div
+  &.content-wrapper
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px
+    margin-top: 3rem
+    background-color: #fff
+    font-family: 'Maven Pro', sans-serif
+    border-radius: 0.3rem
+    padding: 0
+    max-width: 1200px
+
+  &.heading-wrapper
+    border-bottom: 2px solid #bfbfbf
+    padding: 20px
+
+    h1.title 
+      font-size: 2.2rem
+      text-align: center
+      margin: 0
+      color: $honey-text
+
+      small
+        color: $honey-trans
+        font-size: 1.4rem
+        letter-spacing: -1px
+
+        a
+          color: #25cf83aa
+          text-decoration: none
+
+  &.form-wrapper
+    padding: 0 2rem
+
+    h2
+      text-align: center
+      margin: 3.5rem
+      font:
+        family: 'Manrope', sans-serif
+        size: 2.4rem
+
+    div
+      &.form
+        display: block
+        margin: 0 auto
+        max-width: 800px
+
+      &.form-floating
+        margin-bottom: 15px
+
+        label
+          margin-bottom: 5px
+        
+        input, select
+          &:focus
+              box-shadow: 0 0 0 .05rem $honey2 !important
+              border-color: $honey !important  
+
+        label, input
+          font-size: 1.1rem !important
+      
+      &.group-submit
+        padding: 1.1rem 0 3.5rem 0
+
+        p.error-msg
+          color: #fff
+          text-align: center
+          font-size: 1.35rem
+          margin-bottom: 1.4rem
+
+        div.searchOrRecent 
+          button#btnSearch
+            display: block
+            margin: 0 auto 0.6rem auto
+            padding: 6px 95px
+            background-color: $honey-text
+            border: 2px solid $honey-text
+            border-radius: 0.3rem
+            font-size: 1.4rem
+            transition: 0.35s
+
+            &:hover
+              background-color: #fff
+              color: $honey-text
+              border-color: $honey-text
+
+          p
+            font-size: 1.3rem
+            text-align: center
+
+            a
+              color: $honey-text

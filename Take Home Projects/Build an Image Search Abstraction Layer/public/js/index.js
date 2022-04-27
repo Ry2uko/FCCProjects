@@ -30,17 +30,7 @@ $(document).ready(function(){
 
     if(!validateInput(query, page, imgCount, imgSize)) return;
 
-    $.ajax({
-      method: 'POST',
-      url: '/api/recent',
-      data: { query },
-      success: () => {
-        window.location.href = `${window.location.href}api/query/${query}?page=${page}&imgCount=${imgCount}&imgSize=${imgSize}`;
-      },
-      error: res => {
-        alert(res.responseJSON.error);
-      }
-    });
+    window.location.href = `${window.location.href}api/query/${query}?page=${page}&imgCount=${imgCount}&imgSize=${imgSize}`;
 
   });
 

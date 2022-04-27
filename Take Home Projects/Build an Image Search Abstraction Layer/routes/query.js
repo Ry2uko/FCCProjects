@@ -1,6 +1,7 @@
 'use strict';
 
 import '../config.js';
+import Recents from '../models/recents.js';
 import express from 'express';
 import { createApi } from 'unsplash-js';
 import * as nodeFetch from 'node-fetch';
@@ -31,9 +32,8 @@ router.get('/:query', validateRequest, async (req, res) => {
     perPage: parseInt(imgCount)
   }).then(data => {
 
-    if (data.errors) {
-      return console.error(data.errors[0]);  
-    } 
+    if (data.errors) res.status(500).json({ error: data.errors[0] });  
+
     const pics = data.response;
 
     if (pics.total < 1) noResult = true;
@@ -73,16 +73,21 @@ router.get('/:query', validateRequest, async (req, res) => {
     }
 
   });
-  noResult 
-  ? res.json({ error: 'No result' })
-  : res.json(resObj);
+
+  if (noResult) return res.status(404).json({ error: 'No result' });
+
+  const recent_model = new Recents({ searchQuery: query });
+  try { await recent_model.save(); } 
+  catch (err) { return res.status(400).json({ error: err.message }); }
+  
+  res.status(200).json(resObj);
 });
 
 function validateRequest(req, res, next) {
   const sizes = ['all', 'small', 'regular', 'full'];
-  const page = req.query.page,
-  imgCount = req.query.imgCount,
-  imgSize = req.query.imgSize,
+  const page = req.query.page || '1',
+  imgCount = req.query.imgCount || '12',
+  imgSize = req.query.imgSize || 'all',
   numberRegex = new RegExp('^[0-9]+$');
 
   let errMsg;
@@ -95,7 +100,7 @@ function validateRequest(req, res, next) {
 
   if (!sizes.includes(imgSize.toLowerCase())) errMsg = 'Image size is invalid';
 
-  if (errMsg) return res.json({ error: errMsg });
+  if (errMsg) return res.status(400).json({ error: errMsg });
   next();
 }
 

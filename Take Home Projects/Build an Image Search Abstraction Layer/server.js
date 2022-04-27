@@ -30,7 +30,7 @@ app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.status(200).render('index');
 });
 
 // Routes

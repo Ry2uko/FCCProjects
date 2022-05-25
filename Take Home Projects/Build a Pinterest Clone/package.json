@@ -1,0 +1,31 @@
+{
+  "name": "pinterest-clone",
+  "version": "1.0.0",
+  "description": "FCC Legacy Back End Projcet",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha --ui tdd",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Ry2uko",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.3.1",
+    "node-fetch": "^3.2.4",
+    "passport": "^0.5.2",
+    "passport-github": "^1.1.0",
+    "path": "^0.12.7"
+  }
+}

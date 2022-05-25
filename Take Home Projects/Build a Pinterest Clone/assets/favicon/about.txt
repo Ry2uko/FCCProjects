@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Allan
+- Font Author: Copyright (c) 2010-2012, Anton Koovit (anton@fatype.com), with Reserved Font Name 'Allan'
+- Font Source: http://fonts.gstatic.com/s/allan/v20/ea8aadU7WuTxEu5KEPCN2WpNgEKU.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <title>BitTerest</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 'Barlow', sans-serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet"> 
+    <!-- 'Allan', cursive-->
+    <link href="https://fonts.googleapis.com/css2?family=Allan&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="/public/css/index.css" type="text/css" />
+    <script src="https://kit.fontawesome.com/b40850cb13.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="offcanvas-nav">
+      <h1 class="oc-nav-title">BitTerest</h1>
+      <a href="javascript:void(0)" class="closenav"><i class="fa-solid fa-xmark"></i></a>
+      <ul class="oc-nav-list">
+        <li class="oc-nav-link selected" id="ocAllPics"><a href="javascript:void(0)" class="selected">All</a></li>
+        <div id="oc-onlyAuthed">
+          <li class="oc-nav-link" id="ocMyPics"><a href="javascript:void(0)">My Pics</a></li>
+          <div class="oc-dd-container">
+            <li class="oc-nav-link" id="ocAddPic"><a href="javascript:void(0)">Add a Pic <i class="fa-solid fa-caret-down"></i></a></li>
+            <div class="oc-dd-form-container">
+              <form action="javascript:void(0)" id="oc-dd-form" method="POST">
+                <input type="text" placeholder="Pic URL..." id="oc-form-pic-url"
+                class="oc-form-input" autocomplete="off"/>
+                <input type="text" placeholder="Pic Description..." id="oc-form-pic-desc"
+                class="oc-form-input" autocomplete="off"/>
+                <p class="oc-err-msg"></p>
+                <input type="submit" class="oc-form-submit-btn" value="Add" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </ul>
+      <button type="button" id="ocLogBtn">Sign in with Github</button>
+    </div>
+    
+    <div class="offcanvas-content" content_id="">
+      <button type="button" id="closeOccContent"><i class="fa-solid fa-xmark"></i></button>
+      <div class="occ-pic-container">
+        <img id="occ-pic" src="#" alt="" />
+      </div>
+      <div class="occ-info">
+        <div type="button" class="occ-user">
+          <img id="occ-avatar" src="#" alt="" /> 
+          <button id="occ-username"></button>
+        </div>
+        <div class="occ-pgs">
+          <div class="stars-date">
+            <p id="occ-stars"><i class="fa-regular fa-star"></i> <span>0</span></p>
+            <p id="occ-date">Uploaded on <span></span></p>
+          </div>
+          <p id="occ-description">
+            <span></span> 
+            <button type="button" id="editDesc"><i class="fa-regular fa-pen-to-square"></i></button>
+          </p>
+          <div class="de-container">
+            <textarea id="descEditInput" maxlength="120" spellcheck="false"></textarea>
+            <div class="de-controls">
+              <button type="button" id="deCancel">Cancel</button>
+              <button type="button" id="deSave">Save</button>
+            </div>
+          </div>
+        </div>
+        <div class="occ-controls"> 
+          <button type="button" id="starPic" class="disabled"><i class="fa-regular fa-star"></i><span class="star-status">Star</span></button>
+          <button type="button" id="deletePic"><i class="fa-regular fa-trash-can"></i>Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-wrapper" tabindex="0">
+      <div class="navbar">
+        <ul class="navbar-list">
+          <li class="nav-link" id="nav-responsive">
+            <button type="button" id="openNav"><i class="fa-solid fa-bars"></i></button>
+          </li>
+          <li class="nav-link selected" id="allPics"><a href="javascript:void(0)" class="selected">All</a></li>
+          <div id="onlyAuthed">
+            <li class="nav-link" id="myPics"><a href="javascript:void(0)">My Pics</a></li>
+            <div class="dd-container">
+              <li class="nav-link" id="addPic"><a href="javascript:void(0)">Add a Pic <i class="fa-solid fa-caret-down"></i></a></li>
+              <div class="dd-form-container">
+                <form action="javascript:void(0)" id="dd-form" method="POST">
+                  <input type="text" placeholder="Pic URL..." id="form-pic-url"
+                  name="picUrl" class="form-input" autocomplete="off"/>
+                  <input type="text" placeholder="Pic Description..." id="form-pic-desc"
+                  name="picDesc" class="form-input" autocomplete="off"/>
+                  <p class="err-msg"></p>
+                  <input type="submit" class="form-submit-btn" value="Add" />
+                </form>
+              </div>
+            </div>
+          </div>
+          <li class="nav-link" id="nav-title"><a href="/">BitTerest</a></li>
+          <li class="nav-link" id="nav-btn"><button type="button" id="logBtn">Sign in with Github</button></li>
+          <div class="user-dd-container">
+            <li class="nav-link" id="nav-user"></li>
+            <ul class="user-dd-content">
+              <li class="user-dd-list"><a href="#" class="github-link"><i class="fa-brands fa-github"></i> Github Profile</a></li>
+              <li class="user-dd-list" id="userStarredPics"><a href="javascript:void(0)"><i class="fa-solid fa-star"></i> Starred Pics</a></li>
+              <li class="user-dd-list" id="logOut"><a href="javascript:void(0)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+      <div class="content"></div>
+      <p class="loading">
+        <!-- Loader: https://cssloaders.github.io/ -->
+        <span class="loader"></span> 
+        <span class="loading-text">Reload the page if images are not loaded correctly</span>
+      </p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+  </body>
+</html>

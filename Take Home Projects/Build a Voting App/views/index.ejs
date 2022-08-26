@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Merriweather+Sans:wght@300&family=Noto+Sans+Mono:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/public/css/index.css" type="text/css" />
+    <script src="https://kit.fontawesome.com/b40850cb13.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <div class="offcanvas-create-poll">
+      <h2 class="create-title">Create Poll</h2>
+      <div class="container-form">
+        <div class="input-group">
+          <label class="input-label">Poll Name:</label>
+          <input type="text" id="creationPollName" autocomplete="off"/>
+        </div>
+        <h5 class="options-container-label">Options:</h5>
+        <div class="options-container">
+          <button type="button" id="creationAddOption"><i class="fa-solid fa-plus"></i>Add Option</button>
+        </div>
+        <button type="button" id="creationCreatePoll">Create</button>
+      </div>  
+    </div>
+
+    <div class="page-wrapper">
+      <div class="navbar">
+        <li class="navbar-item item-title">
+          <h1 class="title"><a href="/">Voting App</a></h1>
+        </li>
+        <div class="responsive-nav">
+          <li class="navbar-item search">
+            <div class="input-group">
+              <input type="text" id="searchPoll" placeholder="Search Polls" autocomplete="off" value="<%- cacheSearch %>"/>
+              <button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+          </li>
+          <% if (user) { %>
+            <div class="user-authed-dd">
+              <li class="navbar-item" id="userDDBtn"><%= user.username %> <i class="fa-solid fa-angle-down"></i></li>
+              <div class="user-dd-container">
+                <a class="dd-item" href="<%- `/polls?created_by=${user.username}` %>">My Polls</a>
+                <a class="dd-item" href="/logout">Logout</a>
+              </div>
+            </div>
+            <li class="navbar-item" id="addPoll"><i class="fa-solid fa-plus"></i></li>
+          <% } else {%>
+            <li class="navbar-item">
+              <a href="/login" class="sign-in">Sign in</a>
+            </li>
+            <li class="navbar-item">
+              <a href="/signup" class="sign-up">Sign up</a>
+            </li>
+          <% } %>
+          
+        </div>
+        <li class="navbar-item open-responsive-nav">
+          <button type="button" id="openResNav"><i class="fa-solid fa-bars"></i></button>
+        </li>
+      </div>
+
+      <div class="responsive-navbar">
+        <li class="navbar-item search">
+          <div class="input-group">
+            <input type="text" id="responsiveSearchPoll" placeholder="Search Polls" />
+            <button type="button" id="responsiveSearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </li>
+        <% if (user) {%>
+          <div class="user-authed-dd">
+            <li class="navbar-item" id="resUserDDBtn"><%= user.username %> <i class="fa-solid fa-angle-down"></i></li>
+            <div class="user-dd-container">
+              <a class="dd-item" href="<%- `/polls?created_by=${user.username}` %>">My Polls</a>
+              <a class="dd-item" href="/logout">Logout</a>
+            </div>
+          </div>
+          <li class="navbar-item" id="resAddPoll">Add Poll</li>
+        <% } else {%>
+          <li class="navbar-item" id="resLogin">
+            <a href="javascript:void(0)" class="sign-in">Sign in</a>
+          </li>
+          <li class="navbar-item" id="resSignUp">
+            <a href="javascript:void(0)" class="sign-up">Sign up</a>
+          </li>
+        <% }%>   
+      </div>
+
+      <div class="page-content">
+        <% polls.forEach(poll => { %>
+          <% if (user) { %>
+            <% if (Object.keys(user.polls_voted).includes(poll._id.toString())) { %>
+              <div class="poll-container disabled" selected-index="<%- Object.keys(poll.options).indexOf(user.polls_voted[poll._id.toString()]) %>"
+                poll-id="<%- poll._id.toString() %>" ae="<%- [poll.created_by, user.username] %>">
+            <% } else { %>
+              <div class="poll-container" selected-index="" poll-id="<%- poll._id.toString() %>">
+            <% } %>
+              <% if (poll.created_by === user.username) { %>
+                <button type="button" class="deletePoll"><i class="fa-solid fa-trash-can"></i></button>
+              <% } %>
+          <% } else { %>
+            <div class="poll-container" selected-index="" poll-id="<%- poll._id.toString() %>">
+          <% } %>
+            <div class="poll-name">
+              <h2 class="pName"><%- poll.name %></h2>
+              <span class="poll-user">by: <a href="<%- `/polls?created_by=${poll.created_by}` %>" class="pUser"><%- poll.created_by %></a></span>
+            </div>
+            <div class="minimize-container">
+              <div class="client-height">
+                <div class="poll-options-container">
+                  <% Object.keys(poll.options).forEach((option, i) => { %>
+                    <div class="poll-option" option-index="<%- i %>" option-votes="<%- poll.options[option] %>"><%- option %></div>
+                  <% }) %>
+                </div>
+                <button type="button" class="voteBtn">Vote</button>
+                <button type="button" class="showVotes">
+                  Check votes <i class="fa-solid fa-angle-down"></i>
+                </button>
+              </div>
+            </div>
+            <div class="votes-container">
+              <div class="canvas-container">
+                <canvas class="votes-graph" charted="false"></canvas>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+  </body>
+</html>

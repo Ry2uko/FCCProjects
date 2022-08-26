@@ -1,0 +1,900 @@
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #0A192F;
+  color: #f5fffde2;
+}
+
+*:focus {
+  outline: none;
+}
+
+div.offcanvas-create-poll {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: auto;
+  background-color: #060F1E;
+  border: 1px solid rgba(28, 242, 196, 0.6);
+  border-radius: 0.27rem;
+  width: 1300px;
+  height: 800px;
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 0 1rem 1.4rem 1rem;
+}
+
+div.offcanvas-create-poll h2.create-title {
+  display: block;
+  text-align: center;
+  padding: 30px 0;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 2rem;
+}
+
+div.offcanvas-create-poll h5.options-container-label {
+  font-weight: normal;
+  font-size: 1.5rem;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+div.offcanvas-create-poll button#creationCreatePoll {
+  background-color: #19D4AF;
+  border: none;
+  border-radius: 0.2rem;
+  color: #060F1E;
+  padding: 4px 35px;
+  margin-top: auto;
+  margin-right: 1rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  cursor: pointer;
+  font-family: Lora, serif;
+  font-size: 1.35rem;
+}
+
+div.offcanvas-create-poll div.container-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+div.offcanvas-create-poll div.input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 35px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+div.offcanvas-create-poll div.input-group label.input-label {
+  font-size: 1.5rem;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+div.offcanvas-create-poll div.input-group input#creationPollName {
+  margin-left: 1rem;
+  width: 85%;
+  height: 100%;
+  background-color: #051122;
+  color: #f5fffdf6;
+  border: 1px solid #f5fffdaa;
+  border-radius: 0.25rem;
+  padding: 0 10px;
+  font-family: Lora, serif;
+  font-size: 1.2rem;
+}
+
+div.offcanvas-create-poll div.options-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (min-content)[10];
+      grid-template-rows: repeat(10, -webkit-min-content);
+      grid-template-rows: repeat(10, min-content);
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+div.offcanvas-create-poll div.options-container div.creation-option {
+  position: relative;
+  background-color: #051122;
+  color: #f5fffdda;
+  border: 1px solid #f5fffd82;
+  border-radius: 0.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  overflow: hidden;
+  text-overflow: hidden;
+  text-align: center;
+  width: 460px;
+  line-height: 28px;
+  padding: 6px 15px;
+  margin: 5px 24px;
+  font-size: 1.25rem;
+  font-family: "Noto Sans Mono", monospace;
+}
+
+div.offcanvas-create-poll div.options-container div.creation-option button.creationRemoveOption {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #051122;
+  border: none;
+  color: #19D4AF;
+  margin: 2px 8px;
+  font-size: 1.12rem;
+  cursor: pointer;
+}
+
+div.offcanvas-create-poll div.options-container div.creation-input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 460px;
+  height: 41px;
+  margin: 5px 24px;
+}
+
+div.offcanvas-create-poll div.options-container div.creation-input-group input#creationOptionName {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: #060F1E;
+  border: 1px solid #19d4afef;
+  border-radius: 0.25rem 0 0 0.25rem;
+  color: #D1DCDD;
+  padding: 0 10px;
+  font-family: "Noto Sans Mono", monospace;
+  font-size: 1.2rem;
+}
+
+div.offcanvas-create-poll div.options-container div.creation-input-group button#creationOptionBtn {
+  background-color: #19d4afef;
+  color: #060F1E;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0 0.25rem 0.25rem 0;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+div.offcanvas-create-poll div.options-container button#creationAddOption {
+  background-color: #051122;
+  color: #19d4afef;
+  border: 1px solid #19d4afb0;
+  border-radius: 0.25rem;
+  width: 460px;
+  text-align: center;
+  padding: 6px 15px;
+  margin: 5px 24px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-family: "Noto Sans Mono", monospace;
+}
+
+div.offcanvas-create-poll div.options-container button#creationAddOption i {
+  font-size: 1.1rem;
+  margin-right: 8px;
+}
+
+div.page-wrapper {
+  opacity: 1;
+  margin: 0.7rem 1rem;
+}
+
+div.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.navbar li.navbar-item {
+  list-style-type: none;
+  margin: 0 10px;
+}
+
+div.navbar li.navbar-item a {
+  text-decoration: none;
+  color: #f5fffde2;
+  font-family: Lora, serif;
+  font-size: 1.25rem;
+}
+
+@media screen and (max-width: 800px) {
+  div.navbar li.navbar-item a {
+    font-size: 1.2rem;
+  }
+}
+
+div.navbar li.navbar-item a.sign-up {
+  border: 1px solid #f5fffde2;
+  border-radius: 0.4rem;
+  padding: 8px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+div.navbar li.navbar-item a.sign-up:hover {
+  color: #f5fffdb4;
+  border: 1px solid #f5fffdb4;
+}
+
+div.navbar li.navbar-item a.sign-in {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+div.navbar li.navbar-item a.sign-in:hover {
+  color: #f5fffdb4;
+}
+
+div.navbar li.navbar-item.item-title {
+  margin-right: auto;
+}
+
+div.navbar li.navbar-item.item-title h1.title a {
+  color: #1cf2c4d2;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-decoration: none;
+  text-shadow: 0 0 10px rgba(28, 242, 196, 0.6);
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.2em;
+}
+
+@media screen and (max-width: 800px) {
+  div.navbar li.navbar-item.item-title h1.title a {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.navbar li.navbar-item.item-title h1.title a {
+    font-size: 0.8em;
+  }
+}
+
+div.navbar li.navbar-item.search div.input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+div.navbar li.navbar-item.search div.input-group input#searchPoll {
+  padding: 8px 5px;
+  background-color: #01081275;
+  color: #f5fffdf6;
+  border: 1px solid #f5fffdaa;
+  border-radius: 0.3rem 0 0 0.3rem;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  font-size: 1.1rem;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+div.navbar li.navbar-item.search div.input-group input#searchPoll:focus {
+  border: 1px solid #f5fffdc1;
+}
+
+@media screen and (max-width: 800px) {
+  div.navbar li.navbar-item.search div.input-group input#searchPoll {
+    font-size: 1rem;
+  }
+}
+
+div.navbar li.navbar-item.search div.input-group button#searchBtn {
+  padding: 0 10px;
+  border-radius: 0 0.3rem 0.3rem 0;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  background-color: #f5fffde2;
+  color: #2b2b2b;
+}
+
+div.navbar li.navbar-item.open-responsive-nav {
+  display: none;
+}
+
+div.navbar li.navbar-item.open-responsive-nav button#openResNav {
+  border: none;
+  color: #0A192F;
+  background-color: #18CCA9;
+  font-size: 1.55rem;
+  padding: 4px 9px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 420px) {
+  div.navbar li.navbar-item.open-responsive-nav button#openResNav {
+    font-size: 1.3rem;
+    padding: 3px 8px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  div.navbar li.navbar-item.open-responsive-nav {
+    display: block;
+  }
+}
+
+div.navbar li.navbar-item#addPoll {
+  background-color: #19D3AE;
+  padding: 2px 8px;
+  border-radius: 0.35rem;
+  border: 1px solid #19D3AE;
+  cursor: pointer;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+div.navbar li.navbar-item#addPoll i {
+  color: #0A192F;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 2.3rem;
+}
+
+div.navbar li.navbar-item#addPoll:hover {
+  background-color: #0A192F;
+}
+
+div.navbar li.navbar-item#addPoll:hover i {
+  color: #19D3AE;
+}
+
+div.navbar div.responsive-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.navbar div.responsive-nav div.user-authed-dd li#userDDBtn {
+  margin: 0 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.4rem;
+}
+
+div.navbar div.responsive-nav div.user-authed-dd li#userDDBtn i {
+  margin-left: 2px;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 750px) {
+  div.navbar div.responsive-nav div.user-authed-dd li#userDDBtn {
+    margin: 0 10px;
+  }
+}
+
+div.navbar div.responsive-nav div.user-dd-container {
+  position: absolute;
+  background-color: #19D3AE;
+  border-radius: 0.25rem;
+  color: #0A192F;
+  margin: 15px 0;
+  display: none;
+  z-index: 998;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+div.navbar div.responsive-nav div.user-dd-container a.dd-item {
+  cursor: pointer;
+  padding: 9px;
+  -webkit-transition: 0.33s;
+  transition: 0.33s;
+  text-decoration: none;
+  color: #0A192F;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.25rem;
+}
+
+div.navbar div.responsive-nav div.user-dd-container a.dd-item:hover {
+  background-color: #2020200e;
+}
+
+@media screen and (max-width: 750px) {
+  div.navbar div.responsive-nav div.user-dd-container {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  div.navbar div.responsive-nav {
+    display: none;
+  }
+}
+
+div.responsive-navbar {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #081528;
+  border-radius: 0.3rem;
+  margin: 8px 0;
+  max-height: 0;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.3rem;
+}
+
+div.responsive-navbar li.navbar-item {
+  list-style-type: none;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+  text-select: none;
+  cursor: pointer;
+}
+
+div.responsive-navbar li.navbar-item a {
+  text-decoration: none;
+  color: #f5fffde2;
+  font-family: Lora, serif;
+  font-size: 1.25rem;
+}
+
+div.responsive-navbar li.navbar-item a.sign-up {
+  color: #18c29d;
+}
+
+div.responsive-navbar li.navbar-item#resAddPoll {
+  background-color: #15b796;
+  color: #0A192F;
+  -webkit-transition: 0.35s;
+  transition: 0.35s;
+}
+
+div.responsive-navbar li.navbar-item#resAddPoll:hover {
+  background-color: #1f9da4;
+}
+
+div.responsive-navbar li.navbar-item.search {
+  padding: 10px 0;
+  cursor: auto;
+}
+
+div.responsive-navbar li.navbar-item.search div.input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+div.responsive-navbar li.navbar-item.search div.input-group input#responsiveSearchPoll {
+  padding: 8px 5px;
+  background-color: #081528;
+  color: #f5fffdf6;
+  border: 1px solid rgba(28, 242, 196, 0.646);
+  border-radius: 0.3rem 0 0 0.3rem;
+  width: 40%;
+  font-size: 1.1rem;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+@media screen and (max-width: 420px) {
+  div.responsive-navbar li.navbar-item.search div.input-group input#responsiveSearchPoll {
+    width: 60%;
+    font-size: 1rem;
+  }
+}
+
+div.responsive-navbar li.navbar-item.search div.input-group button#responsiveSearchBtn {
+  padding: 0 13px;
+  border-radius: 0 0.3rem 0.3rem 0;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background-color: rgba(28, 242, 196, 0.827);
+  color: #2b2b2b;
+}
+
+@media screen and (max-width: 420px) {
+  div.responsive-navbar li.navbar-item.search div.input-group button#responsiveSearchBtn {
+    font-size: 1.05rem;
+    padding: 0 11px;
+  }
+}
+
+div.responsive-navbar li.navbar-item.search:hover {
+  background-color: #081528;
+}
+
+div.responsive-navbar div.user-authed-dd li#resUserDDBtn {
+  cursor: pointer;
+}
+
+div.responsive-navbar div.user-authed-dd li#resUserDDBtn i {
+  margin-left: 2px;
+  font-size: 1.2rem;
+}
+
+div.responsive-navbar div.user-dd-container {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  margin: 1px 0 12px;
+  background-color: #0a1322ba;
+}
+
+div.responsive-navbar div.user-dd-container a {
+  text-decoration: none;
+  color: #f5fffde2;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+@media screen and (max-width: 720px) {
+  div.responsive-navbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+div.page-content {
+  padding: 0 10px 10px 10px;
+}
+
+div.page-content div.minimize-container {
+  max-height: 0;
+  -webkit-transition: 1.4s;
+  transition: 1.4s;
+  overflow: hidden;
+}
+
+div.page-content div.poll-container {
+  border: 1px solid rgba(28, 242, 196, 0.6);
+  background-color: #060F1E;
+  border-radius: 0.27rem;
+  font-family: Lora, serif;
+  padding: 15px 10px;
+  margin: 1.1rem 0;
+  position: relative;
+}
+
+div.page-content div.poll-container button.showVotes {
+  display: block;
+  margin: 45px auto 0 auto;
+  background-color: #060F1E;
+  color: #67f7d8d1;
+  cursor: pointer;
+  padding: 1px 20px;
+  border: none;
+  font-size: 1.5rem;
+  font-family: Lora, serif;
+}
+
+@media screen and (max-width: 800px) {
+  div.page-content div.poll-container button.showVotes {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.page-content div.poll-container button.showVotes {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  div.page-content div.poll-container button.showVotes {
+    font-size: 1.2rem;
+  }
+}
+
+div.page-content div.poll-container button.voteBtn {
+  display: block;
+  margin: 20px auto 0 auto;
+  border: 2px solid #18CCA8;
+  border-radius: 0.25rem;
+  opacity: 0.72;
+  cursor: not-allowed;
+  background-color: #18CCA8;
+  color: #060F1E;
+  padding: 4px 50px;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 800px) {
+  div.page-content div.poll-container button.voteBtn {
+    font-size: 1.44rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.page-content div.poll-container button.voteBtn {
+    margin: 10px auto 0 auto;
+    font-size: 1.38rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  div.page-content div.poll-container button.voteBtn {
+    font-size: 1.33rem;
+    padding: 5px 45px;
+  }
+}
+
+div.page-content div.poll-container button.deletePoll {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #060F1E;
+  color: #e63946;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  padding: 5px;
+  margin: 5px 10px;
+}
+
+div.page-content div.poll-name {
+  width: 100%;
+  color: #f5fffdef;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+div.page-content div.poll-name h2.pName {
+  word-break: break-word;
+  text-align: center;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.85rem;
+}
+
+@media screen and (max-width: 800px) {
+  div.page-content div.poll-name h2.pName {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  div.page-content div.poll-name h2.pName {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.page-content div.poll-name h2.pName {
+    font-size: 1.2rem;
+  }
+}
+
+div.page-content div.poll-name span.poll-user {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+div.page-content div.poll-name span.poll-user a.pUser {
+  text-decoration: none;
+  color: #16b3e2;
+}
+
+@media screen and (max-width: 520px) {
+  div.page-content div.poll-name span.poll-user {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.page-content div.poll-name span.poll-user {
+    font-size: 1rem;
+  }
+}
+
+div.page-content div.poll-options-container {
+  padding: 25px 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (min-content)[10];
+      grid-template-rows: repeat(10, -webkit-min-content);
+      grid-template-rows: repeat(10, min-content);
+  grid-auto-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media screen and (max-width: 520px) {
+  div.page-content div.poll-options-container {
+    -ms-grid-rows: (min-content)[20];
+        grid-template-rows: repeat(20, -webkit-min-content);
+        grid-template-rows: repeat(20, min-content);
+    grid-auto-flow: row;
+  }
+}
+
+div.page-content div.poll-option {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  overflow: hidden;
+  text-overflow: hidden;
+  text-align: center;
+  width: 360px;
+  padding: 6px 15px;
+  line-height: 28px;
+  margin: 6px 12px;
+  border: 1px solid rgba(28, 242, 196, 0.6);
+  -webkit-box-shadow: 0px 0px 1px #1cf2c4;
+          box-shadow: 0px 0px 1px #1cf2c4;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  font-size: 1.25rem;
+  font-family: "Noto Sans Mono", monospace;
+}
+
+div.page-content div.poll-option.selected {
+  background-color: rgba(28, 242, 196, 0.759);
+  color: #060F1E;
+  cursor: default;
+}
+
+@media screen and (max-width: 880px) {
+  div.page-content div.poll-option {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  div.page-content div.poll-option {
+    width: 240px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  div.page-content div.poll-option {
+    width: 200px;
+    padding: 6px 12px;
+    line-height: 30px;
+    font-size: 1.15rem;
+    min-height: 75px;
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  div.page-content div.poll-option {
+    width: 320px;
+    min-height: 0;
+    padding: 9px 10px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.page-content div.poll-option {
+    padding: 7px 10px;
+    width: 220px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  div.page-content div.poll-option {
+    font-size: 1.1rem;
+    width: 180px;
+    padding: 9px 6px;
+    line-height: 35px;
+    -webkit-line-clamp: 2;
+  }
+}
+
+div.page-content div.votes-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: 1s;
+  transition: 1s;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+div.page-content div.votes-container div.canvas-container {
+  width: 100%;
+  height: 100%;
+}
+
+div.page-content div.votes-container div.canvas-container canvas.votes-graph {
+  width: 100% !important;
+  height: 860px !important;
+}
+/*# sourceMappingURL=index.css.map */

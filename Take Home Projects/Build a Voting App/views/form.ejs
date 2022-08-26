@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%- title %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Merriweather+Sans:wght@300&family=Noto+Sans+Mono:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/form.css" type="text/css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <h1 class="title"><a href="/">Voting App</a></h1>
+      <h2 class="form-title"><%- title %></h2>
+      
+      <div class="form-container <%- `${formType}-form` %>">
+        <% if (messages.error) { %>
+          <div class="error-container">
+            <%- messages.error %>
+          </div>
+        <% } %>
+        <form action="/<%- formType %>" method="POST" class="form">
+          <% if (formType === 'login') { %>
+            <div class="input-container">
+              <label for="loginInput" class="form-label">Username or email address</label>
+              <input type="text" id="loginInput" class="form-input" name="login" autocomplete="off"/>
+            </div>
+          <% } else if (formType === 'signup') { %>
+            <div class="input-container">
+              <label for="usernameInput" class="form-label">Username</label>
+              <input type="text" id="usernameInput" class="form-input"  name="username" autocomplete="off"/>
+            </div>
+            <div class="input-container">
+              <label for="emailInput" class="form-label">Email address</label>
+              <input type="email" id="emailInput" class="form-input" name="email" autocomplete="off"/>
+            </div>
+          <% } %>
+          
+          <div class="input-container">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" id="passwordInput" name="password" class="form-input" />
+          </div>
+
+          <% if (formType === 'signup') { %>  
+            <div class="input-container">
+              <label for="confirmPasswordInput" class="form-label">Confirm password</label>
+              <input type="password" id="confirmPasswordInput" name="confirmPassword" class="form-input" />
+            </div>
+            <label for="showPassword2" class="show-password-label">
+              <input type="checkbox" id="showPassword2" class="show-password-input" /> Show password
+            </label>
+            <button type="sumbit" id="signUpBtn" class="submitBtn">Sign up</button> 
+          <% } else if (formType === 'login') { %>
+            <label for="showPassword1" class="show-password-label">
+              <input type="checkbox" id="showPassword1" class="show-password-input" /> Show password
+            </label>
+            <button type="submit" id="loginBtn" class="submitBtn">Login</button>
+          <% } %>
+        </form>
+        <div class="misc-container">
+          <% if (formType === 'login') { %>
+            <%- 'Don\'t have an account? <a href="/signup">Create an account</a>.' %>
+          <% } else if (formType === 'signup') { %>
+            <%- 'Already have an account? <a href="/login">Sign in</a>.' %>
+          <% } %>
+        </div>
+      </div>
+      <p class="credits-footer">A project by <a href="https://github.com/Ry2uko" target="_blank">Ry2uko</a></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/public/js/form.js"></script>
+  </body>
+</html>

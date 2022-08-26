@@ -1,0 +1,189 @@
+$bg-theme: #0A192F
+$container-bg: #060F1E
+$border-color: rgba(28, 242, 196, 0.6)
+$color-theme: #f5fffde2
+$color2-theme: #1cf2c4d2
+$merriweather: 'Merriweather Sans', sans-serif
+$lora: Lora, serif
+$noto-sans-mono: 'Noto Sans Mono', monospace
+
+*, ::before, ::after
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body, html
+  width: 100%
+  height: 100vh
+  overflow-x: hidden
+  background-color: $bg-theme
+  color: $color-theme
+
+*:focus
+  outline: none
+
+div
+  &.page-wrapper
+    margin: 0.7rem 1rem
+
+    h1.title 
+      a
+        color: $color2-theme
+        text-decoration: none
+        text-shadow: 0 0 10px rgba(28,242,196,0.6)
+        font: 
+          family: $merriweather
+          size: 1.2em
+        
+      @media screen and (max-width: 800px)
+        text-align: center
+        margin-bottom: 2rem
+        a
+          font-size: 1.1em
+    
+    h2.form-title 
+      text-align: center
+      margin-top: 2rem
+      font:
+        size: 2.4rem
+        family: $lora
+
+    p.credits-footer
+      margin-top: 5rem
+      text-align: center
+      opacity: 0.9
+      font:
+        size: 1.1rem
+        family: $merriweather
+
+  &.form-container
+    display: flex
+    flex-direction: column
+    margin: 2rem auto 
+    text-align: center
+    width: min-content
+
+    form.form 
+      display: flex
+      flex-direction: column
+      background-color: $container-bg
+      border: 1px solid $border-color
+      border-radius: 0.2rem
+      margin-bottom: 1.5rem  
+
+      label.show-password-label
+        width: max-content
+        user-select: none
+        font:
+          family: $lora
+          size: 1.18rem
+        
+        input.show-password-input
+          cursor: pointer
+          margin-right: 3px
+          width: 17px
+          height: 17px
+          background-color: #060A10
+
+      button.submitBtn
+        cursor: pointer
+        padding: 7px 0
+        background-color: rgba(28, 242, 196, 0.85)
+        border: none
+        border-radius: 0.3rem
+        font:
+          size: 1.1rem
+          family: $lora
+
+    &.login-form
+      form.form 
+        width: 420px
+        padding: 28px 20px
+
+        label.show-password-label
+          margin-bottom: 33px
+        
+        @media screen and (max-width: 500px)
+          width: 380px
+          margin-bottom: 1rem
+        @media screen and (max-width: 420px)
+          width: 340px
+
+      div
+        &.input-container
+          margin-bottom: 28px
+
+          &:last-of-type
+            margin-bottom: 23px
+
+    &.signup-form
+      form.form 
+        width: 520px
+        padding: 20px 25px
+
+        label.show-password-label
+          margin-bottom: 24px
+
+        button.submitBtn
+          margin-top: 0.8rem
+        
+        @media screen and (max-width: 580px)
+          width: 420px
+          margin-bottom: 1rem
+        @media screen and (max-width: 420px)
+          width: 320px
+
+      div
+        &.input-container
+          margin-bottom: 20px
+
+          &:last-of-type
+            margin-bottom: 24px
+
+  &.input-container
+    display: flex
+    flex-direction: column
+
+    label.form-label
+      text-align: left
+      margin-bottom: 7px
+      font:
+        size: 1.1rem
+        family: $lora
+      
+    input.form-input
+      padding: 8px 10px
+      background-color: #060a10
+      border: 1px solid #ffffff3f
+      border-radius: 0.3rem
+      color: $color-theme
+      font:
+        size: 1.1rem
+        family: $lora
+  
+  &.misc-container
+    background-color: $container-bg
+    border: 1px solid $border-color
+    border-radius: 0.2rem
+    padding: 18px 0
+    font:
+      family: $lora
+      size: 1.05rem
+
+    a
+      text-decoration: none
+      color: $color2-theme
+    
+  &.error-container
+    background-color: #1e0806
+    border: 1px solid rgba(250, 88, 55, 0.6)
+    padding: 18px 0
+    margin-bottom: 1.3rem
+    border-radius: 0.2rem
+    font:
+      size: 1.1rem
+      family: $lora
+    
+    @media screen and (max-width: 580px)
+      margin-bottom: 1rem
+      

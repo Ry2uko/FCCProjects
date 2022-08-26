@@ -1,0 +1,236 @@
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #0A192F;
+  color: #f5fffde2;
+}
+
+*:focus {
+  outline: none;
+}
+
+div.page-wrapper {
+  margin: 0.7rem 1rem;
+}
+
+div.page-wrapper h1.title a {
+  color: #1cf2c4d2;
+  text-decoration: none;
+  text-shadow: 0 0 10px rgba(28, 242, 196, 0.6);
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1.2em;
+}
+
+@media screen and (max-width: 800px) {
+  div.page-wrapper h1.title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  div.page-wrapper h1.title a {
+    font-size: 1.1em;
+  }
+}
+
+div.page-wrapper h2.form-title {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2.4rem;
+  font-family: Lora, serif;
+}
+
+div.page-wrapper p.credits-footer {
+  margin-top: 5rem;
+  text-align: center;
+  opacity: 0.9;
+  font-size: 1.1rem;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+div.form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 2rem auto;
+  text-align: center;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
+div.form-container form.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #060F1E;
+  border: 1px solid rgba(28, 242, 196, 0.6);
+  border-radius: 0.2rem;
+  margin-bottom: 1.5rem;
+}
+
+div.form-container form.form label.show-password-label {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-family: Lora, serif;
+  font-size: 1.18rem;
+}
+
+div.form-container form.form label.show-password-label input.show-password-input {
+  cursor: pointer;
+  margin-right: 3px;
+  width: 17px;
+  height: 17px;
+  background-color: #060A10;
+}
+
+div.form-container form.form button.submitBtn {
+  cursor: pointer;
+  padding: 7px 0;
+  background-color: rgba(28, 242, 196, 0.85);
+  border: none;
+  border-radius: 0.3rem;
+  font-size: 1.1rem;
+  font-family: Lora, serif;
+}
+
+div.form-container.login-form form.form {
+  width: 420px;
+  padding: 28px 20px;
+}
+
+div.form-container.login-form form.form label.show-password-label {
+  margin-bottom: 33px;
+}
+
+@media screen and (max-width: 500px) {
+  div.form-container.login-form form.form {
+    width: 380px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.form-container.login-form form.form {
+    width: 340px;
+  }
+}
+
+div.form-container.login-form div.input-container {
+  margin-bottom: 28px;
+}
+
+div.form-container.login-form div.input-container:last-of-type {
+  margin-bottom: 23px;
+}
+
+div.form-container.signup-form form.form {
+  width: 520px;
+  padding: 20px 25px;
+}
+
+div.form-container.signup-form form.form label.show-password-label {
+  margin-bottom: 24px;
+}
+
+div.form-container.signup-form form.form button.submitBtn {
+  margin-top: 0.8rem;
+}
+
+@media screen and (max-width: 580px) {
+  div.form-container.signup-form form.form {
+    width: 420px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  div.form-container.signup-form form.form {
+    width: 320px;
+  }
+}
+
+div.form-container.signup-form div.input-container {
+  margin-bottom: 20px;
+}
+
+div.form-container.signup-form div.input-container:last-of-type {
+  margin-bottom: 24px;
+}
+
+div.input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+div.input-container label.form-label {
+  text-align: left;
+  margin-bottom: 7px;
+  font-size: 1.1rem;
+  font-family: Lora, serif;
+}
+
+div.input-container input.form-input {
+  padding: 8px 10px;
+  background-color: #060a10;
+  border: 1px solid #ffffff3f;
+  border-radius: 0.3rem;
+  color: #f5fffde2;
+  font-size: 1.1rem;
+  font-family: Lora, serif;
+}
+
+div.misc-container {
+  background-color: #060F1E;
+  border: 1px solid rgba(28, 242, 196, 0.6);
+  border-radius: 0.2rem;
+  padding: 18px 0;
+  font-family: Lora, serif;
+  font-size: 1.05rem;
+}
+
+div.misc-container a {
+  text-decoration: none;
+  color: #1cf2c4d2;
+}
+
+div.error-container {
+  background-color: #1e0806;
+  border: 1px solid rgba(250, 88, 55, 0.6);
+  padding: 18px 0;
+  margin-bottom: 1.3rem;
+  border-radius: 0.2rem;
+  font-size: 1.1rem;
+  font-family: Lora, serif;
+}
+
+@media screen and (max-width: 580px) {
+  div.error-container {
+    margin-bottom: 1rem;
+  }
+}
+/*# sourceMappingURL=form.css.map */

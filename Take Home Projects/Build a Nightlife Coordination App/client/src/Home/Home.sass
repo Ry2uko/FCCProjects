@@ -1,0 +1,93 @@
+@import '../index.sass'
+
+div.Home
+  h1.title 
+    font-size: 2.6rem
+    font-family: 'Noto Sans', sans-serif
+    letter-spacing: 3px
+
+    a
+      text-decoration: none
+      color: rgba(255, 255, 255, 0.863)
+  
+  button#loginBtn
+    margin: 0 5px 0 auto
+    background-color: transparent
+    border: 1px solid $nl-theme
+    border-radius: 0.25rem
+    color: $nl-theme
+    font-family: Maitree, serif
+    font-size: 1.5rem
+    padding: 0 45px
+    cursor: pointer
+    transition: 0.4s
+
+    &:hover
+      background-color: $nl-theme
+      color: rgb(11, 11, 11)
+
+  p.footer-credits
+    position: absolute
+    color: rgba(255, 255, 255, 0.8)
+    font-family: Maitree, serif
+    font-size: 1.3rem
+    bottom: 0
+    text-align: center
+    width: 100%
+    margin-bottom: 1.2rem
+
+    a
+      color: rgba(210, 51, 250, 0.8)
+      text-decoration: none
+
+  div
+    &.home-header
+      display: flex
+      flex-direction: row
+      align-items: center
+
+    &.search-container
+      display: flex
+      flex-direction: column
+      width: 600px
+      margin: 6rem auto
+
+      h2
+        font-family: 'Noto Sans', sans-serif
+        font-size: 3.2rem
+        color: rgba(255, 255, 255, 0.935) 
+        display: flex
+        align-items: center
+        margin-bottom: 1rem
+        justify-content: center
+        
+        i
+          font-size: 2.25rem
+          margin-right: 10px
+          color: rgb(204, 1, 255)
+
+    &.location-form
+      display: flex
+      width: 100%
+
+      input#location-input
+        font-family: Maitree, serif
+        width: 92%
+        font-size: 1.3rem
+        padding: 3px 8px
+        border-radius: 0.2rem
+        border: 1px solid rgba(204, 1, 255, 0.612)
+        color: rgba(255, 255, 255, 0.945)
+        background-color: rgba(0, 0, 0, 0.76)
+
+        &:focus
+          outline: none
+
+      button#location-btn
+        background-color: $nl-theme
+        border: $nl-theme
+        color: rgba(0, 0, 0, 0.819)
+        font-size: 1.3rem
+        width: 8%
+        cursor: pointer
+        border-radius: 0 0.2rem 0.2rem 0

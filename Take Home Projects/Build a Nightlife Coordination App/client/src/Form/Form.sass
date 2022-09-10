@@ -1,0 +1,117 @@
+@import '../index.sass'
+
+div.Form
+  color: #fff
+
+  h1.title
+    font-size: 2.6rem
+    font-family: 'Noto Sans', sans-serif
+    letter-spacing: 3px
+    text-align: right
+
+    a
+      text-decoration: none
+      color: rgba(255, 255, 255, 0.863)
+
+  h2.form-title 
+    font-family: 'Maitree', serif
+    font-size: 3rem
+    margin-top: 2rem
+    text-align: center
+    color: $nl-theme2
+
+  div
+    &.form-container
+      display: flex
+      flex-direction: column
+      margin: 1.7rem auto
+      width: 460px
+      padding: 34px 30px
+      border: 1.8px solid rgba(1, 204, 255, 0.612)
+      border-radius: 0.2rem
+      color: rgba(255, 255, 255, 0.945)
+      background-color: rgba(0, 0, 0, 0.76)
+
+      button
+        &#loginBtn, &#registerBtn
+          display: block
+          cursor: pointer
+          width: 100%
+          padding: 2.5px 0
+          font-size: 1.3rem
+          font-family: 'Maitree', serif
+          background-color: #01DEE2
+          color: rgb(11, 11, 11)
+          border: none
+          border-radius: 0.3rem
+
+      label
+        text-align: left
+        margin-bottom: 8px
+        font-size: 1.2rem
+        font-family: 'Libre Franklin', sans-serif
+
+        &.show-password-label
+          width: max-content
+          user-select: none
+          font-family: 'Libre Franklin', sans-serif
+          font-size: 1.25rem
+
+          input
+            cursor: pointer
+            margin-right: 6px
+            margin-bottom: 2.4rem
+            width: 18px
+            height: 18px
+
+      div.input-control
+        display: flex
+        flex-direction: column
+        margin-bottom: 2.8rem
+
+        &:last-of-type
+          margin-bottom: 2rem !important
+
+        input
+          padding: 8px 10px
+          background-color: #000007
+          border: 1px solid #ffffff5c
+          color: rgba(255, 255, 255, 0.863)
+          border-radius: 0.25rem
+          font-size: 1.1rem
+          font-family: 'Noto Sans', sans-serif
+
+    &.misc-container
+      margin: 0 auto
+      width: 460px
+      border: 1.8px solid rgba(1, 204, 255, 0.612)
+      border-radius: 0.2rem
+      color: rgba(255, 255, 255, 0.945)
+      background-color: rgba(0, 0, 0, 0.76)
+      font-size: 1.15rem
+      font-family: 'Libre Franklin', sans-serif
+      text-align: center
+      padding: 14px 0
+      justify-content: center
+
+      a.anchor-link 
+        margin-left: 6px
+        background-color: transparent
+        border: none
+        cursor: pointer
+        text-decoration: none
+        color: #01DEE2
+        font-size: 1.15rem
+        font-family: 'Libre Franklin', sans-serif
+
+    &.register-form
+      div
+        &.form-container
+          margin: 1.2rem auto
+          width: 500px
+
+          div.input-control
+            margin-bottom: 2rem
+
+        &.misc-container
+          width: 500px

@@ -3,13 +3,7 @@
 import PollModel from '../models/poll.js';
 import UserModel from '../models/user.js';
 import express from 'express';
-/*
-// for testing only
-const userAuthId = {
-  'Harveth': '62f493ed9bd524fa20fb45d1',
-  'DragonBourne': '62f49d5ebc85be8b8863ff48'
-}
-*/
+
 const router = express.Router();
 
 router.route('/')
@@ -46,13 +40,6 @@ router.route('/api')
     return res.status(200).json({ polls });
   })
   .post(validateData, async (req, res) => {
-    /*
-    // for testing only
-    if (req.headers['auth-user']) {
-      let authUserId = userAuthId[req.headers['auth-user']];
-      req.user = await UserModel.findOne({ _id: authUserId }, { '__v': 0, 'password': 0, 'email': 0 });
-    }
-    */
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     const userData = req.user;
 
@@ -75,13 +62,6 @@ router.route('/api')
     res.status(201).json(poll);
   })
   .put(async (req, res) => {
-    /*
-    // for testing only
-    if (req.headers['auth-user']) {
-      let authUserId = userAuthId[req.headers['auth-user']];
-      req.user = await UserModel.findOne({ _id: authUserId }, { '__v': 0, 'password': 0, 'email': 0 });
-    }
-    */
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     const userData = req.user;
 
@@ -113,13 +93,6 @@ router.route('/api')
     res.status(200).json(poll);
   })
   .delete(async (req, res) => {
-    /*
-    // for testing only
-    if (req.headers['auth-user']) {
-      let authUserId = userAuthId[req.headers['auth-user']];
-      req.user = await UserModel.findOne({ _id: authUserId }, { '__v': 0, 'password': 0, 'email': 0 });
-    }
-    */
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     const userData = req.user;
 

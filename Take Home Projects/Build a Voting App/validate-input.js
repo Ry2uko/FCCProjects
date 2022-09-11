@@ -16,7 +16,7 @@ function validateInput(body) {
     if (username === '' || email === '' || 
     password === '' || confirmPassword === '') return [false, 'Missing input field(s).'];
     if (!emailRegex.test(email)) errMsg = 'Invalid email address.';
-    if (username.length < 6) errMsg = 'Username must be 6-20 characters long.';
+    if (username.length < 6 && useranme.length > 20) errMsg = 'Username must be 6-20 characters long.';
     else if (!usernameRegex.test(username)) errMsg = 'Invalid username.';
     if (confirmPassword !== password) errMsg = 'Confirm password does not match password.';
   } else {

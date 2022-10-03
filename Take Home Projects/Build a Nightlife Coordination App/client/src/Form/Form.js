@@ -1,14 +1,41 @@
 import './Form.sass';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
 import $ from 'jquery';
 
 function Login(props) {
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+  }
+
+  const handleLogIn = () => {
+    let username = $('#usernameInput').val(),
+    password = $('#passwordInput').val();
+
+    if (username.trim() === '' || password.trim() === '') return;
+
+    $.ajax({
+      method: 'POST',
+      url: '/login',
+      data: {
+        username, password
+      },
+      success: () => {
+        props.navigate('/', { replace: true });
+      },
+      error: resp => {
+        $('.error-container').text(resp.responseJSON.error).css('display', 'block');
+      }
+    });
+  }
+
   return (
     <div className="login-form form-type-container">
       <h2 className="form-title">Login</h2>
+      <div className="error-container"></div>
       <div className="form-container">
-        <form method="POST" action="/login" id="formLogin">
+        <form method="POST" action="/" id="formLogin" onSubmit={handleFormSubmit}>
           <div className="input-control">
             <label htmlFor="usernameInput">Username</label>
             <input type="text" id="usernameInput" name="username" autoComplete="off" />
@@ -18,9 +45,9 @@ function Login(props) {
             <input type="password" id="passwordInput" name="password" autoComplete="off" />
           </div>
           <label htmlFor="showPassword" className="show-password-label">
-            <input type="checkbox" id="showPassword" className="show-password-input" onChange={() => props.showPassword('/login')} /> Show password
+            <input type="checkbox" id="showPassword" className="show-password-input" onChange={() => props.showPassword('login')} /> Show password
           </label>
-          <button type="submit" id="loginBtn">Login</button>
+          <button type="submit" id="loginBtn" onClick={handleLogIn}>Login</button>
         </form>
       </div>
       <div className="misc-container">
@@ -31,11 +58,40 @@ function Login(props) {
 }
 
 function Register(props) {
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+  }
+
+  const handleRegister = () => {
+
+    let username = $('#usernameInput').val(),
+    password = $('#passwordInput').val(),
+    confirmPassword = $('#confirmPasswordInput').val();
+
+    if (username.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') return;
+
+    $.ajax({
+      method: 'POST',
+      url: '/register',
+      data: {
+        username, password, confirmPassword
+      },
+      success: () => {
+        props.navigate('/', { replace: true });
+      },
+      error: resp => {
+        $('.error-container').text(resp.responseJSON.error).css('display', 'block');
+      }
+    });
+  };
+
   return (
     <div className="register-form form-type-container">
       <h2 className="form-title">Register</h2>
+      <div className="error-container"></div>
       <div className="form-container">
-        <form method="POST" action="/register" id="formRegister">
+        <form method="POST" action="/" id="formRegister" onSubmit={handleFormSubmit}>
           <div className="input-control">
             <label htmlFor="usernameInput">Username</label>
             <input type="text" id="usernameInput" name="username" autoComplete="off" />
@@ -49,9 +105,9 @@ function Register(props) {
             <input type="password" id="confirmPasswordInput" name="confirm-password" />
           </div>
           <label htmlFor="showPassword" className="show-password-label">
-            <input type="checkbox" id="showPassword" className="show-password-input" onChange={() => props.showPassword('/register')} /> Show password
+            <input type="checkbox" id="showPassword" className="show-password-input" onChange={() => props.showPassword('register')} /> Show password
           </label>
-          <button type="submit" id="registerBtn">Register</button>
+          <button type="submit" id="registerBtn" onClick={handleRegister}>Register</button>
         </form>
       </div>
       <div className="misc-container">
@@ -61,12 +117,13 @@ function Register(props) {
   );
 }
 
-export default function Form(props) {
-  useEffect(() => {
-    $('#showPassword').prop('checked', false);
-  });
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.showPassword = this.showPassword.bind(this);
+  }
 
-  const showPassword = loginType => {
+  showPassword(loginType) {
     if (loginType === 'register') {
       if ($('#showPassword').is(':checked')) {
         $('#passwordInput').attr('type', 'text');
@@ -82,18 +139,40 @@ export default function Form(props) {
     }
   }
 
-  let component;
-
-  if (props.type === 'login') {
-    component = <Login showPassword={showPassword} />;
-  } else if (props.type === 'register') {
-    component = <Register showPassword={showPassword} />;
+  componentDidMount() {
+    $('#showPassword').prop('checked', false);
+    
+    $.ajax({
+      method: 'GET',
+      url: '/auth',
+      success: () => { 
+        this.props.navigate('/', { replace: true });
+      }
+    });
   }
 
+  render() {
+    let component;
+
+    if (this.props.type === 'login') {
+      component = <Login showPassword={this.showPassword} navigate={this.props.navigate}/>;
+    } else if (this.props.type === 'register') {
+      component = <Register showPassword={this.showPassword} navigate={this.props.navigate}/>;
+    }
+
+    return (
+      <div className="Form">
+        <h1 className="title testtest"><Link to="/">NIGHTSURFER</Link></h1>
+        { component }
+      </div>
+    );
+  }
+}
+
+export default function WithRouter(props) {
+  const navigate = useNavigate();
+
   return (
-    <div className="Form">
-      <h1 className="title testtest"><Link to="/">NIGHTSURFER</Link></h1>
-      { component }
-    </div>
+    <Form navigate={navigate} type={props.type}/>
   );
 }

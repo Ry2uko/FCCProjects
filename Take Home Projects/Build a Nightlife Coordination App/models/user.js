@@ -9,9 +9,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  email: {
+  destination: {
     type: String,
-    required: true
+    default: "" 
+  },
+  destination_link: {
+    type: String,
+    default: ""
   }
 });
 

@@ -13,11 +13,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-    <Routes>
-      <Route path="/" element={<App component="Home" />} />
-      <Route path="/login" element={<App component="Form-Login" />} />
-      <Route path="/register" element={<App component="Form-Register" />} />
-    </Routes>
-  </Router>
+      <Routes>
+        <Route exact path="/login" element={<App component="Form-Login" />} />
+        <Route exact path="/register" element={<App component="Form-Register" />} />
+        <Route path="*" element={<App component="Home" />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );

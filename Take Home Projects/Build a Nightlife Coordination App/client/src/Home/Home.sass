@@ -1,0 +1,278 @@
+@import '../index.sass'
+
+div.Home
+  button > i
+    pointer-events: none
+
+  h1.title 
+    font-size: 2.6rem
+    font-family: 'Noto Sans', sans-serif
+    letter-spacing: 3px
+
+    a
+      text-decoration: none
+      color: rgba(255, 255, 255, 0.863)
+  
+  button#loginBtn
+    margin-right: 5px
+    background-color: transparent
+    border: 1px solid $nl-theme
+    border-radius: 0.25rem
+    color: $nl-theme
+    padding: 0 45px
+    cursor: pointer
+    transition: 0.4s
+    font:
+      family: Maitree, serif
+      size: 1.5rem
+
+    &:hover
+      background-color: $nl-theme
+      color: rgb(11, 11, 11)
+
+  p.footer-credits
+    position: absolute
+    color: rgba(255, 255, 255, 0.8)
+    font-family: Maitree, serif
+    font-size: 1.3rem
+    bottom: 0
+    text-align: center
+    width: 100%
+    margin-bottom: 1.2rem
+
+    a
+      color: rgba(210, 51, 250, 0.8)
+      text-decoration: none
+
+  div
+    &.home-header
+      display: flex
+      flex-direction: row
+      align-items: center
+
+    &.login-container
+      margin-left: auto
+
+    &.location-form
+      display: flex
+      width: 100%
+
+      input#location-input
+        font-family: Maitree, serif
+        width: 92%
+        font-size: 1.3rem
+        padding: 3px 6px
+        border-radius: 0.2rem
+        border: 1px solid rgba(204, 1, 255, 0.612)
+        color: rgba(255, 255, 255, 0.945)
+        background-color: rgba(0, 0, 0, 0.76)
+
+        &:focus
+          outline: none
+
+      button#location-btn
+        background-color: $nl-theme
+        border: $nl-theme
+        color: rgba(0, 0, 0, 0.819)
+        font-size: 1.3rem
+        width: 7.5%
+        cursor: pointer
+        border-radius: 0 0.2rem 0.2rem 0
+
+    &.user-authed-dd
+      margin-right: 15px
+      margin-left: auto
+      display: flex
+      flex-direction: column
+      align-content: center
+      position: relative
+
+      button#toggleDropDownBtn
+        padding: 0 10px
+        background-color: transparent 
+        border: none
+        cursor: pointer
+        color: rgba(255, 255, 255, 0.863)
+        font:
+          family: 'Libre Franklin', serif
+          size: 1.7rem
+        
+        i
+          margin-left: 3px
+          font:
+            size: 1.3rem
+      
+      button#clearDestinationBtn
+        text-align: center
+        background-color: #080b0c
+        color: #ffffffd7
+        border: none
+        opacity: 0.9
+        border-radius: 50%
+        cursor: pointer
+        margin-left: 2px
+        padding: 1px 4px
+        font:
+          size: 0.74rem
+      
+      div
+        &.user-dd-container
+          position: absolute
+          top: 40px
+          right: -10px
+          background-color: #DCDDE3
+          border-radius: 0.3rem
+          width: 170px
+          display: none
+          flex-direction: column
+
+          button#logOutBtn
+            border-radius: 0.3rem
+            padding: 3px 0
+            background-color: inherit
+            border: none
+            cursor: pointer
+            transition: 0.3s
+            font:
+              family: 'Maitree', serif
+              size: 1.2rem
+            
+            &:hover
+              background-color: #d1d1d48d
+
+        &.status-container
+          text-align: center
+          padding: 2px 8px
+          font:
+            family: 'Maitree', serif
+            size: 1rem
+          
+          span.user-status 
+            b a
+                text-decoration: none
+                color: #aa1dcdf1
+
+div.SearchContent
+  div
+    &.search-container
+      display: flex
+      flex-direction: column
+      width: 600px
+      margin: 6rem auto
+
+      h2
+        font-family: 'Noto Sans', sans-serif
+        font-size: 3.2rem
+        color: rgba(255, 255, 255, 0.935) 
+        display: flex
+        align-items: center
+        margin-bottom: 1rem
+        justify-content: center
+        
+        i
+          font-size: 2.25rem
+          margin-right: 10px
+          color: rgb(204, 1, 255)
+
+div.BusinessesContent
+  margin-top: 1.4rem
+
+  button#searchAgainBtn
+    border: 1px solid $nl-theme
+    border-radius: 0.3rem
+    background-color: $nl-theme
+    color: rgb(11, 11, 11)
+    margin-left: 2rem
+    padding: 0 13px
+    cursor: pointer
+    font:
+      family: Maitree, serif
+      size: 1.4rem  
+
+  div
+    &.businesses-container
+      margin: 35px auto
+      max-width: 1200px
+
+    &.business-container
+      position: relative
+      background-color: rgba(0, 0, 0, 0.734)
+      color: rgba(255, 255, 255, 0.79)
+      border: 1px solid #d233facf
+      border-radius: 0.25rem
+      margin: 10px 0
+      padding: 10px 5px
+      display: flex
+      max-height: 160px
+      flex-direction: row
+      font:
+        family: 'Libre Franklin', sans-serif
+        size: 1.15rem
+
+    &.business-image
+      width: 180px
+      margin: 0 10px
+
+      img
+        width: 100%
+        height: 100%
+        border-radius: 0.4rem
+      
+    &.business-info
+      flex-grow: 1
+      margin-left: 10px
+      margin-top: 5px
+
+      h4.business-title 
+        margin-bottom: 4px
+        font:
+          size: 1.3rem
+        
+        a
+          text-decoration: none
+          color: rgba(255, 255, 255, 0.79)
+      
+      button.markBusinessBtn
+        position: absolute
+        top: 0
+        right: 0
+        margin: 8px 12px
+        padding: 2px 6.4px
+        background-color: #36f
+        color: rgb(11, 11, 11)
+        border: 1px solid #36f
+        border-radius: 0.27rem
+        cursor: pointer
+        font:
+          size: 1.36rem
+        
+        &.disabled
+          pointer-events: none
+          background-color: #3366ffa2
+          border: 1px solid #2544A9
+      div
+        &.ratings-container
+          margin-bottom: 4px
+          font:
+            size: 1rem
+          
+          span
+            &.business-rating
+              margin-right: 5px
+
+            &.business-review-count
+              margin: 0 5px
+        
+        &.location-container, &.is-closed-container
+          margin-bottom: 3px
+          font:
+            size: 1.1rem
+        
+        &.is-closed-container
+          color: #f66
+
+        &.transactions-container
+          text-transform: capitalize
+          font: 
+            size: 1.1rem
+

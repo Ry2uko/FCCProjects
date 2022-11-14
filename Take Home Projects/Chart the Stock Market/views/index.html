@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chart the Stock Market</title>
+    <link rel="stylesheet" href="/public/css/styles.css" type="text/css" />
+  </head>
+  <body>
+    <h1 class="title">Chart the Stock Market</h1>
+
+    <div class="canvas-container">
+      <canvas id="graphChart"></canvas>
+    </div>
+
+    <div class="input-container">
+      <label>Stock Symbol: </label>
+      <input type="text" id="stockSymbolInput" placeholder="Stock Symbol"/>
+      <button type="button" id="addStock">Add Stock</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/public/js/script.js"></script>
+  </body>
+</html>

@@ -11,8 +11,8 @@ $(document).ready(function(){
   const datasetsColor = [
     'rgba(255, 99, 132)',
     'rgba(97, 136, 255)',
-    'rgb(255, 255, 97)',
-    'rgba(255, 160, 97)'
+    'rgba(255, 255, 97)',
+    'rgba(0, 230, 0)'
   ]
 
   const config = {

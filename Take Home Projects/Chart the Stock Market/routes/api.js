@@ -12,6 +12,8 @@ router.post('/', (req, res) => {
 
   if (!querySymbol) {
     return res.status(400).json({ error: 'Stock symbol missing.' });
+  } else if (querySymbol.length > 5) {
+    return res.status(400).json({ error: 'Invalid symbol.' });
   }
 
   // 5 API requests per minute and 500 requests per day
@@ -26,7 +28,26 @@ router.post('/', (req, res) => {
       res.status(400).json({ error: err });
     } else if (apiRes.statusCode === 200) {
       if (data['Error Message']) return res.status(400).json({ error: 'Invalid API call.' });
-      res.status(200).json(data);
+
+      const resData = {
+        symbol: data['Meta Data']['2. Symbol'],
+        monthlyTimeSeries: {}
+      }, timeSeries = data['Monthly Time Series'];
+
+      let filtered = Object.keys(timeSeries)
+        .filter(key => ['2022', '2021', '2020', '2019'].some(year => {
+          return key.includes(year);
+        }))
+        .reduce((obj, key) => {
+          obj[key] = timeSeries[key];
+          return obj;
+        }, {});
+        
+      for (let timeKey in filtered) {
+        resData.monthlyTimeSeries[timeKey] = parseFloat(filtered[timeKey]['4. close']);
+      }
+
+      res.status(200).json(resData);
     } else {
       res.status(500).json({ error: `ERROR: HTTP ${apiRes.statusCode}` });
     }

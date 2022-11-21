@@ -1,6 +1,15 @@
 $(document).ready(function(){
+  const socket = io();
+
   const ctx = $("#graphChart")[0].getContext('2d');
   let graphChart;
+
+  const datasetsColor = [
+    'rgba(255, 99, 132)',
+    'rgba(97, 136, 255)',
+    'rgba(255, 255, 97)',
+    'rgba(0, 230, 0)'
+  ];
 
   const configData = {
     datasets: [
@@ -8,12 +17,25 @@ $(document).ready(function(){
     ]
   };
 
-  const datasetsColor = [
-    'rgba(255, 99, 132)',
-    'rgba(97, 136, 255)',
-    'rgba(255, 255, 97)',
-    'rgba(0, 230, 0)'
-  ]
+  let addStockLock = true;
+  $.ajax({
+    url: '/stock',
+    method: 'GET',
+    success: data => {
+      data.stocks.forEach(stock => {
+        configData.datasets.push({
+          label: stock.symbol,
+          data: stock.monthlyTimeSeries,
+          backgroundColor: datasetsColor[configData.datasets.length],
+          borderColor: datasetsColor[configData.datasets.length]
+        });  
+      });
+      try { graphChart.destroy(); } catch(_) {}
+      graphChart = new Chart(ctx, config);
+      $('#stockSymbolInput').val('');
+      addStockLock = false;
+    }
+  });
 
   const config = {
     type: 'line', 
@@ -91,7 +113,6 @@ $(document).ready(function(){
 
   graphChart = new Chart(ctx, config);
 
-  let addStockLock = false;
   $('#addStock').on('click', () => {
     if (addStockLock) return;
     addStockLock = true;
@@ -110,23 +131,12 @@ $(document).ready(function(){
       },
       success: data => {
         const datasetsData = [];
-        let monthlyTimeSeries = data['Monthly Time Series'];
-        
-        // limit to only 2019~
-        let filtered = Object.keys(monthlyTimeSeries)
-        .filter(key => ['2022', '2021', '2020', '2019'].some(year => {
-          return key.includes(year);
-        }))
-        .reduce((obj, key) => {
-          obj[key] = monthlyTimeSeries[key];
-          return obj;
-        }, {});
+        let monthlyTimeSeries = data.monthlyTimeSeries;
 
-        for (let date in filtered) {
-          let dateObject = filtered[date];
+        for (let time in monthlyTimeSeries) {
           datasetsData.push({
-            x: date,
-            y: parseFloat(dateObject['4. close']),
+            x: time,
+            y: monthlyTimeSeries[time],
           });
         }
 
@@ -140,6 +150,7 @@ $(document).ready(function(){
         };
 
         configData.datasets.push(datasetsObject);
+        saveStock(datasetsObject);
         graphChart.destroy();
         graphChart = new Chart(ctx, config);
         $('#stockSymbolInput').val('');
@@ -150,25 +161,49 @@ $(document).ready(function(){
         alert('Failed to add stock: ' + errMsg);
       }
     });
+
+    function saveStock(stockObj) {
+      $.ajax({
+        method: 'POST',
+        url: '/stock',
+        data: { stockObj },
+        success: data => {
+          addStockLock = false;
+          console.log(data);
+        },
+        error: resp => {
+          const errMsg = resp.responseJSON.error;
+          alert('Failed to save stock: ' + errMsg);
+        }
+      })
+    }
   });
 
   $('#stockSymbolInput').keydown(e => {
     if (e.key === 'Enter') $('#addStock').click();
   });
 
+  $('#openHelpModal').on('click', () => {
+    if ($('#helpModal').css('display') !== 'none') return;
+
+    $('.modal-backdrop').css({
+      'display': 'block',
+      'opacity': 0
+    }).animate({ 'opacity': 0.4 }, 200);
+    $('#helpModal').fadeIn(200).css('display', 'flex');
+    $('.modal-backdrop').on('click', () => {
+      $('#closeHelpModal').click();
+    });
+  });
+
+  $('#closeHelpModal').on('click', () => {
+    $('.modal-backdrop').fadeOut(200).off('click');
+    $('#helpModal').fadeOut(200);
+  });
 });
 
 /*
-https://cloudfront-us-east-2.images.arcpublishing.com/reuters/3XVSE7R5O5NJFMYP32IE36OU7I.png
-• Help Button - shows tooltip/message: Stocks other people....
-• Visualize Graph (chart.js)
-• Stock Symbol Input & Get Stock Btn
-
--test chart.js
--implement chart.js
--test socket.js
--work on api routes & implement socket.js
--unit tests?
+- Remove a Stock
+- socket.io
+- unit tests
 */
-
-

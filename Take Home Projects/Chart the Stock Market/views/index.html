@@ -9,22 +9,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> 
+    <script src="https://kit.fontawesome.com/b40850cb13.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/public/css/styles.css" type="text/css" />
   </head>
   <body>
-    <h1 class="title">Chart the Stock Market</h1>
+
+    <div class="modal-backdrop"></div>
+    <div id="helpModal">
+        <div class="modal-content">
+          <button type="button" id="closeHelpModal"><i class="fa-solid fa-xmark"></i></button> 
+          <h4 class="modal-title">Help</h4>
+          <ul class="help-modal-list">
+            <li>Stocks other people add or remove will show up here in real time.</li>
+            <li>Click the label to hide a stock.</li>
+            <li>Only <b>four</b> stocks maximum.</li>
+            <li>The free tier of the  stock api has a maximum of only <b>five</b> requests/minute and 500/day.</li>
+            <li>Click <a href="https://stockanalysis.com/stocks/" target="_blank">here</a> to see all working stock symbols.</li>
+          </ul>
+        </div>
+    </div>
+
+    <h1 class="title">
+      Chart the Stock Market
+      <button type="button" title="Help" id="openHelpModal"><i class="fa-regular fa-circle-question"></i></button>
+    </h1>
 
     <div class="canvas-container">
       <canvas id="graphChart"></canvas>
     </div>
 
     <div class="input-container">
-      <input type="text" id="stockSymbolInput" placeholder="Enter Stock Symbol"/>
+      <button type="button" id="removeStock" title="Remove a stock"><i class="fa-regular fa-square-minus"></i></button>
+      <input type="text" id="stockSymbolInput" placeholder="Enter Stock Symbol" maxlength="5"/>
       <button type="button" id="addStock">Add Stock</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.3/socket.io.js" integrity="sha512-iWPnCISAd/J+ZacwV2mbNLCaPGRrRo5OS81lKTVPtRg1wGTC20Cfmp5Us5RcbLv42QLdbAWl0MI57yox5VecQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="/public/js/script.js"></script>
   </body>
 </html>

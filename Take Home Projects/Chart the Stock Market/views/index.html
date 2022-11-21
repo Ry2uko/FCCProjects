@@ -40,7 +40,12 @@
     </div>
 
     <div class="input-container">
-      <button type="button" id="removeStock" title="Remove a stock"><i class="fa-regular fa-square-minus"></i></button>
+      <div class="popup-container">
+        <div class="remove-stocks-container">
+          <ul class="remove-stocks-list"></ul>
+        </div>
+        <button type="button" id="removeStock" title="Remove a stock"><i class="fa-regular fa-square-minus"></i></button>
+      </div>
       <input type="text" id="stockSymbolInput" placeholder="Enter Stock Symbol" maxlength="5"/>
       <button type="button" id="addStock">Add Stock</button>
     </div>

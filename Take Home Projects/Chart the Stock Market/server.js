@@ -52,7 +52,12 @@ server.listen(port, () => {
 });
 
 io.on('connection', socket => {
-  console.log('A user connected');
+  socket.on('ADDSTOCK', dsObj => {
+    socket.broadcast.emit('ADDSTOCKBROADCAST', dsObj);
+  });  
+  socket.on('REMOVESTOCK', stockSymbol => {
+    socket.broadcast.emit('REMOVESTOCKBROADCAST', stockSymbol);
+  });
 });
 
 export default app; // for testing

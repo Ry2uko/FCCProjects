@@ -47,6 +47,21 @@ router.route('/')
       res.status(201).json(stock);
     } catch (err) { return res.status(500).json({ error: err.message }); }
     
+  })
+  .delete(async (req, res) => {
+    let symbol = req.body.symbol.toUpperCase();
+
+    if (!symbol) return res.status(400).json({ error: 'Invalid/Missing symbol.' });
+    else if (symbol.length > 5) return res.status(400).json({ error: 'Invalid symbol.' });
+
+    StockModel.findOneAndDelete({ symbol }, (err, docs) => {
+      if (err) {
+        return res.status(500).json({ error: 'Unable to delete' });
+        console.log(err);
+      }
+      res.status(200).json(docs);
+    });
+
   });
 
 export default router; 

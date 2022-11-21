@@ -12,7 +12,6 @@ $ff-ntsans: 'Noto Sans', sans-serif
 body, html
   width: 100%
   height: 100vh
-  overflow-x: hidden
   background-color: #171717
 
 h1.title 
@@ -106,6 +105,61 @@ div
     width: 800px
     text-align: center
 
+    div
+      &.popup-container
+        position: relative
+        
+        div.remove-stocks-container
+          display: none
+          position: absolute
+          width: 150px
+          border-radius: 0.3rem
+          text-align: center
+          justify-content: center
+          padding: 6px 0
+          z-index: 1
+          height: 135px
+          background-color: #0b0b0bee
+          bottom: 125%
+          margin-left: -52px
+
+          &::after
+            content: ""
+            position: absolute
+            top: 100%
+            left: 43%
+            border-width: 8px
+            border-style: solid
+            border-color: #0b0b0b transparent transparent transparent
+
+          ul.remove-stocks-list
+            list-style-type: none
+            width: 100%
+
+            li
+              display: flex
+              align-items: center
+              justify-content: center
+              text-align: left
+              margin-left: 10px
+              color: #fff
+              padding: 3px
+              font:
+                size: 1.15rem
+                family: $ff-ubuntu
+
+              span
+                flex: 1
+
+              button.remove-stock-item
+                margin-right: 10px
+                border: none
+                cursor: pointer
+                background-color: inherit
+                color: #ff0037
+                font:
+                  size: 1.3rem
+
     input#stockSymbolInput
       height: 40px
       width: 180px
@@ -136,6 +190,7 @@ div
         margin: 0 8px
         border: none
         cursor: pointer
+        opacity: 0.6
         color: #c71e43
         font:
           size: 1.8rem

@@ -10,10 +10,10 @@ router.post('/', (req, res) => {
   let queryFunction = 'TIME_SERIES_MONTHLY',
   querySymbol = req.body.symbol || '';
 
-  if (!querySymbol) {
-    return res.status(400).json({ error: 'Stock symbol missing.' });
+  if (!querySymbol || typeof querySymbol !== 'string') {
+    return res.status(400).json({ error: 'Invalid/Missing symbol.' });
   } else if (querySymbol.length > 5) {
-    return res.status(400).json({ error: 'Invalid symbol.' });
+    return res.status(400).json({ error: 'Invalid symbol length.' });
   }
 
   // 5 API requests per minute and 500 requests per day

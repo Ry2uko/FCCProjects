@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom/client';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Navigate
 } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,7 +24,7 @@ root.render(
         <Route exact path="/requests/new" element={<App component="NewRequest" />} />
         <Route exact path="/books/my" element={<App component="MyBooks" />} />
         <Route exact path="/users" element={<App component="User" />} />
-        <Route path="*" element={<App component="Book" />} />
+        <Route path="*" element={<Navigate to="/books" replace />} />
       </Routes>
     </Router>
   </React.StrictMode>

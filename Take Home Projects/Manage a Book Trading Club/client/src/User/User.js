@@ -11,7 +11,9 @@ class User extends React.Component {
   render() {
     return (
       <div className="User">
-        <h1>Users</h1>
+        <div className="title-banner">
+          <h1 className="title">Users</h1>
+        </div>
       </div>
     );
   }

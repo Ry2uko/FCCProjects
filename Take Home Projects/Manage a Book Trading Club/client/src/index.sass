@@ -1,7 +1,6 @@
-$void: #0E0B16
-$fuschia: #A239CA
-$jewel: #4717F6
-$stark: #E7DFDD
+$red-theme: #EF233C
+$ff-cabin: 'Cabin', sans-serif
+$ff-firaSans: 'Fira Sans', sans-serif
 
 *, ::before, ::after
   margin: 0
@@ -19,3 +18,26 @@ body, html
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
+div
+  &.title-banner  
+    width: 100%
+    height: 135px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    text-align: center
+    background-color: $red-theme
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px
+
+    h1.title 
+      color: #fff
+      font:
+        size: 2.4rem
+        family: $ff-cabin
+    
+    h2.title-description
+      color: #fffffff6
+      font:
+        size: 1.6rem
+        family: $ff-firaSans

@@ -29,7 +29,7 @@ class ReqTrade extends React.Component {
     let type = this.props.type;
     this.setState({
       type: type.toLowerCase(),
-      title: type.charAt(0).toUpperCase() + type.substr(1).toLowerCase()
+      title: type.charAt(0).toUpperCase() + type.substr(1).toLowerCase() + 's'
     });
     $('a.nav-link.active').removeClass('active');
     if (type === 'request') {
@@ -43,7 +43,10 @@ class ReqTrade extends React.Component {
   render() {
     return (
       <div className="ReqTrade">
-        <h1>{this.state.title}</h1>
+        <div className="title-banner">
+          <h1 className="title">All {this.state.title}</h1>
+        </div>
+        
       </div>
     );
   }

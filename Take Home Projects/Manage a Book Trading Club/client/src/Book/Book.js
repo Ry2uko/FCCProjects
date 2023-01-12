@@ -12,7 +12,46 @@ class Book extends React.Component {
   render() {
     return (
       <div className="Book">
-        <h1>Book</h1>
+        <div className="title-banner">
+          <h1 className="title">Books</h1>
+          <h2 className="title-description">Available for trade</h2>
+        </div>
+        <div className="books-container">
+          <div className="book-tile">
+            <h4 className="book-title">The Subtle Art of Not Giving a F*ck</h4>
+            <span className="book-user">from <a className="user" href="#">Ry2uko</a> in Philippines</span>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+          <div className="book-tile">
+            <p>book</p>
+          </div>
+        </div>
       </div>
     );
   }

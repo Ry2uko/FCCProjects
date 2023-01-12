@@ -1,2 +1,46 @@
 @import '../index.sass' 
 /* for variables */
+
+div.Book
+  div
+    &.title-banner
+      width: 100%
+      height: 135px
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      text-align: center
+      background-color: $red-theme
+      box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px
+    
+    &.books-container
+      width: 100%
+      height: 100%
+      display: grid
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+      grid-gap: 20px
+      padding: 2.5rem 3.5rem
+
+      div
+        &.book-tile
+          height: 280px
+          border: 1px solid #0000005e
+          border-radius: 0.4rem
+          display: flex
+          justify-content: center
+          align-items: center
+
+  h1.title 
+    color: #fff
+    font:
+      size: 3.3rem
+      family: $ff-cabin
+    
+  h2.title-description
+    color: #fffffff7
+    font:
+      size: 1.45rem
+      family: $ff-firaSans
+
+      

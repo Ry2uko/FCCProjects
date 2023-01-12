@@ -5,7 +5,6 @@ div.App
   nav.app-nav
     width: 100%
     height: 65px
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px
 
     div
       &.nav-wrapper
@@ -23,7 +22,7 @@ div.App
 
         a.navbar-brand
           text-decoration: none
-          color: #EF233C
+          color: $red-theme
           font:
             size: 1.7rem
 
@@ -44,7 +43,7 @@ div.App
 
           a.nav-link
             color: #fff
-            background-color: #EF233C
+            background-color: $red-theme
             padding: 0 30px
             border-radius: 1.2rem
 
@@ -76,7 +75,7 @@ div.App
             transform: translateX(-50%) scaleX(0)
             bottom: 12px
             background-color: #f20b26
-            transition: all 0.33s ease-in-out 0s
+            transition: all 0.22s ease-in-out 0s
           
           &.active
             &::before

@@ -7,6 +7,18 @@ class Book extends React.Component {
   componentDidMount() {
     $('a.nav-link.active').removeClass('active');
     $('a.nav-link[href="/books"]').attr('class', 'nav-link active');
+
+    $('.book-tile').each(function() {
+      let conditionColors = [
+        'rgb(23, 138, 238, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+        'rgb(136, 41, 214, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+        'rgb(102, 255, 102, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+        'rgb(255, 255, 102, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+        'rgb(255, 80, 80, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset'
+        
+      ];
+      $(this).css('boxShadow', conditionColors[Math.floor(Math.random() * conditionColors.length)]);
+    });
   }
   
   render() {
@@ -18,38 +30,49 @@ class Book extends React.Component {
         </div>
         <div className="books-container">
           <div className="book-tile">
-            <h4 className="book-title">The Subtle Art of Not Giving a F*ck</h4>
-            <span className="book-user">from <a className="user" href="#">Ry2uko</a> in Philippines</span>
+            <div className="book-center-container">
+              <h4 className="book-title">The Subtle Art of Not Giving a F*ck</h4>
+              <h5 className="book-author">by Mark Manson</h5>
+            </div>
+            <div className="book-bottom-container">
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+            </div>
           </div>
           <div className="book-tile">
-            <p>book</p>
+            <div className="book-center-container">
+              <h4 className="book-title">Everything is F*cked</h4>
+              <h5 className="book-author">by Mark Manson</h5>
+            </div>
+            <div className="book-bottom-container">
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+            </div>
           </div>
           <div className="book-tile">
-            <p>book</p>
+            <div className="book-center-container">
+              <h4 className="book-title">Surrounded by Setbacks</h4>
+              <h5 className="book-author">by Thomas Erikson</h5>
+            </div>
+            <div className="book-bottom-container">
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+            </div>
           </div>
           <div className="book-tile">
-            <p>book</p>
+            <div className="book-center-container">
+              <h4 className="book-title">Surrounded by Idiots</h4>
+              <h5 className="book-author">by Thomas Erikson</h5>
+            </div>
+            <div className="book-bottom-container">
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+            </div>
           </div>
           <div className="book-tile">
-            <p>book</p>
-          </div>
-          <div className="book-tile">
-            <p>book</p>
-          </div>
-          <div className="book-tile">
-            <p>book</p>
-          </div>
-          <div className="book-tile">
-            <p>book</p>
-          </div>
-          <div className="book-tile">
-            <p>book</p>
-          </div>
-          <div className="book-tile">
-            <p>book</p>
-          </div>
-          <div className="book-tile">
-            <p>book</p>
+            <div className="book-center-container">
+              <h4 className="book-title">Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones</h4>
+              <h5 className="book-author">by James Clear</h5>
+            </div>
+            <div className="book-bottom-container">
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+            </div>
           </div>
         </div>
       </div>

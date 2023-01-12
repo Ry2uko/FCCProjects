@@ -13,23 +13,51 @@ div.Book
       text-align: center
       background-color: $red-theme
       box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px
-    
+
     &.books-container
       width: 100%
       height: 100%
       display: grid
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr))
       grid-gap: 20px
       padding: 2.5rem 3.5rem
-
+      
       div
         &.book-tile
-          height: 280px
-          border: 1px solid #0000005e
+          height: 260px
+          border: 1px solid #00000081
           border-radius: 0.4rem
           display: flex
           justify-content: center
           align-items: center
+          flex-direction: column
+
+          div
+            &.book-center-container
+              padding: 0 1.4rem
+              flex: 1
+              display: flex
+              justify-content: center
+              align-items: center
+              flex-direction: column
+
+              h4.book-title, h5.book-author
+                text-align: center
+
+              h4.book-title
+                font:
+                  size: 1.4rem
+                  family: $ff-firaSans
+
+              h5.book-author
+                margin-top: 5px
+                color: #000000c6
+                font:
+                  size: 1rem
+                  family: $ff-cabin
+
+            &.book-bottom-container
+              margin-bottom: 0.7rem
 
   h1.title 
     color: #fff

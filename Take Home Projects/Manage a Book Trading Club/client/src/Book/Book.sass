@@ -4,15 +4,19 @@
 div.Book
   div
     &.title-banner
-      width: 100%
-      height: 135px
-      display: flex
-      flex-direction: column
-      align-items: center
-      justify-content: center
-      text-align: center
-      background-color: $red-theme
-      box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px
+      @include title-banner
+
+      h1.title 
+        color: #fff
+        font:
+          size: 3rem
+          family: $ff-cabin
+      
+      h2.title-description
+        color: #f7f7f7
+        font:
+          size: 1.35rem
+          family: $ff-firaSans
 
     &.books-container
       width: 100%
@@ -20,17 +24,34 @@ div.Book
       display: grid
       grid-template-columns: repeat(auto-fill, minmax(420px, 1fr))
       grid-gap: 20px
-      padding: 2.5rem 3.5rem
+      padding: 2.5rem 3.5rem 2.5rem 3.5rem
       
       div
         &.book-tile
-          height: 260px
-          border: 1px solid #00000081
+          position: relative
+          height: 270px
+          border: 1.4px solid #ffffff23
+          background-color: #181818
           border-radius: 0.4rem
           display: flex
           justify-content: center
           align-items: center
           flex-direction: column
+
+          button.request-trade-button
+            position: absolute
+            top: 0
+            right: 0
+            margin: 5px 5px
+            cursor: pointer
+            background-color: #ff536d3c
+            color: #FF536C
+            padding: 6px 14px
+            border-radius: 0.5rem
+            border: none
+            outline: none
+            font:
+              size: 1rem
 
           div
             &.book-center-container
@@ -45,30 +66,19 @@ div.Book
                 text-align: center
 
               h4.book-title
+                color: #FDFDFD
                 font:
                   size: 1.4rem
                   family: $ff-firaSans
 
               h5.book-author
                 margin-top: 5px
-                color: #000000c6
+                color: #ffffffd7
                 font:
                   size: 1rem
                   family: $ff-cabin
 
             &.book-bottom-container
               margin-bottom: 0.7rem
-
-  h1.title 
-    color: #fff
-    font:
-      size: 3.3rem
-      family: $ff-cabin
-    
-  h2.title-description
-    color: #fffffff7
-    font:
-      size: 1.45rem
-      family: $ff-firaSans
 
       

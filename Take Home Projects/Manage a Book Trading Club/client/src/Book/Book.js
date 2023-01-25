@@ -8,28 +8,24 @@ class Book extends React.Component {
     $('a.nav-link.active').removeClass('active');
     $('a.nav-link[href="/books"]').attr('class', 'nav-link active');
 
-    $('.book-tile').each(function() {
-      let conditionColors = [
-        'rgb(23, 138, 238, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
-        'rgb(136, 41, 214, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
-        'rgb(102, 255, 102, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
-        'rgb(255, 255, 102, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
-        'rgb(255, 80, 80, 0.2) 3px 3px 20px 1px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset'
-        
-      ];
-      $(this).css('boxShadow', conditionColors[Math.floor(Math.random() * conditionColors.length)]);
-    });
+    fetch('/auth')
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
   
   render() {
     return (
       <div className="Book">
+        <div className="book-request-modal-container">
+
+        </div>
         <div className="title-banner">
           <h1 className="title">Books</h1>
           <h2 className="title-description">Available for trade</h2>
         </div>
         <div className="books-container">
           <div className="book-tile">
+            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
             <div className="book-center-container">
               <h4 className="book-title">The Subtle Art of Not Giving a F*ck</h4>
               <h5 className="book-author">by Mark Manson</h5>
@@ -39,6 +35,7 @@ class Book extends React.Component {
             </div>
           </div>
           <div className="book-tile">
+            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
             <div className="book-center-container">
               <h4 className="book-title">Everything is F*cked</h4>
               <h5 className="book-author">by Mark Manson</h5>
@@ -48,6 +45,7 @@ class Book extends React.Component {
             </div>
           </div>
           <div className="book-tile">
+            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
             <div className="book-center-container">
               <h4 className="book-title">Surrounded by Setbacks</h4>
               <h5 className="book-author">by Thomas Erikson</h5>
@@ -57,6 +55,7 @@ class Book extends React.Component {
             </div>
           </div>
           <div className="book-tile">
+            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
             <div className="book-center-container">
               <h4 className="book-title">Surrounded by Idiots</h4>
               <h5 className="book-author">by Thomas Erikson</h5>
@@ -66,6 +65,7 @@ class Book extends React.Component {
             </div>
           </div>
           <div className="book-tile">
+            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
             <div className="book-center-container">
               <h4 className="book-title">Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones</h4>
               <h5 className="book-author">by James Clear</h5>

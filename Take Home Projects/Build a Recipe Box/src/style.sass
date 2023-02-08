@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&family=Josefin+Sans&family=Libre+Franklin:wght@300&display=swap')
+
+$main-bg-color: #F1F5F8
+$main-text-color: #414D55
+$ff-FiraSans: 'Fira Sans', sans-serif
+$ff-JosefinSans: 'Josefin Sans', sans-serif
+$ff-LibreFranklin: 'Libre Franklin', sans-serif
+
+*, ::before, ::after
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+*:focus
+  outline: none
+
+body, html
+  width: 100%
+  height: 100vh
+  overflow-x: hidden
+  background-color: $main-bg-color
+  color: $main-text-color !important
+ 
+h1.main-title
+  margin: 1rem 0.2rem
+  font:
+    size: 2.8rem
+    family: $ff-JosefinSans
+  
+  a
+    text-decoration: none
+    color: $main-text-color
+
+div
+  &#editRecipeModal
+    button#closeModalAdd, button#closeModalEdit
+      position: absolute
+      top: 0
+      right: 0
+      border: none
+      padding: 2px 8px
+      background-color: rgba(0,0,0,0)
+      cursor: pointer
+      font-size: 1.4rem
+      
+    h4.modal-title
+      text-align: center
+      padding: 1.4rem 0
+      font:
+        family: $ff-FiraSans
+        size: 2.45rem
+        
+    button#modal_AddRecipe, button#modal_EditRecipe
+      padding: 6px 75px
+      background-color: #fff
+      margin: 20px auto 40px auto
+      border-radius: 0.42rem
+      transition: 0.2s
+      border: 2px solid #0496FF
+      color: rgb(15, 15, 15)
+      font:
+        family: $ff-LibreFranklin
+        size: 1.2rem
+      
+      &:hover
+        background-color: #0496FF
+        color: #fff
+      
+    span.invalid-message
+      display: none
+      text-align: center
+      color: #ff4d4d
+      font:
+        size: 1.24rem
+        family: $ff-FiraSans
+      
+    div
+      &.modal-dialog
+        display: none
+        
+      &.textarea-container
+        width: 80%
+        margin: 15px auto
+        
+      &.input-container
+        margin-bottom: 1rem
+        
+        input[type="text"]
+          box-shadow: none
+          font:
+            family: $ff-LibreFranklin
+            size: 1.1rem
+            
+          &:active, &:focus
+            border: 1px solid #637383 !important
+          
+        input#addRecipe_RecipeName[type="text"], input#editRecipe_RecipeName[type="text"]
+          transition: 0.4s
+          width: 80%
+          margin: 15px auto
+          border-radius: 0.3rem
+        
+        textarea#addRecipe_RecipeDescription, textarea#editRecipe_RecipeDescription
+          resize: none
+          height: 200px
+          box-shadow: none
+          font:
+            size: 1.12rem
+            family: $ff-LibreFranklin
+            
+          &:focus, &:active
+            border: 1px solid #637383 !important
+          
+        h5.input-label
+          text-align: center
+          font:
+            size: 1.4rem
+          
+          span.small
+            margin-left: 5px
+            font-size: 1rem
+            color: rgba(65, 77, 85, 0.8) !important
+      
+      &.ic-add-container
+        width: 85%
+        margin: 20px auto
+        
+        &.add-directions-container
+          width: 90%
+          
+          div.input-group
+            width: 85%
+        
+        ul.ic-list
+          border-radius: 0.4rem
+          padding: 0
+          
+          li.ic-li
+            position: relative
+            list-style-type: none
+            padding: 10px 15px
+            transition: 0.2s
+            cursor: pointer
+            font:
+              size: 1.2em
+            
+            &:not(:last-of-type)
+              border-bottom: 1px solid #ced4da              
+            &:hover
+              background-color: rgba(230, 230, 230, 0.2)
+            
+              button.ic-removebtn
+                display: inline-block
+            
+            &.added-direction
+              word-break: break-all
+              
+            button.ic-removebtn
+              position: absolute
+              right: 0
+              margin: 0 15px
+              padding: 0 5px
+              border: none
+              color: #f66
+              background-color: rgba(0,0,0,0)
+              display: none
+              transition: 0.1s
+              
+              &:hover
+                transform: scale(1.16)     
+              
+            span.number-count
+              position: absolute
+              top: 0
+              left: 0
+              color: rgba(0,0,0,0.44)
+              margin: 2px 6px
+              font:
+                family: $ff-LibreFranklin
+                size: 0.66rem
+                
+        div.input-group
+          width: 70%
+          margin: 0 auto
+          
+          input#addRecipe_IngredientName[type="text"], input#addRecipe_DirectionName[type="text"], input#editRecipe_IngredientName[type="text"], input#editRecipe_DirectionName[type="text"]
+            margin: 10px 0
+            border-radius: 0.28rem 0 0 0.28rem
+            
+          button#addRecipe_AddIngredient, button#addRecipe_AddDirection, button#editRecipe_AddIngredient, button#editRecipe_AddDirection
+            margin: 10px 0
+            padding: 2px 12px
+            font-size: 1.3rem
+            border: 1px solid #0496FF
+            background-color: #0496FF
+            color: rgb(20,20,20)
+            border-radius: 0 0.28rem 0.28rem 0
+          
+  &.recipe-box-container
+    margin-top: 3rem
+    display: flex
+    justify-content: center
+    
+  &.recipe-container
+    width: 1000px
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px
+    background-color: #fff
+    color: #000
+    border-radius: 0.3rem
+    display: flex
+    justify-content: center
+    flex-direction: column
+    padding: 30px 0
+    font-family: $ff-LibreFranklin
+    
+    div
+      &.recipe-header
+        h4#recipeTitle
+          text-align: center
+          font:
+            size: 1.9rem
+            family: $ff-FiraSans
+            
+          button#editRecipe
+            font-size: 1.25rem
+            border: none
+            background-color: #fff
+            margin-left: 7px
+            color: rgba(0, 0, 0, 0.75)
+      
+      &.recipe-body
+        padding: 10px 50px
+        
+        p#recipeDescription
+          font-size: 1.1rem
+          margin: 0
+          
+        h5
+          margin-top: 20px
+          font-size: 1.5rem
+        
+        ol li, ul li
+          font-size: 1.06rem
+  
+  &.recipes-container
+    width: 300px
+    height: 100%
+    
+    button#addRecipe
+      border: 2px double $main-text-color
+      color: $main-text-color
+      background-color: $main-bg-color
+      border-radius: 0.25rem
+      padding: 1px 7px
+      font-size: 1.2rem
+      margin: 5px 15px
+      cursor: pointer
+      transition: 0.2s
+      
+      &:hover
+        background-color: $main-text-color
+        color: $main-bg-color
+      
+    ul#recipeList
+      margin-top: 5px
+      padding: 0 0 0 8px
+      
+      li.recipe
+        border-radius: 0.4rem
+        display: flex
+        list-style-type: none
+        position: relative
+        cursor: pointer
+        transition: 0.1s
+        padding: 10px 15px
+        font:
+          family: $ff-LibreFranklin
+          size: 1.2rem
+          
+        &.active
+          color: #0496FF !important
+          
+          &:hover
+            background-color: #F1F5F8
+          
+            button.deleteRecipe
+              display: none
+        
+        &:hover
+          background-color: rgba(230, 230, 230, 0.3)
+          color: #000
+        
+          button.deleteRecipe
+            display: block
+
+        span.recipeName
+          flex: 1
+        
+        button.deleteRecipe
+          position: absolute
+          right: 10px
+          display: none
+          border: none
+          background-color: rgba(0,0,0,0)
+          color: rgba(255, 26, 26, 0.8)
+          font-size: 1.15rem
+          transition: 0.2s
+          
+          &:hover
+            transform: scale(1.1)

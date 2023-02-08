@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - FCC: Build a Recipe Box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/b40850cb13.js" crossorigin="anonymous"></script><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="parent-container container-fluid">
+  <h1 class="main-title"><a href="#" rel="noreferrer">Recipe Box</a></h1>
+  
+  <div class="modal fade" id="editRecipeModal" tabindex="-1">
+    <div class="modal-dialog modal-lg" id="addRecipeDialog">
+      <div class="modal-content">
+        <button type="button" id="closeModalAdd"><i class="fa-solid fa-xmark"></i></button>
+        <h4 class="modal-title">Add a Recipe</h4>
+        <div class="input-container">
+          <h5 class="input-label">Recipe</h5>
+          <input type="text" class="form-control _inputcleanup1" id="addRecipe_RecipeName" placeholder="Recipe Name" maxlength="100" autocomplete="off"/>
+        </div>
+        <div class="input-container">
+          <h5 class="input-label">Description<span class="small">(optional)</span></h5>
+          <div class="textarea-container">
+            <textarea class="form-control _inputcleanup1" placeholder="Recipe Description" id="addRecipe_RecipeDescription" maxlength="300" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="input-container">
+          <h5 class="input-label">Ingredients</h5>
+          <div class="add-ingredients-container ic-add-container">
+            <ul id="addIngredientsList" class="ic-list _inputcleanup2"></ul>
+            <div class="input-group">
+              <input type="text" class="form-control _inputcleanup1" placeholder="Ingredient" id="addRecipe_IngredientName" autocomplete="off"/>
+              <button type="button" id="addRecipe_AddIngredient">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="input-container">
+          <h5 class="input-label">Directions</h5>
+          <div class="add-directions-container ic-add-container">
+            <ul id="addDirectionsList" class="ic-list _inputcleanup2"></ul>
+            <div class="input-group">
+              <input type="text" class="form-control _inputcleanup1" placeholder="Direction" id="addRecipe_DirectionName" autocomplete="off"/>
+              <button type="button" id="addRecipe_AddDirection">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <span class="invalid-message">keep me pls</span>
+        <button type="button" id="modal_AddRecipe">Add Recipe</button>
+      </div>
+    </div>
+    <div class="modal-dialog modal-lg" id="editRecipeDialog">
+      <div class="modal-content">
+        <button type="button" id="closeModalEdit"><i class="fa-solid fa-xmark"></i></button>
+        <h4 class="modal-title">Edit Recipe</h4>
+        <div class="input-container">
+          <h5 class="input-label">Recipe</h5>
+          <input type="text" class="form-control" id="editRecipe_RecipeName" placeholder="Recipe Name" maxlength="100" autocomplete="off" class="_inputcleanup1"/>
+        </div>
+        <div class="input-container">
+          <h5 class="input-label">Description<span class="small">(optional)</span></h5>
+          <div class="textarea-container">
+            <textarea class="form-control _inputcleanup1" placeholder="Recipe Description" id="editRecipe_RecipeDescription" maxlength="300" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="input-container">
+          <h5 class="input-label">Ingredients</h5>
+          <div class="add-ingredients-container ic-add-container">
+            <ul id="editIngredientsList" class="ic-list _inputcleanup2"></ul>
+            <div class="input-group">
+              <input type="text" class="form-control _inputcleanup1" placeholder="Ingredient" id="editRecipe_IngredientName" autocomplete="off"/>
+              <button type="button" id="editRecipe_AddIngredient">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="input-container">
+          <h5 class="input-label">Directions</h5>
+          <div class="add-directions-container ic-add-container">
+            <ul id="editDirectionsList" class="ic-list _inputcleanup2"></ul>
+            <div class="input-group">
+              <input type="text" class="form-control _inputcleanup1" placeholder="Direction" id="editRecipe_DirectionName" autocomplete="off"/>
+              <button type="button" id="editRecipe_AddDirection">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <span class="invalid-message">keep me pls</span>
+        <button type="button" id="modal_EditRecipe">Edit Recipe</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="recipe-box-container container-sm">
+    <div class="recipe-container">
+      <div class="recipe-header">
+        <h4 id="recipeTitle"><span></span><button id="editRecipe" type="button" title="Edit Recipe"><i class="fa-regular fa-pen-to-square"></i></button></h4>
+      </div>
+
+      <div class="recipe-body">
+        <p id="recipeDescription"></p>
+        <h5 class="recipe-header">Ingredients:</h5>
+        <ul id="ingredientsList"></ul>
+        <h5 class="recipe-directions">Directions:</h5>
+        <ol id="directionsList"></ol>
+      </div>
+    </div>
+    <div class="recipes-container">
+      <button id="addRecipe" type="button" title="Add Recipe">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <ul id="recipeList"></ul>
+    </div>  
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

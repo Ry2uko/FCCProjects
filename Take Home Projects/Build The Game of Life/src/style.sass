@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap')
+
+$ff-PressStart2P: 'Press Start 2P', cursive
+
+*, ::before, ::after
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+*:focus
+  outline: none
+
+body, html
+  width: 100%
+  height: 100vh
+  overflow-x: hidden
+  background-color: #000
+  color: #fff
+
+h1#title
+  text-align: center
+  margin: 2rem 0 0.75rem 0
+  font:
+    family: $ff-PressStart2P
+    size: 1.8rem
+
+span
+  &.generations-text
+    display: block
+    text-align: center
+    margin-bottom: 1.4rem
+    font:
+      size: 1.45rem
+  
+  &#generations
+    color: #FFD60A
+  
+  &.caption
+    margin: 0 1rem
+    color: rgba(255, 255, 255, 0.4)
+    font:
+      size: 1.1rem
+    
+div
+  &#canvas-container
+    display: block
+    margin: 0 auto
+    width: 800px
+    height: 600px
+    
+    canvas
+      margin: auto
+      padding: 0
+      display: block
+  
+  &.caption-container
+    margin-top: 1rem
+    display: flex
+    justify-content: center

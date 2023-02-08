@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Catamaran&family=Josefin+Sans&display=swap");
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #0A0A22;
+  color: #FFFFFF;
+}
+
+div.brand-container {
+  justify-content: center;
+  padding: 20px 0;
+}
+div.brand-container a.brand-heading img.brand {
+  width: 300px;
+}
+div.topics-container {
+  flex-direction: column;
+  padding: 1rem;
+}
+div.topics-container div.topic-container {
+  margin: 10px 0;
+  width: 100%;
+  height: 185px;
+  border: 2.2px groove #fff;
+  border-radius: 0.35rem;
+}
+div.topics-container div.topic-container span {
+  font-family: "Catamaran", sans-serif;
+}
+div.topics-container div.topic-container div.topic-info1-container {
+  padding-top: 5px;
+}
+div.topics-container div.topic-container div.topic-info1-container span {
+  font-size: 1.23rem;
+}
+div.topics-container div.topic-container div.topic-info1-container span.topic-user a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.1s;
+}
+div.topics-container div.topic-container div.topic-info1-container span.topic-user a:hover {
+  color: #ade8f4;
+}
+div.topics-container div.topic-container div.topic-info1-container span.topic-users-container {
+  margin-left: 10px;
+}
+div.topics-container div.topic-container div.topic-info1-container span.topic-users-container a {
+  margin: 0 1px;
+}
+div.topics-container div.topic-container div.topic-info1-container span.topic-users-container a img {
+  transition: transform 0.26s ease-out;
+  border-radius: 50%;
+}
+div.topics-container div.topic-container div.topic-info1-container span.topic-users-container a img:hover {
+  transform: scale(1.15);
+}
+div.topics-container div.topic-container div.topic-info2-container span.topic-title {
+  overflow: auto;
+  cursor: pointer;
+  max-height: 95px;
+}
+div.topics-container div.topic-container div.topic-info2-container span.topic-title a {
+  transition: 0.1s;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.9rem;
+  font-family: "Josefin Sans", sans-serif;
+}
+div.topics-container div.topic-container div.topic-info2-container span.topic-title a:hover {
+  color: #ade8f4;
+}
+div.topics-container div.topic-container div.topic-info3-container {
+  padding: 10px 0;
+}
+div.topics-container div.topic-container div.topic-info3-container span {
+  margin: 0 8px;
+}
+div.topics-container div.topic-container div.topic-info3-container span i {
+  font-size: 1rem;
+  margin-right: -1px;
+}
+div.topics-container div.topic-container div.topic-info3-container span span {
+  font-size: 1.23rem;
+}

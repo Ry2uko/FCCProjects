@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans&family=Josefin+Sans&family=Libre+Franklin:wght@300&display=swap");
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #F1F5F8;
+  color: #414D55 !important;
+}
+
+h1.main-title {
+  margin: 1rem 0.2rem;
+  font-size: 2.8rem;
+  font-family: "Josefin Sans", sans-serif;
+}
+h1.main-title a {
+  text-decoration: none;
+  color: #414D55;
+}
+
+div#editRecipeModal button#closeModalAdd, div#editRecipeModal button#closeModalEdit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  padding: 2px 8px;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+div#editRecipeModal h4.modal-title {
+  text-align: center;
+  padding: 1.4rem 0;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 2.45rem;
+}
+div#editRecipeModal button#modal_AddRecipe, div#editRecipeModal button#modal_EditRecipe {
+  padding: 6px 75px;
+  background-color: #fff;
+  margin: 20px auto 40px auto;
+  border-radius: 0.42rem;
+  transition: 0.2s;
+  border: 2px solid #0496FF;
+  color: #0f0f0f;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 1.2rem;
+}
+div#editRecipeModal button#modal_AddRecipe:hover, div#editRecipeModal button#modal_EditRecipe:hover {
+  background-color: #0496FF;
+  color: #fff;
+}
+div#editRecipeModal span.invalid-message {
+  display: none;
+  text-align: center;
+  color: #ff4d4d;
+  font-size: 1.24rem;
+  font-family: "Fira Sans", sans-serif;
+}
+div#editRecipeModal div.modal-dialog {
+  display: none;
+}
+div#editRecipeModal div.textarea-container {
+  width: 80%;
+  margin: 15px auto;
+}
+div#editRecipeModal div.input-container {
+  margin-bottom: 1rem;
+}
+div#editRecipeModal div.input-container input[type=text] {
+  box-shadow: none;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 1.1rem;
+}
+div#editRecipeModal div.input-container input[type=text]:active, div#editRecipeModal div.input-container input[type=text]:focus {
+  border: 1px solid #637383 !important;
+}
+div#editRecipeModal div.input-container input#addRecipe_RecipeName[type=text], div#editRecipeModal div.input-container input#editRecipe_RecipeName[type=text] {
+  transition: 0.4s;
+  width: 80%;
+  margin: 15px auto;
+  border-radius: 0.3rem;
+}
+div#editRecipeModal div.input-container textarea#addRecipe_RecipeDescription, div#editRecipeModal div.input-container textarea#editRecipe_RecipeDescription {
+  resize: none;
+  height: 200px;
+  box-shadow: none;
+  font-size: 1.12rem;
+  font-family: "Libre Franklin", sans-serif;
+}
+div#editRecipeModal div.input-container textarea#addRecipe_RecipeDescription:focus, div#editRecipeModal div.input-container textarea#addRecipe_RecipeDescription:active, div#editRecipeModal div.input-container textarea#editRecipe_RecipeDescription:focus, div#editRecipeModal div.input-container textarea#editRecipe_RecipeDescription:active {
+  border: 1px solid #637383 !important;
+}
+div#editRecipeModal div.input-container h5.input-label {
+  text-align: center;
+  font-size: 1.4rem;
+}
+div#editRecipeModal div.input-container h5.input-label span.small {
+  margin-left: 5px;
+  font-size: 1rem;
+  color: rgba(65, 77, 85, 0.8) !important;
+}
+div#editRecipeModal div.ic-add-container {
+  width: 85%;
+  margin: 20px auto;
+}
+div#editRecipeModal div.ic-add-container.add-directions-container {
+  width: 90%;
+}
+div#editRecipeModal div.ic-add-container.add-directions-container div.input-group {
+  width: 85%;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list {
+  border-radius: 0.4rem;
+  padding: 0;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li {
+  position: relative;
+  list-style-type: none;
+  padding: 10px 15px;
+  transition: 0.2s;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li:not(:last-of-type) {
+  border-bottom: 1px solid #ced4da;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li:hover {
+  background-color: rgba(230, 230, 230, 0.2);
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li:hover button.ic-removebtn {
+  display: inline-block;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li.added-direction {
+  word-break: break-all;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li button.ic-removebtn {
+  position: absolute;
+  right: 0;
+  margin: 0 15px;
+  padding: 0 5px;
+  border: none;
+  color: #f66;
+  background-color: rgba(0, 0, 0, 0);
+  display: none;
+  transition: 0.1s;
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li button.ic-removebtn:hover {
+  transform: scale(1.16);
+}
+div#editRecipeModal div.ic-add-container ul.ic-list li.ic-li span.number-count {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(0, 0, 0, 0.44);
+  margin: 2px 6px;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 0.66rem;
+}
+div#editRecipeModal div.ic-add-container div.input-group {
+  width: 70%;
+  margin: 0 auto;
+}
+div#editRecipeModal div.ic-add-container div.input-group input#addRecipe_IngredientName[type=text], div#editRecipeModal div.ic-add-container div.input-group input#addRecipe_DirectionName[type=text], div#editRecipeModal div.ic-add-container div.input-group input#editRecipe_IngredientName[type=text], div#editRecipeModal div.ic-add-container div.input-group input#editRecipe_DirectionName[type=text] {
+  margin: 10px 0;
+  border-radius: 0.28rem 0 0 0.28rem;
+}
+div#editRecipeModal div.ic-add-container div.input-group button#addRecipe_AddIngredient, div#editRecipeModal div.ic-add-container div.input-group button#addRecipe_AddDirection, div#editRecipeModal div.ic-add-container div.input-group button#editRecipe_AddIngredient, div#editRecipeModal div.ic-add-container div.input-group button#editRecipe_AddDirection {
+  margin: 10px 0;
+  padding: 2px 12px;
+  font-size: 1.3rem;
+  border: 1px solid #0496FF;
+  background-color: #0496FF;
+  color: #141414;
+  border-radius: 0 0.28rem 0.28rem 0;
+}
+div.recipe-box-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+div.recipe-container {
+  width: 1000px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 0.3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px 0;
+  font-family: "Libre Franklin", sans-serif;
+}
+div.recipe-container div.recipe-header h4#recipeTitle {
+  text-align: center;
+  font-size: 1.9rem;
+  font-family: "Fira Sans", sans-serif;
+}
+div.recipe-container div.recipe-header h4#recipeTitle button#editRecipe {
+  font-size: 1.25rem;
+  border: none;
+  background-color: #fff;
+  margin-left: 7px;
+  color: rgba(0, 0, 0, 0.75);
+}
+div.recipe-container div.recipe-body {
+  padding: 10px 50px;
+}
+div.recipe-container div.recipe-body p#recipeDescription {
+  font-size: 1.1rem;
+  margin: 0;
+}
+div.recipe-container div.recipe-body h5 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+div.recipe-container div.recipe-body ol li, div.recipe-container div.recipe-body ul li {
+  font-size: 1.06rem;
+}
+div.recipes-container {
+  width: 300px;
+  height: 100%;
+}
+div.recipes-container button#addRecipe {
+  border: 2px double #414D55;
+  color: #414D55;
+  background-color: #F1F5F8;
+  border-radius: 0.25rem;
+  padding: 1px 7px;
+  font-size: 1.2rem;
+  margin: 5px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+div.recipes-container button#addRecipe:hover {
+  background-color: #414D55;
+  color: #F1F5F8;
+}
+div.recipes-container ul#recipeList {
+  margin-top: 5px;
+  padding: 0 0 0 8px;
+}
+div.recipes-container ul#recipeList li.recipe {
+  border-radius: 0.4rem;
+  display: flex;
+  list-style-type: none;
+  position: relative;
+  cursor: pointer;
+  transition: 0.1s;
+  padding: 10px 15px;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 1.2rem;
+}
+div.recipes-container ul#recipeList li.recipe.active {
+  color: #0496FF !important;
+}
+div.recipes-container ul#recipeList li.recipe.active:hover {
+  background-color: #F1F5F8;
+}
+div.recipes-container ul#recipeList li.recipe.active:hover button.deleteRecipe {
+  display: none;
+}
+div.recipes-container ul#recipeList li.recipe:hover {
+  background-color: rgba(230, 230, 230, 0.3);
+  color: #000;
+}
+div.recipes-container ul#recipeList li.recipe:hover button.deleteRecipe {
+  display: block;
+}
+div.recipes-container ul#recipeList li.recipe span.recipeName {
+  flex: 1;
+}
+div.recipes-container ul#recipeList li.recipe button.deleteRecipe {
+  position: absolute;
+  right: 10px;
+  display: none;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 26, 26, 0.8);
+  font-size: 1.15rem;
+  transition: 0.2s;
+}
+div.recipes-container ul#recipeList li.recipe button.deleteRecipe:hover {
+  transform: scale(1.1);
+}

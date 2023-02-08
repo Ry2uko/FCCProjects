@@ -5,3 +5,107 @@ div.ReqTrade
   div
     &.title-banner
       @include title-banner
+    
+    &.reqTrades-container
+      margin: 2.5rem auto
+      width: 1450px
+      height: 480px
+      overflow: hidden
+      display: flex
+      flex-direction: column
+
+    &.reqTrade-container
+      display: flex      
+      position: relative
+      background-color: #181818
+      border: 1.4px solid #ffffff23
+      border-radius: 0.4rem
+      padding: 2rem 1.8rem
+
+      button.reqTrade-info-btn
+        position: absolute
+        border: none
+        background: $red-gradient
+        border-radius: 0.4rem
+        color: #ffffffe2
+        width: 90px
+        cursor: pointer
+        height: 70px
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        font-size: 2.2rem
+        z-index: 999
+
+    &.panel-container
+      flex-grow: 1
+      flex-basis: 0
+      $panel-gap: 15px
+
+      &.left-panel-container
+        margin-right: $panel-gap
+
+      &.right-panel-container
+        margin-left: $panel-gap
+
+      span.reqTrade-tile-user
+        a.request-user
+          color: $red-theme
+          text-decoration: none
+          font:
+            family: $ff-cabin
+            size: 1.85rem
+
+    &.container-tile
+      background-color: #1f1f1f
+      margin-top: 15px
+      height: 360px
+      border: 1.4px solid #4a4a4a23
+      overflow: auto
+      border-radius: 0.2rem
+      padding: 1rem 
+
+    &.request-book
+      display: flex
+      cursor: pointer
+      position: relative
+      flex-direction: column
+      justify-content: center
+      align-item: center
+      background-color: #181818
+      border-radius: 0.45rem
+      border: 1.4px solid #1c1c1c64
+      margin: 15px 0
+      padding: 30px 0
+
+      h4.book-name
+        text-align: center
+        font:
+          family: $ff-alegreyaSans
+          size: 2rem
+
+      span.book-author-span
+        opacity: 0.9
+        text-align: center
+        font:
+          size: 1.3rem
+        
+        span.book-author
+          color: $red-theme
+          cursor: pointer
+
+    &.requests-count-container
+      position: absolute
+      border-radius: 0.4rem
+      padding: 3px 10px
+      margin: 8px
+      display: flex
+      justify-content: center
+      align-items: center
+      top: 0
+      right: 0
+      color: #ED3A54
+      background-color: #ed3a552d
+      font:
+        size: 1.15rem
+        family: $ff-firaSans

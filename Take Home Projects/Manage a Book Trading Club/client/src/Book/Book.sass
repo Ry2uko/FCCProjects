@@ -38,7 +38,12 @@ div.Book
           align-items: center
           flex-direction: column
 
+          &:hover 
+            button.request-trade-button
+              display: block
+
           button.request-trade-button
+            display: none
             position: absolute
             top: 0
             right: 0
@@ -80,5 +85,11 @@ div.Book
 
             &.book-bottom-container
               margin-bottom: 0.7rem
+
+              span.book-user
+                a.user-name
+                  text-decoration: none
+                  color: $red-theme
+
 
       

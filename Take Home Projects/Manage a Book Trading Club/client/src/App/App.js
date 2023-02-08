@@ -6,40 +6,73 @@ import NewRequest from '../NewRequest/NewRequest.js';
 import ReqTrade from '../ReqTrade/ReqTrade.js';
 import User from '../User/User.js';
 import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import $ from 'jquery';
+
+async function getUser() {
+  const response = await fetch('/auth');
+  const userObj = await response.json();
+  return userObj;
+}
 
 export default function App(props) {
-  let componentRender;
+  let componentRender = useRef();
+  // Replace when authorized
+  const [floatRightAuth, setFloatRightAuth] = useState(<Link to="/login" className="nav-link">Login</Link>);
 
   switch(props.component) {
     case 'Book':
       // Also the home page
-      componentRender = <Book />;
+      componentRender.current = <Book />;
       break;
     case 'Form-Login':
-      componentRender = <Form type="login" />;
+      componentRender.current = <Form type="login" />;
       break;
     case 'Form-Register':
-      componentRender = <Form type="register" />;
+      componentRender.current = <Form type="register" />;
       break;
     case 'ReqTrade-Request':
-      componentRender = <ReqTrade type="request" />;
+      componentRender.current = <ReqTrade type="request" />;
       break;
     case 'ReqTrade-Trade':
-      componentRender = <ReqTrade type="trade" />;
+      componentRender.current = <ReqTrade type="trade" />;
       break;
     case 'NewRequest':
-      componentRender = <NewRequest />;
+      componentRender.current = <NewRequest />;
       break;
     case 'MyBooks':
-      componentRender = <MyBooks />;
+      componentRender.current = <MyBooks />;
       break;
     case 'User':
-      componentRender = <User />;
+      componentRender.current = <User />;
       break;
 
     default:
       break;
   }
+
+  function openUserDropdown() {
+    $('.user-dropdown-content').css('display', $('.user-dropdown-content').css('display') === 'none' ? 'flex': 'none');
+  }
+
+  useEffect(() => {
+    getUser().then(data => {
+      if (data.error) return;
+      console.log(data);
+      setFloatRightAuth(
+        <div className="user-dropdown" userid={ data.user.id }>
+          <button type="button" className="user-btn" onClick={openUserDropdown}>
+            { data.user.username }<i className="fa-solid fa-caret-down"></i>
+            </button>
+          <div className="user-dropdown-content">
+            <Link to="/profile" className="dropdown-content-btn">Profile</Link>
+            <Link to="/profile/books" className="dropdown-content-btn">My Books</Link>
+            <Link to="/profile/requests" className="dropdown-content-btn">My Requests</Link>
+          </div>
+        </div>
+      );
+    });
+  }, []);
 
   return (
     <div className="App">
@@ -62,12 +95,12 @@ export default function App(props) {
               <Link to="/users" className="nav-link">Users</Link>
             </li> 
             <li className="nav-item float-right">
-              <Link to="/login" className="nav-link">Login</Link>
+              { floatRightAuth }
             </li>
           </ul>
         </div>
       </nav>
-      {componentRender}
+      { componentRender.current }
     </div>
   );
 }

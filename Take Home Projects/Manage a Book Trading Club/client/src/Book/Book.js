@@ -7,10 +7,6 @@ class Book extends React.Component {
   componentDidMount() {
     $('a.nav-link.active').removeClass('active');
     $('a.nav-link[href="/books"]').attr('class', 'nav-link active');
-
-    fetch('/auth')
-      .then((response) => response.json())
-      .then((data) => console.log(data));
   }
   
   render() {

@@ -1,3 +1,21 @@
+$red-theme: #F5485F
+$red-gradient: linear-gradient(135deg,#fe566a,#d51535)
+$bg-theme: #111111
+$ff-cabin: 'Cabin', sans-serif
+$ff-firaSans: 'Fira Sans', sans-serif
+$ff-carterOne: 'Carter One', cursive
+$ff-alegreyaSans: 'Alegreya Sans', sans-serif
+
+@mixin title-banner 
+  width: 100%
+  height: 120px
+  display: flex
+  background-image: $red-gradient
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  text-align: center
+
 *, ::before, ::after
   margin: 0
   padding: 0
@@ -10,7 +28,32 @@ body, html
   width: 100%
   height: 100vh
   overflow-x: hidden
+  background-color: $bg-theme
+  color: #fff
   font-family: Calibri, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
+div
+  &.title-banner  
+    width: 100%
+    height: 135px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    text-align: center
+    background-color: $red-theme
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px
+
+    h1.title 
+      color: #fff
+      font:
+        size: 2.4rem
+        family: $ff-cabin
+    
+    h2.title-description
+      color: #fffffff6
+      font:
+        size: 1.6rem
+        family: $ff-firaSans

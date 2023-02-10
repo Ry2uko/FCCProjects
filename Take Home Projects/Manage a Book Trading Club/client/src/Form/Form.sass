@@ -1,2 +1,51 @@
 @import '../index.sass' 
 /* for variables */
+
+div.Form
+  h1.form-title
+    text-align: center
+    background: $red-gradient
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    padding: 3rem 0 2rem 0
+    font:
+      family: $ff-firaSans
+      size: 3.5rem
+  
+  div
+    &.form-container
+      margin: 0 auto
+      background-color: #0b0b0b
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px
+      border-radius: 0.3rem
+      width: 750px
+      height: 250px
+      display: flex
+      justify-content: center
+      align-items: center
+    
+    &.button-group-container
+      display: flex
+      justify-content: center
+      border: 1px groove #ebebeb
+      border-radius: 0.2rem
+      margin: 0 auto
+      width: 300px
+      padding: 8px 0
+      cursor: pointer
+      transition: 0.15s ease-in-out
+
+      div
+        &.logo-container
+          i
+            font-size: 1.7rem
+          
+        &.text-container
+          margin-left: 18px
+
+          span
+            font-size: 1.42rem
+      
+      &:hover
+        background-color: #ebebeb 
+        color: #0B0B0B

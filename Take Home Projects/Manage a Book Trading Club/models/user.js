@@ -5,10 +5,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  password: {
-    type: String,
+  id: {
+    type: Number,
     required: true
   },
+  location: {
+    type: String,
+    default: ''
+  },
+  books: {
+    type: Array,
+    default: []
+  }
 });
 
 export default mongoose.model('User', userSchema);

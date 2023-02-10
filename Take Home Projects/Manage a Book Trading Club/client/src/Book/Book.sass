@@ -1,2 +1,95 @@
 @import '../index.sass' 
 /* for variables */
+
+div.Book
+  div
+    &.title-banner
+      @include title-banner
+
+      h1.title 
+        color: #fff
+        font:
+          size: 3rem
+          family: $ff-cabin
+      
+      h2.title-description
+        color: #f7f7f7
+        font:
+          size: 1.35rem
+          family: $ff-firaSans
+
+    &.books-container
+      width: 100%
+      height: 100%
+      display: grid
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr))
+      grid-gap: 20px
+      padding: 2.5rem 3.5rem 2.5rem 3.5rem
+      
+      div
+        &.book-tile
+          position: relative
+          height: 270px
+          border: 1.4px solid #ffffff23
+          background-color: #181818
+          border-radius: 0.4rem
+          display: flex
+          justify-content: center
+          align-items: center
+          flex-direction: column
+
+          &:hover 
+            button.request-trade-button
+              display: block
+
+          button.request-trade-button
+            display: none
+            position: absolute
+            top: 0
+            right: 0
+            margin: 5px 5px
+            cursor: pointer
+            background-color: #ff536d3c
+            color: #FF536C
+            padding: 6px 14px
+            border-radius: 0.5rem
+            border: none
+            outline: none
+            font:
+              size: 1rem
+
+          div
+            &.book-center-container
+              padding: 0 1.4rem
+              flex: 1
+              display: flex
+              justify-content: center
+              align-items: center
+              flex-direction: column
+
+              h4.book-title, h5.book-author
+                text-align: center
+
+              h4.book-title
+                color: #FDFDFD
+                font:
+                  size: 1.4rem
+                  family: $ff-firaSans
+
+              h5.book-author
+                margin-top: 5px
+                color: #ffffffd7
+                font:
+                  size: 1rem
+                  family: $ff-cabin
+
+            &.book-bottom-container
+              margin-bottom: 0.7rem
+
+              span.book-user
+                a.user-name
+                  text-decoration: none
+                  color: $red-theme
+
+
+      

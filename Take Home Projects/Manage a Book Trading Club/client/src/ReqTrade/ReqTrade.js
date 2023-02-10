@@ -106,10 +106,8 @@ class ReqTrade extends React.Component {
   }
 }
 
-
 export default function WithRouter(props) {
   const navigate = useNavigate();
-  console.log(props);
   return (
     <ReqTrade navigate={navigate} type={props.type} />
   );

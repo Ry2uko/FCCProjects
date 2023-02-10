@@ -5,6 +5,7 @@ import MyBooks from '../MyBooks/MyBooks.js';
 import NewRequest from '../NewRequest/NewRequest.js';
 import ReqTrade from '../ReqTrade/ReqTrade.js';
 import User from '../User/User.js';
+import Profile from '../Profile/Profile.js';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import $ from 'jquery';
@@ -45,6 +46,9 @@ export default function App(props) {
       break;
     case 'User':
       componentRender.current = <User />;
+      break;
+    case 'Profile-Main':
+      componentRender.current = <Profile />;
       break;
 
     default:

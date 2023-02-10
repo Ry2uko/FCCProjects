@@ -22,6 +22,7 @@ root.render(
         <Route exact path="/requests" element={<App component="ReqTrade-Request" />} />
         <Route exact path="/trades" element={<App component="ReqTrade-Trade" />} />
         <Route exact path="/requests/new" element={<App component="NewRequest" />} />
+        <Route exact path="/profile" element={<App component="Profile-Main" />} />
         <Route exact path="/books/my" element={<App component="MyBooks" />} />
         <Route exact path="/users" element={<App component="User" />} />
         <Route path="*" element={<Navigate to="/books" replace />} />

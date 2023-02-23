@@ -1,0 +1,78 @@
+$white: #fdfdff
+$black: #0c0f0a
+$ff-Ubuntu: 'Ubuntu', sans-serif
+$ff-SignikaNegative: 'Signika Negative', sans-serif
+$ff-Lato: 'Lato', sans-serif
+
+*, ::before, ::after
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body, html
+  width: 100%
+  height: 100vh
+  overflow-x: hidden
+  background-color: $white
+  color: $black
+  font:
+    family: $ff-Ubuntu
+
+h1.title
+  text-align: center
+  margin: 2rem
+  font:
+    size: 3.2rem
+    family: $ff-SignikaNegative    
+
+button#enterRoom
+  display: block
+  margin: 5.8rem auto  
+  background-color: #099c3c
+  color: #fff
+  cursor: pointer
+  border: 1px solid #0000009b
+  padding: 6px 45px
+  border-radius: 0.35rem
+  font:
+    family: $ff-SignikaNegative
+    size: 1.48rem
+
+div
+  &.input-container
+    display: flex
+    margin-top: 7rem
+    width: 100%
+    align-items: center
+    flex-direction: column
+
+    label.input-label
+      color: rgba(58, 58, 58, 0.75)
+      margin-bottom: 15px
+      font:
+        family: $ff-Lato
+        size: 1.6rem
+
+    input#roomNameInput
+      width: 600px
+      border: 1px solid rgba(13, 15, 11, 0.419)
+      border-radius: 0.3rem
+      padding: 10px 8px
+      background-color: rgba(0,0,0,0)
+      color: rgba(12, 15, 10, 0.904)
+      font:
+        family: $ff-Ubuntu
+        size: 1.6rem
+    
+      &:focus
+        outline: none
+
+    span.invalid-text
+      color: #d90429
+      margin-top: 1.2rem
+      opacity: 0
+      font:
+        family: $ff-Ubuntu
+        size: 1.4rem    
+
+

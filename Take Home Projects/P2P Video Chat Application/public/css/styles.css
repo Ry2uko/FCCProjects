@@ -1,0 +1,81 @@
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #fdfdff;
+  color: #0c0f0a;
+  font-family: "Ubuntu", sans-serif;
+}
+
+h1.title {
+  text-align: center;
+  margin: 2rem;
+  font-size: 3.2rem;
+  font-family: "Signika Negative", sans-serif;
+}
+
+button#enterRoom {
+  display: block;
+  margin: 5.8rem auto;
+  background-color: #099c3c;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #0000009b;
+  padding: 6px 45px;
+  border-radius: 0.35rem;
+  font-family: "Signika Negative", sans-serif;
+  font-size: 1.48rem;
+}
+
+div.input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 7rem;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+div.input-container label.input-label {
+  color: rgba(58, 58, 58, 0.75);
+  margin-bottom: 15px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+}
+
+div.input-container input#roomNameInput {
+  width: 600px;
+  border: 1px solid rgba(13, 15, 11, 0.419);
+  border-radius: 0.3rem;
+  padding: 10px 8px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(12, 15, 10, 0.904);
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.6rem;
+}
+
+div.input-container input#roomNameInput:focus {
+  outline: none;
+}
+
+div.input-container span.invalid-text {
+  color: #d90429;
+  margin-top: 1.2rem;
+  opacity: 0;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.4rem;
+}
+/*# sourceMappingURL=styles.css.map */

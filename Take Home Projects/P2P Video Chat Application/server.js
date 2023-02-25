@@ -34,11 +34,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/room/:roomName', (req, res) => {
-  res.status(200).render('room.ejs');
+  res.status(200).render('room.ejs', {
+    roomName: req.params.roomName
+  });
 });
 
 app.use((req, res) => {
   return res.status(404).json({ error: 'Not found ;(' });
+});
+
+io.on('connection', socket => {
+  socket.on('join-room', (roomId, userId) => {
+    console.log(roomId, userId)      ;
+  });
 });
 
 const port = process.env.PORT || 3000;

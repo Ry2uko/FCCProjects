@@ -8,8 +8,19 @@
     <script>
       const roomName = "<%= roomName %>"
     </script>
+    <link rel="stylesheet" href="/public/css/room.css" type="text/css" />
   </head>
   <body>
-    <h1></h1>
+    <h1 class="room-name-title"><%= roomName %></h1>
+    <button title="Home" type="button" id="homeBtn"><i class="fa-solid fa-house"></i></button>
+    <div class="video-grid-container">
+      <div class="video-grid"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.4.7/peerjs.min.js" integrity="sha512-y23HV23IWVEWlGpIez8Kvr87ZT16V9gICf5dfqu5rjxs7ip66pcIf87/uFbxn9tStGCgohZeIktIAHg9fjubsw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script type="text/javascript" src="/public/js/room.js"></script>
+    <script src="https://kit.fontawesome.com/b40850cb13.js" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -1,0 +1,62 @@
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body, html {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+h1.room-name-title {
+  text-align: center;
+  margin: 1.5rem 0 2rem 0;
+  font-family: Helvetica, sans-serif;
+  font-size: 2.5rem;
+}
+
+button#homeBtn {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0.86);
+  border: none;
+  font-size: 1.6rem;
+  padding: 5px;
+  cursor: pointer;
+  margin: 5px 15px;
+  top: 0;
+  right: 0;
+  -webkit-transition: ease-in-out 0.1s;
+  transition: ease-in-out 0.1s;
+}
+
+button#homeBtn:hover {
+  -webkit-transform: scale(1.06);
+          transform: scale(1.06);
+}
+
+div.video-grid-container {
+  display: block;
+  width: 100%;
+  margin: 1rem;
+}
+
+div.video-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (600px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 600px);
+  grid-auto-rows: 338px;
+}
+
+div video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+/*# sourceMappingURL=room.css.map */

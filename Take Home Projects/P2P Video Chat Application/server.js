@@ -9,6 +9,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
+import { PeerServer } from 'peer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,6 +17,7 @@ const app = express();
 
 const httpServer = createServer(app);
 const io = new Server(httpServer);
+const peerServer = PeerServer({ port: process.env.PEERSERVERPORT });
 
 app.set('view engine', 'ejs');
 
@@ -44,8 +46,13 @@ app.use((req, res) => {
 });
 
 io.on('connection', socket => {
-  socket.on('join-room', (roomId, userId) => {
-    console.log(roomId, userId)      ;
+  socket.on('join-room', (roomName, userId) => {
+    socket.join(roomName);
+    socket.to(roomName).emit('user-connected', userId);
+
+    socket.on('disconnect', () => {
+      socket.to(roomName).emit('user-disconnected', userId);
+    });
   });
 });
 

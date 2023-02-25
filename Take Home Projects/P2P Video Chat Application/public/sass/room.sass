@@ -1,0 +1,49 @@
+*, ::before, ::after
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+body, html
+  position: relative
+  width: 100%
+  height: 100vh
+  overflow-x: hidden
+
+h1.room-name-title
+  text-align: center
+  margin: 1.5rem 0 2rem 0
+  font:
+    family: Helvetica, sans-serif
+    size: 2.5rem
+
+button#homeBtn
+  position: absolute
+  background-color: rgba(0,0,0,0)
+  color: rgba(0,0,0,0.86)
+  border: none
+  font-size: 1.6rem
+  padding: 5px
+  cursor: pointer
+  margin: 5px 15px
+  top: 0
+  right: 0
+  transition: ease-in-out 0.1s 
+
+  &:hover
+    transform: scale(1.06)
+
+div
+  &.video-grid-container
+    display: block
+    width: 100%
+    margin: 1rem
+
+  &.video-grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, 600px)
+    grid-auto-rows: 338px
+  
+  video
+    width: 100%
+    height: 100%
+    object-fit: cover

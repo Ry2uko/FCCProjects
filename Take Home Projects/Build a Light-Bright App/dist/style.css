@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Prism&family=Ubuntu&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+h1.title {
+  text-align: center;
+  margin-top: 1.1rem;
+  text-shadow: 0 0 3px #fff, 0 0 14px #fff;
+  user-select: none;
+  font-size: 4rem;
+  font-family: "Tilt Prism", cursive;
+}
+
+button#resetBtn {
+  border: none;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+button#resetBtn:hover {
+  transform: rotate(-25deg);
+}
+button#helpBtn {
+  position: absolute;
+  padding: 10px;
+  margin: 0 5px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.6rem;
+}
+
+div.parent-container {
+  width: 100%;
+}
+div.reset-container {
+  width: 850px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-40%);
+  top: 43px;
+}
+div.circles-container {
+  margin: 1rem auto;
+  border-radius: 0.3rem;
+  display: grid;
+  width: 850px;
+  height: 670px;
+  grid-template-columns: repeat(auto-fill, 85px);
+  grid-auto-rows: 85px;
+  grid-gap: 6px;
+  padding: 1rem;
+}
+div.circle {
+  background-color: #000;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: ease-out 0.2s;
+}
+div.circle:hover {
+  border-color: #fff;
+}
+div.modal-container {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000;
+  width: 600px;
+  height: 600px;
+  z-index: 999;
+  border-radius: 0.6rem;
+  border: 1px solid gainsboro;
+  box-shadow: 0 0 2px gainsboro;
+  font-family: "Ubuntu", sans-serif;
+}
+div.modal-container h4.modal-title {
+  text-align: center;
+  margin-top: 1.8rem;
+  font-size: 2rem;
+}
+div.modal-container button#hideModal {
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1.7rem;
+  cursor: pointer;
+  padding: 4px;
+  margin: 3px 12px;
+  position: absolute;
+}
+div.modal-container div.text-container {
+  margin: 2rem 3rem;
+}
+div.modal-container div.text-container li.help-list {
+  margin-bottom: 20px;
+  font-size: 1.15rem;
+}
+div.modal-container div.text-container li.help-list b {
+  color: #ffba08;
+  text-shadow: 0 0 1px #ffba08, 0 0 3px #ffba08;
+}
+div.modal-container div.text-container li.help-list b.sp {
+  color: #8338ec;
+  text-shadow: 0 0 2px #8338ec, 0 0 8px #8338ec;
+}

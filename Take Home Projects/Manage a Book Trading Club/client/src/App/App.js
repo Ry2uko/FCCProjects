@@ -6,7 +6,7 @@ import NewRequest from '../NewRequest/NewRequest.js';
 import ReqTrade from '../ReqTrade/ReqTrade.js';
 import User from '../User/User.js';
 import Profile from '../Profile/Profile.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import $ from 'jquery';
 
@@ -19,7 +19,7 @@ async function getUser() {
 export default function App(props) {
   let componentRender = useRef();
   // Replace when authorized
-  const [floatRightAuth, setFloatRightAuth] = useState(<Link to="/login" className="nav-link">Login</Link>);
+  const [floatRightAuth, setFloatRightAuth] = useState(null);
 
   switch(props.component) {
     case 'Book':
@@ -47,7 +47,8 @@ export default function App(props) {
     case 'User':
       componentRender.current = <User />;
       break;
-    case 'Profile-Main':
+
+    case 'Profile':
       componentRender.current = <Profile />;
       break;
 
@@ -61,8 +62,10 @@ export default function App(props) {
 
   useEffect(() => {
     getUser().then(data => {
-      if (data.error) return;
-      console.log(data);
+      if (data.error) {
+        setFloatRightAuth(<Link to="/login" className="nav-link">Login</Link>);
+        return;
+      };
       setFloatRightAuth(
         <div className="user-dropdown" userid={ data.user.id }>
           <button type="button" className="user-btn" onClick={openUserDropdown}>
@@ -75,6 +78,9 @@ export default function App(props) {
           </div>
         </div>
       );
+      $('.dropdown-content-btn').on('click', () => {
+        $('.user-dropdown-content').css('display', 'none');
+      });
     });
   }, []);
 

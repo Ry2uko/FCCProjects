@@ -5,6 +5,7 @@ import UserModel from './models/user.js';
 import bookRouter from './routes/book.js';
 import requestRouter from './routes/request.js';
 import tradeRouter from './routes/trade.js';
+import userRouter from './routes/user.js';
 import express from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
@@ -82,20 +83,25 @@ app.get(
     catch (err) { return res.status(500).json({ error: err.message }); }
 
     if (userData.length < 1) {
+      // create new user
       try {
         const new_user = new UserModel({
           username: req.user._json.login,
           id: req.user.id,
         });
 
-        if (req.user._json.location) new_user.location = req.user._json.location;
+        ['location', 'avatar_url', 'bio'].forEach(prop => {
+          if (req.user._json[prop]) new_user[prop] = req.user._json[prop];
+        });
+        
         await new_user.save();
       } catch (err) { return res.status(500).json({ error: err.message }); }
+
     }
     
     res.redirect('/');
   }
-)
+);
 
 
 app.route(['/login', '/signin'])
@@ -120,6 +126,7 @@ app.route('/logout')
 app.use(['/book', '/books'], bookRouter);
 app.use(['/request', '/requests'], requestRouter);
 app.use(['/trade', '/trades'], tradeRouter);
+app.use('/users', userRouter);
 
 app.get('/', (req, res) => {
   res.redirect(301, process.env.PROXY_URL);

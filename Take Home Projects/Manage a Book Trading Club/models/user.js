@@ -9,13 +9,29 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  avatar_url: {
+    type: String,
+    default: ''
+  },
+  bio: {
+    type: String,
+    default: ''
+  },
+  hide_location: {
+    type: Boolean,
+    default: false
+  },
   location: {
     type: String,
     default: ''
   },
-  books: {
+  trades: { // trade id
     type: Array,
     default: []
+  },
+  books: { // book id
+    type: Array,
+    default: [] 
   }
 });
 

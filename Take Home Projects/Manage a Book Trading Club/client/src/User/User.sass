@@ -5,4 +5,66 @@ div.User
   div
     &.title-banner
       @include title-banner
-      
+    
+    &.users-container
+      width: 100%
+      height: 100%
+      display: grid
+      justify-content: center
+      grid-template-columns: 750px 750px
+      grid-auto-rows: 140px
+      grid-gap: 20px 30px
+      padding: 2.5rem 3.5rem
+    
+    &.user-tile
+      position: relative
+      background-color: #181818
+      border: 1.4px solid rgba(255, 255, 255, 0.14)
+      border-radius: 0.3rem
+      color: #fdfdfd
+      padding: 13px 20px
+
+      span
+        &.user-name
+          cursor: pointer
+          color: $red-theme
+          font:
+            size: 1.7rem
+            family: $ff-firaSans
+
+        &.user-location-container
+          margin-left: 7px
+          color: #f7f3f3
+          font:
+            size: 1.15rem
+            family: $ff-cabin
+
+      p.user-bio
+        margin: 7px 3px
+        max-height: 75px
+        width: 650px
+        text-align: left
+        overflow-y: auto
+        overflow-x: hidden
+        font:
+          size: 1.35rem
+          family: $ff-cabin
+
+    &.user-btn-container
+      position: absolute
+      top: 0
+      right: 0
+      display: flex
+      margin: 10px 12px
+      flex-direction: column
+
+      button.user-btn
+        border: 1px solid #575757
+        background: $black-gradient
+        border-radius: 0.4rem
+        margin-bottom: 10px
+        color: #fff
+        width: 45px
+        height: 45px
+        cursor: pointer
+        font-size: 1.1rem

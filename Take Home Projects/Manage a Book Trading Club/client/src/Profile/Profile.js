@@ -1,6 +1,5 @@
 import './Profile.sass';
 import React, { useRef } from 'react';
-import $ from 'jquery';
 
 class Main extends React.Component {
   render() {

@@ -27,7 +27,7 @@ class Book extends React.Component {
               <h5 className="book-author">by Mark Manson</h5>
             </div>
             <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
             </div>
           </div>
           <div className="book-tile">
@@ -37,7 +37,7 @@ class Book extends React.Component {
               <h5 className="book-author">by Mark Manson</h5>
             </div>
             <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
             </div>
           </div>
           <div className="book-tile">
@@ -47,7 +47,7 @@ class Book extends React.Component {
               <h5 className="book-author">by Thomas Erikson</h5>
             </div>
             <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
             </div>
           </div>
           <div className="book-tile">
@@ -57,7 +57,7 @@ class Book extends React.Component {
               <h5 className="book-author">by Thomas Erikson</h5>
             </div>
             <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
             </div>
           </div>
           <div className="book-tile">
@@ -67,7 +67,7 @@ class Book extends React.Component {
               <h5 className="book-author">by James Clear</h5>
             </div>
             <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a> in <span className="user-location">Philippines</span></span>
+              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
             </div>
           </div>
         </div>

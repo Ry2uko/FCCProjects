@@ -55,9 +55,14 @@ class ReqTrade extends React.Component {
               <div className="container-tile">
                 <div className="request-book-container">
                   <div className="request-book">
-                    <div className="requests-count-container">
-                      <span className="requests-count">9</span>
-                    </div>
+                    { 
+                      this.props.type === 'request' ? (
+                        <div className="requests-count-container">
+                          <span className="requests-count">9</span>
+                        </div>
+                      ) : null
+                    }
+                    
                     <h4 className="book-name">The Subtle Art of Not Giving a F*ck</h4>
                     <span className="book-author-span">by <span className="book-author">Mark Manson</span></span>
                   </div>
@@ -76,23 +81,35 @@ class ReqTrade extends React.Component {
               <div className="container-tile">
                 <div className="request-book-container">
                   <div className="request-book">
-                    <div className="requests-count-container">
-                      <span className="requests-count">6</span>
-                    </div>
+                  { 
+                      this.props.type === 'request' ? (
+                        <div className="requests-count-container">
+                          <span className="requests-count">6</span>
+                        </div>
+                      ) : null
+                    }
                     <h4 className="book-name">Howl's Moving Castle</h4>
                     <span className="book-author-span">by <span className="book-author">Diana Wynne Jones</span></span>
                   </div>
                   <div className="request-book">
-                    <div className="requests-count-container">
-                      <span className="requests-count">3</span>
-                    </div>
+                  { 
+                      this.props.type === 'request' ? (
+                        <div className="requests-count-container">
+                          <span className="requests-count">3</span>
+                        </div>
+                      ) : null
+                    }
                     <h4 className="book-name">House of Many Ways</h4>
                     <span className="book-author-span">by <span className="book-author">Diana Wynne Jones</span></span>
                   </div>
                   <div className="request-book">
-                    <div className="requests-count-container">
-                      <span className="requests-count">1</span>
-                    </div>
+                  { 
+                      this.props.type === 'request' ? (
+                        <div className="requests-count-container">
+                          <span className="requests-count">1</span>
+                        </div>
+                      ) : null
+                    }
                     <h4 className="book-name">Castle in The Air</h4>
                     <span className="book-author-span">by <span className="book-author">Diana Wynne Jones</span></span>
                   </div>

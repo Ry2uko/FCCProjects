@@ -22,11 +22,24 @@ class Profile extends React.Component {
               <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
               <span id="userLocation">Philippines</span>
             </div>
-            <button type="button" id="userBooksBtn"><i className="fa-solid fa-book"></i>Ry2uko's Books</button>
+            <div className="user-btn-container">
+              <button type="button" id="userBooksBtn"><i className="fa-solid fa-book"></i>Ry2uko's Books</button>
+            </div>
+          </div>
+          <div className="profile-btn-container">
+            <button type="button" id="requestsBtn" className="profile-btn" title="Requests">
+              <i className="fa-solid fa-share"></i>
+            </button>
+            <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
+              <i className="fa-solid fa-gear"></i>
+            </button>
           </div>
         </div>
         <div className="recent-trade-container">
+          <h2 className="recent-trade-title">Recent Trade</h2>
+          <div className="recent-trade-tile-container">
 
+          </div>
         </div>
       </div>
     );

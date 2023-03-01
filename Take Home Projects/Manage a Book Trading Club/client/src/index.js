@@ -1,5 +1,3 @@
-// will be index.js
-
 import './index.sass';
 import Book from './Book/Book.js';
 import Form from './Form/Form.js';
@@ -68,9 +66,8 @@ const App = () => {
   const [navFloatRight, setNavFloatRight] = useState(null);
 
   useEffect(() => {
-    // get user from auth
+    // get user from /auth
     getUser().then(data => {
-      console.log('called');
       if (data.error) {
         setNavFloatRight(<Link to="/login" className="nav-link">Login</Link>);
         setUser(null);
@@ -102,7 +99,14 @@ const App = () => {
     return (
       <Router>
         <Navigation navFloatRight={navFloatRight} />
-         { /* add loading here */ }
+        <span className="loading-container">
+          <div className="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </span>
       </Router>
     );
   } else {
@@ -128,10 +132,6 @@ const App = () => {
     );
   }
 };
-
-const WithRouter = () => {
-
-}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

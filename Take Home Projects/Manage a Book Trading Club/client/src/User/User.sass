@@ -59,7 +59,7 @@ div.User
       flex-direction: column
 
       button.user-btn
-        border: 1px solid #575757
+        border: 1px solid #2b2b2b
         background: $black-gradient
         border-radius: 0.4rem
         margin-bottom: 10px
@@ -68,6 +68,10 @@ div.User
         height: 45px
         cursor: pointer
         font-size: 1.1rem
+        transition: ease-out 0.25s
+
+        &:hover
+          border-color: #444444
 
     &.user-info-container
       display: flex

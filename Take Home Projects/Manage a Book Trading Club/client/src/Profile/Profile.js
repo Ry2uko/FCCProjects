@@ -1,4 +1,5 @@
 import './Profile.sass';
+import { sampleData, ReqTradeContainer } from '../ReqTrade/ReqTrade';
 import React from 'react';
 import $ from 'jquery';
 
@@ -37,9 +38,18 @@ class Profile extends React.Component {
         </div>
         <div className="recent-trade-container">
           <h2 className="recent-trade-title">Recent Trade</h2>
-          <div className="recent-trade-tile-container">
-
+          <div className="recTrade-container">
+            <ReqTradeContainer 
+              type="trade-profile"
+              userAName={sampleData.userAName}
+              userABooks={sampleData.userABooks}
+              userBName={sampleData.userBName}
+              userBBooks={sampleData.userBBooks}
+            />
           </div>
+          <button type="button" id="userTradesBtn" className="user-btn" title="Trade History">
+            <i className="fa-solid fa-clock-rotate-left"></i>
+          </button>
         </div>
       </div>
     );

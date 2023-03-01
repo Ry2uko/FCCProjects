@@ -126,6 +126,11 @@ const App = () => {
               <Profile type="main" />
             </ProtectedRoute>
           } />
+          <Route exact path="/user/:userId" element={
+            <ProtectedRoute user={user}>
+              <Profile type="user" />
+            </ProtectedRoute>
+          } />
           <Route path="*" element={<Navigate to="/books" replace />} />
         </Routes>
       </Router>

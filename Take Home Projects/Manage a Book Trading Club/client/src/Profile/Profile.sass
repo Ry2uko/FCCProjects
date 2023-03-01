@@ -26,36 +26,40 @@ div.Profile
       flex-direction: column
 
     &.info-main-container
-      h4#userName
-        background: $red-gradient
-        -webkit-background-clip: text
-        -webkit-text-fill-color: transparent
-        font:
-          family: $ff-firaSans
-          size: 3.8rem
-        
+      h4.user-name-container 
+        span
+          &#userName
+            margin-right: 12px
+            background: $red-gradient
+            -webkit-background-clip: text
+            -webkit-text-fill-color: transparent
+            font:
+              family: $ff-firaSans
+              size: 3.8rem
+
+          &.location-container
+            margin-left: 0.5rem
+
+          &.location-icon i
+            color: rgba(255, 255, 255, 0.94)
+            font-size: 1.5rem
+
+          &#userLocation
+            color: rgba(255, 255, 255, 0.94)
+            margin-left: 8px
+            font:
+              size: 1.5rem
+              family: $ff-cabin
+
       p#userDescription
-        margin: 1.5rem  0.5rem
+        margin: 2rem  0.5rem
         text-align: left
         width: 80%
-        max-height: 100px
+        max-height: 140px
         overflow-y: auto
         font:
           family: $ff-cabin
           size: 1.5rem
-
-    &.location-container
-      margin-left: 0.5rem
-      display: flex
-      align-items: center
-
-      span
-        &.location-icon i
-          font-size: 1.8rem
-
-        &#userLocation
-          margin-left: 12px
-          font-size: 1.8rem
 
     &.user-btn-container
       flex: 1

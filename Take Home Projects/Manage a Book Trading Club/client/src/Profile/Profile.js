@@ -2,10 +2,12 @@ import './Profile.sass';
 import { sampleData, ReqTradeContainer } from '../ReqTrade/ReqTrade';
 import React from 'react';
 import $ from 'jquery';
+import { useParams } from 'react-router-dom';
 
 class Profile extends React.Component {
   componentDidMount() {
     $('a.nav-link.active').removeClass('active');
+    $('.user-dropdown-content').css('display', 'none');
   }
   render() {
     return (
@@ -16,12 +18,16 @@ class Profile extends React.Component {
           </div>
           <div className="user-info-container">
             <div className="info-main-container">
-              <h4 id="userName">Ry2uko</h4>
+              <h4 className="user-name-container">
+                <span id="userName">
+                  Ry2uko
+                </span>
+                <span className="location-container">
+                  <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
+                  <span id="userLocation">Philippines</span>
+                </span>
+              </h4>
               <p id="userDescription">Just a dev for fun.</p>
-            </div>
-            <div className="location-container">
-              <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
-              <span id="userLocation">Philippines</span>
             </div>
             <div className="user-btn-container">
               <button type="button" id="userBooksBtn"><i className="fa-solid fa-book"></i>Ry2uko's Books</button>
@@ -57,6 +63,8 @@ class Profile extends React.Component {
 }
 
 export default function WithRouter(props) {
+  let { userId } = useParams();
+  console.log(userId);
   return (
     <Profile type={props.type} />
   );

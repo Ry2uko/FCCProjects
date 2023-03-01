@@ -6,7 +6,7 @@ import NewRequest from '../NewRequest/NewRequest.js';
 import ReqTrade from '../ReqTrade/ReqTrade.js';
 import User from '../User/User.js';
 import Profile from '../Profile/Profile.js';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import $ from 'jquery';
 
@@ -48,8 +48,8 @@ export default function App(props) {
       componentRender.current = <User />;
       break;
 
-    case 'Profile':
-      componentRender.current = <Profile />;
+    case 'Profile-Main':
+      componentRender.current = <Profile type="main" />;
       break;
 
     default:

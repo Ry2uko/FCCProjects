@@ -1,38 +1,40 @@
 import './Profile.sass';
-import { useNavigate } from 'react-router-dom';
-import React, { useRef } from 'react';
+import React from 'react';
 import $ from 'jquery';
 
-async function getUser() {
-  const response = await fetch('/auth');
-  const userObj = await response.json();
-  return userObj;
-}
-
-class Main extends React.Component {
+class Profile extends React.Component {
   componentDidMount() {
     $('a.nav-link.active').removeClass('active');
   }
   render() {
     return (
-      <div className="Main">
-        
+      <div className="Profile">
+        <div className="user-container">
+          <div className="user-avatar-container">
+            <img src="https://avatars.githubusercontent.com/u/83095832?v=4" alt="user-avatar" id="userAvatar" />
+          </div>
+          <div className="user-info-container">
+            <div className="info-main-container">
+              <h4 id="userName">Ry2uko</h4>
+              <p id="userDescription">Just a dev for fun.</p>
+            </div>
+            <div className="location-container">
+              <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
+              <span id="userLocation">Philippines</span>
+            </div>
+            <button type="button" id="userBooksBtn"><i className="fa-solid fa-book"></i>Ry2uko's Books</button>
+          </div>
+        </div>
+        <div className="recent-trade-container">
+
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default function Profile(props) {
-  let componentRender = useRef();
-
-  switch (props.type) {
-    default:
-      componentRender.current = <Main />;
-  }
-
+export default function WithRouter(props) {
   return (
-    <div className="Profile">
-      { componentRender.current }
-    </div>
+    <Profile type={props.type} />
   );
 }

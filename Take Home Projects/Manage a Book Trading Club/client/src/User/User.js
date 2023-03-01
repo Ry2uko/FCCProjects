@@ -17,12 +17,12 @@ class User extends React.Component {
         <div className="users-container">
           <div className="user-tile">
             <div className="user-btn-container">
-              <button type="button" className="user-btn user-books-btn" title="Books"><i class="fa-solid fa-book"></i></button>
-              <button type="button" className="user-btn user-trades-btn" title="Trades"><i class="fa-solid fa-right-left"></i></button>
+              <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+              <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
             </div>
-            <div class="user-info-main-container">
-              <div class="user-title-container">
-                <div class="user-image-container">
+            <div className="user-info-main-container">
+              <div className="user-title-container">
+                <div className="user-image-container">
                   <img src="https://avatars.githubusercontent.com/u/83095832?v=4" className="user-avatar" alt="Avatar" />
                 </div>
                 <h4 className="user-name-container">
@@ -34,12 +34,12 @@ class User extends React.Component {
           </div>
           <div className="user-tile">
             <div className="user-btn-container">
-              <button type="button" className="user-btn user-books-btn" title="Books"><i class="fa-solid fa-book"></i></button>
-              <button type="button" className="user-btn user-trades-btn" title="Trades"><i class="fa-solid fa-right-left"></i></button>
+              <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+              <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
             </div>
-            <div class="user-info-main-container">
-              <div class="user-title-container">
-                <div class="user-image-container">
+            <div className="user-info-main-container">
+              <div className="user-title-container">
+                <div className="user-image-container">
                   <img src="https://avatars.githubusercontent.com/u/83095832?v=4" className="user-avatar" alt="Avatar" />
                 </div>
                 <h4 className="user-name-container">
@@ -51,12 +51,12 @@ class User extends React.Component {
           </div>
           <div className="user-tile">
             <div className="user-btn-container">
-              <button type="button" className="user-btn user-books-btn" title="Books"><i class="fa-solid fa-book"></i></button>
-              <button type="button" className="user-btn user-trades-btn" title="Trades"><i class="fa-solid fa-right-left"></i></button>
+              <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+              <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
             </div>
-            <div class="user-info-main-container">
-              <div class="user-title-container">
-                <div class="user-image-container">
+            <div className="user-info-main-container">
+              <div className="user-title-container">
+                <div className="user-image-container">
                   <img src="https://avatars.githubusercontent.com/u/83095832?v=4" className="user-avatar" alt="Avatar" />
                 </div>
                 <h4 className="user-name-container">
@@ -68,12 +68,12 @@ class User extends React.Component {
           </div>
           <div className="user-tile">
             <div className="user-btn-container">
-              <button type="button" className="user-btn user-books-btn" title="Books"><i class="fa-solid fa-book"></i></button>
-              <button type="button" className="user-btn user-trades-btn" title="Trades"><i class="fa-solid fa-right-left"></i></button>
+              <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+              <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
             </div>
-            <div class="user-info-main-container">
-              <div class="user-title-container">
-                <div class="user-image-container">
+            <div className="user-info-main-container">
+              <div className="user-title-container">
+                <div className="user-image-container">
                   <img src="https://avatars.githubusercontent.com/u/83095832?v=4" className="user-avatar" alt="Avatar" />
                 </div>
                 <h4 className="user-name-container">
@@ -85,12 +85,12 @@ class User extends React.Component {
           </div>
           <div className="user-tile">
             <div className="user-btn-container">
-              <button type="button" className="user-btn user-books-btn" title="Books"><i class="fa-solid fa-book"></i></button>
-              <button type="button" className="user-btn user-trades-btn" title="Trades"><i class="fa-solid fa-right-left"></i></button>
+              <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+              <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
             </div>
-            <div class="user-info-main-container">
-              <div class="user-title-container">
-                <div class="user-image-container">
+            <div className="user-info-main-container">
+              <div className="user-title-container">
+                <div className="user-image-container">
                   <img src="https://avatars.githubusercontent.com/u/83095832?v=4" className="user-avatar" alt="Avatar" />
                 </div>
                 <h4 className="user-name-container">
@@ -102,13 +102,13 @@ class User extends React.Component {
           </div>
           <div className="user-tile">
             <div className="user-btn-container">
-              <button type="button" className="user-btn user-books-btn" title="Books"><i class="fa-solid fa-book"></i></button>
-              <button type="button" className="user-btn user-trades-btn" title="Trades"><i class="fa-solid fa-right-left"></i></button>
+              <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+              <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
             </div>
-            <div class="user-info-main-container">
-              <div class="user-title-container">
-                <div class="user-image-container">
-                  <img src="https://avatars.githubusercontent.com/u/83095832?v=4" className="user-avatar" alt="Avatar" />
+            <div className="user-info-main-container">
+              <div className="user-title-container">
+                <div className="user-image-container">
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" className="user-avatar" alt="Avatar" />
                 </div>
                 <h4 className="user-name-container">
                   <span className="user-name">Ry2uko</span><span className="user-location-container">from <span className="user-location">Philippines</span></span>

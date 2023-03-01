@@ -24,7 +24,7 @@ async function getUser() {
 }
 
 const ProtectedRoute = ({ user, children }) => {
-  if (user == null) return <Navigate to="/books" replace />;
+  if (!user) return <Navigate to="/books" replace />;
   return children;
 };
 
@@ -64,7 +64,7 @@ const Navigation = ({ navFloatRight }) => {
 };
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
   const [navFloatRight, setNavFloatRight] = useState(null);
 
   useEffect(() => {
@@ -73,6 +73,7 @@ const App = () => {
       console.log('called');
       if (data.error) {
         setNavFloatRight(<Link to="/login" className="nav-link">Login</Link>);
+        setUser(null);
         return;
       }
       
@@ -97,26 +98,35 @@ const App = () => {
     });
   }, []);
 
-  return (
-    <Router>
-      <Navigation navFloatRight={navFloatRight} />
-      <Routes>
-        <Route index exact path="/books" element={<Book />} />
-        <Route exact path="/login" element={<Form type="login" />} />
-        <Route exact path="/register" element={<Form type="register" />} />
-        <Route exact path="/requests" element={<ReqTrade type="request" />} />
-        <Route exact path="/trades" element={<ReqTrade type="trade" />} />
-        <Route exact path="/users" element={<User />} />
-        { /* Protected Routes */ }        
-        <Route exact path="/profile" element={
-          <ProtectedRoute user={user}>
-            <Profile type="main" />
-          </ProtectedRoute>
-        } />
-        <Route path="*" element={<Navigate to="/books" replace />} />
-      </Routes>
-    </Router>
-  );
+  if (user === undefined) {
+    return (
+      <Router>
+        <Navigation navFloatRight={navFloatRight} />
+         { /* add loading here */ }
+      </Router>
+    );
+  } else {
+    return (
+      <Router>
+        <Navigation navFloatRight={navFloatRight} />
+        <Routes>
+          <Route index exact path="/books" element={<Book />} />
+          <Route exact path="/login" element={<Form type="login" />} />
+          <Route exact path="/register" element={<Form type="register" />} />
+          <Route exact path="/requests" element={<ReqTrade type="request" />} />
+          <Route exact path="/trades" element={<ReqTrade type="trade" />} />
+          <Route exact path="/users" element={<User />} />
+          { /* Protected Routes */ }        
+          <Route exact path="/profile" element={
+            <ProtectedRoute user={user}>
+              <Profile type="main" />
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={<Navigate to="/books" replace />} />
+        </Routes>
+      </Router>
+    );
+  }
 };
 
 const WithRouter = () => {

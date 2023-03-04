@@ -92,7 +92,7 @@ const App = () => {
       $('.dropdown-content-btn').on('click', () => {
         $('.user-dropdown-content').css('display', 'none');
       });
-    });
+    })
   }, []);
 
   if (user === undefined) {
@@ -123,7 +123,7 @@ const App = () => {
           { /* Protected Routes */ }        
           <Route exact path="/profile" element={
             <ProtectedRoute user={user}>
-              <Profile type="main" />
+              <Profile type="main" user={user}/>
             </ProtectedRoute>
           } />
           <Route exact path="/user/:userId" element={

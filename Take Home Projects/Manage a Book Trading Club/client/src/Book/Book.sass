@@ -1,6 +1,11 @@
 @import '../index.sass' 
 /* for variables */  
 
+@mixin book-container
+  border: 1.4px solid #ffffff23
+  background-color: #181818
+  border-radius: 0.4rem
+
 div.Book
   div
     &.books-container
@@ -13,11 +18,9 @@ div.Book
       
       div
         &.book-tile
+          @include book-container
           position: relative
           height: 270px
-          border: 1.4px solid #ffffff23
-          background-color: #181818
-          border-radius: 0.4rem
           display: flex
           justify-content: center
           align-items: center
@@ -72,6 +75,8 @@ div.Book
               margin-bottom: 0.7rem
 
               span.book-user
+                font-family: $ff-firaSans
+                
                 a.user-name
                   text-decoration: none
                   color: $red-theme

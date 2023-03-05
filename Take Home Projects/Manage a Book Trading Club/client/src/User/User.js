@@ -50,7 +50,7 @@ class User extends React.Component {
           <div className="users-container">
             { this.state.users.map((user, index) => {
               return (
-                <div className="user-tile" userId={user.id}>
+                <div className="user-tile" userid={user.id} key={index}>
                   <div className="user-btn-container">
                     <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
                     <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
@@ -61,7 +61,10 @@ class User extends React.Component {
                         <img src={user.avatar_url} className="user-avatar" alt="User Avatar" />
                       </div>
                       <h4 className="user-name-container">
-                        <span className="user-name">{user.username}</span>
+                        { this.props.user ? (
+                          this.props.user.username === user.username ? <a className="user-name" href="/profile">{user.username}</a> 
+                          : <a className="user-name" href={ `/user/${user.username}` }>{user.username}</a>
+                        ) : <a className="user-name" href={ `/user/${user.username}` }>{user.username}</a>}
                         { user.location ? (
                           <span className="user-location-container">
                             from <span className="user-location">Philippines</span>
@@ -87,6 +90,6 @@ class User extends React.Component {
 export default function WithRouter(props) {
   const navigate = useNavigate();
   return (
-    <User navigate={navigate} />
+    <User navigate={navigate} user={props.user}/>
   );
 }

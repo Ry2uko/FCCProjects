@@ -56,7 +56,7 @@ class Book extends React.Component {
           <div className="books-container">
             { this.state.books.map((book, index) => {
               return (
-                <div className="book-tile" bookId={book.id}>
+                <div className="book-tile" bookid={book.id} key={index}>
                   <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
                   <div className="book-center-container">
                     <h4 className="book-title">{book.title}</h4>
@@ -67,7 +67,15 @@ class Book extends React.Component {
                     ): null}
                   </div>
                   <div className="book-bottom-container">
-                    <span className="book-user">from <a className="user-name" href="/">{book.user}</a></span>
+                    <span className="book-user">
+                      from
+                      { 
+                        this.props.user ? (
+                          this.props.user.username === book.user ? <a className="user-name" href="/profile"> {book.user}</a>
+                          : <a className="user-name" href={ `/user/${book.user}` }> {book.user}</a>
+                        ) : <a className="user-name" href={ `/user/${book.user}` }> {book.user}</a>
+                      }
+                    </span>
                   </div>
                 </div>
               );
@@ -83,6 +91,6 @@ class Book extends React.Component {
 export default function WithRouter(props) {
   const navigate = useNavigate();
   return (
-    <Book navigate={navigate} />
+    <Book navigate={navigate} user={props.user}/>
   );
 }

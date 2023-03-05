@@ -116,13 +116,14 @@ const App = () => {
       <Router>
         <Navigation navFloatRight={navFloatRight} />
         <Routes>
-          <Route index exact path="/books" element={<Book />} />
+          <Route index exact path="/books" element={<Book user={user} />} />
           <Route exact path="/login" element={<Form type="login" />} />
           <Route exact path="/register" element={<Form type="register" />} />
-          <Route exact path="/requests" element={<ReqTrade type="request" />} />
-          <Route exact path="/trades" element={<ReqTrade type="trade" />} />
-          <Route exact path="/users" element={<User />} />
-          <Route exact path="/user/:userId" element={<Profile type="user" />} />
+          <Route exact path="/requests" element={<ReqTrade type="request" user={user} />} />
+          <Route exact path="/trades" element={<ReqTrade type="trade" user={user} />} />
+          <Route exact path="/users" element={<User user={user} />} />
+          <Route exact path="/user/:username" element={<Profile type="user" user={user} />} />
+          <Route exact path="/user/:username/books" element={<UserBooks type="user" user={user} />} />
           { /* Protected Routes */ }        
           <Route exact path="/profile" element={
             <ProtectedRoute user={user}>

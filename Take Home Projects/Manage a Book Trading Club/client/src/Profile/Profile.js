@@ -4,8 +4,8 @@ import React from 'react';
 import $ from 'jquery';
 import { useParams, useNavigate } from 'react-router-dom';
 
-async function getUser(userId) {
-  const response = await fetch(`/users?id=${userId}`);
+async function getUser(routeStr) {
+  const response = await fetch(routeStr);
   const userObj = await response.json();
   return userObj.user;
 }
@@ -21,19 +21,25 @@ class Profile extends React.Component {
   }
 
   handleUserBooksBtn() {
-    let route;
+    let route = '/books';
 
-    if (this.props.type === 'profile') route = '/profile';
+    if (this.props.type === 'profile') route = '/profile/books';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}/books`;
 
-    this.props.navigate('/profile/books', { state: { recent: route } });
+    this.props.navigate(route);
   }
 
   componentDidMount() {
-    getUser(this.props.user.id).then(user => {
+    let route = '';
+    
+    if (this.props.type === 'profile') route = `/users?id=${this.props.user.id}`;
+    else if (this.props.type === 'user') route = `/users?username=${this.props.username}`;
+
+    getUser(route).then(user => {
       this.setState({ user });
-      console.log('state: ', this.state.user);
     });
 
+    // Default
     $('a.nav-link.active').removeClass('active');
     $('.user-dropdown-content').css('display', 'none');
   }
@@ -106,9 +112,17 @@ class Profile extends React.Component {
 }
 
 export default function WithRouter(props) {
-  let { userId } = useParams();
+  let { username } = useParams();
   const navigate = useNavigate();
+
+  if (props.user) {
+    if (username === props.user.username) {
+      navigate('/profile', { replace: true });
+      return;
+    }
+  }
+  
   return (
-    <Profile type={props.type} user={props.user} navigate={navigate} />
+    <Profile type={props.type} user={props.user} navigate={navigate} username={username}/>
   );
 }

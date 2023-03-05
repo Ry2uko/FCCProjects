@@ -43,7 +43,8 @@ const ReqTradeContainer = ({
   userAName,
   userABooks,
   userBName,
-  userBBooks
+  userBBooks,
+  user
 }) => {
   return (
     <div className="reqTrade-container">
@@ -52,7 +53,12 @@ const ReqTradeContainer = ({
           {
             type === 'trade-profile'
             ? <span className="trade-profile">{ userAName }</span>
-            : <a href={ `/user/${userAName}` } className="request-user">{ userAName }</a>
+            : (
+              user ? (
+                user.username === userAName ? <a href="/profile" className="request-user">{ userAName }</a>
+                : <a href={ `/user/${userAName}` } className="request-user">{ userAName }</a>
+              ) : <a href={ `/user/${userAName}` } className="request-user">{ userAName }</a>
+            )
           }
         </span>
         <div className="container-tile">
@@ -79,7 +85,12 @@ const ReqTradeContainer = ({
       <button className="reqTrade-info-btn"><i className="fa-solid fa-repeat"></i></button>
       <div className="right-panel-container panel-container">
         <span className="reqTrade-tile-user">
-          <a href={ `/user/${userBName}` } className="request-user">{userBName}</a>
+          {
+            user ? (
+              user.username === userBName ? <a href="/profile" className="request-user">{userBName}</a>
+              : <a href={ `/user/${userBName}` } className="request-user">{userBName}</a>
+            ) : <a href={ `/user/${userBName}` } className="request-user">{userBName}</a>
+          }
         </span>
         <div className="container-tile">
           <div className="request-book-container">
@@ -93,7 +104,6 @@ const ReqTradeContainer = ({
                       </div>
                     ) : null
                   }
-                  
                   <h4 className="book-name">{ book.title }</h4>
                   <span className="book-author-span">by <span className="book-author">{ book.author }</span></span>
                 </div>
@@ -155,6 +165,7 @@ class ReqTrade extends React.Component {
             userABooks={sampleData.userABooks}
             userBName={sampleData.userBName}
             userBBooks={sampleData.userBBooks}
+            username={this.props.user}
           />
         </div>
       </div>
@@ -165,7 +176,7 @@ class ReqTrade extends React.Component {
 export default function WithRouter(props) {
   const navigate = useNavigate();
   return (
-    <ReqTrade navigate={navigate} type={props.type} />
+    <ReqTrade navigate={navigate} type={props.type} user={props.user} />
   );
 };
 export { sampleData, ReqTradeContainer };

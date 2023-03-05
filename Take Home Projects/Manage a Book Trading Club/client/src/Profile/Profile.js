@@ -2,7 +2,7 @@ import './Profile.sass';
 import { sampleData, ReqTradeContainer } from '../ReqTrade/ReqTrade';
 import React from 'react';
 import $ from 'jquery';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 async function getUser(userId) {
   const response = await fetch(`/users?id=${userId}`);
@@ -16,6 +16,16 @@ class Profile extends React.Component {
     this.state = {
       user: null
     };
+
+    this.handleUserBooksBtn = this.handleUserBooksBtn.bind(this);
+  }
+
+  handleUserBooksBtn() {
+    let route;
+
+    if (this.props.type === 'profile') route = '/profile';
+
+    this.props.navigate('/profile/books', { state: { recent: route } });
   }
 
   componentDidMount() {
@@ -61,7 +71,7 @@ class Profile extends React.Component {
                 <p id="userDescription">{this.state.user.bio}</p>
               </div>
               <div className="user-btn-container">
-                <button type="button" id="userBooksBtn"><i className="fa-solid fa-book"></i>{this.state.user.username}'s Books</button>
+                <button type="button" id="userBooksBtn" onClick={this.handleUserBooksBtn}><i className="fa-solid fa-book"></i>{this.state.user.username}'s Books</button>
               </div>
             </div>
             <div className="profile-btn-container">
@@ -97,7 +107,8 @@ class Profile extends React.Component {
 
 export default function WithRouter(props) {
   let { userId } = useParams();
+  const navigate = useNavigate();
   return (
-    <Profile type={props.type} user={props.user} />
+    <Profile type={props.type} user={props.user} navigate={navigate} />
   );
 }

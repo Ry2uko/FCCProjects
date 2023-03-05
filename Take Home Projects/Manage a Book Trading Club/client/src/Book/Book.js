@@ -3,76 +3,79 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import $ from 'jquery';
 
+async function getBooks() {
+  const response = await fetch('/books');
+  const booksObj = await response.json();
+  return booksObj.books;
+}
+
 class Book extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // null instead of empty array so that we can determine if books haven't been loaded yet
+      books: null
+    };
+  }
+
   componentDidMount() {
+    getBooks().then(books => {
+      this.setState({ books });
+    });
+
+    // Default
     $('a.nav-link.active').removeClass('active');
     $('a.nav-link[href="/books"]').attr('class', 'nav-link active');
   }
   
   render() {
-    return (
-      <div className="Book">
-        <div className="book-request-modal-container">
-
-        </div>
-        <div className="title-banner">
-          <h1 className="title">Books</h1>
-          <h2 className="title-description">Available for trade</h2>
-        </div>
-        <div className="books-container">
-          <div className="book-tile">
-            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
-            <div className="book-center-container">
-              <h4 className="book-title">The Subtle Art of Not Giving a F*ck</h4>
-              <h5 className="book-author">by Mark Manson</h5>
-            </div>
-            <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
-            </div>
+    if (this.state.books == null) {
+      return (
+        <>
+          <div className="title-banner">
+            <h1 className="title">Books</h1>
+            <h2 className="title-description">Available for trade</h2>
           </div>
-          <div className="book-tile">
-            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
-            <div className="book-center-container">
-              <h4 className="book-title">Everything is F*cked</h4>
-              <h5 className="book-author">by Mark Manson</h5>
+          <span className="loading-container">
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
-            <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
-            </div>
+          </span>
+        </>
+      );
+    } else {
+      return (
+        <div className="Book">
+          <div className="title-banner">
+            <h1 className="title">Books</h1>
+            <h2 className="title-description">Available for trade</h2>
           </div>
-          <div className="book-tile">
-            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
-            <div className="book-center-container">
-              <h4 className="book-title">Surrounded by Setbacks</h4>
-              <h5 className="book-author">by Thomas Erikson</h5>
-            </div>
-            <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
-            </div>
-          </div>
-          <div className="book-tile">
-            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
-            <div className="book-center-container">
-              <h4 className="book-title">Surrounded by Idiots</h4>
-              <h5 className="book-author">by Thomas Erikson</h5>
-            </div>
-            <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
-            </div>
-          </div>
-          <div className="book-tile">
-            <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
-            <div className="book-center-container">
-              <h4 className="book-title">Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones</h4>
-              <h5 className="book-author">by James Clear</h5>
-            </div>
-            <div className="book-bottom-container">
-              <span className="book-user">from <a className="user-name" href="/">Ry2uko</a></span>
-            </div>
+          <div className="books-container">
+            { this.state.books.map((book, index) => {
+              return (
+                <div className="book-tile" bookId={book.id}>
+                  <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
+                  <div className="book-center-container">
+                    <h4 className="book-title">{book.title}</h4>
+                    {book.author ? (
+                      <h5 className="book-author">
+                        by {book.author}
+                      </h5>
+                    ): null}
+                  </div>
+                  <div className="book-bottom-container">
+                    <span className="book-user">from <a className="user-name" href="/">{book.user}</a></span>
+                  </div>
+                </div>
+              );
+            }) }
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

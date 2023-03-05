@@ -5,8 +5,8 @@ import $ from 'jquery';
 
 async function getUsers() {
   const response = await fetch('/users');
-  const userObj = await response.json();
-  return userObj.users;
+  const usersObj = await response.json();
+  return usersObj.users;
 }
 
 class User extends React.Component {
@@ -50,7 +50,7 @@ class User extends React.Component {
           <div className="users-container">
             { this.state.users.map((user, index) => {
               return (
-                <div className="user-tile" key={index}>
+                <div className="user-tile" userId={user.id}>
                   <div className="user-btn-container">
                     <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
                     <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>

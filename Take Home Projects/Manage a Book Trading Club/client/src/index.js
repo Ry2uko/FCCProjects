@@ -4,6 +4,8 @@ import Form from './Form/Form.js';
 import ReqTrade from './ReqTrade/ReqTrade.js';
 import User from './User/User.js';
 import Profile from './Profile/Profile.js';
+import UserBooks from './UserBooks/UserBooks.js';
+
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
@@ -120,15 +122,16 @@ const App = () => {
           <Route exact path="/requests" element={<ReqTrade type="request" />} />
           <Route exact path="/trades" element={<ReqTrade type="trade" />} />
           <Route exact path="/users" element={<User />} />
+          <Route exact path="/user/:userId" element={<Profile type="user" />} />
           { /* Protected Routes */ }        
           <Route exact path="/profile" element={
             <ProtectedRoute user={user}>
-              <Profile type="main" user={user}/>
+              <Profile type="profile" user={user} />
             </ProtectedRoute>
           } />
-          <Route exact path="/user/:userId" element={
+          <Route exact path="/profile/books" element={
             <ProtectedRoute user={user}>
-              <Profile type="user" />
+              <UserBooks type="profile" user={user} />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/books" replace />} />

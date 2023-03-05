@@ -80,14 +80,18 @@ class Profile extends React.Component {
                 <button type="button" id="userBooksBtn" onClick={this.handleUserBooksBtn}><i className="fa-solid fa-book"></i>{this.state.user.username}'s Books</button>
               </div>
             </div>
-            <div className="profile-btn-container">
-              <button type="button" id="requestsBtn" className="profile-btn" title="Requests">
-                <i className="fa-solid fa-share"></i>
-              </button>
-              <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
-                <i className="fa-solid fa-gear"></i>
-              </button>
-            </div>
+            {
+              this.props.type === 'profile' ? (
+                <div className="profile-btn-container">
+                  <button type="button" id="requestsBtn" className="profile-btn" title="Requests">
+                    <i className="fa-solid fa-share"></i>
+                  </button>
+                  <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
+                    <i className="fa-solid fa-gear"></i>
+                  </button>
+                </div>
+              ) : null
+            }
           </div>
           <div className="recent-trade-container">
             <h2 className="recent-trade-title">Recent Trade</h2>

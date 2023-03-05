@@ -86,17 +86,34 @@ class UserBooks extends React.Component {
           <div  className="books-container">
             { this.state.books.map((book, index) => {
               return (
-                <div className="book-tile" bookid={book._id} key={index}>
-                  { book.requests_count > 0 ? (
-                    <div className="book-requests-container"><span className="book-requests">{book.requests_count}</span></div> 
-                  ) : null}
-                  <h4 className="book-title">{book.title}</h4>
-                  { book.author ? (
-                    <span className="book-author">by {book.author}</span>
-                  ) : null }
-                  { book.condition ? (
-                    <span className="book-condition-container"><span className={ `${book.condition}-condition book-condition` }>{book.condition}</span> condition</span>
-                  ) : null }
+                <div className="book-tile-container" bookid={book._id} key={index}>
+                  <div className="book-tile">
+                    { book.requests_count > 0 ? (
+                      <div className="book-requests-container"><span className="book-requests">{book.requests_count}</span></div> 
+                    ) : null}
+                    <h4 className="book-title">{book.title}</h4>
+                    { book.author ? (
+                      <span className="book-author">by {book.author}</span>
+                    ) : null }
+                    { book.condition ? (
+                      <span className="book-condition-container"><span className={ `${book.condition}-condition book-condition` }>{book.condition}</span> condition</span>
+                    ) : null }
+                  </div>
+                  {
+                    this.props.type === 'profile' ? (
+                      <div className="profile-book-btn-container">
+                        <div className="btn-container">
+                          <button type="button" className="edit-book-btn"><i className="fa-solid fa-pen"></i></button>
+                          <div className="tag-container" />
+                        </div>
+                        <div className="btn-container">
+                          <button type="button" className="delete-book-btn"><i className="fa-solid fa-trash-can"></i></button>
+                          <div className="tag-container" />
+                        </div>
+                      </div>
+                    ) : null
+                  }
+                  
                 </div>
               );
             }) }

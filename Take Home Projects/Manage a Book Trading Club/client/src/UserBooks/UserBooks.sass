@@ -26,39 +26,40 @@ div.UserBooks-header-container
 div.UserBooks
   div
     &.books-container
-      margin: 0 4rem
+      margin: 0 6rem
       display: flex
       flex-direction: column
 
     &.book-tile
       @include book-container
+      z-index: 1
       padding: 20px 25px
-      min-height: 100px
+      min-height: 135px
       margin: 10px 0
       position: relative
+      justify-content: center
       display: flex
       flex-direction: column
 
       h4.book-title
-        background: $red-gradient
-        -webkit-background-clip: text
-        -webkit-text-fill-color: transparent
+        color: $red-theme
         font:
           family: $ff-firaSans
-          size: 2.7rem
+          size: 2.2rem
       
       span
         &.book-author
+          opacity: 0.9
           margin: 5px 0
           font:
             family: $ff-firaSans  
-            size: 1.6rem
+            size: 1.55rem
           
         &.book-condition-container
           margin: 25px 0 0 0
           font:
             family: $ff-alegreyaSans
-            size: 1.8rem
+            size: 1.4rem
         
         &.book-condition
           &.best-condition
@@ -80,3 +81,48 @@ div.UserBooks
       font:
         size: 1.8rem
         family: $ff-firaSans
+
+    &.book-tile-container
+      position: relative
+
+    &.profile-book-btn-container
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      position: absolute
+      height: 100%
+      top: 0
+      right: -53px
+      transform: translate(-50%)
+      transition: ease-out 1s
+
+      div.tag-container
+        position: absolute
+        right: 0
+        border-radius: 0 1rem 1rem 0
+        z-index: 1
+        top: 0
+        height: 100%
+        width: 12px 
+        background: $red-gradient
+
+      div.btn-container
+        position: relative
+        cursor: pointer
+        background-color: #111111
+        border-radius: 0 1rem 1rem 0
+        border: 1.4px solid #ffffff0f
+        margin: 7px 0
+        transition: ease-out 0.42s
+
+        &:hover
+          transform: translateX(51px)
+
+        button
+          color: #fa354c
+          background-color: rgba(0,0,0,0)
+          border: none
+          font-size: 1.35rem
+          cursor: pointer
+          padding: 12px 30px 12px 25px

@@ -1,7 +1,6 @@
 import './Form.sass';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import $ from 'jquery';
 
 class Form extends React.Component {
   constructor(props) {

@@ -1,0 +1,128 @@
+@import '../index.sass' 
+@import '../Book/Book.sass'
+/* for variables */  
+div.UserBooks-header-container
+  display: flex
+  align-items: center
+  margin: 1.5rem 2.5rem 1rem 2.5rem
+
+  button#backBtn
+    background: $red-gradient
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    font-size: 3rem
+    padding: 5px 5px
+    border: none
+    cursor: pointer
+    margin-right: 20px
+    background-color: rgb(0,0,0,0)
+
+  h2.header-title
+    color: #fff
+    font:
+      size: 3rem
+      family: $ff-alegreyaSans
+
+div.UserBooks
+  div
+    &.books-container
+      margin: 0 6rem
+      display: flex
+      flex-direction: column
+
+    &.book-tile
+      @include book-container
+      z-index: 1
+      padding: 20px 25px
+      min-height: 135px
+      margin: 10px 0
+      position: relative
+      justify-content: center
+      display: flex
+      flex-direction: column
+
+      h4.book-title
+        color: $red-theme
+        font:
+          family: $ff-firaSans
+          size: 2.2rem
+      
+      span
+        &.book-author
+          opacity: 0.9
+          margin: 5px 0
+          font:
+            family: $ff-firaSans  
+            size: 1.55rem
+          
+        &.book-condition-container
+          margin: 25px 0 0 0
+          font:
+            family: $ff-alegreyaSans
+            size: 1.4rem
+        
+        &.book-condition
+          &.best-condition
+            color: #fff01b
+
+    &.book-requests-container
+      color: #ED3A54
+      background-color: #ed3a552d
+      display: flex
+      padding: 5px 12px
+      cursor: pointer
+      border-radius: 0.4rem
+      margin: 10px 15px
+      justify-content: center
+      align-items: center
+      position: absolute
+      top: 0
+      right: 0
+      font:
+        size: 1.3rem
+        family: $ff-firaSans
+
+    &.book-tile-container
+      position: relative
+
+    &.profile-book-btn-container
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      position: absolute
+      height: 100%
+      top: 0
+      right: -53px
+      transform: translate(-50%)
+      transition: ease-out 1s
+
+      div.tag-container
+        position: absolute
+        right: 0
+        border-radius: 0 1rem 1rem 0
+        z-index: 1
+        top: 0
+        height: 100%
+        width: 12px 
+        background: $red-gradient
+
+      div.btn-container
+        position: relative
+        cursor: pointer
+        background-color: #111111
+        border-radius: 0 1rem 1rem 0
+        border: 1.4px solid #ffffff0f
+        margin: 7px 0
+        transition: ease-out 0.42s
+
+        &:hover
+          transform: translateX(51px)
+
+        button
+          color: #fa354c
+          background-color: rgba(0,0,0,0)
+          border: none
+          font-size: 1.35rem
+          cursor: pointer
+          padding: 12px 30px 12px 25px

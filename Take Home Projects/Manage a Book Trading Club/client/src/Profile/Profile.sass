@@ -2,3 +2,144 @@
 /* for variables */
 
 div.Profile
+  display: flex
+  flex-direction: column
+  margin: 2.5rem 2.5rem 1rem 2.5rem
+
+  div
+    &.user-container
+      position: relative
+      display: flex
+    
+    &.user-avatar-container
+      width: 340px
+      height: 340px
+
+      img#userAvatar
+        border-radius: 0.3rem
+        width: 100%
+    
+    &.user-info-container
+      margin-left: 2.5rem
+      display: flex
+      flex: 1
+      flex-direction: column
+
+    &.info-main-container
+      h4.user-name-container 
+        span
+          &#userName
+            margin-right: 12px
+            background: $red-gradient
+            -webkit-background-clip: text
+            -webkit-text-fill-color: transparent
+            font:
+              family: $ff-firaSans
+              size: 3.8rem
+
+          &.location-container
+            margin-left: 0.5rem
+
+          &.location-icon i
+            color: rgba(255, 255, 255, 0.94)
+            font-size: 1.5rem
+
+          &#userLocation
+            color: rgba(255, 255, 255, 0.94)
+            margin-left: 8px
+            font:
+              size: 1.5rem
+              family: $ff-cabin
+
+      p#userDescription
+        margin: 2rem  0.5rem
+        text-align: left
+        width: 80%
+        max-height: 140px
+        overflow-y: auto
+        font:
+          family: $ff-cabin
+          size: 1.5rem
+
+    &.user-btn-container
+      flex: 1
+      display: flex
+      align-items: flex-end
+      padding-bottom: 0.3rem
+
+      button#userBooksBtn
+        border: none
+        border-radius: 0.3rem
+        background: $black-gradient
+        border: 1px solid rgba(255, 255, 255, 0.1)
+        padding: 9px 20px
+        cursor: pointer
+        color: #fff
+        transition: ease-out 0.25s
+        font:
+          family: $ff-firaSans
+          size: 1.45rem
+
+        &:hover
+          border-color: rgba(255, 255, 255, 0.2)        
+        i
+          margin-right: 10px
+
+    &.profile-btn-container
+      margin: 0 15px
+      display: flex
+      position: absolute
+      top: 0
+      right: 0
+
+      button.profile-btn
+        margin: 0 7px
+        background: $black-gradient
+        border-radius: 0.3rem
+        cursor: pointer
+        color: #fff
+        border: 1px solid rgba(255, 255, 255, 0.2)
+        font-size: 1.4rem
+        padding: 8px 12px
+        transition: ease-out 0.25s
+
+        &:hover
+          border-color: rgba(255, 255, 255, 0.3)
+
+    &.recent-trade-container
+      position: relative
+      margin-top: 2.8rem
+
+      span.no-trades-text
+        opacity: 0.8
+        font:
+          size: 1.4rem
+          family: $ff-firaSans
+
+      h2.recent-trade-title
+        color: #fff
+        font:
+          size: 2.75rem
+          family: $ff-alegreyaSans
+      
+      button#userTradesBtn
+        position: absolute
+        top: 0
+        right: 0
+        margin: 7px 7px
+        background: $black-gradient
+        border-radius: 0.3rem
+        cursor: pointer
+        color: #fff
+        border: 1px solid rgba(255, 255, 255, 0.2)
+        font-size: 1.4rem
+        padding: 8px 12px
+        transition: ease-out 0.25s
+
+        &:hover
+          border-color: rgba(255, 255, 255, 0.3)
+
+    &.recTrade-container
+      display: block
+      margin-top: 1rem 
+

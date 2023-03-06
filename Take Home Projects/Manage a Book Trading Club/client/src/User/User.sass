@@ -1,8 +1,93 @@
 @import '../index.sass' 
 /* for variables */
 
+
+
 div.User
   div
-    &.title-banner
-      @include title-banner
-      
+    &.users-container
+      width: 100%
+      height: 100%
+      display: grid
+      justify-content: center
+      grid-template-columns: 750px 750px
+      grid-auto-rows: 140px
+      grid-gap: 20px 30px
+      padding: 2.5rem 3.5rem
+    
+    &.user-tile
+      position: relative
+      background-color: #181818
+      border: 1.4px solid rgba(255, 255, 255, 0.14)
+      border-radius: 0.3rem
+      color: #fdfdfd
+      padding: 13px 20px
+
+      a.user-name
+        cursor: pointer
+        text-decoration: none
+        color: $red-theme
+        font:
+          size: 1.9rem
+          family: $ff-firaSans
+
+      span.user-location-container
+        margin-left: 8px
+        color: #f7f3f3
+        font:
+          size: 1.2rem
+          family: $ff-cabin
+
+      p.user-bio
+        margin: 7px 3px
+        max-height: 75px
+        width: 650px
+        text-align: left
+        overflow-y: auto
+        overflow-x: hidden
+        font:
+          size: 1.35rem
+          family: $ff-cabin
+
+    &.user-btn-container
+      position: absolute
+      top: 0
+      right: 0
+      display: flex
+      margin: 10px 12px
+      flex-direction: column
+
+      button.user-btn
+        border: 1px solid #2b2b2b
+        background: $black-gradient
+        border-radius: 0.4rem
+        margin-bottom: 10px
+        color: #fff
+        width: 45px
+        height: 45px
+        cursor: pointer
+        font-size: 1.1rem
+        transition: ease-out 0.25s
+
+        &:hover
+          border-color: #444444
+
+    &.user-info-container
+      display: flex
+      flex-direction: column
+
+    &.user-title-container
+      display: flex
+      align-items: center
+      margin-bottom: 20px
+
+    &.user-image-container
+      display: inline-block
+      margin-right: 12px
+      width: 45px
+      height: 45px
+
+      img.user-avatar
+        width: 100%
+        height: 100% 
+        border-radius: 0.22rem

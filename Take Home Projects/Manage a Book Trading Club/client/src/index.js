@@ -53,9 +53,7 @@ const Navigation = ({ navFloatRight }) => {
             <li className="nav-item">
               <Link to="/users" className="nav-link">Users</Link>
             </li> 
-            <li className="nav-item float-right">
-              { navFloatRight }
-            </li>
+            { navFloatRight }
           </ul>
         </div>
       </nav>
@@ -71,7 +69,7 @@ const App = () => {
     // get user from /auth
     getUser().then(data => {
       if (data.error) {
-        setNavFloatRight(<Link to="/login" className="nav-link">Login</Link>);
+        setNavFloatRight(<li className="nav-item float-right"><Link to="/login" className="nav-link">Login</Link></li>);
         setUser(null);
         return;
       }
@@ -79,16 +77,23 @@ const App = () => {
       setUser(data.user);
 
       setNavFloatRight(
-        <div className="user-dropdown" userid={ data.user.id }>
-          <button type="button" className="user-btn" onClick={toggleUserDropdown}>
-            { data.user.username }<i className="fa-solid fa-caret-down"></i>
-            </button>
-          <div className="user-dropdown-content">
-            <Link to="/profile" className="dropdown-content-btn">Profile</Link>
-            <Link to="/profile/books" className="dropdown-content-btn">My Books</Link>
-            <Link to="/profile/requests" className="dropdown-content-btn">My Requests</Link>
-          </div>
-        </div>
+        <>
+          <li className="nav-item float-right">
+            <div className="user-dropdown" userid={ data.user.id }>
+              <button type="button" className="user-btn" onClick={toggleUserDropdown}>
+                { data.user.username }<i className="fa-solid fa-caret-down"></i>
+                </button>
+              <div className="user-dropdown-content">
+                <Link to="/profile" className="dropdown-content-btn">Profile</Link>
+                <Link to="/profile/books" className="dropdown-content-btn">My Books</Link>
+                <Link to="/profile/requests" className="dropdown-content-btn">My Requests</Link>
+              </div>
+            </div>
+          </li>
+          <li className="nav-item btn-nav-item">
+            <button type="button" id="createBtn"><i className="fa-solid fa-plus"></i></button>
+          </li>
+        </>
       );
 
       $('.dropdown-content-btn').on('click', () => {

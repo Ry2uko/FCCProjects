@@ -28,10 +28,6 @@ const bookSchema = new mongoose.Schema({
   requests_count: {
     type: Number,
     default: 0
-  },
-  requests_user: { // user id
-    type: Array,
-    default: []
   }
 });
 

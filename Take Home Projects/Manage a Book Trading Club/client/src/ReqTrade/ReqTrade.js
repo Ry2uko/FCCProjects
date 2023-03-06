@@ -4,47 +4,19 @@ import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
 
-const sampleData = {
-  userAName: 'Ry2uko',
-  userABooks: [
-    {
-      title: 'The Subtle Art of Not Giving a F*ck',
-      author: 'Mark Manson',
-      requestsCount: 9
-    },
-    {
-      title: 'Everything is F*cked',
-      author: 'Mark Manson',
-      requestsCount: 0
-    }
-  ],
-  userBName: 'Ry2ukoAlt',
-  userBBooks: [
-    {
-      title: 'Howl\'s Moving Castle',
-      author: 'Diana Wynne Jones',
-      requestsCount: 6
-    },
-    {
-      title: 'House of Many Ways',
-      author: 'Diana Wynne Jones',
-      requestsCount: 3
-    },
-    {
-      title: 'Castle in The Air',
-      author: 'Diana Wynne Jones',
-      requestsCount: 1
-    }
-  ]
-};
+async function getData(route) {
+  const response = await fetch(route);
+  const dataObj = await response.json();
+  return dataObj;
+}
 
 const ReqTradeContainer = ({ 
-  type,
-  userAName,
+  type, // for determining if request or trade
+  userA,
   userABooks,
-  userBName,
+  userB,
   userBBooks,
-  user
+  user, // for checking if user is current user in links
 }) => {
   return (
     <div className="reqTrade-container">
@@ -52,12 +24,12 @@ const ReqTradeContainer = ({
         <span className="reqTrade-tile-user">
           {
             type === 'trade-profile'
-            ? <span className="trade-profile">{ userAName }</span>
+            ? <span className="trade-profile">{ userA }</span>
             : (
               user ? (
-                user.username === userAName ? <a href="/profile" className="request-user">{ userAName }</a>
-                : <a href={ `/user/${userAName}` } className="request-user">{ userAName }</a>
-              ) : <a href={ `/user/${userAName}` } className="request-user">{ userAName }</a>
+                user.username === userA ? <a href="/profile" className="request-user">{ userA }</a>
+                : <a href={ `/user/${userA}` } className="request-user">{ userA }</a>
+              ) : <a href={ `/user/${userA}` } className="request-user">{ userA }</a>
             )
           }
         </span>
@@ -68,9 +40,11 @@ const ReqTradeContainer = ({
                 <div className="request-book" key={index}>
                   { 
                     type === 'request' ? (
-                      <div className="requests-count-container">
-                        <span className="requests-count">{ book.requestsCount }</span>
-                      </div>
+                      book.requestsCount > 0 ? (
+                        <div className="requests-count-container">
+                          <span className="requests-count">{ book.requestsCount }</span>
+                        </div>
+                      ) : null
                     ) : null
                   }
                   
@@ -87,9 +61,9 @@ const ReqTradeContainer = ({
         <span className="reqTrade-tile-user">
           {
             user ? (
-              user.username === userBName ? <a href="/profile" className="request-user">{userBName}</a>
-              : <a href={ `/user/${userBName}` } className="request-user">{userBName}</a>
-            ) : <a href={ `/user/${userBName}` } className="request-user">{userBName}</a>
+              user.username === userB ? <a href="/profile" className="request-user">{userB}</a>
+              : <a href={ `/user/${userB}` } className="request-user">{userB}</a>
+            ) : <a href={ `/user/${userB}` } className="request-user">{userB}</a>
           }
         </span>
         <div className="container-tile">
@@ -99,9 +73,11 @@ const ReqTradeContainer = ({
                 <div className="request-book" key={index}>
                   { 
                     type === 'request' ? (
-                      <div className="requests-count-container">
-                        <span className="requests-count">{ book.requestsCount }</span>
-                      </div>
+                      book.requestsCount > 0 ? (
+                        <div className="requests-count-container">
+                          <span className="requests-count">{ book.requestsCount }</span>
+                        </div>
+                      ) : null
                     ) : null
                   }
                   <h4 className="book-name">{ book.title }</h4>
@@ -121,28 +97,58 @@ class ReqTrade extends React.Component {
     super(props);
     this.state = {
       type: '',
-      title: ''
+      title: '',
+      requests: null,
+      trades: null,
+      books: null
     }
 
     this.renderInit = this.renderInit.bind(this);
   }
 
   componentDidMount() {
+    if (this.props.type === 'request') {
+      getData('/requests').then(({ requests }) => {
+        this.setState({ requests, trades: null });
+      });
+    }
+
+    getData('/books').then(({ books }) => {
+      this.setState({ books });
+    });
+
     this.renderInit();
   }
 
   componentDidUpdate(prevProps) {
+    // for checking if /requests or /trades 
+    // if user is currently in /requests then moved to /trades, since they share the same component it won't mount again but will only re render
+
+    // for avoiding infinite loop because of this.setState which updates the component again
+    // only works if route is changed
     if (!equal(this.props.type, prevProps.type)) {
-      this.renderInit()
+      if (this.props.type === 'request') {
+        getData('/requests').then(({ requests }) => {
+          this.setState({ requests, trades: null });
+        });
+      }
+
+      getData('/books').then(({ books }) => {
+        this.setState({ books });
+      });
+
+      this.renderInit();
     }
   }
 
   renderInit() {
+    // Initialize
     let type = this.props.type;
     this.setState({
       type: type.toLowerCase(),
       title: type.charAt(0).toUpperCase() + type.substr(1).toLowerCase() + 's'
     });
+
     $('a.nav-link.active').removeClass('active');
     if (type === 'request') {
       $('a.nav-link[href="/requests"]').attr('class', 'nav-link active');
@@ -153,23 +159,62 @@ class ReqTrade extends React.Component {
   }
 
   render() {
-    return (
-      <div className="ReqTrade">
-        <div className="title-banner">
-          <h1 className="title">All {this.state.title}</h1>
+    if (
+      (this.props.type === 'request' && this.state.requests == null || this.state.books == null) ||
+      (this.props.type === 'trade' && this.state.trades == null || this.state.books == null)
+    ) {
+      return (
+        <>
+          <div className="title-banner">
+            <h1 className="title">All {this.state.title}</h1>
+          </div>
+          <span className="loading-container">
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </span>
+        </>
+      );
+    } else {
+      return (
+        <div className="ReqTrade">
+          <div className="title-banner">
+            <h1 className="title">All {this.state.title}</h1>
+          </div>
+          <div className="reqTrades-container">
+            { this.props.type === 'request' ? (
+              this.state.requests.map((request, index) => {
+                // format userA and userB books id to object
+                const formattedUserABooks = request.userABooks.reduce((a, bookId) => {
+                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  a.push(book);
+                  return a;
+                }, []);
+
+                const formattedUserBBooks = request.userABooks.reduce((a, bookId) => {
+                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  a.push(book);
+                  return a;
+                }, []);
+
+                return <ReqTradeContainer 
+                  type={this.props.type}
+                  userA={request.userA}
+                  userABooks={formattedUserABooks}
+                  userB={request.userB}
+                  userBBooks={formattedUserBBooks}
+                  user={this.props.user}
+                  key={index}
+                />;
+              })
+            ): null}
+          </div>
         </div>
-        <div className="reqTrades-container">
-          <ReqTradeContainer 
-            type={this.props.type}
-            userAName={sampleData.userAName}
-            userABooks={sampleData.userABooks}
-            userBName={sampleData.userBName}
-            userBBooks={sampleData.userBBooks}
-            username={this.props.user}
-          />
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
@@ -179,4 +224,5 @@ export default function WithRouter(props) {
     <ReqTrade navigate={navigate} type={props.type} user={props.user} />
   );
 };
-export { sampleData, ReqTradeContainer };
+
+export { ReqTradeContainer };

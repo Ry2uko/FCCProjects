@@ -128,6 +128,13 @@ export default function WithRouter(props) {
   let { username } = useParams();
   const navigate = useNavigate();
 
+  if (props.user) {
+    if (username === props.user.username) {
+      navigate('/profile/books', { replace: true });
+      return;
+    }
+  }
+
   return (
     <UserBooks type={props.type} user={props.user} navigate={navigate} username={username}/>
   );

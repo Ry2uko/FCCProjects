@@ -15,7 +15,21 @@ class User extends React.Component {
     this.state = {
       users: null
     };
+
+    
   }
+
+  handleUserBookBtn(evnt) {
+    const targetUserId = parseInt($(evnt.target).parents('.user-tile').attr('userid'));
+
+    if (this.props.user) {
+      if (targetUserId === parseInt(this.props.user.id)) return this.props.navigate('/profile/books');
+    }
+
+    const targetUser = this.state.users.find(user => user.id === targetUserId);
+    this.props.navigate(`/user/${targetUser.username}/books`);
+  }
+
   componentDidMount() {
     getUsers().then(users => {
       this.setState({ users });
@@ -52,7 +66,7 @@ class User extends React.Component {
               return (
                 <div className="user-tile" userid={user.id} key={index}>
                   <div className="user-btn-container">
-                    <button type="button" className="user-btn user-books-btn" title="Books"><i className="fa-solid fa-book"></i></button>
+                    <button type="button" className="user-btn user-books-btn" title="Books"onClick={(e) => this.handleUserBookBtn(e)}><i className="fa-solid fa-book"></i></button>
                     <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
                   </div>
                   <div className="user-info-main-container">

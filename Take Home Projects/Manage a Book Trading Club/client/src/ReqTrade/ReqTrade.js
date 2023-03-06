@@ -40,7 +40,7 @@ const ReqTradeContainer = ({
                 <div className="request-book" key={index}>
                   { 
                     type === 'request' ? (
-                      book.requestsCount > 0 ? (
+                      book.requests_count > 0 ? (
                         <div className="requests-count-container">
                           <span className="requests-count">{ book.requestsCount }</span>
                         </div>
@@ -56,7 +56,13 @@ const ReqTradeContainer = ({
           </div>
         </div>
       </div>
-      <button className="reqTrade-info-btn"><i className="fa-solid fa-repeat"></i></button>
+      {
+        type === 'request' ? (
+          <button className="reqTrade-info-btn"><i className="fa-solid fa-share"></i></button>
+        ) : (
+          <button className="reqTrade-info-btn"><i className="fa-solid fa-repeat"></i></button>
+        )
+      }
       <div className="right-panel-container panel-container">
         <span className="reqTrade-tile-user">
           {
@@ -111,6 +117,10 @@ class ReqTrade extends React.Component {
       getData('/requests').then(({ requests }) => {
         this.setState({ requests, trades: null });
       });
+    } else if (this.props.type === 'trade') {
+      getData('/trades').then(({ trades }) => {
+        this.setState({ trades, requests: null });
+      });
     }
 
     getData('/books').then(({ books }) => {
@@ -131,9 +141,13 @@ class ReqTrade extends React.Component {
         getData('/requests').then(({ requests }) => {
           this.setState({ requests, trades: null });
         });
+      } else if (this.props.type === 'trade') {
+        getData('/trades').then(({ trades }) => {
+          this.setState({ trades, requests: null });
+        });
       }
 
-      getData('/books').then(({ books }) => {
+      getData('/books').then(({ books }) => {   
         this.setState({ books });
       });
 
@@ -194,7 +208,7 @@ class ReqTrade extends React.Component {
                   return a;
                 }, []);
 
-                const formattedUserBBooks = request.userABooks.reduce((a, bookId) => {
+                const formattedUserBBooks = request.userBBooks.reduce((a, bookId) => {
                   const book = this.state.books.find(book => book._id.toString() == bookId);
                   a.push(book);
                   return a;
@@ -210,7 +224,32 @@ class ReqTrade extends React.Component {
                   key={index}
                 />;
               })
-            ): null}
+            ): (
+              this.state.trades.map((trade, index) => {
+                // format userA and userB books id to object
+                const formattedUserABooks = trade.userABooks.reduce((a, bookId) => {
+                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  a.push(book);
+                  return a;
+                }, []);
+
+                const formattedUserBBooks = trade.userBBooks.reduce((a, bookId) => {
+                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  a.push(book);
+                  return a;
+                }, []);
+
+                return <ReqTradeContainer 
+                  type={this.props.type}
+                  userA={trade.userA}
+                  userABooks={formattedUserABooks}
+                  userB={trade.userB}
+                  userBBooks={formattedUserBBooks}
+                  user={this.props.user}
+                  key={index}
+                />;
+              })
+            )}
           </div>
         </div>
       );

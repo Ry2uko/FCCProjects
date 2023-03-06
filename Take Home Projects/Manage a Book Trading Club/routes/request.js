@@ -65,77 +65,78 @@ router.route('/')
     res.status(201).json(request);
   });
 
-  async function validateData(req, res, next) {
-    req.user = await getUserData(83095832);  
-    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+async function validateData(req, res, next) {
+  req.user = await getUserData(83095832);  
+  if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
-    let userBObj, books;
-    let errMsg = '';
+  let userBObj, books;
+  let errMsg = '';
 
-
-    if (!req.body.userB) {
-      errMsg = 'Invalid or missing userB.';
-    } else if (req.user.username === req.body.userB) {
-      errMsg = "UserB cannot be user.";
-    }
-
-    if (!req.body.userABooks) {
-      errMsg = 'Invalid or missing userA books.';
-    } else if (req.body.userABooks.length < 1) {
-      errMsg = 'No books to trade.';
-    }
-
-    if (!req.body.userBBooks) {
-      errMsg = 'Invalid or missing userB books.';
-    } else if (req.body.userBBooks.length < 1) {
-      errMsg = 'No books to trade.';
-    }
-
-    if (errMsg) return res.status(400).json({ error: errMsg });
-
-    try {
-      books = await BookModel.find({}).lean();
-      userBObj = await UserModel.findOne({ username: req.body.userB }).lean();
-
-      let booksIdArr = books.reduce((a, b) => {
-        a.push(b._id.toString());
-        return a;
-      }, []);
-
-      if (userBObj == null) return res.status(400).json({ error: 'UserB not fond.' });
-
-      // if bookId does not exist
-      if (!req.body.userABooks.every(bookId => booksIdArr.includes(bookId))) {
-        return res.status(400).json({ error: 'Book in userABooks does not exist.' });
-      }
-
-      if (!req.body.userBBooks.every(bookId => booksIdArr.includes(bookId))) {
-        return res.status(400).json({ error: 'Book in userBBooks does not exist.' });
-      }
-
-      // if books to trade does not belong to user
-      if (!req.body.userABooks.every(bookId => {
-        let targetBook = books.find(book => book._id.toString() === bookId);
-        return targetBook.user === req.user.username;
-      })) {
-        return res.status(400).json({ error: 'Book in userABooks does not belong to user.' });
-      }
-
-      if (!req.body.userBBooks.every(bookId => {
-        let targetBook = books.find(book => book._id.toString() === bookId);
-        return targetBook.user === req.body.userB;
-      })) {
-        return res.status(400).json({ error: 'Book in userBBooks does not belong to user.' });
-      }
-
-    } catch (err) { return res.status(400).json({ error: err.message }); }
-
-    res.locals.userA = req.user.username;
-    res.locals.userB = userBObj.username;
-    res.locals.userABooks = req.body.userABooks;
-    res.locals.userBBooks = req.body.userBBooks;
-
-    next();
+  if (!req.body.userB) {
+    errMsg = 'Invalid or missing userB.';
+  } else if (req.user.username === req.body.userB) {
+    errMsg = "UserB cannot be user.";
   }
+
+  if (!req.body.userABooks) {
+    errMsg = 'Invalid or missing userA books.';
+  } else if (req.body.userABooks.length < 1) {
+    errMsg = 'No books to trade.';
+  }
+
+  if (!req.body.userBBooks) {
+    errMsg = 'Invalid or missing userB books.';
+  } else if (req.body.userBBooks.length < 1) {
+    errMsg = 'No books to trade.';
+  }
+
+  if (errMsg) return res.status(400).json({ error: errMsg });
+
+  try {
+    books = await BookModel.find({}).lean();
+    userBObj = await UserModel.findOne({ username: req.body.userB }).lean();
+
+    if (userBObj == null) return res.status(400).json({ error: 'UserB not fond.' });
+
+    let booksIdArr = books.reduce((a, b) => {
+      if (b.available) a.push(b._id.toString());
+
+      return a;
+    }, []);
+
+    // if bookId does not exist or is not available
+    if (!req.body.userABooks.every(bookId => booksIdArr.includes(bookId))) {
+      return res.status(400).json({ error: 'Book in userABooks does not exist or is not available.' });
+    }
+
+    if (!req.body.userBBooks.every(bookId => booksIdArr.includes(bookId))) {
+      return res.status(400).json({ error: 'Book in userBBooks does not exist or is not available.' });
+    }
+
+    // if books to trade does not belong to user
+    if (!req.body.userABooks.every(bookId => {
+      let targetBook = books.find(book => book._id.toString() === bookId);
+      return targetBook.user === req.user.username;
+    })) {
+      return res.status(400).json({ error: 'Book in userABooks does not belong to user.' });
+    }
+
+    if (!req.body.userBBooks.every(bookId => {
+      let targetBook = books.find(book => book._id.toString() === bookId);
+      return targetBook.user === req.body.userB;
+    })) {
+      return res.status(400).json({ error: 'Book in userBBooks does not belong to user.' });
+    }
+
+  } catch (err) { return res.status(400).json({ error: 'err.message' }); }
+
+  res.locals.userA = req.user.username;
+  res.locals.userB = userBObj.username;
+  res.locals.userABooks = req.body.userABooks;
+  res.locals.userBBooks = req.body.userBBooks;
+
+  next();
+}
   
 export default router;
+export { validateData }

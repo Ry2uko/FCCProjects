@@ -19,6 +19,7 @@ router.route('/')
       trades = await TradeModel.find(queryObject, { '__v': 0 }).lean();
     } catch (err) { res.status(500).json({ error: err.message }); }
 
+    trades.reverse();
     if (tradeId) {
       if (trades.length < 1) return res.status(400).json({ error: 'Trade not found.' });
       res.status(200).json({ trade: trades[0] });
@@ -42,8 +43,8 @@ router.route('/')
       userBDoc = await UserModel.findOne({ username: userB }).lean();
 
       // update user trades
-      userADoc.trades.push(trade._id.toString());
-      userBDoc.trades.push(trade._id.toString());
+      userADoc.trades.unshift(trade._id.toString());
+      userBDoc.trades.unshift(trade._id.toString());
 
       await trade.save();
       await UserModel.findOneAndUpdate({ id: userADoc.id }, userADoc);

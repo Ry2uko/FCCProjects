@@ -1,6 +1,6 @@
 import './UserBooks.sass';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import $ from 'jquery';
 
 async function getData(userRoute) {
@@ -21,12 +21,18 @@ class UserBooks extends React.Component {
     };
 
     this.handleBackBtn = this.handleBackBtn.bind(this);
+    this.handleOpenBook = this.handleOpenBook.bind(this);
   }
 
   handleBackBtn() {
     if (this.props.type === 'profile') this.props.navigate('/profile');
     else if (this.props.type === 'user') this.props.navigate(`/user/${this.props.username}`);
     else this.props.navigate('/books');
+  }
+
+  handleOpenBook(bookId) {
+    let route = this.props.type === 'profile' ? '/profile/books' : `/user/${this.props.username}/books`;
+    this.props.navigate(`/book/${bookId}`, { state: { route } })
   }
 
   componentDidMount() {
@@ -48,12 +54,13 @@ class UserBooks extends React.Component {
     
     // Default
     $('a.nav-link.active').removeClass('active');
+    $('.user-dropdown-content').css('display', 'none');
   }
 
   render() {
     if (this.state.books == null) {
       return (
-        <>
+        <div className="parent-container">
           <div className="UserBooks-header-container">
             <button type="button" id="backBtn"><i className="fa-solid fa-caret-left"></i></button>
             { this.props.type === 'profile' ? (
@@ -70,11 +77,11 @@ class UserBooks extends React.Component {
               <div></div>
             </div>
           </span>
-        </>
+        </div>
       );
     } else {
       return (
-        <div className="UserBooks">
+        <div className="UserBooks parent-container">
           <div className="UserBooks-header-container">
             <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
             { this.props.type === 'profile' ? (
@@ -91,7 +98,11 @@ class UserBooks extends React.Component {
                     { book.requests_count > 0 ? (
                       <div className="book-requests-container"><span className="book-requests">{book.requests_count}</span></div> 
                     ) : null}
-                    <h4 className="book-title">{book.title}</h4>
+                    <h4 className="book-title">
+                      <span class="book-link" onClick={() => { this.handleOpenBook(book._id.toString()) }}>
+                        {book.title}
+                      </span>
+                    </h4>
                     { book.author ? (
                       <span className="book-author">by {book.author}</span>
                     ) : null }

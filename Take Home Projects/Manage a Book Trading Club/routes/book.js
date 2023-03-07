@@ -34,6 +34,7 @@ router.route('/')
       books = await BookModel.find(queryObject, { '__v': 0 }).lean();
     } catch (err) { res.status(500).json({ error: err.message }); }
 
+    books.reverse();
     if (bookId) {
       if (books.length < 1) return res.status(400).json({ error: 'Book not found.'});
       res.status(200).json({ book: books[0] });
@@ -55,7 +56,7 @@ router.route('/')
       user = await UserModel.findOne({ id: req.user.id }).lean();
 
       // update user's books
-      user.books.push(book._id);
+      user.books.unshift(book._id);
 
       await book.save();
       await UserModel.findOneAndUpdate({ id: user.id }, user);

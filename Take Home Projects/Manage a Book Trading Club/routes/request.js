@@ -25,6 +25,7 @@ router.route('/')
       requests = await RequestModel.find(queryObject, { '__v': 0 }).lean();
     } catch (err) { res.status(500).json({ error: err.message }); }
 
+    requests.reverse();
     if (requestId) {
       if (requests.length < 1) return res.status(400).json({ error: 'Request not found.' });
       res.status(200).json({ request: requests[0] });
@@ -54,7 +55,10 @@ router.route('/')
       await request.save();
       await BookModel.updateMany({ _id: { $in: targetBooksId } }, {
         $push: { 
-          requests: request._id.toString(),
+          requests: {
+            $each: [ request._id.toString() ],
+            $position: 0
+          },
         },
         $inc: {
           requests_count: 1

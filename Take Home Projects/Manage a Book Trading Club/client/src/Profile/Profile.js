@@ -78,7 +78,7 @@ class Profile extends React.Component {
       if (user.trades.length < 1) {
         this.setState({ user });
       } else {
-        let recentTradeId = user.trades[user.trades.length-1];
+        let recentTradeId = user.trades[0];
 
         getData(`/trades?id=${recentTradeId}`).then(({ trade }) => {
           this.setState({ user, recentTrade: trade });
@@ -98,18 +98,20 @@ class Profile extends React.Component {
   render() {
     if (this.state.user == null || this.state.books == null) {
       return (
-        <span className="loading-container">
-          <div className="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </span>
+        <div className="parent-container">
+          <span className="loading-container">
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </span>
+        </div>
       );
     } else {
       return (
-        <div className="Profile">
+        <div className="Profile parent-container">
           <div className="user-container">
             <div className="user-avatar-container">
               <img src={this.state.user.avatar_url} alt="user-avatar" id="userAvatar" />

@@ -36,12 +36,13 @@ class User extends React.Component {
     });
     $('a.nav-link.active').removeClass('active');
     $('a.nav-link[href="/users"]').attr('class', 'nav-link active');
+    $('.user-dropdown-content').css('display', 'none');
   }
 
   render() {
     if (this.state.users == null) {
       return (
-        <>
+        <div className="parent-container">
           <div className="title-banner">
             <h1 className="title">Users</h1>
           </div>
@@ -53,11 +54,11 @@ class User extends React.Component {
               <div></div>
             </div>
           </span>
-        </>
+        </div>
       );
     } else {
       return (
-        <div className="User">
+        <div className="User parent-container">
           <div className="title-banner">
             <h1 className="title">Users</h1>
           </div>

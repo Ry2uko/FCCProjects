@@ -1,5 +1,5 @@
 import './Book.sass';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
@@ -27,10 +27,14 @@ class Book extends React.Component {
   }
 
   handleBackBtn() {
-    this.props.navigate('/books');
+    let route;
+    if (this.props.navState) route = this.props.navState.route;
+
+    this.props.navigate(route ? route : '/books');
   }
 
-  handleOpenBookBtn(bookId) {
+  handleOpenBookBtn(bookId, evnt) {
+    if ($(evnt.target).hasClass('user-name')) return;
     this.props.navigate(`/book/${bookId}`, { replace: true });
   }
 
@@ -52,6 +56,20 @@ class Book extends React.Component {
                   <span className="book-author">by {targetBook.author}</span>
                 ): null
               }
+              <span className="book-user">
+                from
+                {
+                  this.props.user ? (
+                    this.props.user.username === targetBook.user ? (
+                      <Link to="/profile" className="user-name"> {targetBook.user}</Link>
+                    ) : (
+                      <Link to={ `/user/${targetBook.user}` } className="user-name"> {targetBook.user}</Link>
+                    )
+                  ) : (
+                    <Link to={ `/user/${targetBook.user}` } className="user-name"> {targetBook.user}</Link>
+                  )
+                }
+              </span>
               {
                 targetBook.condition ? (
                   <span className="book-condition"><span className={`${targetBook.condition}-condition`}>{targetBook.condition}</span> condition</span>
@@ -59,20 +77,22 @@ class Book extends React.Component {
               }
               <div className="book-btn-container">
                 {
-                  targetBook.available ? (
-                    <button type="button" id="requestBtn">
-                      <i className="fa-solid fa-share"></i> Request
-                    </button>
-                  ) : (
-                    <>
-                      <button type="button" id="requestDisabled">
-                        Not Available
+                  this.props.user ? (
+                    targetBook.available ? (
+                      <button type="button" id="requestBtn">
+                        <i className="fa-solid fa-share"></i> Request
                       </button>
-                      <button type="button" id="viewTradeBtn">
-                        <i className="fa-solid fa-repeat"></i> View Trade
-                      </button>
-                    </>
-                  )
+                    ) : (
+                      <>
+                        <button type="button" id="requestDisabled">
+                          Not Available
+                        </button>
+                        <button type="button" id="viewTradeBtn">
+                          <i className="fa-solid fa-repeat"></i> View Trade
+                        </button>
+                      </>
+                    )
+                  ) : null
                 }
               </div>
             </div>
@@ -117,7 +137,7 @@ class Book extends React.Component {
 
   renderStateData() {
     this.setState({ books: null, requests: null, users: null, trades: null });
-    
+
     getData('/books').then(({ books }) => {
       this.setState({ books });
     });
@@ -141,6 +161,7 @@ class Book extends React.Component {
     // Default
     $('a.nav-link.active').removeClass('active');
     $('a.nav-link[href="/books"]').attr('class', 'nav-link active');
+    $('.user-dropdown-content').css('display', 'none');
   }
   
   componentDidUpdate(prevProps) {
@@ -158,7 +179,7 @@ class Book extends React.Component {
       ) {
       if (this.props.bookId) {
         return (
-          <>
+          <div className="parent-container">
             <div className="Book-header-container">
               <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
               <h2 className="header-title">Book {this.props.bookId}</h2>
@@ -171,11 +192,11 @@ class Book extends React.Component {
                 <div></div>
               </div>
             </span>
-          </>
+          </div>
         )
       } else {
         return (
-          <>
+          <div className="parent-container">
             <div className="title-banner">
               <h1 className="title">Books</h1>
               <h2 className="title-description">Available for trade</h2>
@@ -188,12 +209,12 @@ class Book extends React.Component {
                 <div></div>
               </div>
             </span>
-          </>
+          </div>
         );
       }
     } else {
       return (
-        <div className="Book">
+        <div className="Book parent-container">
           {
             this.props.bookId ? (
               this.renderBookById()
@@ -207,8 +228,7 @@ class Book extends React.Component {
                   { 
                     this.state.books.map((book, index) => {
                       return (
-                        <div className="book-tile" bookid={book._id.toString()} key={index} onClick={() => { this.handleOpenBookBtn(book._id.toString()) }}>
-                          <button className="request-trade-button"><i className="fa-solid fa-arrow-right-arrow-left"></i></button>
+                        <div className="book-tile" bookid={book._id.toString()} key={index} onClick={(e) => { this.handleOpenBookBtn(book._id.toString(), e) }}>
                           <div className="book-center-container">
                             <h4 className="book-title">{book.title}</h4>
                             {book.author ? (
@@ -245,9 +265,10 @@ class Book extends React.Component {
 
 export default function WithRouter(props) {
   let { bookId } = useParams();
+  const { state } = useLocation();
   const navigate = useNavigate();
 
   return (
-    <Book navigate={navigate} user={props.user} bookId={bookId} route={props.route} />
+    <Book navigate={navigate} user={props.user} bookId={bookId} route={props.route} navState={state}/>
   );
 }

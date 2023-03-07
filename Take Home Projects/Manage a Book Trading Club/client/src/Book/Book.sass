@@ -7,7 +7,7 @@
   border-radius: 0.4rem
 
 div.Book-header-container
-  padding: 1rem 2rem 1.5rem 2rem
+  margin: 1.5rem 2.5rem 1rem 2.5rem
   display: flex
   align-items: center
 
@@ -15,15 +15,15 @@ div.Book-header-container
     border: none
     background-color: rgba(0,0,0,0)
     color: $red-theme
-    font-size: 3.4rem
-    padding: 5px 10px
+    font-size: 3rem
+    padding: 5px 5px
     cursor: pointer
-    margin-right: 15px
+    margin-right: 20px
 
   h2.header-title
     color: #fff
     font:
-      size: 2.7rem
+      size: 3rem
       family: $ff-alegreyaSans
 
 div.Book
@@ -53,12 +53,19 @@ div.Book
               size: 3rem
 
           span
-            &.book-author
+            &.book-author, &.book-user
               color: #ffffffd5
               font:
                 family: $ff-alegreyaSans
-                size: 2.1rem
-            
+                size: 2.4rem
+
+            &.book-user
+              margin-top: 7px
+
+              a.user-name
+                text-decoration: none
+                color: $red-theme
+
             &.book-condition
               margin-top: 2.5rem
               font:
@@ -165,26 +172,6 @@ div.Book
           cursor: pointer
           align-items: center
           flex-direction: column
-
-          &:hover 
-            button.request-trade-button
-              display: block
-
-          button.request-trade-button
-            display: none
-            position: absolute
-            top: 0
-            right: 0
-            margin: 5px 5px
-            cursor: pointer
-            background-color: #ff536d3c
-            color: #FF536C
-            padding: 6px 14px
-            border-radius: 0.5rem
-            border: none
-            outline: none
-            font:
-              size: 1rem
 
           div
             &.book-center-container

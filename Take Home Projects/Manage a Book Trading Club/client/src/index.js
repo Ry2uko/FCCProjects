@@ -32,9 +32,24 @@ function toggleUserDropdown() {
   $('.user-dropdown-content').css('display', $('.user-dropdown-content').css('display') === 'none' ? 'flex': 'none');
 }
 
+const CreateModal = () => {
+  return (
+    <div className="CreateModal">
+      <div className="create-option-container">
+        <h6 className="option-title">New Book</h6>
+        <span className="option-description">Create a book for trade</span>
+      </div>
+      <div className="create-option-container">
+        <h6 className="option-title">New Request</h6>
+        <span className="option-description">Create a request for a trade</span>
+      </div>  
+    </div>
+  );
+};
+
 const Navigation = ({ navFloatRight }) => {
   return (
-    <div className="Navigation">
+    <div className="Navigation parent-container">
       <nav className="app-nav">
         <div className="nav-wrapper">
           <div className="navbar-header">
@@ -65,6 +80,34 @@ const App = () => {
   const [user, setUser] = useState(undefined);
   const [navFloatRight, setNavFloatRight] = useState(null);
 
+  const handleCreateBtn = () => {
+    const MS = 250;
+
+    $('.user-dropdown-content').css('display', 'none');
+
+    $('.CreateModal').css({
+      'display': 'flex',
+      'opacity': 0
+    }).animate({
+      'opacity': 1
+    }, MS);
+    $('.parent-container').css('pointerEvents', 'none').animate({ 'opacity': 0.5 }, MS);
+
+    $(document).on('click', function(e) {
+      if ($(e.target)[0] === $('div#root')[0]) {
+        $('.CreateModal').animate({
+          'opacity': 0
+        }, MS, function(){
+          $(this).css('display', 'none');
+        });
+        $('.parent-container').animate({ 'opacity': 1 }, MS, function(){
+          $(this).css('pointerEvents', 'auto')
+        });
+        $(document).off('click');
+      }
+    });
+  }
+
   useEffect(() => {
     // get user from /auth
     getUser().then(data => {
@@ -87,11 +130,12 @@ const App = () => {
                 <Link to="/profile" className="dropdown-content-btn">Profile</Link>
                 <Link to="/profile/books" className="dropdown-content-btn">My Books</Link>
                 <Link to="/profile/requests" className="dropdown-content-btn">My Requests</Link>
+                <Link to="/profile/trades" className="dropdown-content-btn">My Trades</Link>
               </div>
             </div>
           </li>
           <li className="nav-item btn-nav-item">
-            <button type="button" id="createBtn"><i className="fa-solid fa-plus"></i></button>
+            <button type="button" id="createBtn" onClick={handleCreateBtn}><i className="fa-solid fa-plus"></i></button>
           </li>
         </>
       );
@@ -120,6 +164,7 @@ const App = () => {
     return (
       <Router>
         <Navigation navFloatRight={navFloatRight} />
+        <CreateModal />
         <Routes>
           <Route index exact path="/books" element={<Book user={user} route="/books"/>} />
           <Route index exact path="/book/:bookId" element={<Book user={user} route="/book"/>} />

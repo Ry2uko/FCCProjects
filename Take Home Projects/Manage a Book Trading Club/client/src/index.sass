@@ -48,6 +48,49 @@ div.title-banner
       size: 1.6rem
       family: $ff-firaSans
 
+div.CreateModal
+  position: absolute
+  opacity: 0
+  background-color: #0e0d0d
+  border: 2px solid #090909
+  border-radius: 0.5rem
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+  width: 450px
+  height: 200px
+  z-index: 9999
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  display: none
+  flex-direction: column
+
+  div
+    &.create-option-container:first-of-type
+      border-radius: 0.5rem 0.5rem 0 0
+      border-bottom: 2px solid #090909
+
+    &.create-option-container
+      padding: 15px 20px
+      border-radius: 0 0 0.5rem 0.5rem
+      flex: 1
+      cursor: pointer
+      transition: ease-out 0.3s
+
+      &:hover
+        background: #e1213a
+
+      h6.option-title
+        margin-bottom: 3px
+        font:
+          family: $ff-alegreyaSans
+          size: 1.7rem
+        
+      span.option-description
+        color: #ffffffd8
+        font:
+          family: $ff-alegreyaSans
+          size: 1.3rem
+
 div.Navigation
   nav.app-nav
     width: 100%
@@ -184,7 +227,7 @@ div.Navigation
       border-radius: 0.4rem
       top: 58px
       margin-left: -50px
-      z-index: 9999
+      z-index: 9990
 
       a.dropdown-content-btn
         text-decoration: none

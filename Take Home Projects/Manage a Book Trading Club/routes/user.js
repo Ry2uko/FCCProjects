@@ -29,6 +29,7 @@ router.get('/', async (req, res) => {
     delete user.hide_location;
   });
 
+  users.reverse();
   if (userId || username) {
     if (users.length < 1) return res.status(400).json({ error: 'User not found.' });
     res.status(200).json({ user: users[0] });

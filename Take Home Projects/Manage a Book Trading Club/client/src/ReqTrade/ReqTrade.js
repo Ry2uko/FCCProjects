@@ -129,6 +129,7 @@ class ReqTrade extends React.Component {
     });
 
     this.renderInit();
+    $('.user-dropdown-content').css('display', 'none');
   }
 
   componentDidUpdate(prevProps) {
@@ -179,7 +180,7 @@ class ReqTrade extends React.Component {
       (this.props.type === 'trade' && this.state.trades == null || this.state.books == null)
     ) {
       return (
-        <>
+        <div className="parent-container">
           <div className="title-banner">
             <h1 className="title">All {this.state.title}</h1>
           </div>
@@ -191,11 +192,11 @@ class ReqTrade extends React.Component {
               <div></div>
             </div>
           </span>
-        </>
+        </div>
       );
     } else {
       return (
-        <div className="ReqTrade">
+        <div className="ReqTrade parent-container">
           <div className="title-banner">
             <h1 className="title">All {this.state.title}</h1>
           </div>

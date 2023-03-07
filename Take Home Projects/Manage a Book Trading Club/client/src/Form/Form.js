@@ -1,6 +1,7 @@
 import './Form.sass';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import $ from 'jquery';
 
 class Form extends React.Component {
   constructor(props) {
@@ -12,9 +13,13 @@ class Form extends React.Component {
     window.location.replace('http://localhost:1010/auth/github');
   }
 
+  componentDidMount() {
+    $('.user-dropdown-content').css('display', 'none');
+  }
+
   render() {
     return (
-      <div className="Form">
+      <div className="Form parent-container">
         <h1 className="form-title">Login</h1>
         <div className="form-container">
           <div className="button-group-container" id="githubLogInBtn" onClick={this.handleGithubLogIn}>

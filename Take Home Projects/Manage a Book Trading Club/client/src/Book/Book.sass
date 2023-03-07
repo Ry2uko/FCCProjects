@@ -6,8 +6,147 @@
   background-color: #181818
   border-radius: 0.4rem
 
+div.Book-header-container
+  padding: 1rem 2rem 1.5rem 2rem
+  display: flex
+  align-items: center
+
+  button#backBtn
+    border: none
+    background-color: rgba(0,0,0,0)
+    color: $red-theme
+    font-size: 3.4rem
+    padding: 5px 10px
+    cursor: pointer
+    margin-right: 15px
+
+  h2.header-title
+    color: #fff
+    font:
+      size: 2.7rem
+      family: $ff-alegreyaSans
+
 div.Book
   div
+    &.spec-container
+      div
+        &.spec-book-container
+          @include book-container
+          display: flex
+          margin: 1rem 3.5rem
+          padding: 1.5rem 2rem
+          height: 670px
+
+        &.book-info-container
+          position: relative
+          display: flex
+          flex-direction: column
+          flex: 1
+
+          h4.book-title
+            background: $red-gradient
+            -webkit-background-clip: text
+            -webkit-text-fill-color: transparent
+            margin-bottom: 5px
+            font:
+              family: $ff-firaSans
+              size: 3rem
+
+          span
+            &.book-author
+              color: #ffffffd5
+              font:
+                family: $ff-alegreyaSans
+                size: 2.1rem
+            
+            &.book-condition
+              margin-top: 2.5rem
+              font:
+                family: $ff-alegreyaSans
+                size: 2rem
+
+              span
+                &.Best-condition
+                  color: #f2ff00
+
+        &.book-btn-container
+          margin-bottom: 10px
+          position: absolute
+          bottom: 0
+
+          button
+            &#requestBtn
+              border: 1px solid rgba(245, 72, 95, 0.3)
+              background: $black-gradient
+              border-radius: 0.4rem
+              color: $red-theme
+              padding: 8px 25px
+              cursor: pointer
+              font:
+                family: $ff-firaSans
+                size: 1.85rem
+
+              i
+                font-size: 1.75rem
+                margin-right: 5px
+
+        &.book-requests-container
+          h4.requests-title
+            font:
+              family: $ff-alegreyaSans
+              size: 2.3rem
+            
+            span#requestsCount
+              margin: 0 5px
+              color: $red-theme
+              font-size: 2.5rem
+        
+        &.book-requests
+          width: 550px
+          background-color: #1F1F1F
+          padding: 10px 8px 0 10px
+          border-radius: 0.25rem
+          border: 1.4px solid rgba(74, 74, 74, 0.137254902)
+          display: flex
+          flex-direction: column
+          margin-top: 10px
+          height: 550px
+          overflow: auto
+
+        &.book-request
+          background-color: #181818
+          border-radius: 0.2rem
+          margin-bottom: 10px
+          padding: 10px 10px 15px 10px
+
+          span.requested-on
+            color: #D0D0D0
+            font:
+              family: $ff-alegreyaSans
+              size: 1.6rem
+
+          div
+            &.user-header-container
+              display: flex
+              margin-bottom: 12px
+
+              a.user-name
+                text-decoration: none
+                color: $red-theme
+                font:
+                  family: $ff-firaSans
+                  size: 2.2rem
+
+            &.user-image-container
+              width: 45px
+              height: 45px
+              margin-right: 11px
+
+              img.user-avatar
+                width: 100%
+                height: 100%
+                border-radius: 0.3rem
+    
     &.books-container
       width: 100%
       height: 100%
@@ -23,6 +162,7 @@ div.Book
           height: 270px
           display: flex
           justify-content: center
+          cursor: pointer
           align-items: center
           flex-direction: column
 
@@ -80,6 +220,4 @@ div.Book
                 a.user-name
                   text-decoration: none
                   color: $red-theme
-
-
       

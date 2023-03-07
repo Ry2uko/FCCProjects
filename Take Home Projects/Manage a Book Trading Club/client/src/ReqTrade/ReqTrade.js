@@ -17,9 +17,10 @@ const ReqTradeContainer = ({
   userB,
   userBBooks,
   user, // for checking if user is current user in links
+  reqTradeId
 }) => {
   return (
-    <div className="reqTrade-container">
+    <div className="reqTrade-container" reqtradeid={reqTradeId}>
       <div className="left-panel-container panel-container">
         <span className="reqTrade-tile-user">
           {
@@ -136,7 +137,7 @@ class ReqTrade extends React.Component {
 
     // for avoiding infinite loop because of this.setState which updates the component again
     // only works if route is changed
-    if (!equal(this.props.type, prevProps.type)) {
+    if (!equal(this.props.route, prevProps.route)) {
       if (this.props.type === 'request') {
         getData('/requests').then(({ requests }) => {
           this.setState({ requests, trades: null });
@@ -222,6 +223,7 @@ class ReqTrade extends React.Component {
                   userBBooks={formattedUserBBooks}
                   user={this.props.user}
                   key={index}
+                  reqTradeId={request._id.toString()}
                 />;
               })
             ): (
@@ -247,6 +249,7 @@ class ReqTrade extends React.Component {
                   userBBooks={formattedUserBBooks}
                   user={this.props.user}
                   key={index}
+                  reqTradeId={trade._id.toString()}
                 />;
               })
             )}
@@ -260,7 +263,7 @@ class ReqTrade extends React.Component {
 export default function WithRouter(props) {
   const navigate = useNavigate();
   return (
-    <ReqTrade navigate={navigate} type={props.type} user={props.user} />
+    <ReqTrade navigate={navigate} type={props.type} user={props.user} route={props.route} />
   );
 };
 

@@ -64,7 +64,7 @@ class User extends React.Component {
           <div className="users-container">
             { this.state.users.map((user, index) => {
               return (
-                <div className="user-tile" userid={user.id} key={index}>
+                <div className="user-tile" userid={user.id.toString()} key={index}>
                   <div className="user-btn-container">
                     <button type="button" className="user-btn user-books-btn" title="Books"onClick={(e) => this.handleUserBookBtn(e)}><i className="fa-solid fa-book"></i></button>
                     <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>

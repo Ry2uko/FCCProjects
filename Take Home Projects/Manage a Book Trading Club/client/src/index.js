@@ -121,11 +121,12 @@ const App = () => {
       <Router>
         <Navigation navFloatRight={navFloatRight} />
         <Routes>
-          <Route index exact path="/books" element={<Book user={user} />} />
+          <Route index exact path="/books" element={<Book user={user} route="/books"/>} />
+          <Route index exact path="/book/:bookId" element={<Book user={user} route="/book"/>} />
           <Route exact path="/login" element={<Form type="login" />} />
           <Route exact path="/register" element={<Form type="register" />} />
-          <Route exact path="/requests" element={<ReqTrade type="request" user={user} />} />
-          <Route exact path="/trades" element={<ReqTrade type="trade" user={user} />} />
+          <Route exact path="/requests" element={<ReqTrade type="request" user={user} route="/requests" />} />
+          <Route exact path="/trades" element={<ReqTrade type="trade" user={user} route="/trades" />} />
           <Route exact path="/users" element={<User user={user} />} />
           <Route exact path="/user/:username" element={<Profile type="user" user={user} />} />
           <Route exact path="/user/:username/books" element={<UserBooks type="user" user={user} />} />

@@ -2,6 +2,7 @@
 
 import BookModel from '../models/book.js';
 import UserModel from '../models/user.js';
+import RequestModel from '../models/request.js';
 import express from 'express';
 
 const router = express.Router();
@@ -11,6 +12,14 @@ async function getUserData(id) {
   let user = await UserModel.findOne({ id }).lean();
   return user;
 }
+
+const bookConditions = [
+  'Excellent',
+  'Very Good',
+  'Good',
+  'Fair',
+  'Poor'
+];
 
 router.route('/')
   .get(async (req, res) => {
@@ -43,7 +52,7 @@ router.route('/')
     }
   })
   .post(validateData, async (req, res) => {
-    req.user = await getUserData(69445101);
+    req.user = await getUserData(69445101); // Ry2ukoAlt
     // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     let book, user;
 
@@ -52,8 +61,8 @@ router.route('/')
     condition = res.locals.condition;
 
     try {
-      book = new BookModel({ user: req.user.username, title, author, condition });
       user = await UserModel.findOne({ id: req.user.id }).lean();
+      book = new BookModel({ user: user.username, title, author, condition });
 
       // update user's books
       user.books.unshift(book._id.toString());
@@ -63,6 +72,36 @@ router.route('/')
     } catch (err) { return res.status(400).json({ error: err.message }); }
 
     res.status(201).json(book);
+  })
+  .delete(async (req, res) => {
+    let bookId = req.body.id;
+
+    if (!bookId) return res.status(400).json({ error: 'Book id missing or invalid.' });
+
+    let book;
+    try {
+      book = await BookModel.findById(bookId).lean();
+
+      if (book == null) return res.status(400).json({ error: 'Book not found.' });
+
+      // delete book
+      await BookModel.findByIdAndDelete(bookId);
+      
+      // update user and remove book
+      await UserModel.findOneAndUpdate({ username: book.user }, {
+        $pull: { books: bookId  }
+      });
+
+      // delete requests that has this book
+      await RequestModel.deleteMany({
+        userABooks: bookId 
+      });
+      await RequestModel.deleteMany({
+        userBBooks: bookId 
+      }); 
+    } catch (err) { return res.status(400).json({ error: err.message }); }
+
+    res.status(200).json(book);
   });
 
 function validateData(req, res, next) {
@@ -70,6 +109,12 @@ function validateData(req, res, next) {
 
   if (!req.body.title) {
     errMsg = 'Invalid or missing book title.';
+  }
+
+  if (req.body.condition) {
+    if (!bookConditions.includes(req.body.condition)) {
+      errMsg = 'Invalid book condition.';
+    }
   }
 
   if (errMsg) return res.status(400).json({ error: errMsg });

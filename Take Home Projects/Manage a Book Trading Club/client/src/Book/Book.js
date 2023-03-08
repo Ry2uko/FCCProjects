@@ -40,7 +40,20 @@ class Book extends React.Component {
 
   renderBookById() {
     let targetBook = this.state.books.find(book => book._id.toString() === this.props.bookId);
-
+    if (!targetBook) {
+      return (
+        <>
+          <div className="Book-header-container">
+            <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
+          </div>
+          <div className="spec-container">
+            <span className="error-text">
+              Book <b>{this.props.bookId}</b> either does not exist or it has been deleted.
+            </span>
+          </div>
+        </>
+      )
+    }
     return (
       <>
         <div className="Book-header-container">
@@ -78,20 +91,9 @@ class Book extends React.Component {
               <div className="book-btn-container">
                 {
                   this.props.user ? (
-                    targetBook.available ? (
-                      <button type="button" id="requestBtn">
-                        <i className="fa-solid fa-share"></i> Request
-                      </button>
-                    ) : (
-                      <>
-                        <button type="button" id="requestDisabled">
-                          Not Available
-                        </button>
-                        <button type="button" id="viewTradeBtn">
-                          <i className="fa-solid fa-repeat"></i> View Trade
-                        </button>
-                      </>
-                    )
+                    <button type="button" id="requestBtn">
+                      <i className="fa-solid fa-share"></i> Request
+                    </button>
                   ) : null
                 }
               </div>

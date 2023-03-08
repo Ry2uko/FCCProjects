@@ -82,7 +82,7 @@ class User extends React.Component {
                         ) : <a className="user-name" href={ `/user/${user.username}` }>{user.username}</a>}
                         { user.location ? (
                           <span className="user-location-container">
-                            from <span className="user-location">Philippines</span>
+                            from <span className="user-location">{user.location}</span>
                           </span>
                         ) : null }
                       </h4>

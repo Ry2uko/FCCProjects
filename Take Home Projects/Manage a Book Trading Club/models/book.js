@@ -9,17 +9,13 @@ const bookSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  user: {
+  user: { // username
     type: String,
     required: true
   },
   condition: {
     type: String,
     default: ''
-  },
-  available: { // if someone hasn't traded yet
-    type: Boolean,
-    default: true
   },
   requests: { // request id
     type: Array,

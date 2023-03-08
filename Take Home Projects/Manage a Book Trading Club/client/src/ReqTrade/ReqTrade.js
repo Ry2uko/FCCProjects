@@ -10,6 +10,9 @@ async function getData(route) {
   return dataObj;
 }
 
+
+// rendering non-existent books
+
 const ReqTradeContainer = ({ 
   type, // for determining if request or trade
   userA,
@@ -82,7 +85,8 @@ const ReqTradeContainer = ({
                 <div className="request-book" key={index}>
                   { 
                     type === 'request' ? (
-                      book.requests_count > 0 ? (
+                      book.requests_count > 1 ? (
+                        /* greater than 1 since this request is not counted */ 
                         <div className="requests-count-container">
                           <span className="requests-count">{ book.requests_count }</span>
                         </div>

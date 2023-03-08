@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 // similar to the request model since it will only be a trade if the request is accepted
 
 const tradeSchema = new mongoose.Schema({
-  userA: {
+  userA: { // username
     type: String,
     required: true
   },
@@ -11,7 +11,7 @@ const tradeSchema = new mongoose.Schema({
     type: Array,
     default: []
   },
-  userB: {
+  userB: { // username
     type: String,
     required: true
   },

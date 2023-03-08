@@ -39,16 +39,17 @@ router.route('/')
     // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     // when user accepted the trade
-    let request;
+    let request, user;
     let requestId = req.body.id;
 
     if (!requestId) return res.status(400).json({ error: 'Missing or invalid request id.' });
 
     try {
       request = await RequestModel.findById(requestId).lean();
+      user = await UserModel.findOne({ id: req.user.id }).lean();
 
       if (request == null) return res.status(400).json({ error: 'Request does not exist.' });
-      if (request.userB !== req.user.username) return res.status(400).json({ error: 'Request not for user.' });
+      if (request.userB !== user.username) return res.status(400).json({ error: 'Request not for user.' });
     } catch (err) { return res.status(400).json({ error: err.message }); }
 
     let trade, userADoc, userBDoc;

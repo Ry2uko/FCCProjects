@@ -52,7 +52,7 @@ router.route('/')
     }
   })
   .post(validateData, async (req, res) => {
-    req.user = await getUserData(69445101); // Ry2ukoAlt
+    req.user = await getUserData(69445101); // Ritsuko
     // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     let book, user;
 

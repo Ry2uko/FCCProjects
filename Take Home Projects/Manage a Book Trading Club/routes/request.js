@@ -69,8 +69,6 @@ router.route('/')
     try {
       request = await RequestModel.findById(requestId).lean();
 
-      let userBBooks = request.userBBooks;
-
       if (request == null) return res.status(400).json({ error: 'Request not found.' });
 
       // delete request
@@ -84,10 +82,12 @@ router.route('/')
         $inc: { requests_count: -1 }
       });
     } catch (err) { return res.status(400).json({ error: err.message }); }
+
+    return res.status(200).json(request);
   });
 
 async function validateData(req, res, next) {
-  req.user = await getUserData(69445101); // Ritsuko
+  req.user = await getUserData(83095832); // Ry2uko
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
   let userAObj, userBObj, books;
@@ -115,9 +115,9 @@ async function validateData(req, res, next) {
     books = await BookModel.find({}).lean();
     userAObj = await UserModel.findOne({ id: req.user.id }).lean();
     userBObj = await UserModel.findOne({ username: req.body.userB }).lean();
-
-    if (userAObj.username === userBObj.username) return res.status(400).json({ error: 'Cannot send request to self >:<' });
+    
     if (userBObj == null) return res.status(400).json({ error: 'UserB not found.' });
+    if (userAObj.username === userBObj.username) return res.status(400).json({ error: 'Cannot send request to self >:<' });
 
     let booksIdArr = books.reduce((a, b) => {
       a.push(b._id.toString());
@@ -148,7 +148,7 @@ async function validateData(req, res, next) {
       return res.status(400).json({ error: 'Book in userBBooks does not belong to userB.' });
     }
 
-  } catch (err) { return res.status(400).json({ error: 'err.message' }); }
+  } catch (err) { return res.status(400).json({ error: err.message }); }
 
   res.locals.userA = userAObj.username;
   res.locals.userB = userBObj.username;

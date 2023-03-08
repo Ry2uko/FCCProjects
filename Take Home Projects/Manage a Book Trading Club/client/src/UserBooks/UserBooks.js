@@ -3,6 +3,8 @@ import React from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
+// no books yet
+
 async function getData(userRoute) {
   const userResponse = await fetch(userRoute);
   const userObj = await userResponse.json();
@@ -52,7 +54,7 @@ class UserBooks extends React.Component {
       let stateBooks = [];
       
       userBooks.forEach(bookId => {
-        stateBooks.push(books.find(book => book._id === bookId));
+        stateBooks.push(books.find(book => book._id.toString() === bookId));
       });
 
       this.setState({ books: stateBooks });
@@ -68,7 +70,7 @@ class UserBooks extends React.Component {
       return (
         <div className="parent-container">
           <div className="UserBooks-header-container">
-            <button type="button" id="backBtn"><i className="fa-solid fa-caret-left"></i></button>
+            <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
             { this.props.type === 'profile' ? (
               <h2 className="header-title">My Books</h2>
             ) : (
@@ -96,7 +98,7 @@ class UserBooks extends React.Component {
               <h2 className="header-title">{this.props.username}'s Books</h2>
             )}
           </div>
-          <div  className="books-container">
+          <div className="books-container">
             { this.state.books.map((book, index) => {
               return (
                 <div className="book-tile-container" bookid={book._id} key={index}>

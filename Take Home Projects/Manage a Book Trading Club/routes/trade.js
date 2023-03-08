@@ -35,7 +35,7 @@ router.route('/')
     }
   })
   .post(async (req, res) => {
-    req.user = await getUserData(69445101);  // Ry2ukoAlt
+    req.user = await getUserData(83095832);  // Ry2uko
     // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     // when user accepted the trade

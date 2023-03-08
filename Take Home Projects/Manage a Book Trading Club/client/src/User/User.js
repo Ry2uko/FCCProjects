@@ -16,10 +16,11 @@ class User extends React.Component {
       users: null
     };
     
-    this.handleUserBookBtn = this.handleUserBookBtn.bind(this);
+    this.handleUserBooksBtn = this.handleUserBooksBtn.bind(this);
+    this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
   }
 
-  handleUserBookBtn(evnt) {
+  handleUserBooksBtn(evnt) {
     const targetUserId = parseInt($(evnt.target).parents('.user-tile').attr('userid'));
 
     if (this.props.user) {
@@ -28,6 +29,17 @@ class User extends React.Component {
 
     const targetUser = this.state.users.find(user => user.id === targetUserId);
     this.props.navigate(`/user/${targetUser.username}/books`, { state: { route: '/users' }}); 
+  }
+
+  handleUserTradesBtn(evnt) {
+    const targetUserId = parseInt($(evnt.target).parents('.user-tile').attr('userid'));
+
+    if (this.props.user) {
+      if (targetUserId === parseInt(this.props.user.id)) return this.props.navigate('/profile/trades', { state: { route: '/users' } });
+    }
+
+    const targetUser = this.state.users.find(user => user.id === targetUserId);
+    this.props.navigate(`/user/${targetUser.username}/trades`, { state: { route: '/users' } });
   }
 
   componentDidMount() {
@@ -67,8 +79,8 @@ class User extends React.Component {
               return (
                 <div className="user-tile" userid={user.id.toString()} key={index}>
                   <div className="user-btn-container">
-                    <button type="button" className="user-btn user-books-btn" title="Books"onClick={(e) => this.handleUserBookBtn(e)}><i className="fa-solid fa-book"></i></button>
-                    <button type="button" className="user-btn user-trades-btn" title="Trades"><i className="fa-solid fa-right-left"></i></button>
+                    <button type="button" className="user-btn user-books-btn" title="Books" onClick={(e) => this.handleUserBooksBtn(e)}><i className="fa-solid fa-book"></i></button>
+                    <button type="button" className="user-btn user-trades-btn" title="Trades" onClick={(e) => this.handleUserTradesBtn(e)}><i className="fa-solid fa-right-left"></i></button>
                   </div>
                   <div className="user-info-main-container">
                     <div className="user-title-container">

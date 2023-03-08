@@ -21,6 +21,7 @@ class Profile extends React.Component {
 
     this.handleUserBooksBtn = this.handleUserBooksBtn.bind(this);
     this.renderReqTrade = this.renderReqTrade.bind(this);
+    this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
   }
 
   handleUserBooksBtn() {
@@ -28,6 +29,15 @@ class Profile extends React.Component {
 
     if (this.props.type === 'profile') route = '/profile/books';
     else if (this.props.type === 'user') route = `/user/${this.props.username}/books`;
+
+    this.props.navigate(route);
+  }
+
+  handleUserTradesBtn() {
+    let route = '/trades';
+
+    if (this.props.type === 'profile') route = '/profile/trades';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}/trades`;
 
     this.props.navigate(route);
   }
@@ -144,7 +154,7 @@ class Profile extends React.Component {
                 <span className="no-trades-text">No trades yet.</span>
               ) }
             </div>
-            <button type="button" id="userTradesBtn" className="user-btn" title="Trade History">
+            <button type="button" id="userTradesBtn" className="user-btn" title="Trade History"  onClick={this.handleUserTradesBtn}>
               <i className="fa-solid fa-clock-rotate-left"></i>
             </button>
           </div>

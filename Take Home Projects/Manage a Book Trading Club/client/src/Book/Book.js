@@ -4,6 +4,9 @@ import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
 
+// show requests
+// condition coloring
+
 async function getData(route) {
   const response = await fetch(route);
   const dataObj = await response.json();

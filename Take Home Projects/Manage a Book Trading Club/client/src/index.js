@@ -5,6 +5,7 @@ import ReqTrade from './ReqTrade/ReqTrade.js';
 import User from './User/User.js';
 import Profile from './Profile/Profile.js';
 import UserBooks from './UserBooks/UserBooks.js';
+import UserTrades from './UserTrades/UserTrades.js';
 
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -17,10 +18,10 @@ import {
 } from 'react-router-dom';
 import $ from 'jquery';
 
-async function getUser() {
-  const response = await fetch('/auth');
-  const userObj = await response.json();
-  return userObj;
+async function getData(route) {
+  const response = await fetch(route);
+  const dataObj = await response.json();
+  return dataObj;
 }
 
 const ProtectedRoute = ({ user, children }) => {
@@ -109,36 +110,38 @@ const App = () => {
   }
 
   useEffect(() => {
-    // get user from /auth
-    getUser().then(data => {
+    // get user from /user
+    getData('/auth').then(data => {
       if (data.error) {
         setNavFloatRight(<li className="nav-item float-right"><Link to="/login" className="nav-link">Login</Link></li>);
         setUser(null);
         return;
       }
       
-      setUser(data.user);
+      getData(`/users?id=${data.user.id}`).then(userData => {
+        setUser(userData.user);
 
-      setNavFloatRight(
-        <>
-          <li className="nav-item float-right">
-            <div className="user-dropdown" userid={ data.user.id }>
-              <button type="button" className="user-btn" onClick={toggleUserDropdown}>
-                { data.user.username }<i className="fa-solid fa-caret-down"></i>
-                </button>
-              <div className="user-dropdown-content">
-                <Link to="/profile" className="dropdown-content-btn">Profile</Link>
-                <Link to="/profile/books" className="dropdown-content-btn">My Books</Link>
-                <Link to="/profile/requests" className="dropdown-content-btn">My Requests</Link>
-                <Link to="/profile/trades" className="dropdown-content-btn">My Trades</Link>
+        setNavFloatRight(
+          <>
+            <li className="nav-item float-right">
+              <div className="user-dropdown" userid={ userData.user.id }>
+                <button type="button" className="user-btn" onClick={toggleUserDropdown}>
+                  { userData.user.username }<i className="fa-solid fa-caret-down"></i>
+                  </button>
+                <div className="user-dropdown-content">
+                  <Link to="/profile" className="dropdown-content-btn">Profile</Link>
+                  <Link to="/profile/books" className="dropdown-content-btn">My Books</Link>
+                  <Link to="/profile/requests" className="dropdown-content-btn">My Requests</Link>
+                  <Link to="/profile/trades" className="dropdown-content-btn">My Trades</Link>
+                </div>
               </div>
-            </div>
-          </li>
-          <li className="nav-item btn-nav-item">
-            <button type="button" id="createBtn" onClick={handleCreateBtn}><i className="fa-solid fa-plus"></i></button>
-          </li>
-        </>
-      );
+            </li>
+            <li className="nav-item btn-nav-item">
+              <button type="button" id="createBtn" onClick={handleCreateBtn}><i className="fa-solid fa-plus"></i></button>
+            </li>
+          </>
+        );
+      });
 
       $('.dropdown-content-btn').on('click', () => {
         $('.user-dropdown-content').css('display', 'none');
@@ -175,6 +178,7 @@ const App = () => {
           <Route exact path="/users" element={<User user={user} />} />
           <Route exact path="/user/:username" element={<Profile type="user" user={user} />} />
           <Route exact path="/user/:username/books" element={<UserBooks type="user" user={user} />} />
+          <Route exact path="/user/:username/trades" element={<UserTrades type="user" user={user} />} />
           { /* Protected Routes */ }        
           <Route exact path="/profile" element={
             <ProtectedRoute user={user}>
@@ -184,6 +188,11 @@ const App = () => {
           <Route exact path="/profile/books" element={
             <ProtectedRoute user={user}>
               <UserBooks type="profile" user={user} />
+            </ProtectedRoute>
+          } />
+          <Route exact path="/profile/trades" element={
+            <ProtectedRoute user={user}>
+              <UserTrades type="profile" user={user} />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/books" replace />} />

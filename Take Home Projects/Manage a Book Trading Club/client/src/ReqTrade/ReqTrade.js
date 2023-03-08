@@ -24,14 +24,13 @@ const ReqTradeContainer = ({
       <div className="left-panel-container panel-container">
         <span className="reqTrade-tile-user">
           {
-            type === 'trade-profile'
-            ? <span className="trade-profile">{ userA }</span>
-            : (
-              user ? (
-                user.username === userA ? <a href="/profile" className="request-user">{ userA }</a>
-                : <a href={ `/user/${userA}` } className="request-user">{ userA }</a>
+            user ? (
+              user.username === userA ? (
+                type === 'trade-profile' ? (
+                  <span className="trade-profile">{ userA }</span>
+                ) :  <a href="/profile" className="request-user">{ userA }</a>
               ) : <a href={ `/user/${userA}` } className="request-user">{ userA }</a>
-            )
+            ) : <a href={ `/user/${userA}` } className="request-user">{ userA }</a>    
           }
         </span>
         <div className="container-tile">
@@ -43,7 +42,7 @@ const ReqTradeContainer = ({
                     type === 'request' ? (
                       book.requests_count > 0 ? (
                         <div className="requests-count-container">
-                          <span className="requests-count">{ book.requestsCount }</span>
+                          <span className="requests-count">{ book.requests_count }</span>
                         </div>
                       ) : null
                     ) : null
@@ -66,11 +65,14 @@ const ReqTradeContainer = ({
       }
       <div className="right-panel-container panel-container">
         <span className="reqTrade-tile-user">
-          {
+        {
             user ? (
-              user.username === userB ? <a href="/profile" className="request-user">{userB}</a>
-              : <a href={ `/user/${userB}` } className="request-user">{userB}</a>
-            ) : <a href={ `/user/${userB}` } className="request-user">{userB}</a>
+              user.username === userB ? (
+                type === 'trade-profile' ? (
+                  <span className="trade-profile">{ userB }</span>
+                ) :  <a href="/profile" className="request-user">{ userB }</a>
+              ) : <a href={ `/user/${userB}` } className="request-user">{ userB }</a>
+            ) : <a href={ `/user/${userB}` } className="request-user">{ userB }</a>    
           }
         </span>
         <div className="container-tile">
@@ -80,9 +82,9 @@ const ReqTradeContainer = ({
                 <div className="request-book" key={index}>
                   { 
                     type === 'request' ? (
-                      book.requestsCount > 0 ? (
+                      book.requests_count > 0 ? (
                         <div className="requests-count-container">
-                          <span className="requests-count">{ book.requestsCount }</span>
+                          <span className="requests-count">{ book.requests_count }</span>
                         </div>
                       ) : null
                     ) : null

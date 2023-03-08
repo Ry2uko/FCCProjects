@@ -6,6 +6,7 @@ $ff-cabin: 'Cabin', sans-serif
 $ff-firaSans: 'Fira Sans', sans-serif
 $ff-carterOne: 'Carter One', cursive
 $ff-alegreyaSans: 'Alegreya Sans', sans-serif
+$ff-unbounded: 'Unbounded', cursive
 
 *, ::before, ::after
   margin: 0
@@ -102,7 +103,7 @@ div.Navigation
       display: flex
       align-items: center
       overflow: hidden
-      margin-left: 45px
+      margin-left: 55px
       flex: 1
 
       li.nav-item
@@ -182,7 +183,7 @@ div.Navigation
       flex-direction: row
       justify-content: center
       align-items: stretch
-      width: 1450px
+      width: 1500px
       height: 100%
       margin: 0 auto
 
@@ -192,10 +193,12 @@ div.Navigation
 
       a.navbar-brand
         text-decoration: none
-        color: #fffffff7
+        background: $red-gradient
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
         font:
-          size: 1.6rem
-          family: $ff-carterOne
+          size: 2.5rem
+          family: $ff-unbounded
 
     &.user-dropdown
       display: flex

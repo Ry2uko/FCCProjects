@@ -1,6 +1,6 @@
 import './UserBooks.sass';
 import React from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
 async function getData(userRoute) {
@@ -25,9 +25,15 @@ class UserBooks extends React.Component {
   }
 
   handleBackBtn() {
-    if (this.props.type === 'profile') this.props.navigate('/profile');
-    else if (this.props.type === 'user') this.props.navigate(`/user/${this.props.username}`);
-    else this.props.navigate('/books');
+    let route;
+    if (this.props.navState) route = this.props.navState.route;
+
+    if (route) {
+      this.props.navigate(route);
+    } else {
+      if (this.props.type === 'profile') this.props.navigate('/profile');
+      else this.props.navigate(`/user/${this.props.username}`);
+    }
   }
 
   handleOpenBook(bookId) {
@@ -99,7 +105,7 @@ class UserBooks extends React.Component {
                       <div className="book-requests-container"><span className="book-requests">{book.requests_count}</span></div> 
                     ) : null}
                     <h4 className="book-title">
-                      <span class="book-link" onClick={() => { this.handleOpenBook(book._id.toString()) }}>
+                      <span className="book-link" onClick={() => { this.handleOpenBook(book._id.toString()) }}>
                         {book.title}
                       </span>
                     </h4>
@@ -137,6 +143,7 @@ class UserBooks extends React.Component {
 
 export default function WithRouter(props) {
   let { username } = useParams();
+  let { state } = useLocation();
   const navigate = useNavigate();
 
   if (props.user) {
@@ -147,6 +154,6 @@ export default function WithRouter(props) {
   }
 
   return (
-    <UserBooks type={props.type} user={props.user} navigate={navigate} username={username}/>
+    <UserBooks type={props.type} user={props.user} navigate={navigate} username={username} navState={state} />
   );
 }

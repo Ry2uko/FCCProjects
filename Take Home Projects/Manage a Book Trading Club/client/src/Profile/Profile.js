@@ -46,25 +46,14 @@ class Profile extends React.Component {
     }, []);
 
 
-    if (this.state.recentTrade.userA === this.state.user.username) {
-      return <ReqTradeContainer 
-        type="trade-profile"
-        userA={this.state.recentTrade.userA}
-        userABooks={formattedUserABooks}
-        userB={this.state.recentTrade.userB}
-        userBBooks={formattedUserBBooks}
-        user={this.state.user}
-      />;
-    } else {
-      return <ReqTradeContainer 
-        type="trade-profile"
-        userA={this.state.recentTrade.userB}
-        userABooks={formattedUserBBooks}
-        userB={this.state.recentTrade.userA}
-        userBBooks={formattedUserABooks}
-        user={this.state.user}
-      />;
-    }
+    return <ReqTradeContainer 
+      type="trade-profile"
+      userA={this.state.recentTrade.userA}
+      userABooks={formattedUserABooks}
+      userB={this.state.recentTrade.userB}
+      userBBooks={formattedUserBBooks}
+      user={this.state.user}
+    />;
     
   }
 

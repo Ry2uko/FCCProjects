@@ -15,19 +15,19 @@ class User extends React.Component {
     this.state = {
       users: null
     };
-
     
+    this.handleUserBookBtn = this.handleUserBookBtn.bind(this);
   }
 
   handleUserBookBtn(evnt) {
     const targetUserId = parseInt($(evnt.target).parents('.user-tile').attr('userid'));
 
     if (this.props.user) {
-      if (targetUserId === parseInt(this.props.user.id)) return this.props.navigate('/profile/books');
+      if (targetUserId === parseInt(this.props.user.id)) return this.props.navigate('/profile/books',  { state: { route: '/users' }});
     }
 
     const targetUser = this.state.users.find(user => user.id === targetUserId);
-    this.props.navigate(`/user/${targetUser.username}/books`);
+    this.props.navigate(`/user/${targetUser.username}/books`, { state: { route: '/users' }}); 
   }
 
   componentDidMount() {

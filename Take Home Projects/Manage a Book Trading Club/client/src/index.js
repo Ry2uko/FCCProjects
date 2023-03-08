@@ -53,7 +53,7 @@ const Navigation = ({ navFloatRight }) => {
       <nav className="app-nav">
         <div className="nav-wrapper">
           <div className="navbar-header">
-            <Link to="/books" className="navbar-brand">Book Trading Club</Link>
+            <Link to="/books" className="navbar-brand">BTc</Link>
           </div>
           <ul className="navbar-nav">
             <li className="nav-item">

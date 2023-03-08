@@ -56,7 +56,7 @@ router.route('/')
       user = await UserModel.findOne({ id: req.user.id }).lean();
 
       // update user's books
-      user.books.unshift(book._id);
+      user.books.unshift(book._id.toString());
 
       await book.save();
       await UserModel.findOneAndUpdate({ id: user.id }, user);

@@ -101,7 +101,9 @@ const App = () => {
         }, MS, function(){
           $(this).css('display', 'none');
         });
-        $('.parent-container').animate({ 'opacity': 1 }, MS, function(){
+        $('.parent-container').animate({ 
+          'opacity': 1 
+        }, MS, function(){
           $(this).css('pointerEvents', 'auto')
         });
         $(document).off('click');

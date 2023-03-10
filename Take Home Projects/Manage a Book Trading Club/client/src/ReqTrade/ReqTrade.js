@@ -10,8 +10,9 @@ async function getData(route) {
   return dataObj;
 }
 
-
 // rendering non-existent books
+// opening books
+// trade/request info modal
 
 const ReqTradeContainer = ({ 
   type, // for determining if request or trade
@@ -20,7 +21,8 @@ const ReqTradeContainer = ({
   userB,
   userBBooks,
   user, // for checking if user is current user in links
-  reqTradeId
+  reqTradeId,
+  handleOpenBookBtn
 }) => {
   return (
     <div className="reqTrade-container" reqtradeid={reqTradeId}>
@@ -40,7 +42,7 @@ const ReqTradeContainer = ({
           <div className="request-book-container">
             { userABooks.map((book, index) => {
               return (
-                <div className="request-book" key={index}>
+                <div className="request-book" key={index} onClick={() => { handleOpenBookBtn(book._id.toString()) }}>
                   { 
                     type === 'request' ? (
                       book.requests_count > 0 ? (
@@ -52,7 +54,9 @@ const ReqTradeContainer = ({
                   }
                   
                   <h4 className="book-name">{ book.title }</h4>
-                  <span className="book-author-span">by <span className="book-author">{ book.author }</span></span>
+                  {
+                    book.author ? <span className="book-author-span">by <span className="book-author">{ book.author }</span></span> : null
+                  }
                 </div>
               )
             }) }
@@ -82,7 +86,7 @@ const ReqTradeContainer = ({
           <div className="request-book-container">
             { userBBooks.map((book, index) => {
               return (
-                <div className="request-book" key={index}>
+                <div className="request-book" key={index} onClick={() => { handleOpenBookBtn(book._id.toString()) }}>
                   { 
                     type === 'request' ? (
                       book.requests_count > 1 ? (
@@ -94,7 +98,9 @@ const ReqTradeContainer = ({
                     ) : null
                   }
                   <h4 className="book-name">{ book.title }</h4>
-                  <span className="book-author-span">by <span className="book-author">{ book.author }</span></span>
+                  {
+                    book.author ? <span className="book-author-span">by <span className="book-author">{ book.author }</span></span> : null
+                  }
                 </div>
               )
             }) }
@@ -117,6 +123,11 @@ class ReqTrade extends React.Component {
     }
 
     this.renderInit = this.renderInit.bind(this);
+    this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+  }
+
+  handleOpenBookBtn(bookId) {
+    this.props.navigate(`/book/${bookId}`, { state: { route: this.props.route }});
   }
 
   componentDidMount() {
@@ -182,8 +193,8 @@ class ReqTrade extends React.Component {
 
   render() {
     if (
-      (this.props.type === 'request' && this.state.requests == null || this.state.books == null) ||
-      (this.props.type === 'trade' && this.state.trades == null || this.state.books == null)
+      ((this.props.type === 'request' && this.state.requests == null) || this.state.books == null) ||
+      ((this.props.type === 'trade' && this.state.trades == null) || this.state.books == null)
     ) {
       return (
         <div className="parent-container">
@@ -211,13 +222,13 @@ class ReqTrade extends React.Component {
               this.state.requests.map((request, index) => {
                 // format userA and userB books id to object
                 const formattedUserABooks = request.userABooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  const book = this.state.books.find(book => book._id.toString() === bookId);
                   a.push(book);
                   return a;
                 }, []);
 
                 const formattedUserBBooks = request.userBBooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  const book = this.state.books.find(book => book._id.toString() === bookId);
                   a.push(book);
                   return a;
                 }, []);
@@ -231,19 +242,20 @@ class ReqTrade extends React.Component {
                   user={this.props.user}
                   key={index}
                   reqTradeId={request._id.toString()}
+                  handleOpenBookBtn={this.handleOpenBookBtn}
                 />;
               })
             ): (
               this.state.trades.map((trade, index) => {
                 // format userA and userB books id to object
                 const formattedUserABooks = trade.userABooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  const book = this.state.books.find(book => book._id.toString() === bookId);
                   a.push(book);
                   return a;
                 }, []);
 
                 const formattedUserBBooks = trade.userBBooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() == bookId);
+                  const book = this.state.books.find(book => book._id.toString() === bookId);
                   a.push(book);
                   return a;
                 }, []);
@@ -257,6 +269,7 @@ class ReqTrade extends React.Component {
                   user={this.props.user}
                   key={index}
                   reqTradeId={trade._id.toString()}
+                  handleOpenBookBtn={this.handleOpenBookBtn}
                 />;
               })
             )}

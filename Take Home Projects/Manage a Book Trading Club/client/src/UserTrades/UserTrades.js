@@ -23,6 +23,12 @@ class UserTrades extends React.Component {
     };
 
     this.handleBackBtn = this.handleBackBtn.bind(this);
+    this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+  }
+
+  handleOpenBookBtn(bookId) {
+    let route = this.props.type === 'profile' ? '/profile/trades' : `/user/${this.props.username}/trades`;
+    this.props.navigate(`/book/${bookId}`, { state: { route } });
   }
 
   handleBackBtn() {
@@ -59,6 +65,8 @@ class UserTrades extends React.Component {
       userBBooks={formattedUserBBooks}
       user={this.state.user}
       key={index}
+      reqTradeId={trade._id.toString()}
+      handleOpenBookBtn={this.handleOpenBookBtn}
     />
   }
 

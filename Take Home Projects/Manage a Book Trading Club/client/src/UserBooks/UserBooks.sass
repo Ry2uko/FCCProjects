@@ -1,6 +1,7 @@
 @import '../index.sass' 
 @import '../Book/Book.sass'
 /* for variables */  
+  
 div.UserBooks-header-container
   display: flex
   align-items: center
@@ -22,6 +23,71 @@ div.UserBooks-header-container
     font:
       size: 3rem
       family: $ff-alegreyaSans
+
+div.confirm-modal
+  background-color: #0E0D0D
+  border: 2px solid #090909
+  border-radius: 0.5rem
+  position: absolute
+  width: 480px
+  height: 420px
+  top: 50%
+  left: 50%
+  opacity: 0
+  transform: translate(-50%, -50%)
+  z-index: 9999
+  display: none
+  flex-direction: column
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+
+  span.warning-description
+    margin: 1.8rem auto 2.8rem auto
+    font:
+      family: $ff-alegreyaSans
+      size: 1.4rem
+
+  div
+    &.header-container
+      display: flex
+      align-items: center
+      flex-direction: column
+
+      span.warning-icon
+        margin: 2.5rem 0 1.8rem 0
+
+        i
+          background: $red-gradient
+          -webkit-background-clip: text
+          -webkit-text-fill-color: transparent
+          font-size: 7.5rem
+      
+      h4.warning-text
+        font:
+          family: $ff-firaSans
+          size: 2.4rem
+
+    &.modal-buttons-container
+        display: block
+        margin: 0 auto
+
+        button
+          border-radius: 0.3rem
+          color: #fff
+          height: 45px
+          cursor: pointer
+          padding: 0 35px
+          margin: 0 30px
+          font:
+            family: $ff-firaSans
+            size: 1.4rem
+
+          &#cancelBtn
+            background-color: #262626
+            border: none
+          
+          &#deleteBtn
+            background: $red-gradient
+            border: none
 
 div.UserBooks
   div
@@ -63,10 +129,6 @@ div.UserBooks
           font:
             family: $ff-alegreyaSans
             size: 1.4rem
-        
-        &.book-condition
-          &.Excellent-condition
-            color: #fff01b
 
     &.book-requests-container
       color: #ED3A54
@@ -91,12 +153,10 @@ div.UserBooks
     &.profile-book-btn-container
       display: flex
       flex-direction: column
-      justify-content: center
-      align-items: center
       position: absolute
       height: 100%
-      top: 0
-      right: -53px
+      top: 10px
+      right: -51px
       transform: translate(-50%)
       transition: ease-out 1s
 

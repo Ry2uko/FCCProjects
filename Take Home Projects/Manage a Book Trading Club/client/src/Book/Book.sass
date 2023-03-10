@@ -79,10 +79,6 @@ div.Book
                 family: $ff-alegreyaSans
                 size: 2rem
 
-              span
-                &.Excellent-condition
-                  color: #f2ff00
-
         &.book-btn-container
           margin-bottom: 10px
           position: absolute
@@ -90,19 +86,19 @@ div.Book
 
           button
             &#requestBtn
-              border: 1px solid rgba(245, 72, 95, 0.3)
+              border: 1px solid #ffffff3a
               background: $black-gradient
               border-radius: 0.4rem
-              color: $red-theme
-              padding: 8px 25px
+              color: #fffffff3
+              padding: 8px 27px
               cursor: pointer
               font:
                 family: $ff-firaSans
-                size: 1.85rem
+                size: 1.8rem
 
               i
                 font-size: 1.75rem
-                margin-right: 5px
+                margin-right: 8px
 
         &.book-requests-container
           h4.requests-title
@@ -128,6 +124,7 @@ div.Book
           overflow: auto
 
         &.book-request
+          cursor: pointer
           background-color: #181818
           border-radius: 0.2rem
           margin-bottom: 10px
@@ -181,6 +178,25 @@ div.Book
           flex-direction: column
 
           div
+            &.requests-count-container
+              color: #ED3A54
+              background-color: #ed3a552d
+              display: flex
+              padding: 4px 10px
+              cursor: pointer
+              border-radius: 0.4rem
+              margin: 10px 10px
+              justify-content: center
+              align-items: center
+              position: absolute
+              top: 0
+              right: 0
+              
+              span.requests-count
+                font:
+                  size: 1.05rem
+                  family: $ff-firaSans
+
             &.book-center-container
               padding: 0 1.4rem
               flex: 1

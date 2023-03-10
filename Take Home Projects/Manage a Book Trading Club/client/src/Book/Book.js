@@ -4,8 +4,8 @@ import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
 
-// show requests
-// condition coloring
+// request btn
+// requests open
 
 async function getData(route) {
   const response = await fetch(route);
@@ -27,6 +27,8 @@ class Book extends React.Component {
     this.renderBookById = this.renderBookById.bind(this);
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+    this.handleOpenBookRequestBtn = this.handleOpenBookRequestBtn.bind(this);
+    this.handleCreateRequestBtn = this.handleCreateRequestBtn.bind(this);
   }
 
   handleBackBtn() {
@@ -38,11 +40,22 @@ class Book extends React.Component {
 
   handleOpenBookBtn(bookId, evnt) {
     if ($(evnt.target).hasClass('user-name')) return;
-    this.props.navigate(`/book/${bookId}`, { replace: true });
+    this.props.navigate(`/book/${bookId}`);
+  }
+
+  handleOpenBookRequestBtn(requestId, bookId, evnt) {
+    if ($(evnt.target).hasClass('user-name')) return;
+    this.props.navigate(`/request/${requestId}`, { state: { route: `/book/${bookId}`}});
+  }
+
+  handleCreateRequestBtn(bookId) {
+    if (!this.props.user) return;
+    this.props.navigate('/new/request', { state: { bookId } });
   }
 
   renderBookById() {
     let targetBook = this.state.books.find(book => book._id.toString() === this.props.bookId);
+
     if (!targetBook) {
       return (
         <>
@@ -57,6 +70,7 @@ class Book extends React.Component {
         </>
       )
     }
+
     return (
       <>
         <div className="Book-header-container">
@@ -88,13 +102,13 @@ class Book extends React.Component {
               </span>
               {
                 targetBook.condition ? (
-                  <span className="book-condition"><span className={`${targetBook.condition}-condition`}>{targetBook.condition}</span> condition</span>
+                  <span className="book-condition"><span className={`${targetBook.condition.split(' ').join('')}-condition`}>{targetBook.condition}</span> condition</span>
                 ) : null
               }
               <div className="book-btn-container">
                 {
                   this.props.user ? (
-                    <button type="button" id="requestBtn">
+                    <button type="button" id="requestBtn" onClick={() => {this.handleCreateRequestBtn(targetBook._id.toString())}}>
                       <i className="fa-solid fa-share"></i> Request
                     </button>
                   ) : null
@@ -109,7 +123,7 @@ class Book extends React.Component {
                       const targetRequest = this.state.requests.find(request => request._id.toString() === requestId);
                       const targetUser = this.state.users.find(user => user.username === targetRequest.userA);
                       return (
-                        <div className="book-request" key={index}>
+                        <div className="book-request" key={index} onClick={(e) => { this.handleOpenBookRequestBtn(requestId, targetBook._id.toString(), e) }}>
                           <div className="user-header-container">
                             <div className="user-image-container">
                               <img src={targetUser.avatar_url} className="user-avatar" alt="User Avatar" />
@@ -234,6 +248,13 @@ class Book extends React.Component {
                     this.state.books.map((book, index) => {
                       return (
                         <div className="book-tile" bookid={book._id.toString()} key={index} onClick={(e) => { this.handleOpenBookBtn(book._id.toString(), e) }}>
+                          {
+                            book.requests_count > 0 ? (
+                              <div className="requests-count-container">
+                                <span className="requests-count">{book.requests_count}</span>
+                              </div>
+                            ) : null
+                          }
                           <div className="book-center-container">
                             <h4 className="book-title">{book.title}</h4>
                             {book.author ? (

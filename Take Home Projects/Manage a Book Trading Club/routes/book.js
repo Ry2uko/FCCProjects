@@ -52,7 +52,9 @@ router.route('/')
     }
   })
   .post(validateData, async (req, res) => {
-    req.user = await getUserData(69445101); // Ritsuko
+    req.user = await getUserData(69445101); 
+    // Ritsuko 69445101
+    // Ry2uko 83095832
     // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     let book, user;
 
@@ -74,8 +76,10 @@ router.route('/')
     res.status(201).json(book);
   })
   .delete(async (req, res) => {
+    return
     let bookId = req.body.id;
-
+    
+    // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     if (!bookId) return res.status(400).json({ error: 'Book id missing or invalid.' });
 
     let book;

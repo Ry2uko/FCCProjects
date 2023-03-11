@@ -4,9 +4,6 @@ import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
 
-// request btn
-// requests open
-
 async function getData(route) {
   const response = await fetch(route);
   const dataObj = await response.json();
@@ -61,6 +58,7 @@ class Book extends React.Component {
         <>
           <div className="Book-header-container">
             <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
+            <h2 className="header-title">Book {this.props.bookId}</h2>
           </div>
           <div className="spec-container">
             <span className="error-text">

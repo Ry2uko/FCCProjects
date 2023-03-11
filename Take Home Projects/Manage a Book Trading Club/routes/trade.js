@@ -8,6 +8,8 @@ import express from 'express';
 
 const router = express.Router();
 
+// deleting request, and removing from requests in books
+
 // Dummy User Data
 async function getUserData(id) {
   let user = await UserModel.findOne({ id }).lean();
@@ -62,7 +64,7 @@ router.route('/')
         userBBooks: request.userBBooks
       });
 
-      // update both user's (add trades to array)
+      // update both user (add trades to array)
       userADoc = await UserModel.findOne({ username: request.userA }).lean();
       userBDoc = await UserModel.findOne({ username: request.userB }).lean();
 
@@ -80,28 +82,87 @@ router.route('/')
         userADoc.books.unshift(bookId);
       });
 
+      // get all books in request
+      let userABBooks = request.userABooks.concat(request.userBBooks);
+      let reqBulkOps = [], bookBulkOps = [];
+
+      // get all requests that have these books
+      let userABooksRequests = (await RequestModel.find({ userABooks: { $in: userABBooks} })).reduce((a, b) => {
+        a.push(b._id.toString());
+        return a;
+      }, []);
+      let userBBooksRequests = (await RequestModel.find({ userBBooks: { $in: userABBooks} })).reduce((a, b) => {
+        a.push(b._id.toString());
+        return a;
+      }, []);
+      let requestsToDelete = [...new Set(userABooksRequests.concat(userBBooksRequests))]; // remove duplicates
+
+      let affBooks = await BookModel.find({
+        requests: { $in: requestsToDelete }
+      }).lean();
+      affBooks.forEach(affBook => {
+        affBook.requests = affBook.requests.filter(affBookReqId => {
+          return !requestsToDelete.includes(affBookReqId);
+        });
+        affBook.requests_count = affBook.requests.length;
+      });
+      let affBooksId = affBooks.reduce((a, b) => {
+        a.push(b._id.toString());
+        return a;
+      }, []);
+
+      affBooksId.forEach(affBookId => {
+        let targetAffBook = affBooks.find(affBook => affBook._id.toString() === affBookId);
+
+        bookBulkOps.push({
+          updateOne: {
+            filter: { _id: affBookId },
+            update: {
+              $set: targetAffBook
+            }
+          }
+        });
+      });
+      userABBooks.forEach(abBookId => {
+        let newUser = '';
+
+        // change owner
+        if (request.userABooks.includes(abBookId)) {
+          newUser = request.userB;
+        } else if (request.userBBooks.includes(abBookId)) {
+          newUser = request.userA;
+        }
+
+        bookBulkOps.push({
+          updateOne: {
+            filter: { _id: abBookId },
+            update: {
+              $set: {
+                user: newUser
+              }
+            }
+          }
+        });
+      });
+      requestsToDelete.forEach(reqId => {
+        // delete request
+        reqBulkOps.push({ deleteOne: {
+          filter: { _id: reqId }
+        }});
+
+      });
+
       // save trade 
       await trade.save();
 
       // update users
-      await UserModel.findOneAndUpdate({ username: request.userA }, userADoc);
-      await UserModel.findOneAndUpdate({ username: request.userB }, userBDoc);
-
-      // update books
-      await BookModel.updateMany({ _id: { $in: request.userBBooks }}, {
-        $set: { user: request.userA, requests_count: 0, requests: [] }
-      });
-      await BookModel.updateMany({ _id: { $in: request.userABooks }}, {
-        $set: { user: request.userB, requests_count: 0, requests: [] }
-      });
-
-      // delete requests that have books in this trade
-      await RequestModel.deleteMany({
-        userABooks: { $in: request.userABooks.concat(request.userBBooks) }
-      });
-      await RequestModel.deleteMany({
-        userBBooks: { $in: request.userBBooks.concat(request.userABooks) }
-      }); 
+      await UserModel.findOneAndUpdate({ username: userADoc.username}, userADoc);
+      await UserModel.findOneAndUpdate({ username: userBDoc.username }, userBDoc);
+      
+      // update books (requests arary, requests_count) that are affected by the deleted trades
+      await BookModel.bulkWrite(bookBulkOps);
+      await RequestModel.bulkWrite(reqBulkOps);
+      
     } catch (err) { return res.status(400).json({ error: err.message }); }
 
     res.status(201).json(trade);

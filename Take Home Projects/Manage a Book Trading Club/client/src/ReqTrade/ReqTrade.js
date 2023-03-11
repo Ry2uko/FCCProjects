@@ -1,5 +1,5 @@
 import './ReqTrade.sass';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
@@ -22,7 +22,8 @@ const ReqTradeContainer = ({
   userBBooks,
   user, // for checking if user is current user in links
   reqTradeId,
-  handleOpenBookBtn
+  handleOpenBookBtn,
+  handleOpenReqTradeBtn
 }) => {
   return (
     <div className="reqTrade-container" reqtradeid={reqTradeId}>
@@ -65,9 +66,9 @@ const ReqTradeContainer = ({
       </div>
       {
         type === 'request' ? (
-          <button className="reqTrade-info-btn"><i className="fa-solid fa-share"></i></button>
+          <button className="reqTrade-info-btn" onClick={() => { handleOpenReqTradeBtn(reqTradeId) }}><i className="fa-solid fa-share"></i></button>
         ) : (
-          <button className="reqTrade-info-btn"><i className="fa-solid fa-repeat"></i></button>
+          <button className="reqTrade-info-btn" onClick={() => { handleOpenReqTradeBtn(reqTradeId) }}><i className="fa-solid fa-repeat"></i></button>
         )
       }
       <div className="right-panel-container panel-container">
@@ -124,26 +125,74 @@ class ReqTrade extends React.Component {
 
     this.renderInit = this.renderInit.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+    this.renderRequestById = this.renderRequestById.bind(this);
+    this.renderTradeById = this.renderTradeById.bind(this);
+    this.renderStateData = this.renderStateData.bind(this);
+    this.handleBackBtn = this.handleBackBtn.bind(this);
+    this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
+  }
+
+  renderRequestById() {
+    let targetRequest = this.state.requests.find(request => request._id.toString() === this.props.requestId);
+
+    if (!targetRequest) {
+      return (
+        <>
+          <div className="ReqTrade-header-container">
+            <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
+            <h2 className="header-title">Request {this.props.requestId}</h2>
+          </div>
+          <div className="spec-container">
+            <span className="error-text">
+              Request <b>{this.props.requestId}</b> either does not exist or it has been deleted.
+            </span>
+          </div>
+        </>
+      )
+    }
+
+    return;
+  }
+
+  renderTradeById() {
+    return;
+  }
+
+  handleBackBtn() {
+    let route;
+    if (this.props.navState) route = this.props.navState.route;
+
+    this.props.navigate(route ? route : '/requests');
+  }
+
+  handleOpenReqTradeBtn(reqTradeId) {
+    this.props.navigate(`/${this.props.type === 'request' ? 'request' : 'trade'}/${reqTradeId}`, { state: { route: this.props.route }});
   }
 
   handleOpenBookBtn(bookId) {
     this.props.navigate(`/book/${bookId}`, { state: { route: this.props.route }});
   }
 
-  componentDidMount() {
+  renderStateData() {
+    this.setState({ books: null, requests: null, trades: null });
+
     if (this.props.type === 'request') {
       getData('/requests').then(({ requests }) => {
-        this.setState({ requests, trades: null });
+        this.setState({ requests });
       });
     } else if (this.props.type === 'trade') {
       getData('/trades').then(({ trades }) => {
-        this.setState({ trades, requests: null });
+        this.setState({ trades });
       });
-    }
+    } 
 
-    getData('/books').then(({ books }) => {
+    getData('/books').then(({ books }) => {   
       this.setState({ books });
     });
+  }
+
+  componentDidMount() {
+    this.renderStateData();
 
     this.renderInit();
     $('.user-dropdown-content').css('display', 'none');
@@ -156,20 +205,7 @@ class ReqTrade extends React.Component {
     // for avoiding infinite loop because of this.setState which updates the component again
     // only works if route is changed
     if (!equal(this.props.route, prevProps.route)) {
-      if (this.props.type === 'request') {
-        getData('/requests').then(({ requests }) => {
-          this.setState({ requests, trades: null });
-        });
-      } else if (this.props.type === 'trade') {
-        getData('/trades').then(({ trades }) => {
-          this.setState({ trades, requests: null });
-        });
-      }
-
-      getData('/books').then(({ books }) => {   
-        this.setState({ books });
-      });
-
+      this.renderStateData();
       this.renderInit();
     }
   }
@@ -196,84 +232,114 @@ class ReqTrade extends React.Component {
       ((this.props.type === 'request' && this.state.requests == null) || this.state.books == null) ||
       ((this.props.type === 'trade' && this.state.trades == null) || this.state.books == null)
     ) {
-      return (
-        <div className="parent-container">
-          <div className="title-banner">
-            <h1 className="title">All {this.state.title}</h1>
-          </div>
-          <span className="loading-container">
-            <div className="lds-ellipsis">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+      if (this.props.route === '/request' || this.props.route === '/trade') {
+        return (
+          <div className="parent-container">
+            <div className="ReqTrade-header-container">
+              <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
+              <h2 className="header-title">{this.props.type === 'request' ? 'Request' : 'Trade'} {this.props.type === 'request' ? this.props.requestId : this.props.tradeId}</h2>
             </div>
-          </span>
-        </div>
-      );
+            <span className="loading-container">
+              <div className="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </span>
+          </div>
+        );
+      } else {
+        return (
+          <div className="parent-container">
+            <div className="title-banner">
+              <h1 className="title">All {this.state.title}</h1>
+            </div>
+            <span className="loading-container">
+              <div className="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </span>
+          </div>
+        );
+      }
     } else {
       return (
         <div className="ReqTrade parent-container">
-          <div className="title-banner">
-            <h1 className="title">All {this.state.title}</h1>
-          </div>
-          <div className="reqTrades-container">
-            { this.props.type === 'request' ? (
-              this.state.requests.map((request, index) => {
-                // format userA and userB books id to object
-                const formattedUserABooks = request.userABooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() === bookId);
-                  a.push(book);
-                  return a;
-                }, []);
+          {
+            this.props.route === '/request' ? this.renderRequestById() 
+            : this.props.route === '/trade' ? this.renderTradeById()
+            : (
+              <>
+                <div className="title-banner">
+                  <h1 className="title">All {this.state.title}</h1>
+                </div>
+                <div className="reqTrades-container">
+                  { this.props.type === 'request' ? (
+                    this.state.requests.map((request, index) => {
 
-                const formattedUserBBooks = request.userBBooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() === bookId);
-                  a.push(book);
-                  return a;
-                }, []);
+                      // format userA and userB books id to object
+                      const formattedUserABooks = request.userABooks.reduce((a, bookId) => {
+                        const book = this.state.books.find(book => book._id.toString() === bookId);
+                        a.push(book);
+                        return a;
+                      }, []);
 
-                return <ReqTradeContainer 
-                  type={this.props.type}
-                  userA={request.userA}
-                  userABooks={formattedUserABooks}
-                  userB={request.userB}
-                  userBBooks={formattedUserBBooks}
-                  user={this.props.user}
-                  key={index}
-                  reqTradeId={request._id.toString()}
-                  handleOpenBookBtn={this.handleOpenBookBtn}
-                />;
-              })
-            ): (
-              this.state.trades.map((trade, index) => {
-                // format userA and userB books id to object
-                const formattedUserABooks = trade.userABooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() === bookId);
-                  a.push(book);
-                  return a;
-                }, []);
+                      const formattedUserBBooks = request.userBBooks.reduce((a, bookId) => {
+                        const book = this.state.books.find(book => book._id.toString() === bookId);
+                        a.push(book);
+                        return a;
+                      }, []);
 
-                const formattedUserBBooks = trade.userBBooks.reduce((a, bookId) => {
-                  const book = this.state.books.find(book => book._id.toString() === bookId);
-                  a.push(book);
-                  return a;
-                }, []);
+                      return <ReqTradeContainer 
+                        type={this.props.type}
+                        userA={request.userA}
+                        userABooks={formattedUserABooks}
+                        userB={request.userB}
+                        userBBooks={formattedUserBBooks}
+                        user={this.props.user}
+                        key={index}
+                        reqTradeId={request._id.toString()}
+                        handleOpenBookBtn={this.handleOpenBookBtn}
+                        handleOpenReqTradeBtn={this.handleOpenReqTradeBtn}
+                      />;
+                    })
+                  ): (
+                    this.state.trades.map((trade, index) => {
+                      // format userA and userB books id to object
+                      const formattedUserABooks = trade.userABooks.reduce((a, bookId) => {
+                        const book = this.state.books.find(book => book._id.toString() === bookId);
+                        a.push(book);
+                        return a;
+                      }, []);
 
-                return <ReqTradeContainer 
-                  type={this.props.type}
-                  userA={trade.userA}
-                  userABooks={formattedUserABooks}
-                  userB={trade.userB}
-                  userBBooks={formattedUserBBooks}
-                  user={this.props.user}
-                  key={index}
-                  reqTradeId={trade._id.toString()}
-                  handleOpenBookBtn={this.handleOpenBookBtn}
-                />;
-              })
-            )}
-          </div>
+                      const formattedUserBBooks = trade.userBBooks.reduce((a, bookId) => {
+                        const book = this.state.books.find(book => book._id.toString() === bookId);
+                        a.push(book);
+                        return a;
+                      }, []);
+
+                      return <ReqTradeContainer 
+                        type={this.props.type}
+                        userA={trade.userA}
+                        userABooks={formattedUserABooks}
+                        userB={trade.userB}
+                        userBBooks={formattedUserBBooks}
+                        user={this.props.user}
+                        key={index}
+                        reqTradeId={trade._id.toString()}
+                        handleOpenBookBtn={this.handleOpenBookBtn}
+                        handleOpenReqTradeBtn={this.handleOpenReqTradeBtn}
+                      />;
+                    })
+                  )}
+                </div>
+              </>
+            )
+          }
         </div>
       );
     }
@@ -281,9 +347,20 @@ class ReqTrade extends React.Component {
 }
 
 export default function WithRouter(props) {
+  let { requestId, tradeId } = useParams();
+  const { state } = useLocation();
   const navigate = useNavigate();
+
   return (
-    <ReqTrade navigate={navigate} type={props.type} user={props.user} route={props.route} />
+    <ReqTrade 
+      navigate={navigate} 
+      type={props.type} 
+      user={props.user} 
+      route={props.route} 
+      navState={state} 
+      requestId={requestId} 
+      tradeId={tradeId}
+    />
   );
 };
 

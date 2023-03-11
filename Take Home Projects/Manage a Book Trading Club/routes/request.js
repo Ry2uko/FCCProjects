@@ -7,6 +7,8 @@ import express from 'express';
 
 const router = express.Router();
 
+// more validations: don't allow more than 3 books, if request already exists
+
 // Dummy User Data
 async function getUserData(id) {
   let user = await UserModel.findOne({ id }).lean();
@@ -16,14 +18,20 @@ async function getUserData(id) {
 router.route('/')
   .get(async (req, res) => {
     let requests;
-    let requestId = req.query.id;
+    let requestId = req.query.id,
+    userA = req.query.userA,
+    userB = req.query.userB; 
+
+    if (userA && userB) return res.status(400).json({ error: 'userA and userB cannot be both a query at the same time.' });
 
     const queryObject = {};
     if (requestId) queryObject._id = requestId;
+    if (userA) queryObject.userA = userA;
+    if (userB) queryObject.userB = userB;
 
     try {
       requests = await RequestModel.find(queryObject, { '__v': 0 }).lean();
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { return res.status(400).json({ error: err.message }); }
 
     requests.reverse();
     if (requestId) {
@@ -63,6 +71,7 @@ router.route('/')
   .delete(async (req, res) => {
     let requestId = req.body.id;
 
+    // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     if (!requestId) return res.status(400).json({ error: 'Invalid or missing request id.' });
 
     let request;
@@ -87,7 +96,8 @@ router.route('/')
   });
 
 async function validateData(req, res, next) {
-  req.user = await getUserData(83095832); // Ry2uko
+  req.user = await getUserData(69445101);
+  
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
   let userAObj, userBObj, books;

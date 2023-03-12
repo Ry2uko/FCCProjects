@@ -23,6 +23,7 @@ class Profile extends React.Component {
     this.renderReqTrade = this.renderReqTrade.bind(this);
     this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+    this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
   }
 
   handleOpenBookBtn(bookId) {
@@ -52,15 +53,24 @@ class Profile extends React.Component {
     this.props.navigate(route);
   }
 
+  handleUserRequestsBtn() {
+    let route = '/trades';
+
+    if (this.props.type === 'profile') route = '/profile/requests';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}/requests`;
+
+    this.props.navigate(route);
+  }
+
   renderReqTrade() {
     const formattedUserABooks = this.state.recentTrade.userABooks.reduce((a, bookId) => {
-      const book = this.state.books.find(book => book._id.toString() == bookId);
+      const book = this.state.books.find(book => book._id.toString() === bookId);
       a.push(book);
       return a;
     }, []);
 
     const formattedUserBBooks = this.state.recentTrade.userBBooks.reduce((a, bookId) => {
-      const book = this.state.books.find(book => book._id.toString() == bookId);
+      const book = this.state.books.find(book => book._id.toString() === bookId);
       a.push(book);
       return a;
     }, []);
@@ -146,18 +156,18 @@ class Profile extends React.Component {
                 <button type="button" id="userBooksBtn" onClick={this.handleUserBooksBtn}><i className="fa-solid fa-book"></i>{this.state.user.username}'s Books</button>
               </div>
             </div>
-            {
-              this.props.type === 'profile' ? (
-                <div className="profile-btn-container">
-                  <button type="button" id="requestsBtn" className="profile-btn" title="Requests">
-                    <i className="fa-solid fa-share"></i>
-                  </button>
+            <div className="profile-btn-container">
+              <button type="button" id="requestsBtn" className="profile-btn" title="Requests" onClick={this.handleUserRequestsBtn}>
+                <i className="fa-solid fa-share"></i>
+              </button>
+              {
+                this.props.type === 'profile' ? (
                   <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
                     <i className="fa-solid fa-gear"></i>
                   </button>
-                </div>
-              ) : null
-            }
+                ) : null
+              }
+            </div>
           </div>
           <div className="recent-trade-container">
             <h2 className="recent-trade-title">Recent Trade</h2>

@@ -24,6 +24,7 @@ class UserTrades extends React.Component {
 
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+    this.renderReqTrade = this.renderReqTrade.bind(this);
   }
 
   handleOpenBookBtn(bookId) {
@@ -101,7 +102,7 @@ class UserTrades extends React.Component {
   }
 
   render() {
-    if (this.state.trades == null || this.state.books == null) {
+    if (this.state.trades === null || this.state.books === null) {
       return (
         <div className="parent-container">
           <div className="UserTrades-header-container">

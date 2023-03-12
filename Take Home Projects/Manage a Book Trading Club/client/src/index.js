@@ -6,6 +6,7 @@ import User from './User/User.js';
 import Profile from './Profile/Profile.js';
 import UserBooks from './UserBooks/UserBooks.js';
 import UserTrades from './UserTrades/UserTrades.js';
+import UserRequests from './UserRequests/UserRequests.js';
 
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -183,6 +184,8 @@ const App = () => {
           <Route exact path="/user/:username" element={<Profile type="user" user={user} />} />
           <Route exact path="/user/:username/books" element={<UserBooks type="user" user={user} />} />
           <Route exact path="/user/:username/trades" element={<UserTrades type="user" user={user} />} />
+          <Route exact path="/user/:username/requests" element={<UserRequests type="user" user={user} />} />
+
           { /* Protected Routes */ }        
           <Route exact path="/profile" element={
             <ProtectedRoute user={user}>
@@ -197,6 +200,11 @@ const App = () => {
           <Route exact path="/profile/trades" element={
             <ProtectedRoute user={user}>
               <UserTrades type="profile" user={user} />
+            </ProtectedRoute>
+          } />
+          <Route exact path="/profile/requests" element={
+            <ProtectedRoute user={user}>
+              <UserRequests type="profile" user={user} />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/books" replace />} />

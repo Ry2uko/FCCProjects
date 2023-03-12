@@ -71,7 +71,7 @@ router.route('/')
   .delete(async (req, res) => {
     let requestId = req.body.id;
 
-    // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     if (!requestId) return res.status(400).json({ error: 'Invalid or missing request id.' });
 
     let request;
@@ -96,7 +96,7 @@ router.route('/')
   });
 
 async function validateData(req, res, next) {
-  req.user = await getUserData(69445101);
+  req.user = await getUserData(83095832);
   
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 

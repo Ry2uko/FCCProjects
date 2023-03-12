@@ -55,7 +55,8 @@ router.route('/')
     req.user = await getUserData(69445101); 
     // Ritsuko 69445101
     // Ry2uko 83095832
-    // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+
     let book, user;
 
     let title = res.locals.title,
@@ -76,20 +77,61 @@ router.route('/')
     res.status(201).json(book);
   })
   .delete(async (req, res) => {
-    return
     let bookId = req.body.id;
-    
-    // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    req.user = await getUserData(69445101); 
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     if (!bookId) return res.status(400).json({ error: 'Book id missing or invalid.' });
 
     let book;
     try {
+      let bookBulkOps = [];
+
       book = await BookModel.findById(bookId).lean();
 
       if (book == null) return res.status(400).json({ error: 'Book not found.' });
 
-      // delete book
-      await BookModel.findByIdAndDelete(bookId);
+      // get all requests that have the book to delete
+      let requestsToDelete = (await RequestModel.find({
+        $or: [
+          { userABooks: book._id.toString() },
+          { userBBooks: book._id.toString() }
+        ]
+      }).lean()).reduce((a, b) => {
+        a.push(b._id.toString());
+        return a;
+      }, []);
+
+      // updated affected books (affBooks)
+      let affBooks = (await BookModel.find({
+        requests: { $in: requestsToDelete }
+      }).lean()).map(affBook => {
+        if (affBook._id.toString() === book._id.toString()) {
+          // delete book
+          bookBulkOps.push({
+            deleteOne: {
+              filter: { _id: affBook._id.toString() }
+            }
+          });
+          return affBook;
+        }
+
+        // filter out requests to be deleted
+        affBook.requests = affBook.requests.filter(affBookReqId => {
+          return !requestsToDelete.includes(affBookReqId)
+        });
+        affBook.requests_count = affBook.requests.length;
+
+        bookBulkOps.push({
+          updateOne: {
+            filter: { _id: affBook._id.toString() },
+            update: {
+              $set: affBook
+            }
+          }
+        });
+
+        return affBook;
+      });
       
       // update user and remove book
       await UserModel.findOneAndUpdate({ username: book.user }, {
@@ -98,11 +140,10 @@ router.route('/')
 
       // delete requests that has this book
       await RequestModel.deleteMany({
-        userABooks: bookId 
+        _id: { $in: requestsToDelete }
       });
-      await RequestModel.deleteMany({
-        userBBooks: bookId 
-      }); 
+
+      await BookModel.bulkWrite(bookBulkOps);
     } catch (err) { return res.status(400).json({ error: err.message }); }
 
     res.status(200).json(book);

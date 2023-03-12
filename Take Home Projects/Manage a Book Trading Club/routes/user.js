@@ -42,6 +42,8 @@ router.route('/')
     }
   })
   .put(async (req, res) => {
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+
     let userId = req.body.id,
     username = req.body.username,
     avatar_url = req.body.avatar_url,
@@ -50,6 +52,7 @@ router.route('/')
     location = req.body.location ;
 
     if (!userId) return res.status(400).json({ error: 'Invalid or missing user id.' });
+    if (userId !== req.user.id) return res.status(400).json({ error: 'Cannot edit other user.'});
     if (![
       username,
       avatar_url,

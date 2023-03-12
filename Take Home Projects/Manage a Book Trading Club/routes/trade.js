@@ -38,7 +38,7 @@ router.route('/')
   })
   .post(async (req, res) => {
     req.user = await getUserData(83095832);  // Ry2uko
-    // if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     // when user accepted the trade
     let request, user;
@@ -87,42 +87,36 @@ router.route('/')
       let reqBulkOps = [], bookBulkOps = [];
 
       // get all requests that have these books
-      let userABooksRequests = (await RequestModel.find({ userABooks: { $in: userABBooks} })).reduce((a, b) => {
+      let requestsToDelete = (await RequestModel.find({
+        $or: [
+          { userABooks: { $in: userABBooks } },
+          { userBBooks: { $in: userABBooks } }
+        ]
+      }).lean()).reduce((a, b) => {
         a.push(b._id.toString());
         return a;
       }, []);
-      let userBBooksRequests = (await RequestModel.find({ userBBooks: { $in: userABBooks} })).reduce((a, b) => {
-        a.push(b._id.toString());
-        return a;
-      }, []);
-      let requestsToDelete = [...new Set(userABooksRequests.concat(userBBooksRequests))]; // remove duplicates
 
       let affBooks = await BookModel.find({
         requests: { $in: requestsToDelete }
       }).lean();
+
       affBooks.forEach(affBook => {
         affBook.requests = affBook.requests.filter(affBookReqId => {
           return !requestsToDelete.includes(affBookReqId);
         });
         affBook.requests_count = affBook.requests.length;
-      });
-      let affBooksId = affBooks.reduce((a, b) => {
-        a.push(b._id.toString());
-        return a;
-      }, []);
-
-      affBooksId.forEach(affBookId => {
-        let targetAffBook = affBooks.find(affBook => affBook._id.toString() === affBookId);
 
         bookBulkOps.push({
           updateOne: {
-            filter: { _id: affBookId },
+            filter: { _id: affBook._id.toString() },
             update: {
-              $set: targetAffBook
+              $set: affBook
             }
           }
         });
       });
+
       userABBooks.forEach(abBookId => {
         let newUser = '';
 
@@ -144,6 +138,7 @@ router.route('/')
           }
         });
       });
+
       requestsToDelete.forEach(reqId => {
         // delete request
         reqBulkOps.push({ deleteOne: {

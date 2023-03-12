@@ -73,7 +73,7 @@ div
         border-radius: 0.45rem
         border: 1.4px solid #1c1c1c64
         margin: 15px 0
-        padding: 30px 0
+        padding: 35px 50px
 
         h4.book-name
           text-align: center
@@ -103,7 +103,18 @@ div
           size: 1.15rem
           family: $ff-firaSans
 
+  &.ReqTrade-header-container
+    @include header-container
+
   &.ReqTrade
+    div
+      &.spec-container
+        span.error-text
+          margin: 1rem 6rem
+          color: #ffffffdf
+          font:
+            family: $ff-alegreyaSans
+            size: 1.8rem
     div 
       &.reqTrades-container
         margin: 1.5rem auto

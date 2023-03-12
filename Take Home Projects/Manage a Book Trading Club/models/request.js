@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const requestSchema = new mongoose.Schema({
-  userA: {
+  userA: { // username
     type: String,
     required: true
   },
@@ -9,7 +9,7 @@ const requestSchema = new mongoose.Schema({
     type: Array,
     default: [] // book id
   },
-  userB: {
+  userB: { // username
     type: String,
     required: true
   },

@@ -7,6 +7,8 @@ import express from 'express';
 
 const router = express.Router();
 
+// more validations: don't allow more than 3 books, if request already exists
+
 // Dummy User Data
 async function getUserData(id) {
   let user = await UserModel.findOne({ id }).lean();
@@ -16,15 +18,22 @@ async function getUserData(id) {
 router.route('/')
   .get(async (req, res) => {
     let requests;
-    let requestId = req.query.id;
+    let requestId = req.query.id,
+    userA = req.query.userA,
+    userB = req.query.userB; 
+
+    if (userA && userB) return res.status(400).json({ error: 'userA and userB cannot be both a query at the same time.' });
 
     const queryObject = {};
     if (requestId) queryObject._id = requestId;
+    if (userA) queryObject.userA = userA;
+    if (userB) queryObject.userB = userB;
 
     try {
       requests = await RequestModel.find(queryObject, { '__v': 0 }).lean();
-    } catch (err) { res.status(500).json({ error: err.message }); }
+    } catch (err) { return res.status(400).json({ error: err.message }); }
 
+    requests.reverse();
     if (requestId) {
       if (requests.length < 1) return res.status(400).json({ error: 'Request not found.' });
       res.status(200).json({ request: requests[0] });
@@ -40,21 +49,16 @@ router.route('/')
 
     let request, books;
     try { 
-      let targetBooksId = [];
-
       request = new RequestModel({ userA, userB, userABooks, userBBooks });
       books = await BookModel.find({ user: userB }).lean();
 
-      // update book
-      userBBooks.forEach(bookId => {
-        let targetBook = books.find(book => book._id.toString() == bookId);
-        targetBooksId.push(targetBook._id.toString());
-      });
-
       await request.save();
-      await BookModel.updateMany({ _id: { $in: targetBooksId } }, {
+      await BookModel.updateMany({ _id: { $in: userBBooks } }, {
         $push: { 
-          requests: request._id.toString(),
+          requests: {
+            $each: [ request._id.toString() ],
+            $position: 0
+          },
         },
         $inc: {
           requests_count: 1
@@ -63,19 +67,44 @@ router.route('/')
     } catch (err) { return res.status(400).json({ error: err.message }); }
 
     res.status(201).json(request);
+  })
+  .delete(async (req, res) => {
+    let requestId = req.body.id;
+
+    if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
+    if (!requestId) return res.status(400).json({ error: 'Invalid or missing request id.' });
+
+    let request;
+    try {
+      request = await RequestModel.findById(requestId).lean();
+
+      if (request == null) return res.status(400).json({ error: 'Request not found.' });
+
+      // delete request
+      await RequestModel.findByIdAndDelete(requestId);
+
+      // remove request in request array in book
+      await BookModel.updateMany({
+        _id: { $in: request.userBBooks }
+      }, {
+        $pull: { requests: request._id.toString() },
+        $inc: { requests_count: -1 }
+      });
+    } catch (err) { return res.status(400).json({ error: err.message }); }
+
+    return res.status(200).json(request);
   });
 
 async function validateData(req, res, next) {
-  req.user = await getUserData(83095832);  
+  req.user = await getUserData(83095832);
+  
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
-  let userBObj, books;
+  let userAObj, userBObj, books;
   let errMsg = '';
 
   if (!req.body.userB) {
     errMsg = 'Invalid or missing userB.';
-  } else if (req.user.username === req.body.userB) {
-    errMsg = "UserB cannot be user.";
   }
 
   if (!req.body.userABooks) {
@@ -94,13 +123,14 @@ async function validateData(req, res, next) {
 
   try {
     books = await BookModel.find({}).lean();
+    userAObj = await UserModel.findOne({ id: req.user.id }).lean();
     userBObj = await UserModel.findOne({ username: req.body.userB }).lean();
-
-    if (userBObj == null) return res.status(400).json({ error: 'UserB not fond.' });
+    
+    if (userBObj == null) return res.status(400).json({ error: 'UserB not found.' });
+    if (userAObj.username === userBObj.username) return res.status(400).json({ error: 'Cannot send request to self >:<' });
 
     let booksIdArr = books.reduce((a, b) => {
-      if (b.available) a.push(b._id.toString());
-
+      a.push(b._id.toString());
       return a;
     }, []);
 
@@ -116,27 +146,26 @@ async function validateData(req, res, next) {
     // if books to trade does not belong to user
     if (!req.body.userABooks.every(bookId => {
       let targetBook = books.find(book => book._id.toString() === bookId);
-      return targetBook.user === req.user.username;
+      return targetBook.user === userAObj.username;
     })) {
-      return res.status(400).json({ error: 'Book in userABooks does not belong to user.' });
+      return res.status(400).json({ error: 'Book in userABooks does not belong to userA.' });
     }
 
     if (!req.body.userBBooks.every(bookId => {
       let targetBook = books.find(book => book._id.toString() === bookId);
       return targetBook.user === req.body.userB;
     })) {
-      return res.status(400).json({ error: 'Book in userBBooks does not belong to user.' });
+      return res.status(400).json({ error: 'Book in userBBooks does not belong to userB.' });
     }
 
-  } catch (err) { return res.status(400).json({ error: 'err.message' }); }
+  } catch (err) { return res.status(400).json({ error: err.message }); }
 
-  res.locals.userA = req.user.username;
+  res.locals.userA = userAObj.username;
   res.locals.userB = userBObj.username;
-  res.locals.userABooks = req.body.userABooks;
-  res.locals.userBBooks = req.body.userBBooks;
+  res.locals.userABooks = [...new Set(req.body.userABooks)]; // remove duplicates
+  res.locals.userBBooks = [...new Set(req.body.userBBooks)];
 
   next();
 }
   
 export default router;
-export { validateData }

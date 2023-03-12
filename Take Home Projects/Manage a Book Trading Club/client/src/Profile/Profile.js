@@ -21,6 +21,18 @@ class Profile extends React.Component {
 
     this.handleUserBooksBtn = this.handleUserBooksBtn.bind(this);
     this.renderReqTrade = this.renderReqTrade.bind(this);
+    this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
+    this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
+    this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
+  }
+
+  handleOpenBookBtn(bookId) {
+    let route = '/books';
+
+    if (this.props.type === 'profile') route = '/profile';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}`;
+
+    this.props.navigate(`/book/${bookId}`, { state: { route }})
   }
 
   handleUserBooksBtn() {
@@ -32,39 +44,48 @@ class Profile extends React.Component {
     this.props.navigate(route);
   }
 
+  handleUserTradesBtn() {
+    let route = '/trades';
+
+    if (this.props.type === 'profile') route = '/profile/trades';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}/trades`;
+
+    this.props.navigate(route);
+  }
+
+  handleUserRequestsBtn() {
+    let route = '/trades';
+
+    if (this.props.type === 'profile') route = '/profile/requests';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}/requests`;
+
+    this.props.navigate(route);
+  }
+
   renderReqTrade() {
     const formattedUserABooks = this.state.recentTrade.userABooks.reduce((a, bookId) => {
-      const book = this.state.books.find(book => book._id.toString() == bookId);
+      const book = this.state.books.find(book => book._id.toString() === bookId);
       a.push(book);
       return a;
     }, []);
 
     const formattedUserBBooks = this.state.recentTrade.userBBooks.reduce((a, bookId) => {
-      const book = this.state.books.find(book => book._id.toString() == bookId);
+      const book = this.state.books.find(book => book._id.toString() === bookId);
       a.push(book);
       return a;
     }, []);
 
 
-    if (this.state.recentTrade.userA === this.state.user.username) {
-      return <ReqTradeContainer 
-        type="trade-profile"
-        userA={this.state.recentTrade.userA}
-        userABooks={formattedUserABooks}
-        userB={this.state.recentTrade.userB}
-        userBBooks={formattedUserBBooks}
-        user={this.state.user}
-      />;
-    } else {
-      return <ReqTradeContainer 
-        type="trade-profile"
-        userA={this.state.recentTrade.userB}
-        userABooks={formattedUserBBooks}
-        userB={this.state.recentTrade.userA}
-        userBBooks={formattedUserABooks}
-        user={this.state.user}
-      />;
-    }
+    return <ReqTradeContainer 
+      type="trade-profile"
+      userA={this.state.recentTrade.userA}
+      userABooks={formattedUserABooks}
+      userB={this.state.recentTrade.userB}
+      userBBooks={formattedUserBBooks}
+      user={this.state.user}
+      reqTradeId={this.state.recentTrade._id.toString()}
+      handleOpenBookBtn={this.handleOpenBookBtn}
+    />;
     
   }
 
@@ -78,7 +99,7 @@ class Profile extends React.Component {
       if (user.trades.length < 1) {
         this.setState({ user });
       } else {
-        let recentTradeId = user.trades[user.trades.length-1];
+        let recentTradeId = user.trades[0];
 
         getData(`/trades?id=${recentTradeId}`).then(({ trade }) => {
           this.setState({ user, recentTrade: trade });
@@ -98,18 +119,20 @@ class Profile extends React.Component {
   render() {
     if (this.state.user == null || this.state.books == null) {
       return (
-        <span className="loading-container">
-          <div className="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </span>
+        <div className="parent-container">
+          <span className="loading-container">
+            <div className="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </span>
+        </div>
       );
     } else {
       return (
-        <div className="Profile">
+        <div className="Profile parent-container">
           <div className="user-container">
             <div className="user-avatar-container">
               <img src={this.state.user.avatar_url} alt="user-avatar" id="userAvatar" />
@@ -133,18 +156,18 @@ class Profile extends React.Component {
                 <button type="button" id="userBooksBtn" onClick={this.handleUserBooksBtn}><i className="fa-solid fa-book"></i>{this.state.user.username}'s Books</button>
               </div>
             </div>
-            {
-              this.props.type === 'profile' ? (
-                <div className="profile-btn-container">
-                  <button type="button" id="requestsBtn" className="profile-btn" title="Requests">
-                    <i className="fa-solid fa-share"></i>
-                  </button>
+            <div className="profile-btn-container">
+              <button type="button" id="requestsBtn" className="profile-btn" title="Requests" onClick={this.handleUserRequestsBtn}>
+                <i className="fa-solid fa-share"></i>
+              </button>
+              {
+                this.props.type === 'profile' ? (
                   <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
                     <i className="fa-solid fa-gear"></i>
                   </button>
-                </div>
-              ) : null
-            }
+                ) : null
+              }
+            </div>
           </div>
           <div className="recent-trade-container">
             <h2 className="recent-trade-title">Recent Trade</h2>
@@ -153,7 +176,7 @@ class Profile extends React.Component {
                 <span className="no-trades-text">No trades yet.</span>
               ) }
             </div>
-            <button type="button" id="userTradesBtn" className="user-btn" title="Trade History">
+            <button type="button" id="userTradesBtn" className="user-btn" title="Trade History"  onClick={this.handleUserTradesBtn}>
               <i className="fa-solid fa-clock-rotate-left"></i>
             </button>
           </div>

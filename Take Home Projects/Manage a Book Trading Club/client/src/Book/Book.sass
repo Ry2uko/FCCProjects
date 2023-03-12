@@ -6,8 +6,141 @@
   background-color: #181818
   border-radius: 0.4rem
 
+div.Book-header-container
+  @include header-container
+
 div.Book
   div
+    &.spec-container
+      span.error-text
+        margin: 1rem 6rem
+        color: #ffffffdf
+        font:
+          family: $ff-alegreyaSans
+          size: 1.8rem
+
+      div
+        &.spec-book-container
+          @include book-container
+          display: flex
+          margin: 1rem 3.5rem
+          padding: 1.5rem 2rem
+          height: 670px
+
+        &.book-info-container
+          position: relative
+          display: flex
+          flex-direction: column
+          flex: 1
+
+          h4.book-title
+            background: $red-gradient
+            -webkit-background-clip: text
+            -webkit-text-fill-color: transparent
+            margin-bottom: 5px
+            font:
+              family: $ff-firaSans
+              size: 3rem
+
+          span
+            &.book-author, &.book-user
+              color: #ffffffd5
+              font:
+                family: $ff-alegreyaSans
+                size: 2.4rem
+
+            &.book-user
+              margin-top: 7px
+
+              a.user-name
+                text-decoration: none
+                color: $red-theme
+
+            &.book-condition
+              margin-top: 2.5rem
+              font:
+                family: $ff-alegreyaSans
+                size: 2rem
+
+        &.book-btn-container
+          margin-bottom: 10px
+          position: absolute
+          bottom: 0
+
+          button
+            &#requestBtn
+              border: 1px solid #ffffff3a
+              background: $black-gradient
+              border-radius: 0.4rem
+              color: #fffffff3
+              padding: 8px 27px
+              cursor: pointer
+              font:
+                family: $ff-firaSans
+                size: 1.8rem
+
+              i
+                font-size: 1.75rem
+                margin-right: 8px
+
+        &.book-requests-container
+          h4.requests-title
+            font:
+              family: $ff-alegreyaSans
+              size: 2.3rem
+            
+            span#requestsCount
+              margin: 0 5px
+              color: $red-theme
+              font-size: 2.5rem
+        
+        &.book-requests
+          width: 550px
+          background-color: #1F1F1F
+          padding: 10px 8px 0 10px
+          border-radius: 0.25rem
+          border: 1.4px solid rgba(74, 74, 74, 0.137254902)
+          display: flex
+          flex-direction: column
+          margin-top: 10px
+          height: 550px
+          overflow: auto
+
+        &.book-request
+          cursor: pointer
+          background-color: #181818
+          border-radius: 0.2rem
+          margin-bottom: 10px
+          padding: 10px 10px 15px 10px
+
+          span.requested-on
+            color: #D0D0D0
+            font:
+              family: $ff-alegreyaSans
+              size: 1.6rem
+
+          div
+            &.user-header-container
+              display: flex
+              margin-bottom: 12px
+
+              a.user-name
+                text-decoration: none
+                color: $red-theme
+                font:
+                  family: $ff-firaSans
+                  size: 2.2rem
+
+            &.user-image-container
+              width: 45px
+              height: 45px
+              margin-right: 11px
+
+              img.user-avatar
+                width: 100%
+                height: 100%
+                border-radius: 0.3rem
+    
     &.books-container
       width: 100%
       height: 100%
@@ -23,30 +156,30 @@ div.Book
           height: 270px
           display: flex
           justify-content: center
+          cursor: pointer
           align-items: center
           flex-direction: column
 
-          &:hover 
-            button.request-trade-button
-              display: block
-
-          button.request-trade-button
-            display: none
-            position: absolute
-            top: 0
-            right: 0
-            margin: 5px 5px
-            cursor: pointer
-            background-color: #ff536d3c
-            color: #FF536C
-            padding: 6px 14px
-            border-radius: 0.5rem
-            border: none
-            outline: none
-            font:
-              size: 1rem
-
           div
+            &.requests-count-container
+              color: #ED3A54
+              background-color: #ed3a552d
+              display: flex
+              padding: 4px 10px
+              cursor: pointer
+              border-radius: 0.4rem
+              margin: 10px 10px
+              justify-content: center
+              align-items: center
+              position: absolute
+              top: 0
+              right: 0
+              
+              span.requests-count
+                font:
+                  size: 1.05rem
+                  family: $ff-firaSans
+
             &.book-center-container
               padding: 0 1.4rem
               flex: 1
@@ -80,6 +213,4 @@ div.Book
                 a.user-name
                   text-decoration: none
                   color: $red-theme
-
-
       

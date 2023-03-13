@@ -1,5 +1,5 @@
 import './UserBooks.sass';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
@@ -238,12 +238,14 @@ export default function WithRouter(props) {
   let { state } = useLocation();
   const navigate = useNavigate();
 
-  if (props.user) {
-    if (username === props.user.username) {
-      navigate('/profile/books', { replace: true });
-      return;
+  useEffect(() => {
+    if (props.user) {
+      if (username === props.user.username) {
+        navigate('/profile/books', { replace: true });
+        return;
+      }
     }
-  }
+  }, []);
 
   return (
     <UserBooks type={props.type} user={props.user} navigate={navigate} username={username} navState={state} />

@@ -1,6 +1,6 @@
 import './UserTrades.sass';
 import { ReqTradeContainer } from '../ReqTrade/ReqTrade';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
@@ -150,12 +150,14 @@ export default function WithRouter(props) {
   let { state } = useLocation();
   const navigate = useNavigate();
 
-  if (props.user) {
-    if (username === props.user.username) {
-      navigate('/profile/trades', { replace: true });
-      return;
+  useEffect(() => {
+    if (props.user) {
+      if (username === props.user.username) {
+        navigate('/profile/trades', { replace: true });
+        return;
+      }
     }
-  }
+  }, []);
 
   return (
     <UserTrades type={props.type} user={props.user} navigate={navigate} username={username} navState={state} />

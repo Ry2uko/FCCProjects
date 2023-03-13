@@ -1,4 +1,5 @@
 @import '../index.sass' 
+@import '../Book/Book.sass'
 /* for variables */
 
 div
@@ -31,7 +32,7 @@ div
       &.panel-container
         flex-grow: 1
         flex-basis: 0
-        $panel-gap: 15px
+        $panel-gap: 20px
 
         &.left-panel-container
           margin-right: $panel-gap
@@ -60,7 +61,7 @@ div
         border: 1.4px solid #4a4a4a23
         overflow: auto
         border-radius: 0.2rem
-        padding: 1rem 
+        padding: 1rem 1.2rem
 
       &.request-book
         display: flex
@@ -115,6 +116,106 @@ div
           font:
             family: $ff-alegreyaSans
             size: 1.8rem
+
+        div
+          &.spec-request-container
+            @include book-container
+            display: flex
+            flex-direction: column
+            margin: 0.2rem 5rem 1rem 5rem
+            padding: 2rem 2rem
+            height: 685px
+          
+          &.spec-book-panels-container
+            display: flex
+            justify-content: center
+          
+          &.spec-book-panel
+            margin: 0 1.5rem
+            display: flex
+            flex-direction: column
+
+            span.book-label
+              margin: 0 0 10px 0
+              color: #ffffffda
+              font:
+                family: $ff-cabin
+                size: 1.4rem
+
+          &.books-container
+            width: 680px
+            height: 350px
+            background-color: #1f1f1f
+            padding: 12px 12px 0 12px
+            border-radius: 0.25rem
+            border: 1.4px solid rgba(74, 74, 74, 0.137254902)
+            display: flex
+            flex-direction: column
+            overflow: auto
+
+          &.spec-book
+            text-align: center
+            cursor: pointer
+            background-color: #181818
+            border-radius: 0.2rem
+            margin-bottom: 12px
+            padding: 20px 
+
+            h4.spec-book-title
+              color: #fdfdfd
+              font: 
+                size: 1.65rem
+                family: $ff-firaSans
+            
+            h5.spec-book-author
+              color: #ffffffd7
+              margin-top: 5px
+              font:
+                size: 1.35rem
+                family: $ff-cabin
+
+          &.spec-info-container
+            display: flex
+            flex-direction: column
+            margin: 1rem 0 0 2rem
+
+          &.span-container
+            display: flex
+            flex-direction: column
+            padding: 1.5rem 0
+            
+            span
+              margin-bottom: 8px
+              font:
+                family: $ff-alegreyaSans
+                size: 1.65rem
+
+              span, a
+                text-decoration: none
+                margin-left: 5px
+                color: $red-theme
+
+          &.spec-btn-container
+            margin-left: 5px
+            button
+              border: none
+              width: 45px
+              height: 45px
+              cursor: pointer
+              border-radius: 0.3rem
+              color: #000000e6
+              margin-right: 20px
+              font:
+                size: 1.9rem
+                family: $ff-firaSans
+              
+              &#acceptRequest
+                background: linear-gradient(135deg, #56fe8d 0%, #15d553 100%)
+
+              &#rejectRequest
+                background: $red-theme
+          
+
     div 
       &.reqTrades-container
         margin: 1.5rem auto

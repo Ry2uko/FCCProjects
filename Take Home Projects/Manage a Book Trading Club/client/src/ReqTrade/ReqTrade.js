@@ -1,5 +1,5 @@
 import './ReqTrade.sass';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 import React from 'react';
 import $ from 'jquery';
 import equal from 'fast-deep-equal';
@@ -130,6 +130,8 @@ class ReqTrade extends React.Component {
     this.renderStateData = this.renderStateData.bind(this);
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
+    this.handleAcceptRequest = this.handleAcceptRequest.bind(this);
+    this.handleRejectRequest = this.handleRejectRequest.bind(this);
   }
 
   renderRequestById() {
@@ -151,10 +153,92 @@ class ReqTrade extends React.Component {
       )
     }
 
-    return;
+    return (
+      <>
+        <div className="ReqTrade-header-container">
+          <button type="button" id="backBtn" onClick={this.handleBackBtn}><i className="fa-solid fa-caret-left"></i></button>
+          <h2 className="header-title">Request {this.props.requestId}</h2>
+        </div>
+        <div className="spec-container">
+          <div className="spec-request-container">
+            <div className="spec-book-panels-container">
+              <div className="spec-book-panel panel-left">
+                <span className="book-label">Wants to trade:</span>
+                <div className="books-container">
+                  {this.state.requests[0].userABooks.map((userABookId, index) => {
+                    let targetBook = this.state.books.find(book => book._id.toString() === userABookId);
+                    return (
+                      <div className="spec-book" key={index} onClick={() => { this.handleOpenBookBtn(userABookId) }}>
+                        <h4 className="spec-book-title">{targetBook.title}</h4>
+                        <h5 className="spec-book-author">{targetBook.author}</h5>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="spec-book-panel panel-right">
+              <span className="book-label">For:</span>
+                <div className="books-container">
+                {this.state.requests[0].userBBooks.map((userBBookId, index) => {
+                    let targetBook = this.state.books.find(book => book._id.toString() === userBBookId);
+                    return (
+                      <div className="spec-book" key={index} onClick={() => { this.handleOpenBookBtn(userBBookId) }}>
+                        <h4 className="spec-book-title">{targetBook.title}</h4>
+                        <h5 className="spec-book-author">{targetBook.author}</h5>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+            <div className="spec-info-container">
+              <div className="span-container">
+                <span className="requested-by-span">
+                  Requested by: <Link className="requested-by" to={
+                    this.props.user ? (
+                      this.props.user.username === this.state.requests[0].userA ? 
+                      `/profile` : `/user/${this.state.requests[0].userA}`
+                    ) : `/user/${this.state.requests[0].userA}`
+                  }>{this.state.requests[0].userA}</Link>
+                </span>
+                <span className="requested-to-span">
+                  Requested to: <Link className="requested-to" to={
+                    this.props.user ? (
+                      this.props.user.username === this.state.requests[0].userB ? 
+                      `/profile` : `/user/${this.state.requests[0].userB}`
+                    ) : `/user/${this.state.requests[0].userB}`
+                  }>{this.state.requests[0].userB}</Link>
+                </span>
+                <span className="requested-on-span">
+                  Requested on: <span className="requested-on">{this.state.requests[0].requested_on}</span>
+                </span>
+              </div>
+              {
+                this.props.user ? (
+                  targetRequest.userB === this.props.user.username ? (
+                    <div className="spec-btn-container">
+                      <button type="button" id="acceptRequest" onClick={() => { this.handleAcceptRequest(targetRequest._id.toString()) }}><i className="fa-solid fa-check"></i></button>
+                      <button type="button" id="rejectRequest" onClick={() => { this.handleRejectRequest(targetRequest._id.toString()) }}><i className="fa-solid fa-xmark"></i></button>
+                    </div>
+                  ) : null
+                ) : null
+              }
+            </div>
+          </div>
+        </div>
+      </>
+    );
   }
 
   renderTradeById() {
+    return;
+  }
+
+  handleAcceptRequest(requestId) {
+    return;
+  }
+
+  handleRejectRequest(requestId) {
     return;
   }
 
@@ -170,7 +254,12 @@ class ReqTrade extends React.Component {
   }
 
   handleOpenBookBtn(bookId) {
-    this.props.navigate(`/book/${bookId}`, { state: { route: this.props.route }});
+    let route;
+    if (this.props.route === '/request') route = `/request/${this.props.requestId}`;
+    else if (this.props.route === '/trade') route = `/trade/${this.props.tradeId}`;
+    else route = this.props.route;
+
+    this.props.navigate(`/book/${bookId}`, { state: { route } });
   }
 
   renderStateData() {

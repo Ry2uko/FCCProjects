@@ -43,7 +43,7 @@ const CreateModal = () => {
       </div>
       <div className="create-option-container">
         <h6 className="option-title">New Request</h6>
-        <span className="option-description">Create a request for a trade</span>
+        <span className="option-description">Create a request to trade</span>
       </div>  
     </div>
   );

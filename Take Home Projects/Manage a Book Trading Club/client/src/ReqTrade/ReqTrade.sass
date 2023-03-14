@@ -32,7 +32,7 @@ div
       &.panel-container
         flex-grow: 1
         flex-basis: 0
-        $panel-gap: 20px
+        $panel-gap: 15px
 
         &.left-panel-container
           margin-right: $panel-gap
@@ -61,7 +61,7 @@ div
         border: 1.4px solid #4a4a4a23
         overflow: auto
         border-radius: 0.2rem
-        padding: 1rem 1.2rem
+        padding: 1rem 1rem
 
       &.request-book
         display: flex
@@ -87,22 +87,6 @@ div
           text-align: center
           font:
             size: 1.3rem
-
-      &.requests-count-container
-        position: absolute
-        border-radius: 0.4rem
-        padding: 3px 10px
-        margin: 8px
-        display: flex
-        justify-content: center
-        align-items: center
-        top: 0
-        right: 0
-        color: #ED3A54
-        background-color: #ed3a552d
-        font:
-          size: 1.15rem
-          family: $ff-firaSans
 
   &.ReqTrade-header-container
     @include header-container
@@ -179,6 +163,19 @@ div
             flex-direction: column
             margin: 1rem 0 0 2rem
 
+            button#cancelRequest
+              background-color: rgba(237, 58, 85, 0.1764705882)
+              color: $red-theme
+              border-radius: 0.3rem
+              border: 1px solid rgba(237, 58, 85, 0.4470588235)
+              width: 220px
+              height: 45px
+              cursor: pointer
+              opacity: 0.95
+              font:
+                family: $ff-firaSans
+                size: 1.5rem
+                
           &.span-container
             display: flex
             flex-direction: column
@@ -197,6 +194,14 @@ div
 
           &.spec-btn-container
             margin-left: 5px
+
+            span.spec-label
+              color: #ffffffd6
+              margin-left: 10px
+              font:
+                family: $ff-alegreyaSans
+                size: 1.6rem
+
             button
               border: none
               width: 45px

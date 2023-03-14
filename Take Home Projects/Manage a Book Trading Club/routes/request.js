@@ -69,6 +69,8 @@ router.route('/')
     res.status(201).json(request);
   })
   .delete(async (req, res) => {
+    req.user = await getUserData(69445101); // dummy data
+
     let requestId = req.body.id;
 
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
@@ -79,6 +81,7 @@ router.route('/')
       request = await RequestModel.findById(requestId).lean();
 
       if (request == null) return res.status(400).json({ error: 'Request not found.' });
+      if (request.userA !== req.user.username) return res.status(400).json({ error: 'Request not by user.' });
 
       // delete request
       await RequestModel.findByIdAndDelete(requestId);
@@ -96,11 +99,11 @@ router.route('/')
   });
 
 async function validateData(req, res, next) {
-  req.user = await getUserData(83095832);
+  req.user = await getUserData(69445101);
   
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
-  let userAObj, userBObj, books;
+  let userAObj, userBObj, books, requests;
   let errMsg = '';
 
   if (!req.body.userB) {
@@ -111,24 +114,70 @@ async function validateData(req, res, next) {
     errMsg = 'Invalid or missing userA books.';
   } else if (req.body.userABooks.length < 1) {
     errMsg = 'No books to trade.';
+  } else if (req.body.userABooks.length > 3) {
+    errMsg = 'Books to trade can not be more than 3.';
+  } else if ([...new Set(req.body.userABooks)].length !== req.body.userABooks.length) {
+    errMsg = 'userABooks contains duplicate books.';
   }
+
 
   if (!req.body.userBBooks) {
     errMsg = 'Invalid or missing userB books.';
   } else if (req.body.userBBooks.length < 1) {
     errMsg = 'No books to trade.';
+  } else if (req.body.userBBooks.length > 3) {
+    errMsg = 'Books to trade can not be more than 3.';
+  } else if ([...new Set(req.body.userBBooks)].length !== req.body.userBBooks.length) {
+    errMsg = 'userBBooks contains duplicate books.';
   }
 
   if (errMsg) return res.status(400).json({ error: errMsg });
 
   try {
     books = await BookModel.find({}).lean();
+    requests = await RequestModel.find({}).lean();
     userAObj = await UserModel.findOne({ id: req.user.id }).lean();
     userBObj = await UserModel.findOne({ username: req.body.userB }).lean();
     
     if (userBObj == null) return res.status(400).json({ error: 'UserB not found.' });
     if (userAObj.username === userBObj.username) return res.status(400).json({ error: 'Cannot send request to self >:<' });
 
+    if (requests.length > 0) {
+      /* check for duplicates */
+
+      const getSymmDiff = (arr1, arr2) => {
+        // get symmetrical difference
+        return arr1.filter(x => !arr2.includes(x))
+        .concat(arr2.filter(x => !arr1.includes(x)));
+      }
+
+      // if other user already has this request
+      let otherUserRequests = requests.filter(request => {
+        // filter other user's requests to user
+        return (request.userA === userBObj.username) && (request.userB === userAObj.username);
+      });
+
+      let otherUserDuplicate = otherUserRequests.find(request => {
+        // if books are all the same
+        return (getSymmDiff(request.userABooks, req.body.userBBooks).length + 
+          getSymmDiff(request.userBBooks, req.body.userABooks).length) < 1;
+      });
+
+      if (otherUserDuplicate) return res.status(400).json({ error: 'Other user has already requested this to you.'});
+
+      // if you already have this request
+      let userRequests = requests.filter(request => {
+        return (request.userA === userAObj.username) && (request.userB === userBObj.username);
+      });
+      
+      let userDuplicate = userRequests.find(request => {
+        return (getSymmDiff(request.userABooks, req.body.userABooks).length +
+        getSymmDiff(request.userBBooks, req.body.userBBooks).length) < 1;
+      });
+
+      if (userDuplicate) return res.status(400).json({ error: 'You already have this request.' });
+    }
+    
     let booksIdArr = books.reduce((a, b) => {
       a.push(b._id.toString());
       return a;
@@ -162,8 +211,8 @@ async function validateData(req, res, next) {
 
   res.locals.userA = userAObj.username;
   res.locals.userB = userBObj.username;
-  res.locals.userABooks = [...new Set(req.body.userABooks)]; // remove duplicates
-  res.locals.userBBooks = [...new Set(req.body.userBBooks)];
+  res.locals.userABooks = req.body.userABooks; // remove duplicates
+  res.locals.userBBooks = req.body.userBBooks;
 
   next();
 }

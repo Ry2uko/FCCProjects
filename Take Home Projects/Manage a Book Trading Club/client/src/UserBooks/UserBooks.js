@@ -19,7 +19,8 @@ class UserBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: null
+      books: null,
+      deleteBtnLock: false
     };
 
     this.handleBackBtn = this.handleBackBtn.bind(this);
@@ -29,7 +30,7 @@ class UserBooks extends React.Component {
   }
 
   reloadState() {
-    this.setState({ books: null });
+    this.setState({ books: null, deleteBtnLock: false });
 
     let route = '';
 
@@ -52,6 +53,8 @@ class UserBooks extends React.Component {
   }
 
   handleDeleteBookBtn(bookId) {
+    if (!bookId || this.state.deleteBtnLock) return;
+    this.setState({ deleteBtnLock: true });
     const MS = 200;
 
     $('.user-dropdown-content').css('display', 'none');

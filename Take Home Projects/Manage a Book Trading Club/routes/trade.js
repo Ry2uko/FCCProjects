@@ -8,8 +8,6 @@ import express from 'express';
 
 const router = express.Router();
 
-// deleting request, and removing from requests in books
-
 // Dummy User Data
 async function getUserData(id) {
   let user = await UserModel.findOne({ id }).lean();
@@ -37,7 +35,7 @@ router.route('/')
     }
   })
   .post(async (req, res) => {
-    req.user = await getUserData(83095832);  // Ry2uko
+    req.user = await getUserData(69445101);
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     // when user accepted the trade

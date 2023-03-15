@@ -280,7 +280,9 @@ class ReqTrade extends React.Component {
       data: { id: requestId },
       success: () => {
         this.renderStateData();
-        this.props.navigate('/requests', { replace: true });
+        let route = '/requests';
+        if (this.props.navState) route = this.props.navState.route;
+        this.props.navigate(route, { replace: true });
       },
       error: resp => {
         const errMsg = resp.responseJSON.error;
@@ -318,7 +320,9 @@ class ReqTrade extends React.Component {
       data: { id: requestId },
       success: () => {
         this.renderStateData();
-        this.props.navigate('/requests', { replace: true });
+        let route = '/requests';
+        if (this.props.navState) route = this.props.navState.route;
+        this.props.navigate(route, { replace: true });
       },
       error: resp => {
         const errMsg = resp.responseJSON.error;

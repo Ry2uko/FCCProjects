@@ -4,8 +4,6 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
-// no trades yet
-
 async function getData(route) {
   const response = await fetch(route);
   const dataObj = await response.json();

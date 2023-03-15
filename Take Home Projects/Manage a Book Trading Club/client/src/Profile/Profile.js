@@ -25,6 +25,7 @@ class Profile extends React.Component {
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
     this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
     this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
+    this.handleProfileSettingsBtn = this.handleProfileSettingsBtn.bind(this);
   }
 
   handleOpenReqTradeBtn(reqTradeId) {
@@ -43,6 +44,10 @@ class Profile extends React.Component {
     else if (this.props.type === 'user') route = `/user/${this.props.username}`;
 
     this.props.navigate(`/book/${bookId}`, { state: { route }})
+  }
+
+  handleProfileSettingsBtn() {
+    this.props.navigate('/profile/settings');
   }
 
   handleUserBooksBtn() {
@@ -154,7 +159,7 @@ class Profile extends React.Component {
                   <span id="userName">
                     {this.state.user.username}
                   </span>
-                  { this.state.user.location ? (
+                  { !this.state.user.hide_location ? (
                     <span className="location-container">
                       <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
                       <span id="userLocation">{this.state.user.location}</span>
@@ -173,7 +178,7 @@ class Profile extends React.Component {
               </button>
               {
                 this.props.type === 'profile' ? (
-                  <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
+                  <button type="button" id="settingsBtn" className="profile-btn" title="Settings" onClick={this.handleProfileSettingsBtn}>
                     <i className="fa-solid fa-gear"></i>
                   </button>
                 ) : null

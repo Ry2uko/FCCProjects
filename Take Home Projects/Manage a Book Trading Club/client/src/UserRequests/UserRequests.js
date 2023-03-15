@@ -170,7 +170,11 @@ class UserRequests extends React.Component {
                       );
                     })
                   ) : (
-                    <span className="error-text">You don't have any request yet</span>
+                    this.props.type === 'profile' ? (
+                      <span className="error-text">You don't have any requests yet</span>
+                    ) : (
+                      <span className="error-text">User doesn't have any requests yet</span>
+                    )
                   )
                 ) : (
                   this.state.requestsToUser.length > 0 ? (
@@ -201,7 +205,11 @@ class UserRequests extends React.Component {
                       );
                     })
                   ) : (
-                    <span className="error-text">You don't have any incoming requests</span>
+                    this.props.type === 'profile' ? (
+                      <span className="error-text">You don't have any incoming requests</span>
+                    ) : (
+                      <span className="error-text">User doesn't have any incoming requests</span>
+                    )
                   )
                 )
               }

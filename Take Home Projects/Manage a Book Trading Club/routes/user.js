@@ -10,6 +10,10 @@ const router = express.Router();
 
 router.route('/')
   .get(async (req, res) => {
+    req.user = {
+      id: 69445101
+    };
+
     let users;
     let userId = req.query.id,
     username = req.query.username,
@@ -27,13 +31,19 @@ router.route('/')
 
     users.forEach((user, index) => {
       if (user.hide_location) {
-        delete user.location;
         if (location) return users.splice(index, 1);
+        if (req.user) {
+          if (req.user.id !== user.id) {
+            delete user.location
+          }
+        } else {
+          delete user.location
+        }
       }
-      delete user.hide_location;
     });
 
     users.reverse();
+    
     if (userId || username) {
       if (users.length < 1) return res.status(400).json({ error: 'User not found.' });
       res.status(200).json({ user: users[0] });
@@ -68,17 +78,18 @@ router.route('/')
       let validationUser;
       user = await UserModel.findOne({ id: userId }).lean();
       let oldUsername = user.username;
-      if (oldUsername === username) return res.status(400).json({ error: 'Why bother?'});
 
       if (user == null) return res.status(400).json({ error: 'User not found.' });
       
-      validationUser = await UserModel.findOne({ username });
-      if (validationUser != null) return res.status(400).json({ error: 'User with that name already exists.' });
+      if (username && oldUsername !== username) {
+        validationUser = await UserModel.findOne({ username });
+        if (validationUser != null) return res.status(400).json({ error: 'User with that name already exists.' });
+      }
 
       let propObj = { username, avatar_url, hide_location, location, bio };
       Object.keys(propObj).forEach(prop => {
         if (propObj[prop] === undefined) return;
-        if (prop === 'hide_location') user['hide_location'] = Boolean(propObj[prop]);
+        if (prop === 'hide_location') user[prop] = propObj[prop] === 'true' ? true : false;
         else user[prop] = propObj[prop];
       });
 

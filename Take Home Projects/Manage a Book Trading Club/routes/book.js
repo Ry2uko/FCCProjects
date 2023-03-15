@@ -50,9 +50,6 @@ router.route('/')
     }
   })
   .post(validateData, async (req, res) => {
-    req.user = await getUserData(69445101); 
-    // Ritsuko 69445101
-    // Ry2uko 83095832
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     let book, user;
@@ -76,7 +73,6 @@ router.route('/')
   })
   .delete(async (req, res) => {
     let bookId = req.body.id;
-    req.user = await getUserData(69445101); 
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     if (!bookId) return res.status(400).json({ error: 'Book id missing or invalid.' });
 
@@ -101,7 +97,7 @@ router.route('/')
 
       // updated affected books (affBooks)
       let affBooks = (await BookModel.find({
-        requests: { $in: requestsToDelete }
+        $or: [ { requests: { $in: requestsToDelete } }, { _id: book._id.toString() } ]
       }).lean()).map(affBook => {
         if (affBook._id.toString() === book._id.toString()) {
           // delete book
@@ -130,7 +126,7 @@ router.route('/')
 
         return affBook;
       });
-      
+
       // update user and remove book
       await UserModel.findOneAndUpdate({ username: book.user }, {
         $pull: { books: bookId  }

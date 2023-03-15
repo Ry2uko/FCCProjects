@@ -29,7 +29,7 @@ class UserBooks extends React.Component {
     this.reloadState = this.reloadState.bind(this);
   }
 
-  reloadState() {
+  reloadState(rvdBookId) {
     this.setState({ books: null, deleteBtnLock: false });
 
     let route = '';
@@ -43,7 +43,7 @@ class UserBooks extends React.Component {
      
       userBooks.forEach(bookId => {
         let book = books.find(book => book._id.toString() === bookId);
-        if (!book) return;
+        if (!book || book._id.toString() === rvdBookId) return;
         
         stateBooks.push(book);
       });
@@ -93,7 +93,7 @@ class UserBooks extends React.Component {
           method: 'DELETE',
           url: '/books',
           data: { id: bookId },
-          success: component.reloadState(),
+          success: component.reloadState(bookId),
           error: resp => {
             const errMsg = resp.responseJSON.error;
             alert('Failed to delete book: ' + errMsg);

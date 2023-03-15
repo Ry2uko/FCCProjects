@@ -10,10 +10,6 @@ const router = express.Router();
 
 router.route('/')
   .get(async (req, res) => {
-    req.user = {
-      id: 69445101
-    };
-
     let users;
     let userId = req.query.id,
     username = req.query.username,
@@ -29,11 +25,11 @@ router.route('/')
       users = await UserModel.find(queryObject, { '__v': 0, '_id': 0 }).lean();
     } catch (err) { res.status(500).json({ error: err.message }); }
 
-    users.forEach((user, index) => {
+    users.forEach((user, index) => {  
       if (user.hide_location) {
         if (location) return users.splice(index, 1);
         if (req.user) {
-          if (req.user.id !== user.id) {
+          if (parseInt(req.user.id) !== user.id) {
             delete user.location
           }
         } else {
@@ -62,9 +58,9 @@ router.route('/')
     location = req.body.location ;
 
     if (!userId) return res.status(400).json({ error: 'Invalid or missing user id.' });
+    if (username === '' || !username) return res.status(400).json({ error: 'Invalid or missing username.' });
     if (userId !== req.user.id) return res.status(400).json({ error: 'Cannot edit other user.'});
     if (![
-      username,
       avatar_url,
       bio,
       hide_location,

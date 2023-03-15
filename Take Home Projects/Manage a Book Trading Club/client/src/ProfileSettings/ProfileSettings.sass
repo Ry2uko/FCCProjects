@@ -13,6 +13,24 @@ div.ProfileSettings
       display: flex
       flex-direction: column
       padding: 1.5rem 1rem
+      position: relative
+
+      button#logOutBtn
+        border: none
+        margin: 2rem 2rem
+        position: absolute
+        bottom: 0
+        right: 0
+        width: 160px
+        opacity: 0.95
+        height: 50px
+        cursor: pointer
+        color: #fff
+        border-radius: 0.5rem
+        background: $red-gradient
+        font:
+          family: $ff-cabin
+          size: 1.6rem
 
     &.input-container
       display: flex
@@ -94,6 +112,7 @@ div.ProfileSettings
 
     &.avatar-container
       width: 300px
+
       img#userAvatarPreview
         border-radius: 0.3rem
         width: 100%

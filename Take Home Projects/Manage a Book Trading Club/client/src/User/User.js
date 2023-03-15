@@ -19,6 +19,11 @@ class User extends React.Component {
     this.handleUserBooksBtn = this.handleUserBooksBtn.bind(this);
     this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
     this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
+    this.handleImageError = this.handleImageError.bind(this);
+  }
+
+  handleImageError(evnt) {
+    $(evnt.target).attr('src', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
   }
 
   handleUserRequestsBtn(evnt) {
@@ -94,7 +99,7 @@ class User extends React.Component {
                   <div className="user-info-main-container">
                     <div className="user-title-container">
                       <div className="user-image-container">
-                        <img src={user.avatar_url} className="user-avatar" alt="User Avatar" />
+                        <img src={user.avatar_url} className="user-avatar" alt="User Avatar" onError={(e) => this.handleImageError(e)}/>
                       </div>
                       <h4 className="user-name-container">
                         { this.props.user ? (

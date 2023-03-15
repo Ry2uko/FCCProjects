@@ -26,6 +26,11 @@ class Profile extends React.Component {
     this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
     this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
     this.handleProfileSettingsBtn = this.handleProfileSettingsBtn.bind(this);
+    this.handleImageError = this.handleImageError.bind(this);
+  }
+
+  handleImageError(evnt) {
+    $(evnt.target).attr('src', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
   }
 
   handleOpenReqTradeBtn(reqTradeId) {
@@ -151,7 +156,7 @@ class Profile extends React.Component {
         <div className="Profile parent-container">
           <div className="user-container">
             <div className="user-avatar-container">
-              <img src={this.state.user.avatar_url} alt="user-avatar" id="userAvatar" />
+              <img src={this.state.user.avatar_url} alt="user-avatar" id="userAvatar" onError={(e) => this.handleImageError(e)} />
             </div>
             <div className="user-info-container">
               <div className="info-main-container">

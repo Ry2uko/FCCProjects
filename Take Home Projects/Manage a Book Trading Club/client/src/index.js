@@ -8,6 +8,7 @@ import UserBooks from './UserBooks/UserBooks.js';
 import UserTrades from './UserTrades/UserTrades.js';
 import UserRequests from './UserRequests/UserRequests.js';
 import ProfileSettings from './ProfileSettings/ProfileSettings.js'
+import NewBook from './NewBook/NewBook.js';
 
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -16,7 +17,8 @@ import {
   Routes,
   Route,
   Link,
-  Navigate
+  Navigate,
+  useNavigate
 } from 'react-router-dom';
 import $ from 'jquery';
 
@@ -36,13 +38,44 @@ function toggleUserDropdown() {
 }
 
 const CreateModal = () => {
+  const navigate = useNavigate();
+
+  const closeModal = (cb) => {
+    const MS = 200;
+
+    $('.CreateModal').animate({
+      'opacity': 0
+    }, MS, function(){
+      $(this).css('display', 'none');
+      cb();
+    });
+    $('.parent-container').animate({ 
+      'opacity': 1 
+    }, MS, function(){
+      $(this).css('pointerEvents', 'auto')
+    });
+    $(document).off('click');
+  }
+
+  const handleNewBook = () => {
+    closeModal(() => {
+      navigate('/new/book');
+    });
+  }
+
+  const handleNewRequest = () => {
+    closeModal(() => {
+      navigate('/new/request');
+    });
+  }
+
   return (
     <div className="CreateModal">
-      <div className="create-option-container">
+      <div className="create-option-container" onClick={handleNewBook}>
         <h6 className="option-title">New Book</h6>
         <span className="option-description">Create a book for trade</span>
       </div>
-      <div className="create-option-container">
+      <div className="create-option-container" onClick={handleNewRequest}>
         <h6 className="option-title">New Request</h6>
         <span className="option-description">Create a request to trade</span>
       </div>  
@@ -113,7 +146,7 @@ const App = () => {
     });
   }
 
-  useEffect(() => {
+  const reloadData = () => {
     // get user from /user
     getData('/auth').then(data => {
       if (data.error) {
@@ -150,7 +183,11 @@ const App = () => {
       $('.dropdown-content-btn').on('click', () => {
         $('.user-dropdown-content').css('display', 'none');
       });
-    })
+    });
+  }
+
+  useEffect(() => {
+    reloadData();
   }, []);
 
   if (user === undefined) {
@@ -210,7 +247,12 @@ const App = () => {
           } />
           <Route exact path="/profile/settings" element={
             <ProtectedRoute user={user}>
-              <ProfileSettings user={user} />
+              <ProfileSettings user={user} reloadIndexData={reloadData}/>
+            </ProtectedRoute>
+          } />
+          <Route exact path="/new/book" element={
+            <ProtectedRoute user={user}>
+              <NewBook user={user} />
             </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/books" replace />} />

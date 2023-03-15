@@ -24,8 +24,7 @@ const bookConditions = [
 router.route('/')
   .get(async (req, res) => {
     let books;
-    let bookId = req.query.id, 
-    isAvailable = req.query.available,
+    let bookId = req.query.id,
     title = req.query.title,
     author = req.query.author,
     user = req.query.user,
@@ -33,7 +32,6 @@ router.route('/')
     
     const queryObject = {};
     if (bookId) queryObject._id = bookId;
-    if (isAvailable) queryObject.available = isAvailable;
     if (title) queryObject.title = title;
     if (author) queryObject.author = author;
     if (user) queryObject.user = user;

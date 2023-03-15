@@ -27,6 +27,11 @@ class UserRequests extends React.Component {
     this.handleFilterPendingNav = this.handleFilterPendingNav.bind(this);
     this.handleFilterIncomingNav = this.handleFilterIncomingNav.bind(this);
     this.renderState = this.renderState.bind(this);
+    this.handleImageError = this.handleImageError.bind(this);
+  }
+
+  handleImageError(evnt) {
+    $(evnt.target).attr('src', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
   }
 
   renderState() {
@@ -149,7 +154,7 @@ class UserRequests extends React.Component {
                         <div className="request-container" key={index} onClick={(e) => {this.handleOpenRequest(request._id.toString(), e)}}>
                           <div className="request-header-container">
                             <div className="header-image-container">
-                              <img src={targetUser.avatar_url} className="request-user-image" alt="user-avatar"/>
+                              <img src={targetUser.avatar_url} className="request-user-image" alt="user-avatar" onError={(e) => this.handleImageError(e)}/>
                             </div>
                             <Link className="request-user-name" to={
                               this.props.user ? (
@@ -184,7 +189,7 @@ class UserRequests extends React.Component {
                         <div className="request-container" key={index} onClick={(e) => {this.handleOpenRequest(request._id.toString(), e)}}>
                           <div className="request-header-container">
                             <div className="header-image-container">
-                              <img src={targetUser.avatar_url} className="request-user-image" alt="user-avatar"/>
+                              <img src={targetUser.avatar_url} className="request-user-image" alt="user-avatar" onError={(e) => this.handleImageError(e)} />
                             </div>
                             <Link className="request-user-name" to={
                               this.props.user ? (

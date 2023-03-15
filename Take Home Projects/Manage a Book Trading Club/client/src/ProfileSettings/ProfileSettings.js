@@ -1,5 +1,5 @@
 import './ProfileSettings.sass';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
@@ -15,7 +15,8 @@ class ProfileSettings extends React.Component {
     super(props);
     this.state = {
       user: null,
-      placeholderImage: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
+      saveBtnLock: false,
+      logOutLock: false
     };
 
     this.avatarUrl = null;
@@ -26,6 +27,26 @@ class ProfileSettings extends React.Component {
     this.handleSaveBtn = this.handleSaveBtn.bind(this);
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.renderStateData = this.renderStateData.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+  }
+
+  handleLogOut() {
+    if (this.state.logOutLock) return;
+    this.setState({ logOutLock: true });
+
+    $.ajax({
+      method: 'POST',
+      url: '/logout',
+      data: {},
+      success: () => {
+        this.props.reloadIndexData();
+        this.props.navigate('/books', { replace: true });
+      },
+      error: resp => {
+        const errMsg = resp.responseJSON;
+        alert('Failed to logout: ' + errMsg.error);
+      }
+    });
   }
 
   handleBackBtn() {
@@ -37,15 +58,19 @@ class ProfileSettings extends React.Component {
   }
 
   handleSaveBtn() {
-    const updateObj = {
-      id: this.props.user.id
-    };
+    if (this.state.saveBtnLock) return;
+    this.setState({ saveBtnLock: true });
 
-    updateObj.hide_location = this.state.user.hide_location;
-    updateObj.username = this.state.user.username;
-    updateObj.avatar_url = this.state.user.avatar_url;
-    updateObj.bio = this.state.user.bio;
-    updateObj.location = this.state.user.location;
+    console.log(this.state.user);
+
+    const updateObj = {
+      id: this.props.user.id,
+      hide_location: this.state.user.hide_location,
+      username: this.state.user.username,
+      avatar_url: this.state.user.avatar_url,
+      bio: this.state.user.bio,
+      location: this.state.user.location
+    };
 
     $.ajax({
       method: 'PUT',
@@ -53,10 +78,13 @@ class ProfileSettings extends React.Component {
       data: updateObj,
       success: () => {
         this.renderStateData();
+        this.props.reloadIndexData();
       },
       error: resp => {
         const errMsg = resp.responseJSON.error;
-        alert('Failed to save: ' + errMsg);
+        $('.input-error').text(errMsg);
+        $('.input-error-container').css('display', 'block');
+        this.setState({ saveBtnLock: false });
       }
     });
   }
@@ -73,7 +101,7 @@ class ProfileSettings extends React.Component {
   }
 
   handleImageError() {
-    this.setState({ imageError: true });
+    $('#userAvatarPreview').attr('src', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
   }
 
   handleInputChange(prop, evnt) {
@@ -86,7 +114,7 @@ class ProfileSettings extends React.Component {
   }
 
   renderStateData() {
-    this.setState({ user: null });
+    this.setState({ user: null, saveBtnLock: false, logOutLock: false });
 
     getData(`/users?id=${this.props.user.id}`).then(({ user }) => {
       this.setState({ user });
@@ -97,6 +125,8 @@ class ProfileSettings extends React.Component {
 
   componentDidMount() {
     this.renderStateData();
+    $('a.nav-link.active').removeClass('active');
+    $('.user-dropdown-content').css('display', 'none');
   }
 
   render() {
@@ -154,12 +184,13 @@ class ProfileSettings extends React.Component {
               </div>
             </div>
             <div className="input-error-container">
-              <span className="input-error">This quick brown fox ran over the brown dog.</span>
+              <span className="input-error">@Hacked By Ry2uko :P</span>
             </div>
             <div className="settings-btn-container">
               <button type="button" className="settings-btn" id="discardBtn" onClick={this.handleDiscardBtn}>Discard</button>
               <button type="button" className="settings-btn" id="saveBtn" onClick={this.handleSaveBtn}>Save</button>
             </div>
+            <button type="button" id="logOutBtn" onClick={this.handleLogOut}>Logout</button>
           </div>
         </div>
       );
@@ -171,11 +202,7 @@ export default function WithRouter(props) {
   let { state } = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!props.user) navigate('/books', { replace: true });
-  }, [props.user]);
-
   return (
-    <ProfileSettings user={props.user} navigate={navigate} navState={state} />
+    <ProfileSettings user={props.user} navigate={navigate} navState={state} reloadIndexData={props.reloadIndexData}/>
   );
 }

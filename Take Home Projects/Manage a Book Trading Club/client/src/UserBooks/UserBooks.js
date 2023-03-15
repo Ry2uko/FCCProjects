@@ -248,7 +248,7 @@ export default function WithRouter(props) {
         return;
       }
     }
-  }, []);
+  }, [username, props.user, navigate]);
 
   return (
     <UserBooks type={props.type} user={props.user} navigate={navigate} username={username} navState={state} />

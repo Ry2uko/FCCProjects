@@ -24,6 +24,16 @@ class Profile extends React.Component {
     this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
     this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
+    this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
+  }
+
+  handleOpenReqTradeBtn(reqTradeId) {
+    let route = '/books';
+
+    if (this.props.type === 'profile') route = '/profile';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}`;
+
+    this.props.navigate(`/trade/${reqTradeId}`, { state: { route } });
   }
 
   handleOpenBookBtn(bookId) {
@@ -85,6 +95,7 @@ class Profile extends React.Component {
       user={this.state.user}
       reqTradeId={this.state.recentTrade._id.toString()}
       handleOpenBookBtn={this.handleOpenBookBtn}
+      handleOpenReqTradeBtn={this.handleOpenReqTradeBtn}
     />;
     
   }

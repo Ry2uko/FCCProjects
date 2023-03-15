@@ -25,6 +25,13 @@ class UserTrades extends React.Component {
     this.handleBackBtn = this.handleBackBtn.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
     this.renderReqTrade = this.renderReqTrade.bind(this);
+    this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
+  }
+
+  handleOpenReqTradeBtn(reqTradeId) {
+    let route = this.props.type === 'profile' ? '/profile/trades' : `/user/${this.props.username}/trades`;
+
+    this.props.navigate(`/trade/${reqTradeId}`, { state: { route } });
   }
 
   handleOpenBookBtn(bookId) {
@@ -68,6 +75,7 @@ class UserTrades extends React.Component {
       key={index}
       reqTradeId={trade._id.toString()}
       handleOpenBookBtn={this.handleOpenBookBtn}
+      handleOpenReqTradeBtn={this.handleOpenReqTradeBtn}
     />
   }
 
@@ -157,7 +165,7 @@ export default function WithRouter(props) {
         return;
       }
     }
-  }, []);
+  }, [navigate, props.user, username]);
 
   return (
     <UserTrades type={props.type} user={props.user} navigate={navigate} username={username} navState={state} />

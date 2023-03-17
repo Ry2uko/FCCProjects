@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
 
 // similar to the request model since it will only be a trade if the request is accepted
 
@@ -21,7 +22,7 @@ const tradeSchema = new mongoose.Schema({
   },
   accepted_on: {
     type: String,
-    default: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'})
+    default: moment().format('MMMM Do YYYY, h:mm:ss a')
   }
 });
 

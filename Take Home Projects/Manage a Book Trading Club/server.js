@@ -107,20 +107,19 @@ app.get(
 app.route(['/login', '/signin'])
   .post(authGuard, (req, res, next) => {
     validateForm(req, res, next, 'register');
-  }, async (req, res) => {
-    return;
   });
 
 app.route(['/register', '/signup'])
   .post(authGuard, (req, res, next) => {
     validateForm(req, res, next, 'register');
-  }, async (req, res) => {
-    return;
   });
 
 app.route('/logout')
   .post(notAuthGuard, (req, res) => {
-    return;
+    req.logout(err => {
+      if (err) return res.status(500).send(err);
+      res.status(200).json({ success: 'logout' });
+    });
   });
 
 app.use(['/book', '/books'], bookRouter);

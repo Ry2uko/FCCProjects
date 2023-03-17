@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
 
 const requestSchema = new mongoose.Schema({
   userA: { // username
@@ -19,7 +20,7 @@ const requestSchema = new mongoose.Schema({
   },
   requested_on: {
     type: String,
-    default: new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'})
+    default: moment().format('MMMM Do YYYY, h:mm:ss a')
   }
 });
 

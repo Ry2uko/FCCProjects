@@ -8,14 +8,6 @@ import express from 'express';
 
 const router = express.Router();
 
-// deleting request, and removing from requests in books
-
-// Dummy User Data
-async function getUserData(id) {
-  let user = await UserModel.findOne({ id }).lean();
-  return user;
-}
-
 router.route('/')
   .get(async (req, res) => {
     let trades; 
@@ -37,7 +29,6 @@ router.route('/')
     }
   })
   .post(async (req, res) => {
-    req.user = await getUserData(83095832);  // Ry2uko
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
     // when user accepted the trade

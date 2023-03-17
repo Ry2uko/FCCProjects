@@ -21,6 +21,7 @@
     "express-session": "^1.17.3",
     "helmet": "^6.0.0",
     "mocha": "^10.1.0",
+    "moment": "^2.29.4",
     "mongoose": "^6.7.4",
     "passport": "^0.6.0",
     "passport-github": "^1.1.0",

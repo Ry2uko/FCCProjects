@@ -121,9 +121,10 @@ div.CreateModal
 div.Navigation
   nav.app-nav
     width: 100%
+    position: relative
+    z-index: 999
     height: 65px
     background: $black-gradient
-    overflow: hidden
 
     ul.navbar-nav
       display: flex
@@ -230,7 +231,6 @@ div.Navigation
       display: flex
       align-items: center
       height: 100%
-      overflow: hidden
 
       button
         &.user-btn
@@ -255,7 +255,7 @@ div.Navigation
       border: 1.4px solid #ffffff23
       border-radius: 0.4rem
       top: 58px
-      margin-left: -50px
+      margin-left: 0px
       z-index: 9990
 
       a.dropdown-content-btn

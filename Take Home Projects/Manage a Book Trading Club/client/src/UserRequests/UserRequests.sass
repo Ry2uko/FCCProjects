@@ -1,5 +1,78 @@
 @import '../index.sass' 
+@import '../Book/Book.sass'
 /* for variables */  
 
 div.UserRequests-header-container
-  @include header-container  
+  @include header-container
+
+div.btn-navbar-container
+  display: flex
+  margin: 0.6rem 3.5rem
+
+  button.navbar-btn
+    cursor: pointer
+    background: #00000000
+    color: #fff
+    border: none
+    padding: 10px 30px
+    margin: 0 12px
+    border-radius: 3rem
+    height: 100%
+    z-index: 2
+    position: relative
+    transition: ease-out 0.4s 
+    font:
+      size: 1.8rem
+      family: $ff-firaSans
+    
+    &.active
+      background: $red-gradient
+
+div.UserRequests 
+  div
+    &.main-requests-container 
+      margin: 2rem 5rem
+
+      span.error-text
+        color: #ffffffe8
+        font:
+          family: $ff-alegreyaSans
+          size: 1.8rem
+
+    &.request-container
+      @include book-container
+      cursor: pointer
+      display: flex
+      flex-direction: column
+      margin: 1rem 0
+    
+    &.request-header-container
+      display: flex
+      align-items: center
+      padding: 1.2rem 1.7rem 1.1rem 1.7rem
+
+      a.request-user-name
+        text-decoration: none
+        color: $red-theme
+        font:
+          size: 2.4rem
+          family: $ff-firaSans
+
+    &.header-image-container      
+      margin-right: 15px
+      width: 50px
+      height: 50px
+
+      img.request-user-image
+        border-radius: 0.3rem
+        width: 100%
+        height: 100%
+
+    &.request-info-container
+      padding: 0 1.7rem 1.3rem 1.7rem
+
+      span
+        color: #ffffffe9
+        font:
+          family: $ff-alegreyaSans
+          size: 1.65rem

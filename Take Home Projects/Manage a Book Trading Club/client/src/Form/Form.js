@@ -15,6 +15,7 @@ class Form extends React.Component {
 
   componentDidMount() {
     $('.user-dropdown-content').css('display', 'none');
+    $('a.nav-link.active').removeClass('active');
   }
 
   render() {

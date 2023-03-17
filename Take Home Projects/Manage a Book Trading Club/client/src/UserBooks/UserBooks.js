@@ -1,5 +1,5 @@
 import './UserBooks.sass';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
@@ -19,7 +19,8 @@ class UserBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: null
+      books: null,
+      deleteBtnLock: false
     };
 
     this.handleBackBtn = this.handleBackBtn.bind(this);
@@ -28,8 +29,8 @@ class UserBooks extends React.Component {
     this.reloadState = this.reloadState.bind(this);
   }
 
-  reloadState() {
-    this.setState({ books: null });
+  reloadState(rvdBookId) {
+    this.setState({ books: null, deleteBtnLock: false });
 
     let route = '';
 
@@ -42,7 +43,7 @@ class UserBooks extends React.Component {
      
       userBooks.forEach(bookId => {
         let book = books.find(book => book._id.toString() === bookId);
-        if (!book) return;
+        if (!book || book._id.toString() === rvdBookId) return;
         
         stateBooks.push(book);
       });
@@ -52,6 +53,9 @@ class UserBooks extends React.Component {
   }
 
   handleDeleteBookBtn(bookId) {
+    if (!bookId || this.state.deleteBtnLock) return;
+    this.setState({ deleteBtnLock: true });
+    const component = this;
     const MS = 200;
 
     $('.user-dropdown-content').css('display', 'none');
@@ -70,6 +74,7 @@ class UserBooks extends React.Component {
         'opacity': 0
       }, MS, function(){
         $(this).css('display', 'none');
+        component.setState({ deleteBtnLock: false });
       });
       $('.parent-container').animate({
         'opacity': 1
@@ -90,7 +95,7 @@ class UserBooks extends React.Component {
           method: 'DELETE',
           url: '/books',
           data: { id: bookId },
-          success: component.reloadState(),
+          success: component.reloadState(bookId),
           error: resp => {
             const errMsg = resp.responseJSON.error;
             alert('Failed to delete book: ' + errMsg);
@@ -238,12 +243,14 @@ export default function WithRouter(props) {
   let { state } = useLocation();
   const navigate = useNavigate();
 
-  if (props.user) {
-    if (username === props.user.username) {
-      navigate('/profile/books', { replace: true });
-      return;
+  useEffect(() => {
+    if (props.user) {
+      if (username === props.user.username) {
+        navigate('/profile/books', { replace: true });
+        return;
+      }
     }
-  }
+  }, [username, props.user, navigate]);
 
   return (
     <UserBooks type={props.type} user={props.user} navigate={navigate} username={username} navState={state} />

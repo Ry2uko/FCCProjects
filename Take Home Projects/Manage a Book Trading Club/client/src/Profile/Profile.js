@@ -1,6 +1,6 @@
 import './Profile.sass';
 import { ReqTradeContainer } from '../ReqTrade/ReqTrade';
-import React from 'react';
+import React, { useEffect } from 'react';
 import $ from 'jquery';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -24,6 +24,22 @@ class Profile extends React.Component {
     this.handleUserTradesBtn = this.handleUserTradesBtn.bind(this);
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
     this.handleUserRequestsBtn = this.handleUserRequestsBtn.bind(this);
+    this.handleOpenReqTradeBtn = this.handleOpenReqTradeBtn.bind(this);
+    this.handleProfileSettingsBtn = this.handleProfileSettingsBtn.bind(this);
+    this.handleImageError = this.handleImageError.bind(this);
+  }
+
+  handleImageError(evnt) {
+    $(evnt.target).attr('src', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
+  }
+
+  handleOpenReqTradeBtn(reqTradeId) {
+    let route = '/books';
+
+    if (this.props.type === 'profile') route = '/profile';
+    else if (this.props.type === 'user') route = `/user/${this.props.username}`;
+
+    this.props.navigate(`/trade/${reqTradeId}`, { state: { route } });
   }
 
   handleOpenBookBtn(bookId) {
@@ -33,6 +49,10 @@ class Profile extends React.Component {
     else if (this.props.type === 'user') route = `/user/${this.props.username}`;
 
     this.props.navigate(`/book/${bookId}`, { state: { route }})
+  }
+
+  handleProfileSettingsBtn() {
+    this.props.navigate('/profile/settings');
   }
 
   handleUserBooksBtn() {
@@ -85,6 +105,7 @@ class Profile extends React.Component {
       user={this.state.user}
       reqTradeId={this.state.recentTrade._id.toString()}
       handleOpenBookBtn={this.handleOpenBookBtn}
+      handleOpenReqTradeBtn={this.handleOpenReqTradeBtn}
     />;
     
   }
@@ -135,7 +156,7 @@ class Profile extends React.Component {
         <div className="Profile parent-container">
           <div className="user-container">
             <div className="user-avatar-container">
-              <img src={this.state.user.avatar_url} alt="user-avatar" id="userAvatar" />
+              <img src={this.state.user.avatar_url} alt="user-avatar" id="userAvatar" onError={(e) => this.handleImageError(e)} />
             </div>
             <div className="user-info-container">
               <div className="info-main-container">
@@ -143,7 +164,7 @@ class Profile extends React.Component {
                   <span id="userName">
                     {this.state.user.username}
                   </span>
-                  { this.state.user.location ? (
+                  { (!this.state.user.hide_location && this.state.user.location !== '') ? (
                     <span className="location-container">
                       <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
                       <span id="userLocation">{this.state.user.location}</span>
@@ -162,7 +183,7 @@ class Profile extends React.Component {
               </button>
               {
                 this.props.type === 'profile' ? (
-                  <button type="button" id="settingsBtn" className="profile-btn" title="Settings">
+                  <button type="button" id="settingsBtn" className="profile-btn" title="Settings" onClick={this.handleProfileSettingsBtn}>
                     <i className="fa-solid fa-gear"></i>
                   </button>
                 ) : null
@@ -191,12 +212,14 @@ export default function WithRouter(props) {
   let { username } = useParams();
   const navigate = useNavigate();
 
-  if (props.user) {
-    if (username === props.user.username) {
-      navigate('/profile', { replace: true });
-      return;
+  useEffect(() => {
+    if (props.user) {
+      if (username === props.user.username) {
+        navigate('/profile', { replace: true });
+        return;
+      }
     }
-  }
+  }, []);
   
   return (
     <Profile type={props.type} user={props.user} navigate={navigate} username={username}/>

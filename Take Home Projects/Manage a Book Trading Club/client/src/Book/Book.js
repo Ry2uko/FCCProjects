@@ -26,10 +26,16 @@ class Book extends React.Component {
     this.handleOpenBookBtn = this.handleOpenBookBtn.bind(this);
     this.handleOpenBookRequestBtn = this.handleOpenBookRequestBtn.bind(this);
     this.handleCreateRequestBtn = this.handleCreateRequestBtn.bind(this);
+    this.handleImageError = this.handleImageError.bind(this);
+  }
+
+  handleImageError(evnt) {
+    $(evnt.target).attr('src', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
   }
 
   handleBackBtn() {
     let route;
+
     if (this.props.navState) route = this.props.navState.route;
 
     this.props.navigate(route ? route : '/books');
@@ -42,7 +48,7 @@ class Book extends React.Component {
 
   handleOpenBookRequestBtn(requestId, bookId, evnt) {
     if ($(evnt.target).hasClass('user-name')) return;
-    this.props.navigate(`/request/${requestId}`, { state: { route: `/book/${bookId}`}});
+    this.props.navigate(`/request/${requestId}`, { state: { route: `/book/${bookId}` } });
   }
 
   handleCreateRequestBtn(bookId) {
@@ -106,9 +112,11 @@ class Book extends React.Component {
               <div className="book-btn-container">
                 {
                   this.props.user ? (
-                    <button type="button" id="requestBtn" onClick={() => {this.handleCreateRequestBtn(targetBook._id.toString())}}>
-                      <i className="fa-solid fa-share"></i> Request
-                    </button>
+                    this.props.user.username !== targetBook.user ? (
+                      <button type="button" id="requestBtn" onClick={() => {this.handleCreateRequestBtn(targetBook._id.toString())}}>
+                        <i className="fa-solid fa-share"></i> Request
+                      </button>
+                    ) : null
                   ) : null
                 }
               </div>
@@ -124,7 +132,7 @@ class Book extends React.Component {
                         <div className="book-request" key={index} onClick={(e) => { this.handleOpenBookRequestBtn(requestId, targetBook._id.toString(), e) }}>
                           <div className="user-header-container">
                             <div className="user-image-container">
-                              <img src={targetUser.avatar_url} className="user-avatar" alt="User Avatar" />
+                              <img src={targetUser.avatar_url} className="user-avatar" alt="User Avatar" onError={(e) => this.handleImageError(e)}/>
                             </div>
                             {
                               this.props.user ? (

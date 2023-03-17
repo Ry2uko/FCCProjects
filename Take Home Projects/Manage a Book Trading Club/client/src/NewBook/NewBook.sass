@@ -1,0 +1,130 @@
+@import '../index.sass'
+@import '../Book/Book.sass'
+/* for variables */
+
+div.NewBook-header-container
+  h1.header-title
+    text-align: center
+    background: $red-gradient
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    padding: 2.5rem 0 2.5rem 0
+    font:
+      family: $ff-firaSans
+      size: 3.4rem
+
+div.NewBook
+  div
+    &.book-form-container
+      margin: 0 8rem 3rem 8rem
+      background-color: #0b0b0b
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px
+      border-radius: 0.3rem
+      display: flex
+      flex-direction: column 
+      padding: 1rem 1rem
+
+    &.input-container 
+      display: flex
+      flex-direction: column
+      padding: 1.2rem 2rem
+
+      label.input-label
+        background: $red-gradient
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
+        font:
+          family: $ff-firaSans
+          size: 2rem
+
+        span.sub-text
+          opacity: 0.8
+          font-size: 1.2rem
+
+      input
+        &.settings-text-input
+          margin: 10px 0
+          background-color: #141414
+          border: 1px solid #393939
+          color: #fff
+          border-radius: 0.3rem
+          padding: 10px 15px
+          transition: ease-out 0.2s
+          font:
+            family: $ff-firaSans
+            size: 1.75rem
+          
+          &:focus
+            border-color: #ffffff48
+
+    &.book-conditions-options
+      background: #101010
+      border-radius: 0.5rem
+      margin-top: 1rem
+
+    &.book-condition-option
+      padding: 1.2rem 1.5rem
+      border-radius: 0
+      cursor: pointer
+      transition: 0.2s
+      color: #ffffffab
+
+      &:hover
+        color: #fff
+
+      &.active
+        background: $black-gradient
+        color: #fff
+
+        &.Excellent-condition
+          background: linear-gradient(-10deg, #8aff8a, #11e811)
+          color: #fff
+
+        &.VeryGood-condition
+          background: linear-gradient(-10deg, #aaffaa, #3aa83a)
+
+        &.Good-condition
+          background: linear-gradient(-10deg, #ffff99, #e6e606)
+        
+        &.Fair-condition
+          background: linear-gradient(-10deg, #facb4b, #d57c2a)
+
+        &.Poor-condition
+          background: linear-gradient(-10deg, #fa5d5d, #df0c0c)
+
+      span.book-condition
+        font:
+          family: $ff-cabin
+          size: 1.8rem
+
+    &.input-error-container
+      display: none
+      margin: 1.5rem 2rem 0 2rem
+      color: #ED3A54
+      border-radius: 0.3rem
+      padding: 15px 20px
+      background-color: rgba(237, 58, 85, 0.147)
+      font:
+        family: $ff-cabin
+        size: 1.7rem
+
+    &.book-form-btn-container
+      padding: 3rem 2rem 2rem 2rem
+      margin: 0 auto
+
+      button.book-form-btn
+        border-radius: 0.3rem
+        padding: 8px 50px
+        margin-right: 50px
+        cursor: pointer
+        background: $black-gradient
+        color: #fff
+        border: 1px solid #ffffff48
+        font:
+          family: $ff-cabin
+          size: 1.6rem
+
+        &#createBtn
+          background: $red-gradient
+          border: none
+

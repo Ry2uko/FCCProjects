@@ -35,6 +35,7 @@ class Book extends React.Component {
 
   handleBackBtn() {
     let route;
+
     if (this.props.navState) route = this.props.navState.route;
 
     this.props.navigate(route ? route : '/books');
@@ -47,7 +48,7 @@ class Book extends React.Component {
 
   handleOpenBookRequestBtn(requestId, bookId, evnt) {
     if ($(evnt.target).hasClass('user-name')) return;
-    this.props.navigate(`/request/${requestId}`, { state: { route: `/book/${bookId}`}});
+    this.props.navigate(`/request/${requestId}`, { state: { route: `/book/${bookId}` } });
   }
 
   handleCreateRequestBtn(bookId) {
@@ -111,9 +112,11 @@ class Book extends React.Component {
               <div className="book-btn-container">
                 {
                   this.props.user ? (
-                    <button type="button" id="requestBtn" onClick={() => {this.handleCreateRequestBtn(targetBook._id.toString())}}>
-                      <i className="fa-solid fa-share"></i> Request
-                    </button>
+                    this.props.user.username !== targetBook.user ? (
+                      <button type="button" id="requestBtn" onClick={() => {this.handleCreateRequestBtn(targetBook._id.toString())}}>
+                        <i className="fa-solid fa-share"></i> Request
+                      </button>
+                    ) : null
                   ) : null
                 }
               </div>

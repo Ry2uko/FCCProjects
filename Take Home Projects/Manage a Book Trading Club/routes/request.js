@@ -7,8 +7,6 @@ import express from 'express';
 
 const router = express.Router();
 
-// more validations: don't allow more than 3 books, if request already exists
-
 // Dummy User Data
 async function getUserData(id) {
   let user = await UserModel.findOne({ id }).lean();
@@ -97,6 +95,7 @@ router.route('/')
   });
 
 async function validateData(req, res, next) {
+  req.user = await getUserData(83095832);
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
   let userAObj, userBObj, books, requests;
@@ -134,7 +133,7 @@ async function validateData(req, res, next) {
     requests = await RequestModel.find({}).lean();
     userAObj = await UserModel.findOne({ id: req.user.id }).lean();
     userBObj = await UserModel.findOne({ username: req.body.userB }).lean();
-    
+
     if (userBObj == null) return res.status(400).json({ error: 'UserB not found.' });
     if (userAObj.username === userBObj.username) return res.status(400).json({ error: 'Cannot send request to self >:<' });
 

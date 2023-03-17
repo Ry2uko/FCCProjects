@@ -164,7 +164,7 @@ class Profile extends React.Component {
                   <span id="userName">
                     {this.state.user.username}
                   </span>
-                  { !this.state.user.hide_location ? (
+                  { (!this.state.user.hide_location && this.state.user.location !== '') ? (
                     <span className="location-container">
                       <span className="location-icon"><i className="fa-solid fa-location-dot"></i></span>
                       <span id="userLocation">{this.state.user.location}</span>

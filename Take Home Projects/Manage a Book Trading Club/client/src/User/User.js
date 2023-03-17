@@ -106,7 +106,7 @@ class User extends React.Component {
                           this.props.user.username === user.username ? <a className="user-name" href="/profile">{user.username}</a> 
                           : <a className="user-name" href={ `/user/${user.username}` }>{user.username}</a>
                         ) : <a className="user-name" href={ `/user/${user.username}` }>{user.username}</a>}
-                        { !user.hide_location ? (
+                        { (!user.hide_location && user.location !== '') ? (
                           <span className="user-location-container">
                             from <span className="user-location">{user.location}</span>
                           </span>

@@ -55,6 +55,7 @@ class UserBooks extends React.Component {
   handleDeleteBookBtn(bookId) {
     if (!bookId || this.state.deleteBtnLock) return;
     this.setState({ deleteBtnLock: true });
+    const component = this;
     const MS = 200;
 
     $('.user-dropdown-content').css('display', 'none');
@@ -73,6 +74,7 @@ class UserBooks extends React.Component {
         'opacity': 0
       }, MS, function(){
         $(this).css('display', 'none');
+        component.setState({ deleteBtnLock: false });
       });
       $('.parent-container').animate({
         'opacity': 1

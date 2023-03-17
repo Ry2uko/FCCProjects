@@ -7,12 +7,6 @@ import express from 'express';
 
 const router = express.Router();
 
-// Dummy User Data
-async function getUserData(id) {
-  let user = await UserModel.findOne({ id }).lean();
-  return user;
-}
-
 router.route('/')
   .get(async (req, res) => {
     let requests;
@@ -72,12 +66,13 @@ router.route('/')
     if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
     if (!requestId) return res.status(400).json({ error: 'Invalid or missing request id.' });
 
-    let request;
+    let request, user;
     try {
       request = await RequestModel.findById(requestId).lean();
+      user = await UserModel.findOne({ username: request.userA }).lean();
 
       if (request == null) return res.status(400).json({ error: 'Request not found.' });
-      if (request.userA !== req.user.username) return res.status(400).json({ error: 'Request not by user.' });
+      if (user.id !== parseInt(req.user.id)) return res.status(400).json({ error: 'Request not by user.' });
 
       // delete request
       await RequestModel.findByIdAndDelete(requestId);
@@ -95,7 +90,6 @@ router.route('/')
   });
 
 async function validateData(req, res, next) {
-  req.user = await getUserData(83095832);
   if (!req.user) return res.status(401).json({ error: 'Unauthorized' });
 
   let userAObj, userBObj, books, requests;

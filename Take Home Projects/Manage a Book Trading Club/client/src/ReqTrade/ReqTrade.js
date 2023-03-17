@@ -10,10 +10,6 @@ async function getData(route) {
   return dataObj;
 }
 
-// rendering non-existent books
-// opening books
-// trade/request info modal
-
 const ReqTradeContainer = ({ 
   type, // for determining if request or trade
   userA,
@@ -122,7 +118,7 @@ class ReqTrade extends React.Component {
     let textType = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
     let targetReqTrade = type === 'request' 
     ? this.state.requests.find(request => request._id.toString() === this.props.requestId)
-    : this.state.trades.find(trade => trade._id.toString() === this.props.tradeId);
+    : this.state.trades.find(trade => trade._id.toString() === this.props.tradeId); 
 
     if (!targetReqTrade) {
       return (
@@ -154,7 +150,7 @@ class ReqTrade extends React.Component {
                 <div className="books-container">
                   {
                     type === 'request' ? (
-                      this.state.requests[0].userABooks.map((userABookId, index) => {
+                      targetReqTrade.userABooks.map((userABookId, index) => {
                         let targetBook = this.state.books.find(book => book._id.toString() === userABookId);
                         return (
                           <div className="spec-book" key={index} onClick={() => { this.handleOpenBookBtn(userABookId) }}>
@@ -164,7 +160,7 @@ class ReqTrade extends React.Component {
                         );
                       }
                     )) : (
-                      this.state.trades[0].userABooks.map((userABookId, index) => {
+                      targetReqTrade.userABooks.map((userABookId, index) => {
                         let targetBook = this.state.books.find(book => book._id.toString() === userABookId);
                         return (
                           <div className="spec-book" key={index} onClick={() => { this.handleOpenBookBtn(userABookId) }}>
@@ -182,7 +178,7 @@ class ReqTrade extends React.Component {
                 <div className="books-container">
                   {
                     type === 'request' ? (
-                      this.state.requests[0].userBBooks.map((userBBookId, index) => {
+                      targetReqTrade.userBBooks.map((userBBookId, index) => {
                         let targetBook = this.state.books.find(book => book._id.toString() === userBBookId);
                         return (
                           <div className="spec-book" key={index} onClick={() => { this.handleOpenBookBtn(userBBookId) }}>
@@ -192,7 +188,7 @@ class ReqTrade extends React.Component {
                         );
                       })
                     ) : (
-                      this.state.trades[0].userBBooks.map((userBBookId, index) => {
+                      targetReqTrade.userBBooks.map((userBBookId, index) => {
                         let targetBook = this.state.books.find(book => book._id.toString() === userBBookId);
                         return (
                           <div className="spec-book" key={index} onClick={() => { this.handleOpenBookBtn(userBBookId) }}>
@@ -212,40 +208,40 @@ class ReqTrade extends React.Component {
                   Requested by: <Link className="requested-by" to={
                     type === 'request' ? (
                       this.props.user ? (
-                        this.props.user.username === this.state.requests[0].userA ? 
-                        `/profile` : `/user/${this.state.requests[0].userA}`
-                      ) : `/user/${this.state.requests[0].userA}`
+                        this.props.user.username === targetReqTrade.userA ? 
+                        `/profile` : `/user/${targetReqTrade.userA}`
+                      ) : `/user/${targetReqTrade.userA}`
                     ) : (
                       this.props.user ? (
-                        this.props.user.username === this.state.trades[0].userA ? 
-                        `/profile` : `/user/${this.state.trades[0].userA}`
-                      ) : `/user/${this.state.trades[0].userA}`
+                        this.props.user.username === targetReqTrade.userA ? 
+                        `/profile` : `/user/${targetReqTrade.userA}`
+                      ) : `/user/${targetReqTrade.userA}`
                     )
-                  }>{type === 'request' ? this.state.requests[0].userA : this.state.trades[0].userA}</Link>
+                  }>{type === 'request' ? targetReqTrade.userA : targetReqTrade.userA}</Link>
                 </span>
                 <span className="requested-to-span">
                   Requested to: <Link className="requested-to" to={
                     type == 'request' ? (
                       this.props.user ? (
-                        this.props.user.username === this.state.requests[0].userB ? 
-                        `/profile` : `/user/${this.state.requests[0].userB}`
-                      ) : `/user/${this.state.requests[0].userB}`
+                        this.props.user.username === targetReqTrade.userB ? 
+                        `/profile` : `/user/${targetReqTrade.userB}`
+                      ) : `/user/${targetReqTrade.userB}`
                     ) : (
                       this.props.user ? (
-                        this.props.user.username === this.state.trades[0].userB ? 
-                        `/profile` : `/user/${this.state.trades[0].userB}`
-                      ) : `/user/${this.state.trades[0].userB}`
+                        this.props.user.username === targetReqTrade.userB ? 
+                        `/profile` : `/user/${targetReqTrade.userB}`
+                      ) : `/user/${targetReqTrade.userB}`
                     )
-                  }>{type === 'request' ? this.state.requests[0].userB : this.state.trades[0].userB}</Link>
+                  }>{type === 'request' ? targetReqTrade.userB : targetReqTrade.userB}</Link>
                 </span>
                 {
                   type === 'request' ? (
                     <span className="requested-on-span">
-                      Requested on: <span className="requested-on">{this.state.requests[0].requested_on}</span>
+                      Requested on: <span className="requested-on">{targetReqTrade.requested_on}</span>
                     </span>
                   ) : (
                     <span className="accepted-on-span">
-                    Accepted on: <span className="accepted-on">{this.state.trades[0].accepted_on}</span>
+                    Accepted on: <span className="accepted-on">{targetReqTrade.accepted_on}</span>
                   </span>
                   )
                 }

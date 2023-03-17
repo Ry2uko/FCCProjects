@@ -3,12 +3,6 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 
-/* removing books */
-/* request button, pre added book */
-/* other users + filtering */
-/* Saving request & error handling */
-/* final testing */
-
 async function getData(route) {
   const response = await fetch(route);
   const dataObj = await response.json();
@@ -85,7 +79,7 @@ class SelectBook extends React.Component {
                       (book.user !== this.props.targetBookUser && this.props.targetBookUser !== ''))
                       ? "book-tile disabled" : "book-tile"
                     ): "book-tile"
-                  } bookid={book._id.toString()} key={index} onClick={(e) => { this.props.handleOpenBookBtn(book._id.toString(), e) }}>
+                  } bookid={book._id.toString()} key={index}>
                     <button type="button" className={
                       this.props.presentBooks ? (
                         this.props.presentBooks.includes(book._id.toString()) ? "add-book-btn active" : "add-book-btn" 
@@ -133,9 +127,8 @@ class NewRequest extends React.Component {
     super(props);
     this.state = {
       user: null,
-      request: null,
       books: null,
-      createLock: false,
+      requestLock: false,
       stateLoad: true,
       renderType: 'form',
       userABooks: [],
@@ -146,6 +139,44 @@ class NewRequest extends React.Component {
     this.handleAddBookBtn = this.handleAddBookBtn.bind(this);
     this.renderStateData = this.renderStateData.bind(this);
     this.addRequestBookBtn = this.addRequestBookBtn.bind(this);
+    this.handleDiscardBtn = this.handleDiscardBtn.bind(this);
+    this.handleRequestBtn = this.handleRequestBtn.bind(this);
+  }
+
+  handleDiscardBtn() {
+    this.props.navigate('/books');
+  }
+
+  handleRequestBtn() {
+    if (this.state.requestLock) return;
+    this.setState({ requestLock: true });
+    
+    let targetBookUser = '';
+    if (this.state.userBBooks.length > 0) {
+      targetBookUser = this.state.books.find(book => book._id.toString() === this.state.userBBooks[0]).user; // assuming that all books are from the same user
+    }
+
+    const updateObj = {
+      userA: this.props.user.username,
+      userB: targetBookUser,
+      userABooks: this.state.userABooks,
+      userBBooks: this.state.userBBooks
+    };
+
+    $.ajax({
+      method: 'POST',
+      url: '/requests',
+      data: updateObj,
+      success: request => {
+        this.props.navigate(`/request/${request._id.toString()}`, { state: { route: '/new/request' } })
+      },    
+      error: resp => {
+        const errMsg = resp.responseJSON.error;
+        $('.input-error').text(errMsg);
+        $('.input-error-container').css('display', 'block');
+        this.setState({ requestLock: false });
+      }
+    })
   }
 
   handleBackBtn() {
@@ -210,8 +241,7 @@ class NewRequest extends React.Component {
     this.setState({ 
       user: null, 
       books: null,
-      request: null, 
-      createLock: false,
+      requestLock: false,
       renderType: 'form'
     });
 
@@ -234,6 +264,13 @@ class NewRequest extends React.Component {
 
   componentDidMount() {
     this.renderStateData();
+
+    if (this.props.navState) {
+      let userBBooks = [...this.state.userBBooks, this.props.navState.bookId];
+      this.setState({
+        userBBooks: [...new Set(userBBooks)]
+      });
+    }
 
     $('a.nav-link.active').removeClass('active');
     $('.user-dropdown-content').css('display', 'none');
@@ -281,6 +318,11 @@ class NewRequest extends React.Component {
                           {
                             targetBook.author ? <span className="book-author-span">by <span className="book-author">{ targetBook.author }</span></span> : null
                           }
+                          {
+                            targetBook.condition ? (
+                              <span className="book-condition-container"><span className={`book-condition ${targetBook.condition.split(' ').join('')}-condition`}>{targetBook.condition}</span> Condition</span>
+                            ) : null
+                          }
                         </div>
                       );
                     })
@@ -300,6 +342,11 @@ class NewRequest extends React.Component {
                           {
                             targetBook.author ? <span className="book-author-span">by <span className="book-author">{ targetBook.author }</span></span> : null
                           }
+                          {
+                            targetBook.condition ? (
+                              <span className="book-condition-container"><span className={`book-condition ${targetBook.condition.split(' ').join('')}-condition`}>{targetBook.condition}</span> Condition</span>
+                            ) : null
+                          }
                         </div>
                       );
                     })
@@ -315,7 +362,7 @@ class NewRequest extends React.Component {
               </div>
               <div className="request-form-btn-container">
                 <button type="button" id="discardBtn" onClick={this.handleDiscardBtn} className="request-form-btn">Discard</button>
-                <button type="button" id="createBtn" onClick={this.handleCreateBtn} className="request-form-btn">Create</button>
+                <button type="button" id="requestBtn" onClick={this.handleRequestBtn} className="request-form-btn">Request</button>
               </div>
             </div>
           </div>

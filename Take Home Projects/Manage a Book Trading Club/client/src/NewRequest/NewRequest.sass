@@ -131,8 +131,8 @@ div.NewRequest
     &.request-books-container
       background-color: #101010
       margin-top: 1rem
-      padding: 1.2rem 2rem
-      height: 600px
+      padding: 1.2rem 2.5rem
+      height: 640px
       display: flex
       flex-direction: column  
       position: relative
@@ -153,7 +153,43 @@ div.NewRequest
         cursor: pointer
         transition: ease-out 0.15s
         border: 2px solid #E84359
+        z-index: 2
     
+    &.request-book
+      display: flex
+      cursor: pointer
+      position: relative
+      flex-direction: column
+      justify-content: center
+      align-item: center
+      background-color: #181818
+      border-radius: 0.45rem
+      border: 1.4px solid #1c1c1c64
+      margin: 10px 0
+      padding: 30px 50px
+      height: 180px
+      width: 100%
+      z-index: 1
+
+      h4.book-name
+        text-align: center
+        font:
+          family: $ff-alegreyaSans
+          size: 2.3rem
+
+      span.book-author-span
+        opacity: 0.8
+        text-align: center
+        font:
+          size: 1.6rem
+      
+      span.book-condition-container
+        margin-top: 20px
+        text-align: center
+        font:
+          size: 1.6rem
+
+
     &.request-info-container
       display: flex
       flex-direction: column
@@ -196,6 +232,6 @@ div.NewRequest
           family: $ff-cabin
           size: 1.6rem
 
-        &#createBtn
+        &#requestBtn
           background: $red-gradient
           border: none

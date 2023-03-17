@@ -149,7 +149,7 @@ class UserRequests extends React.Component {
                 this.state.renderType === 'pending' ? (
                   this.state.requestsByUser.length > 0 ? (
                     this.state.requestsByUser.map((request, index) => {
-                      let targetUser = this.state.users.find(user => user.username === request.userA);
+                      let targetUser = this.state.users.find(user => user.username === request.userB);
                       return (
                         <div className="request-container" key={index} onClick={(e) => {this.handleOpenRequest(request._id.toString(), e)}}>
                           <div className="request-header-container">

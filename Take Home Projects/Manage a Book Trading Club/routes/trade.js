@@ -8,12 +8,6 @@ import express from 'express';
 
 const router = express.Router();
 
-// Dummy User Data
-async function getUserData(id) {
-  let user = await UserModel.findOne({ id }).lean();
-  return user;
-}
-
 router.route('/')
   .get(async (req, res) => {
     let trades; 

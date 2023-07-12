@@ -1,23 +1,27 @@
 # FCCProjects
-[freeCodeCamp](https://www.freecodecamp.org/ry2uko) projects by Ry2uko. 
 
-**Front End**:
+@Ry2uko
 
-[Codepen](https://codepen.io/collection/kNNkPK)
+[freeCodeCamp](https://www.freecodecamp.org/ry2uko)  |  [Codepen](https://codepen.io/collection/kNNkPK)  |  [Replit](https://replit.com/@Ry2uko)  |  [Google Colab Projects](https://drive.google.com/drive/folders/1yI6zu0wE278pJf9fpT0P052TL3v559fW?usp=sharing)  |  [Google Colab Notebooks](https://drive.google.com/drive/folders/1meGI9dpJaZ34LikqkM86FurJVARlPFlY?usp=sharing)
 
-- Responsive Web Design
+- Responsive Web Design & Legacy Responsive Web Design
+- Javascript Algorithms and Data Structures
 - Front End Development Libraries
 - Data Visualization
-- Take Home Projects (Coding Interview Prep)
-
-[Replit](https://replit.com/@Ry2uko)
 - Back End Development and APIs
 - Quality Assurance
 - Information Security
-- Scientific Computing with Python
 - Data Analysis with Python
+- Scientific Computing with Python
 - Machine Learning with Python
-- Take Home Projects (Coding Interview Prep)
-
-[Google Colab](https://drive.google.com/drive/folders/1yI6zu0wE278pJf9fpT0P052TL3v559fW?usp=sharing)
-- Machine Learning with Python
+- College Algebra with Python
+- Relational Database
+- Legacy Data Visualization
+- Legacy Infoormation Security and Quality Assurance
+- Legacy Front End
+- Legacy Back End
+- Legacy Full Stack
+- Take Home Projects
+- Coding Interview Prep: Algorithms and Data Structures
+- Coding Interview Prep: Rosetta Code
+- Project Euler

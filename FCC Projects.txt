@@ -1,4 +1,4 @@
-freeCodeCamp Projects (as of 2/26/23)
+freeCodeCamp Projects so far | 13/7/23
 
 Responsive Web Design:
 1. Build a Survey Form
@@ -104,3 +104,10 @@ Take Home Projects:
 73) Build a Pong Game
 74) Build a Light-Bright App
 75) P2P Video Chat Application
+
+College Algebra with Python:
+76) Build a Multi-Function Calculator
+77) Build a Graphing Calculator
+78) Build Three Math Games
+79) Build a Financial Calculator
+80) Build a Data Graph Explorer

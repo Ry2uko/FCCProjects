@@ -1,0 +1,113 @@
+freeCodeCamp Projects so far | 13/7/23
+
+Responsive Web Design:
+1. Build a Survey Form
+2. Build a Tribute Page
+3. Build a Technical Documentation Page
+4. Build a Product Landing Page
+5. Build a Personal Portfolio Webpage
+
+Javascript Algorithms and Data Structures:
+6.  Palindrome Checker
+7. Roman Numeral Converter
+8. Caesars Cipher
+9. Telephone Number Validator
+10. Cash Register
+
+Front End Development Libraries:
+11. Build a Random Quote Machine
+12. Build a Markdown Previewer
+13. Build a Drum Machine
+14. Build a Javascript Calculator
+15. Build a 25 + 5 Clock
+
+Data Visualization:
+16. Visualize Data with a Bar Chart
+17. Visualize Data with a Scatterplot Graph
+18. Visualize Data with a Heat Map
+19. Visualize Data with a Choropleth Map
+20. Visualize Data with a Treemap Diagram
+
+Back End Development and APIs:
+21. Timestamp Microservice
+22. Request Header Parser Microservice
+23. URL Shortener Microservice
+24. Exercise Tracker
+25. File Metadata Microservice
+
+Quality Assurance: 
+26. Metric-Imperial Converter
+27. Issue Tracker
+28. Personal Library
+29. Sudoku Solver
+30. American British Translator
+
+Information Security:
+31. Stock Price Checker
+32. Anonymous Message Board
+33. Port Scanner
+34. 	SHA-1 Password Cracker
+35. Secure Real Time Multiplayer Game
+
+Scientific Computing with Python:
+36. Arithmetic Formatter
+37. Time Calculator
+38. Budget App
+39. Polygon Area Calculator
+40. Probability Calculator
+
+Data Analysis with Python:
+41. Mean-Variance-Standard Deviation Calculator
+42. Demographic Data Analyzer
+43. Medical Data Visualizer
+44. Page View Time Series Visualizer
+45. Sea Level Predictor
+
+Machine Learning with Python:
+46. Rock Paper Scissors
+47. Cat and Dog Image Classifier
+48. Book Recommendation Engine using KNN
+49. Linear Regression Health Costs Calculator
+50. Neural Network SMS Text Classifier
+
+Relational Database:
+51. Celestial Bodies Database
+52. World Cup Database
+53. Salon Appointment Scheduler
+54. Periodic Table Database
+55. Number Guessing Game
+
+Legacy Front End:
+56. Show the Local Weather
+57. Use the TwitchTV JSON API
+58. Build a Wikipedia Viewer
+59. Build a Tic Tac Toe Game
+60. Build a Simon Game
+
+Legacy Back End:
+61. Image Search Abstraction Layer
+62. Build a Voting App
+63. Build a Nightlife Coordination App
+64. Chart the Stock Market
+65. Manage a Book Trading Club
+66. Build a Pinterest Clone
+
+Legacy Data Visualization:
+67. Build a freeCodeCamp Forum Homepage
+68. Build a Recipe Box
+69. Build the Game of Life
+70. Build a Roguelike Dungeon Crawler Game
+71. Show National Contiguity with a Force Directed Graph
+72. Map Data Across the Globe
+
+Take Home Projects: 
+73) Build a Pong Game
+74) Build a Light-Bright App
+75) P2P Video Chat Application
+
+College Algebra with Python:
+76) Build a Multi-Function Calculator
+77) Build a Graphing Calculator
+78) Build Three Math Games
+79) Build a Financial Calculator
+80) Build a Data Graph Explorer

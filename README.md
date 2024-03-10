@@ -28,3 +28,9 @@
 - Coding Interview Prep: Algorithms and Data Structures
 - Coding Interview Prep: Rosetta Code
 - Project Euler
+
+
+TODO:
+- Add new JS Algorithms and Data Structures Projects
+- Update Gallery & List
+
